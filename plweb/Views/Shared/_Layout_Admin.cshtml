@@ -1,0 +1,292 @@
+﻿@{WebSite.Models.CSS_CRM_NGUOI_DUNGDTO user = (WebSite.Models.CSS_CRM_NGUOI_DUNGDTO)Session["UserAdmin"];}
+@using WebSite.Models
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="robots" content="noindex,nofollow">
+    <!--title-->
+    <title>@ViewBag.Title | Trang quản trị Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/lib/vendor/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/lib/vendor/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="~/lib/vendor/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/lib/vendor/font-awesome/css/font-awesome.min.css" />
+    <!--Datepicker-->
+    <link href="~/lib/bootstrap/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    <!--sweetalert-->
+    <link href="~/lib/css/sweetalert2.min.css" rel="stylesheet" />
+    <!-- Select2 theme -->
+    <link href="~/lib/css/select.css" rel="stylesheet" />
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="~/lib/css/style-booking.css?vr=1.1" />
+    <!-- End layout styles -->
+    <link href="~/lib/css/templatemo_style.css?vr=1.1" rel="stylesheet" />
+    <link href="~/lib/css/style-admin.css" rel="stylesheet" />
+    <link href="~/favicon.ico" />
+    <link rel="icon" href="~/lib/images/logo/favicon.png" type="image/x-icon">
+
+    @Html.DevExpress().GetStyleSheets(
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.GridView }
+    )
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/GridView.css")" />
+
+    @Html.DevExpress().GetScripts(
+        new Script { ExtensionSuite = ExtensionSuite.GridView },
+        new Script { ExtensionSuite = ExtensionSuite.Editors }
+    )
+    <script type="text/javascript" src="@Url.Content("~/Content/Script.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/GridView.js")"></script>
+
+    <script src="~/ckeditor/ckeditor.js" type="text/javascript"></script>
+    <script src="~/ckfinder/ckfinder.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="container-scroller">
+        <div class="horizontal-menu">
+            <nav class="navbar top-navbar col-lg-12 col-12 p-0">
+                <div class="container">
+                    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                        <a class="navbar-brand brand-logo">
+                            <img src="~/lib/images/logo/logo.png" alt="logo" />
+                        </a>
+                        <a class="navbar-brand brand-logo-mini"><img src="~/lib/images/logo/logo.png" alt="logo" /></a>
+                    </div>
+                    <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                        <ul class="navbar-nav mr-lg-2 note-user">
+                            <li class="nav-item nav-search d-none d-lg-block">
+                                <p>
+                                    <span id="tenKhachHang">@user.USER_NAME - @user.NAME</span>
+                                </p>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav navbar-nav-right">
+                            <li class="nav-item nav-profile dropdown">
+                                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                                    <div class="nav-profile-img">
+                                        @*<img src="~/lib/images/logo/sagawa.png" alt="logo" />*@
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
+                            <span class="mdi mdi-menu"></span>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+            <nav class="bottom-navbar">
+                <div class="container">
+                    <ul class="nav page-navigation navbar-left">
+                        @{
+                            if (user.USER_NAME == "017692")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Dich_Vu","Admin")">
+                                        <i class="mdi mdi-compass-outline menu-icon"></i>
+                                        <span class="menu-title">Loại hình dịch vụ</span>
+                                    </a>
+                                </li>
+                            }
+                            if (user.LOAI_TK.Contains(CommonData.ROLE_WEBSITE_ADMIN.SALE_PART))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Admin/TinTuc">
+                                        <i class="mdi mdi-compass-outline menu-icon"></i>
+                                        <span class="menu-title">Quản trị tin tức</span>
+                                    </a>
+                                </li>
+                            }
+                            if (user.LOAI_TK.Contains(CommonData.ROLE_WEBSITE_ADMIN.HR_PART))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Tuyen_Dung","Admin")">
+                                        <i class="mdi mdi-compass-outline menu-icon"></i>
+                                        <span class="menu-title">Quản lý tin tuyển dụng</span>
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                    <ul class="nav page-navigation navbar-right">
+                        <li class="nav-item">
+                            <div class="nav-link d-flex">
+                                <div class="nav-item dropdown">
+                                    <a class="nav-link count-indicator dropdown-toggle text-white font-weight-semibold py-1" id="notificationDropdown" href="javascript:;" data-toggle="dropdown">
+                                        <i class="fa fa-user-circle-o" style="font-size:25px;"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                                        <p style="text-align:center;padding:5px 5px;background: #eaedf2;font-weight: 600;color: indianred;">
+                                            @user.USER_NAME
+                                            <br /> @user.NAME
+                                        </p>
+                                        <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#ModalResetPass" data-backdrop="static">
+                                            <i class="mdi mdi-key"> </i> Đổi mật khẩu
+                                        </a>
+                                        <a class="dropdown-item" href="/Admin/Logout"><i class="mdi mdi-logout"> </i> Đăng xuất</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <div class="main-panel">
+                <div class="content-wrapper pt-2">
+                    @RenderBody()
+                </div>
+                <!-- content-wrapper ends -->
+            </div>
+            <!-- main-panel ends -->
+            <!-- partial:partials/_footer.html -->
+            <footer class="footer">
+                <div class="container">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 <a href="@Url.Action("Index","Home")" target="_blank">Netpost.vn</a></span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Made by <a href="javascript:;">Netpost System development</a></span>
+                    </div>
+                </div>
+            </footer>
+            <!-- partial -->
+        </div>
+        <!-- page-body-wrapper ends -->
+        <img src="~/lib/images/loading.gif" class="pre-image d-none" style="width: 55px;position: fixed;left: 48%;top: 45%;z-index:1051" />
+    </div>
+
+    <div id="ModalResetPass" class="modal fade" role="dialog" style="overflow:auto">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h3 id="title"><span>Đổi mật khẩu</span> </h3>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
+                </div>
+                <div class="modal-body" style="padding: 10px;">
+                    <div class="row m-0">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label"> Mật khẩu cũ</label>
+                                <input class="form-control custom-password" id="pswold" name="pswold" type="text" autocomplete="off" oninput="changeText(this)" onfocus="$('.mess-reset').addClass('d-none');" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"> Mật khẩu mới</label>
+                                <input class="form-control custom-password" id="psw" name="psw" type="text" autocomplete="off" oninput="changeText(this)" onfocus="$('.mess-reset').addClass('d-none');" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"> Nhập lại mật khẩu</label>
+                                <input class="form-control custom-password" id="repsw" name="repsw" type="text" autocomplete="off" oninput="changeText(this)" onfocus="$('.mess-reset').addClass('d-none');" />
+                            </div>
+                            <div class="form-group" style="text-align: right;">
+                                <button class="btn btn-primary" onclick="Reset()" style="width:100%"><i class="" id="refresh1"> </i>  Lưu</button>
+                            </div>
+                            <div class="form-group" style="height:50px;">
+                                <div class="alert alert-danger d-none mess-reset" role="alert" id="message"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- plugins:js -->
+    <script src="~/lib/vendor/js/vendor.bundle.base.js"></script>
+    <script src="~/lib/vendor/moment/moment.min.js"></script>
+    <script src="~/lib/js/moment-with-locales.min.js"></script>
+
+    <script src="~/lib/bootstrap/bootstrap-datepicker.min.js"></script>
+
+    <script src="~/lib/js/off-canvas.js"></script>
+    <script src="~/lib/js/hoverable-collapse.js"></script>
+    <script src="~/lib/js/misc.js"></script>
+    <script src="~/lib/js/settings.js"></script>
+    <script src="~/lib/js/todolist.js"></script>
+    <script src="~/lib/js/sweetalert2@10.js"></script>
+    <!-- endinject -->
+
+    @if (Request.Browser.Browser == "IE" || Request.Browser.Browser == "InternetExplorer")
+    {
+        <script src="~/lib/js/core-2.4.1.js"></script>
+        <script src="~/lib/js/promise-polyfill@8.js"></script>
+    }
+
+    <script type="text/javascript">
+        var re = /^[A-Za-z0-9]{4,}$/;
+
+        function changeText(obj) {
+            if ($(obj).val() !== '') {
+                $(obj).attr('type', 'password');
+            } else {
+                $(obj).attr('type', 'text');
+            }
+        }
+
+        function Reset() {
+            var pass = $('#pswold').val();
+            var newpsw = $('#psw').val();
+            var repsw = $('#repsw').val();
+            if (newpsw == "") {
+                $('#message').html('Password mới không được bỏ trống');
+                $('#message').removeClass("d-none");
+                return;
+            }
+            if (!re.test(newpsw)) {
+                $('#message').html('Password không được chứa kí tự đặc biệt và có 4 kí tự trở lên');
+                $('#message').removeClass("d-none");
+                return;
+            }
+            if (repsw == "") {
+                $('#message').html('Nhập lại password không được bỏ trống');
+                $('#message').removeClass("d-none");
+                return;
+            }
+            if (newpsw != repsw) {
+                $('#message').html('Nhập lại password không đúng.');
+                $('#message').removeClass("d-none");
+                return;
+            }
+
+            $.ajax({
+                url: "/Admin/ResetPass",
+                type: "POST",
+                data: {
+                    pass: pass,
+                    newpsw: newpsw
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (!data.Error) {
+                        Swal.fire({
+                            title: 'Thay đổi mật khẩu thành công!',
+                            icon: 'info',
+                            showCancelButton: false,
+                            cancelButtonText: 'No',
+                            confirmButtonText: 'OK'
+                        })
+                            .then(function (willDelete) {
+                                if (willDelete.value) {
+                                    window.location.reload();
+                                }
+                            });
+                    }
+                    else {
+                        $('#message').html(data.Title);
+                        $('#message').removeClass("d-none");
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

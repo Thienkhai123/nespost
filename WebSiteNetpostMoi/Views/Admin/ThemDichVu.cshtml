@@ -1,0 +1,254 @@
+﻿@model WebSite.Models.TINTUCDTO
+@{
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+
+    string title = "Thêm dịch vụ";
+    if (Model.ID != 0)
+    {
+        title = "Xem và cập nhật dịch vụ";
+    }
+
+    ViewBag.Title = title;
+}
+<div class="container">
+    <ul class="breadcrumb">
+        <li><a href="/Admin/Dich_Vu">Loại hình dịch vụ</a></li>
+        <li><a>@title</a></li>
+    </ul>
+    <div class="row pb-5">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="control-label">Loại dịch vụ<strong style="color:red">(*)</strong></label>
+                <div class="position-relative">
+                    @Html.DevExpress().ComboBox(settings =>
+                    {
+                        settings.Name = "cbLoaiDichVu";
+                        settings.SelectedIndex = -1;
+                        settings.Properties.DropDownStyle = DropDownStyle.DropDownList;
+                        settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                        settings.ControlStyle.CssClass = "form-control form-boder";
+                        settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                        settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                        settings.Properties.TextField = "Text";
+                        settings.Properties.ValueField = "Value";
+                        settings.Properties.ClientSideEvents.Init = "function(){cbLoaiDichVu.SetValue('" + @Model.NHOM_TIN + "')}";
+                    }).BindList(ViewData["LOAI_DICH_VU"] as List<SelectListItem>).GetHtml()
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Chọn file đính kèm (Tiếng Việt -> Tiếng Anh -> Tiếng Nhật)</label>
+                <div class="input-group">
+                    <label class="input-group-btn">
+                        <span class="btn btn-primary" style="font-style:normal">
+                            Chọn file <input id="FileDinhKem" type="file" style="display: none;" name="FileDinhKem" required accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain, application/pdf" multiple>
+                        </span>
+                    </label>
+                    <textarea rows="2" class="form-control" readonly style="margin-left: 5px;" id="tentep" required>@Model.FILE_DINH_KEM</textarea>
+                </div>
+            </div>
+
+            <h4><span>Chọn ngôn ngữ</span></h4>
+
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#tiengviet">Tiếng việt</a>
+                </li>
+                @*<li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tienganh">English</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tiengnhat">日本語</a>
+                </li>*@
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="tiengviet">
+                    <div class="form-group">
+                        <label class="control-label">Tiêu đề <strong style="color:red">(*)</strong></label>
+                        @Html.EditorFor(model => model.TIEU_DE, new { htmlAttributes = new { @class = "form-control", @id = "TIEU_DE" } })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nội dung <strong style="color:red">(*)</strong></label>
+                        <textarea name="NOI_DUNG" id="ckeContent">@Model.NOI_DUNG</textarea>
+                        <script type="text/javascript">
+                            var editor = CKEDITOR.replace("ckeContent");
+                            CKFinder.setupCKEditor(editor, "/ckfinder");
+                        </script>
+                    </div>
+                </div>
+                @*<div class="tab-pane" id="tienganh">
+                    <div class="form-group">
+                        <label class="control-label">Tiêu đề tiếng anh<strong style="color:red">(*)</strong></label>
+                        @Html.EditorFor(model => model.TIEU_DE_EN, new { htmlAttributes = new { @class = "form-control", @id = "TIEU_DE_EN" } })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nội dung tiếng anh<strong style="color:red">(*)</strong></label>
+                        <textarea name="NOI_DUNG_EN" id="ckeContentEN">@Model.NOI_DUNG_EN</textarea>
+                        <script type="text/javascript">
+                            var editor1 = CKEDITOR.replace("ckeContentEN");
+                            CKFinder.setupCKEditor(editor1, "/ckfinder");
+                        </script>
+                    </div>
+                </div>
+                <div class="tab-pane" id="tiengnhat">
+                    <div class="form-group">
+                        <label class="control-label">Tiêu đề tiếng nhật<strong style="color:red">(*)</strong></label>
+                        @Html.EditorFor(model => model.TIEU_DE_JA, new { htmlAttributes = new { @class = "form-control", @id = "TIEU_DE_JA" } })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nội dung tiếng nhật<strong style="color:red">(*)</strong></label>
+                        <textarea name="NOI_DUNG_JA" id="ckeContentJA">@Model.NOI_DUNG_JA</textarea>
+                        <script type="text/javascript">
+                            var editor2 = CKEDITOR.replace("ckeContentJA");
+                            CKFinder.setupCKEditor(editor2, "/ckfinder");
+                        </script>
+                    </div>
+                </div>*@
+            </div>
+
+            <div class="form-group" hidden>
+                <input type="text" value="@Model.ID" id="ID" />
+            </div>
+            <div class="form-group pt-2 text-center">
+                @if (Model.ID == 0)
+                {
+                    <button style="width: 120px;" onclick="Save()" class="btn btn-primary">Lưu</button>
+                }
+                else
+                {
+                    <button style="width: 120px;" onclick="Update()" class="btn btn-primary">Update</button>
+                }
+            </div>
+        </div>
+        <div class="col-md-1">
+        </div>
+    </div>
+</div>
+<script>
+    $('#FileDinhKem').on("change", function () {
+        if (this.files && this.files[0]) {
+            var str = "";
+            for (var i = 0; i < this.files.length; i++) {
+                str = this.files[i].name + ";" + str;
+            }
+            $('#tentep').val(str);
+        }
+    });
+
+    function Save() {
+        if (cbLoaiDichVu.GetValue() == null) {
+            Swal.fire("Loại dịch vụ không được bỏ trống.",
+                '',
+                'error')
+            return;
+        }
+        if ($('#TIEU_DE').val() == "") {
+            Swal.fire("Tiêu đề không được bỏ trống",
+                '',
+                'error')
+            return;
+        }
+        if ($('#VI_TRI').val() == "") {
+            Swal.fire("Vị trí tuyển dụng không được bỏ trống",
+                '',
+                'error')
+            return;
+        }
+
+
+
+        for (var instanceName in CKEDITOR.instances)
+            CKEDITOR.instances[instanceName].updateElement();
+
+        var data = new FormData();
+        data.append("TIEU_DE", $('#TIEU_DE').val());
+        data.append("TIEU_DE_EN", $('#TIEU_DE_EN').val());
+        data.append("TIEU_DE_JA", $('#TIEU_DE_JA').val());
+        data.append("NOI_DUNG", $('#ckeContent').val());
+        data.append("NOI_DUNG_EN", $('#ckeContentEN').val());
+        data.append("NOI_DUNG_JA", $('#ckeContentJA').val());
+        data.append("NHOM_TIN", cbLoaiDichVu.GetValue());
+        $.each($("#FileDinhKem"), function (i, obj) {
+            $.each(obj.files, function (j, file) {
+                data.append("FileDinhKem", file); // is the var i against the var j, because the i is incremental the j is ever 0
+            });
+        });
+        $.ajax({
+            url: "/Admin/InsertNews",
+            type: "POST",
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (data) {
+                if (!data.Error) {
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'Thêm mới tin thành công!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    window.location.href = "/Admin/Dich_Vu";
+                }
+                else {
+                    Swal.fire(data.Title,
+                        '',
+                        'error')
+                    return;
+                }
+            }
+        });
+    }
+
+    function Update() {
+        for (var instanceName in CKEDITOR.instances)
+            CKEDITOR.instances[instanceName].updateElement();
+
+        var data = new FormData();
+        data.append("ID", $('#ID').val());
+        data.append("TIEU_DE", $('#TIEU_DE').val());
+        data.append("TIEU_DE_EN", $('#TIEU_DE_EN').val());
+        data.append("TIEU_DE_JA", $('#TIEU_DE_JA').val());
+        data.append("NOI_DUNG", $('#ckeContent').val());
+        data.append("NOI_DUNG_EN", $('#ckeContentEN').val());
+        data.append("NOI_DUNG_JA", $('#ckeContentJA').val());
+        data.append("NHOM_TIN", cbLoaiDichVu.GetValue());
+        $.each($("#FileDinhKem"), function (i, obj) {
+            $.each(obj.files, function (j, file) {
+                data.append("FileDinhKem", file); // is the var i against the var j, because the i is incremental the j is ever 0
+            });
+        });
+        $.ajax({
+            url: "/Admin/EditNew",
+            type: "POST",
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (data) {
+                if (!data.Error) {
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'Cập nhật tin thành công!',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                    setTimeout(function () {
+                        window.location.href = "/Admin/Dich_Vu";
+                    }, 1500);
+
+                }
+                else {
+                    Swal.fire(data.Title,
+                        '',
+                        'error')
+                    return;
+                }
+            }
+        });
+
+    }
+</script>

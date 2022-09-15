@@ -1,0 +1,204 @@
+﻿@using WebSite.Models;
+@using WebSite.Language;
+@using System.Web.UI.WebControls;
+@{WebSite.Models.DebitNoteOnlineResponse tracuu = (WebSite.Models.DebitNoteOnlineResponse)Session["lstTraCuu"];}
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridView_TraCuoc";
+        settings.CallbackRouteValues = new { Controller = "Booking", Action = "TraCuoc" };
+        settings.KeyFieldName = "HawbNo";
+        //cuộn dọc
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Auto;
+        settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowGroupedColumns = false;
+
+        settings.SettingsPager.Mode = GridViewPagerMode.EndlessPaging;
+
+        if (Request.Browser.IsMobileDevice)
+        {
+            settings.SettingsPager.NumericButtonCount = 1;
+        }
+        settings.Settings.ShowFooter = true;
+
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        if (WebSite.Filter.ClientSession.getCusCode().Equals("0132078"))
+        {
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.STT;
+                column.FieldName = "SortOrder";
+                column.Width = 50;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.Ngay;
+                column.FieldName = "CheckInDate";
+                column.Width = 100;
+
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.maBPBK;
+                column.FieldName = "HawbNo";
+                column.Width = 140;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Resource.tinhdi;
+                column.FieldName = "OriginZone";
+                column.Width = 120;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Resource.tinhden;
+                column.FieldName = "DestZone";
+                column.Width = 120;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.dichvu;
+                column.FieldName = "TOS";
+                column.Width = 80;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.trongluong;
+                column.FieldName = "Weight";
+                column.Width = 100;
+                column.PropertiesEdit.DisplayFormatString = "N2";
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.gtdonhang;
+                column.Width = 110;
+                column.FieldName = "GT_DON_HANG";
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.cuocchinh;
+                column.FieldName = "Amount";
+                column.Width = 130;
+                column.PropertiesEdit.DisplayFormatString = "N0";
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.phikhac;
+                column.FieldName = "FeeAmount";
+                column.Width = 130;
+                column.PropertiesEdit.DisplayFormatString = "N0";
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.tongtien;
+                column.FieldName = "TotalAmount";
+                column.Width = 130;
+                column.PropertiesEdit.DisplayFormatString = "N0";
+            });
+        }
+        else
+        {
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.STT;
+                column.FieldName = "SortOrder";
+                column.Width = 50;
+            });
+            settings.Columns.Add(column =>
+            {
+                //column.GroupIndex = 1;
+                column.Caption = "Loại cước";
+                column.FieldName = "LOAI_CUOC";
+                column.Width = 100;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.Ngay;
+                column.FieldName = "CheckInDate";
+                column.Width = 120;
+
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.maBPBK;
+                column.FieldName = "HawbNo";
+                column.Width = 150;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Resource.tinhdi;
+                column.FieldName = "OriginZone";
+                column.Width = 130;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Resource.tinhden;
+                column.FieldName = "DestZone";
+                column.Width = 130;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.dichvu;
+                column.FieldName = "TOS";
+                column.Width = 90;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = "Trọng lượng (kg)";
+                column.FieldName = "Weight";
+                column.Width = 100;
+                column.PropertiesEdit.DisplayFormatString = "N2";
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.cuocchinh;
+                column.FieldName = "Amount";
+                column.Width = 100;
+                column.PropertiesEdit.DisplayFormatString = "N0";
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.phikhac;
+                column.FieldName = "FeeAmount";
+                column.Width = 120;
+                column.PropertiesEdit.DisplayFormatString = "N0";
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.tongtien;
+                column.FieldName = "TotalAmount";
+                column.Width = 120;
+                column.PropertiesEdit.DisplayFormatString = "N0";
+            });
+        }
+
+        if (tracuu != null)
+        {
+            settings.SetFooterRowTemplateContent(c =>
+            {
+                Html.ViewContext.Writer.Write("<div class=\"row\"> <div class=\"col-md-11\"><h6>" + Booking.totalamount + ":</h6></div><div class=\"col-md-1\"><h6>" + tracuu.SumAmountNoVAT.ToString("N0") + "</h6></div></div>");
+                //Html.ViewContext.Writer.Write("<div class=\"row\"><div class=\"col-md-11\"><h6 >" + Booking.totalVAT + ":</h6></div><div class=\"col-md-1\"><h6>" + tracuu.SumVATAmount.ToString("N0") + "</h6></div></div>");
+                //Html.ViewContext.Writer.Write("<div class=\"row\"><div class=\"col-md-11\"><h6>" + Booking.total + ":</h6></div><div class=\"col-md-1\"><h6>" + tracuu.SumTotalAmount.ToString("N0") + "</h6></div></div>");
+            });
+        }
+
+        settings.SettingsExport.EnableClientSideExportAPI = true;
+        settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
+        settings.SettingsExport.RenderBrick = (sender, e) =>
+        {
+            if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
+                e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
+        };
+
+        settings.SettingsExport.FileName = Booking.bangtracuoc;
+    });
+    @grid.Bind(Model).GetHtml()
+}

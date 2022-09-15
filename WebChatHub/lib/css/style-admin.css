@@ -1,0 +1,186 @@
+﻿
+#access .menu-header ul li a {
+    border: 1px solid white;
+}
+
+#header .under-header {
+    border-bottom: 1px solid lightgray;
+    box-shadow: 0px 0px 7px 0px grey;
+    margin-bottom: 5px;
+}
+
+    #header .under-header h1 {
+        height: 55px;
+        margin-left: 5px;
+    }
+
+#access .menu-header ul {
+    box-shadow: 5px 16px 39px -8px #8c9196;
+    margin-bottom: 8px;
+}
+
+#header {
+    background:white;
+    border-bottom: 1px solid lightgray;
+    box-shadow: 0px 0px 7px 0px grey;
+}
+
+.btn {
+    padding: 12px 12px !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+h2, h4 {
+    width: 100%;
+}
+
+ul.breadcrumb {
+    padding: 10px 16px;
+    list-style: none;
+    background-color: #eee;
+    width: 100%;
+    border-radius: 0;
+}
+
+aside {
+    width: 17%;
+    background-color: white;
+    transition: all 0.5s ease-in-out;
+    float: left;
+    border-right: 1px solid #c5d0d0;
+    height: calc(100% - 70px);
+    margin-top: 3px;
+}
+
+
+.sidebar ul {
+    list-style: none;
+    margin: 0px;
+    padding: 15px 0;
+}
+
+.sidebar li a, .sidebar li a.collapsed.active {
+    display: block;
+    padding: 8px 12px;
+    color: #000;
+    border-left: 0px solid #b8bac1;
+    text-decoration: none;
+}
+
+    .sidebar li a.active {
+        background-color: #b8bac1;
+        border-left: 5px solid !important;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .sidebar li a:hover {
+        background-color: #b8bac1 !important;
+    }
+
+    .sidebar li a i {
+        padding-right: 5px;
+    }
+
+    .sidebar li a .nav-label, .sidebar li a .nav-label + span {
+        transition: all 0.5s ease-in-out;
+    }
+
+.sidebar.fliph li a .nav-label, .sidebar.fliph li a .nav-label + span {
+    display: none;
+    transition: all 0.5s ease-in-out;
+}
+
+.sidebar.fliph {
+    width: 42px;
+    transition: all 0.5s ease-in-out;
+}
+
+    .sidebar.fliph li {
+        position: relative;
+    }
+
+.user-panel > .info, .user-panel > .info > a {
+    color: black;
+    padding: 5px 0 5px;
+    font-weight: bold;
+}
+
+    .user-panel > .info > p {
+        font-weight: 600;
+        margin-bottom: 9px;
+    }
+
+.user-panel {
+    width: 100%;
+    padding: 5px 15px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+}
+
+.fliph .user-panel {
+    display: none;
+}
+
+section {
+    width: 83%;
+    float: right;
+}
+
+h4 {
+    font-weight: bold;
+    margin: 0;
+    line-height: 1.5em;
+}
+
+label {
+    font-weight: bold;
+}
+
+#footer {
+    border-top: 1px solid gray;
+    margin-top: 30px;
+}
+
+.h1, h1 {
+    font-size: 0.5rem;
+}
+
+.under-header {
+    border-bottom: 1px solid lightgray;
+    padding: 2px;
+    padding-top: 5px;
+}
+
+    .under-header h2 {
+        height: 55px;
+    }
+
+html, body, .page-wrapper {
+    height: 100%;
+    width: 100%;
+    background: #eeeeee;
+}
+
+
+.swal2-title {
+    font-size: 0.875em !important;
+    display: block !important;
+}
+#header .logo-1 img {
+    width: 120px;
+}
+#header .logo-2 img {
+    width: 170px;
+}
+#header h1 {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    width: 50%;
+}
+#header .logo-2{
+    text-align:right;
+}

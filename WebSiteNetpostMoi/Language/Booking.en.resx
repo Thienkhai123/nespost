@@ -1,0 +1,1315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="chacchanIn" xml:space="preserve">
+    <value>Are you sure print the order </value>
+  </data>
+  <data name="chacchanxoa" xml:space="preserve">
+    <value>Are you sure delete parcel </value>
+  </data>
+  <data name="chitiet" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="chitietdonhang" xml:space="preserve">
+    <value>Order details</value>
+  </data>
+  <data name="chontep" xml:space="preserve">
+    <value>Choose file</value>
+  </data>
+  <data name="copynoidung" xml:space="preserve">
+    <value>Copy the parcel contents</value>
+  </data>
+  <data name="dangxuat" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="danhsachdonhang" xml:space="preserve">
+    <value>Orders management</value>
+  </data>
+  <data name="dathang" xml:space="preserve">
+    <value>The order</value>
+  </data>
+  <data name="denngay" xml:space="preserve">
+    <value>To date</value>
+  </data>
+  <data name="diachi" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="diachinhan" xml:space="preserve">
+    <value>Receiver's address</value>
+  </data>
+  <data name="dichinguoigui" xml:space="preserve">
+    <value>Sender's  address</value>
+  </data>
+  <data name="dichvu" xml:space="preserve">
+    <value>Service </value>
+  </data>
+  <data name="doipass" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="dondathang" xml:space="preserve">
+    <value>New order</value>
+  </data>
+  <data name="Donhang" xml:space="preserve">
+    <value>Order code</value>
+  </data>
+  <data name="filemau" xml:space="preserve">
+    <value>Excel template </value>
+  </data>
+  <data name="huongdang" xml:space="preserve">
+    <value>User Manuals</value>
+  </data>
+  <data name="huyennhan" xml:space="preserve">
+    <value>Receiver's district</value>
+  </data>
+  <data name="importexcel" xml:space="preserve">
+    <value>Import orders from excel</value>
+  </data>
+  <data name="inphieugui" xml:space="preserve">
+    <value>Print the order</value>
+  </data>
+  <data name="j" xml:space="preserve">
+    <value>Weight (kg)</value>
+  </data>
+  <data name="loithaydoipass" xml:space="preserve">
+    <value>An error occurred. Please refresh the page.</value>
+  </data>
+  <data name="luu" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="luudonhang" xml:space="preserve">
+    <value>Save order</value>
+  </data>
+  <data name="maBPBK" xml:space="preserve">
+    <value>Parcel code</value>
+  </data>
+  <data name="madonhang" xml:space="preserve">
+    <value>Order code/Bill code</value>
+  </data>
+  <data name="mavandon" xml:space="preserve">
+    <value>Parcel code:  </value>
+  </data>
+  <data name="messDiachinhan" xml:space="preserve">
+    <value>The recipient's address cannot be blank</value>
+  </data>
+  <data name="messpasscu" xml:space="preserve">
+    <value>Please enter the old password.</value>
+  </data>
+  <data name="messSDTnhan" xml:space="preserve">
+    <value>The recipient's phone must not be blank</value>
+  </data>
+  <data name="msgddlDistrict" xml:space="preserve">
+    <value>The recipient's district incorrectly and choose again</value>
+  </data>
+  <data name="msgddlProvince" xml:space="preserve">
+    <value>The recipient's province incorrectly and choose again</value>
+  </data>
+  <data name="msgDIA_CHI1" xml:space="preserve">
+    <value>The recipient's address must have at least 5 letters as letters</value>
+  </data>
+  <data name="msgDICH_VU" xml:space="preserve">
+    <value>Service must not be blank</value>
+  </data>
+  <data name="msgTRONG_LUONG" xml:space="preserve">
+    <value>Weight must not be blank</value>
+  </data>
+  <data name="msspasscu" xml:space="preserve">
+    <value>The old password is incorrect. Please re-enter.</value>
+  </data>
+  <data name="ngaytao" xml:space="preserve">
+    <value>Create date</value>
+  </data>
+  <data name="nguoinhan" xml:space="preserve">
+    <value>Receiver/Phone</value>
+  </data>
+  <data name="nhaplaipass" xml:space="preserve">
+    <value>Re-enter the new password incorrectly.</value>
+  </data>
+  <data name="nhaplaipassmoi" xml:space="preserve">
+    <value>Re-enter password</value>
+  </data>
+  <data name="noidung" xml:space="preserve">
+    <value>Contents</value>
+  </data>
+  <data name="noidunghh" xml:space="preserve">
+    <value>Content of goods</value>
+  </data>
+  <data name="passcu" xml:space="preserve">
+    <value>Old password</value>
+  </data>
+  <data name="passmoi" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="passmoitrung" xml:space="preserve">
+    <value>The new password cannot be identical to the old password.</value>
+  </data>
+  <data name="quanhuyen" xml:space="preserve">
+    <value>District</value>
+  </data>
+  <data name="sdt" xml:space="preserve">
+    <value>Receiver's phone</value>
+  </data>
+  <data name="tacvu" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="tennguoigui" xml:space="preserve">
+    <value>Sender</value>
+  </data>
+  <data name="tennguoinhan" xml:space="preserve">
+    <value>Receiver</value>
+  </data>
+  <data name="tensheet" xml:space="preserve">
+    <value>Sheet number</value>
+  </data>
+  <data name="thaydoipass" xml:space="preserve">
+    <value>Change password successfully!</value>
+  </data>
+  <data name="themhang" xml:space="preserve">
+    <value>Add new</value>
+  </data>
+  <data name="time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="timkiem" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="tinhnhan" xml:space="preserve">
+    <value>Receiver's province</value>
+  </data>
+  <data name="tinhTP" xml:space="preserve">
+    <value>Province</value>
+  </data>
+  <data name="trangthai" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="trangthaidonhang" xml:space="preserve">
+    <value>Latest status</value>
+  </data>
+  <data name="trongluong" xml:space="preserve">
+    <value>Weight</value>
+  </data>
+  <data name="tungay" xml:space="preserve">
+    <value>From date</value>
+  </data>
+  <data name="vadidatepasssmoi" xml:space="preserve">
+    <value>New password must have  4 - 8 characters except special characters</value>
+  </data>
+  <data name="xoaBPBK" xml:space="preserve">
+    <value>Delete the parcel</value>
+  </data>
+  <data name="xoathanhcong" xml:space="preserve">
+    <value>Delete successfully!</value>
+  </data>
+  <data name="chondv" xml:space="preserve">
+    <value>Choose service type ....</value>
+  </data>
+  <data name="chonhuyen" xml:space="preserve">
+    <value>Choose receiver's district</value>
+  </data>
+  <data name="chonngonngu" xml:space="preserve">
+    <value>Choose language</value>
+  </data>
+  <data name="chontinh" xml:space="preserve">
+    <value>Choose receiver's province</value>
+  </data>
+  <data name="CPN" xml:space="preserve">
+    <value>Courier</value>
+  </data>
+  <data name="CPT" xml:space="preserve">
+    <value>Normal delivery</value>
+  </data>
+  <data name="PHT" xml:space="preserve">
+    <value>Express service</value>
+  </data>
+  <data name="xoa" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DIA_CHI" xml:space="preserve">
+    <value>The recipient's address cannot be blank</value>
+  </data>
+  <data name="DICH_VU" xml:space="preserve">
+    <value>Service type must not be blank</value>
+  </data>
+  <data name="NGUOI_NHAN" xml:space="preserve">
+    <value>The recipient's name cannot be blank</value>
+  </data>
+  <data name="SDT_NHAN" xml:space="preserve">
+    <value>The recipient's phone must not be blank</value>
+  </data>
+  <data name="chuyentrang" xml:space="preserve">
+    <value>Move to Home page</value>
+  </data>
+  <data name="doipassdelogin" xml:space="preserve">
+    <value>Please change the password to login</value>
+  </data>
+  <data name="chon" xml:space="preserve">
+    <value>Choose</value>
+  </data>
+  <data name="chonchinhanh" xml:space="preserve">
+    <value>Choose branch</value>
+  </data>
+  <data name="danhsachchinhanh" xml:space="preserve">
+    <value>Branch list</value>
+  </data>
+  <data name="dathangvoimaKH" xml:space="preserve">
+    <value>Choose the customer</value>
+  </data>
+  <data name="makhachhang" xml:space="preserve">
+    <value>Customer code/Name</value>
+  </data>
+  <data name="sokien" xml:space="preserve">
+    <value>Parcel quantity</value>
+  </data>
+  <data name="cuocchinh" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="cuockytruoc" xml:space="preserve">
+    <value>Previous period</value>
+  </data>
+  <data name="cuocnong" xml:space="preserve">
+    <value>Current period</value>
+  </data>
+  <data name="khachhang" xml:space="preserve">
+    <value>Customer code</value>
+  </data>
+  <data name="Ngay" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="phikhac" xml:space="preserve">
+    <value>Fee Amount</value>
+  </data>
+  <data name="STT" xml:space="preserve">
+    <value>No.</value>
+  </data>
+  <data name="tenkhachhang" xml:space="preserve">
+    <value>Customer name</value>
+  </data>
+  <data name="tongtien" xml:space="preserve">
+    <value>Total Amount</value>
+  </data>
+  <data name="total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="totalamount" xml:space="preserve">
+    <value>Total amount of good and services</value>
+  </data>
+  <data name="totalVAT" xml:space="preserve">
+    <value>VAT</value>
+  </data>
+  <data name="tracuoconline" xml:space="preserve">
+    <value>Checking fee online</value>
+  </data>
+  <data name="taikhoan" xml:space="preserve">
+    <value>Booking Online Account</value>
+  </data>
+  <data name="sothamchieu" xml:space="preserve">
+    <value>Reference code</value>
+  </data>
+  <data name="ghichu" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="mashipment" xml:space="preserve">
+    <value>Shipment code</value>
+  </data>
+  <data name="thoigiangui" xml:space="preserve">
+    <value>Delivery time</value>
+  </data>
+  <data name="TLquydoi" xml:space="preserve">
+    <value>Conversion weight</value>
+  </data>
+  <data name="inphieugiaohang" xml:space="preserve">
+    <value>Print Delivery Note</value>
+  </data>
+  <data name="chacchanInphieugiaohang" xml:space="preserve">
+    <value>Are you sure print the delivery note</value>
+  </data>
+  <data name="capnhatemail" xml:space="preserve">
+    <value>Update email</value>
+  </data>
+  <data name="newEmail" xml:space="preserve">
+    <value>New email</value>
+  </data>
+  <data name="oldEmail" xml:space="preserve">
+    <value>Old email</value>
+  </data>
+  <data name="addNew" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="makhachhang_noibo" xml:space="preserve">
+    <value>Customer code / Internal code</value>
+  </data>
+  <data name="taoaccount" xml:space="preserve">
+    <value>Create Online Booking account</value>
+  </data>
+  <data name="vadidateEmail" xml:space="preserve">
+    <value>Please input 1 email address</value>
+  </data>
+  <data name="sdtnguoigui" xml:space="preserve">
+    <value>Sender's phone</value>
+  </data>
+  <data name="mauIn" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="thongBao" xml:space="preserve">
+    <value>Notification!</value>
+  </data>
+  <data name="thongBaoMail" xml:space="preserve">
+    <value>Please update your email address to facilitate order confirmation</value>
+  </data>
+  <data name="WH_banCoMuonChuyenNVC" xml:space="preserve">
+    <value>Do you want to deliver to the carrier code warehouse</value>
+  </data>
+  <data name="WH_banCoMuonHuyNK" xml:space="preserve">
+    <value>Do you want to cancel tiet_kiem?</value>
+  </data>
+  <data name="WH_banCoMuonHuyXK" xml:space="preserve">
+    <value>Do you want to cancel delivery</value>
+  </data>
+  <data name="WH_banCoMuonXacNhanNK" xml:space="preserve">
+    <value>Do you want to confirm tiet_kiem?</value>
+  </data>
+  <data name="WH_banCoMuonXacNhanXK" xml:space="preserve">
+    <value>Do you want to confirm delivery</value>
+  </data>
+  <data name="WH_banCoMuonXoaChiTiet" xml:space="preserve">
+    <value>Do you want to delete the details?</value>
+  </data>
+  <data name="WH_baoCaoXuatNhapTon" xml:space="preserve">
+    <value>Import existing reports</value>
+  </data>
+  <data name="WH_batBuocXK" xml:space="preserve">
+    <value>Force delivery with expiry date</value>
+  </data>
+  <data name="WH_chiDuocThaoTacYCMoiLap" xml:space="preserve">
+    <value>Only manipulate with new request set</value>
+  </data>
+  <data name="WH_chiTietXK" xml:space="preserve">
+    <value>Warehouse details</value>
+  </data>
+  <data name="WH_chonAnh" xml:space="preserve">
+    <value>Choose photo</value>
+  </data>
+  <data name="WH_chonHuyen" xml:space="preserve">
+    <value>Select district</value>
+  </data>
+  <data name="WH_chonNhomSanPham" xml:space="preserve">
+    <value>Select product group</value>
+  </data>
+  <data name="WH_chonTinh" xml:space="preserve">
+    <value>Select province</value>
+  </data>
+  <data name="WH_chonXa" xml:space="preserve">
+    <value>Select commune</value>
+  </data>
+  <data name="WH_chuyenNhaVanChuyen" xml:space="preserve">
+    <value>Moving shipping house</value>
+  </data>
+  <data name="WH_co" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="WH_coLoiXayRa" xml:space="preserve">
+    <value>An error occurred</value>
+  </data>
+  <data name="WH_coSerial" xml:space="preserve">
+    <value>Has serial</value>
+  </data>
+  <data name="WH_danhSachKhachHang" xml:space="preserve">
+    <value>List of customers</value>
+  </data>
+  <data name="WH_diaChiSoNha" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="WH_dongCua" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="WH_donGia" xml:space="preserve">
+    <value>Unit price</value>
+  </data>
+  <data name="WH_donViTinh" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="WH_fileBeHon2MB" xml:space="preserve">
+    <value>File must be less than 2 MB in size</value>
+  </data>
+  <data name="WH_hoatDong" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="WH_huy" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="WH_huyen" xml:space="preserve">
+    <value>District</value>
+  </data>
+  <data name="WH_huyThanhCong" xml:space="preserve">
+    <value>Successfully canceled!</value>
+  </data>
+  <data name="WH_khong" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="WH_khongCoChiTietNhapKho" xml:space="preserve">
+    <value>There are no details</value>
+  </data>
+  <data name="WH_khongNhapMaHangNSX" xml:space="preserve">
+    <value>Do not enter both the product code and the manufacturer product code</value>
+  </data>
+  <data name="WH_khongTimDuocSP" xml:space="preserve">
+    <value>Product not found</value>
+  </data>
+  <data name="WH_khongTonTaiMaHang" xml:space="preserve">
+    <value>This item does not exist</value>
+  </data>
+  <data name="WH_luu" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="WH_maHang" xml:space="preserve">
+    <value>PLU</value>
+  </data>
+  <data name="WH_maKhoHang" xml:space="preserve">
+    <value>Warehouse code</value>
+  </data>
+  <data name="WH_maKhoKH" xml:space="preserve">
+    <value>Customer Stock Code</value>
+  </data>
+  <data name="WH_maNhomSP" xml:space="preserve">
+    <value>Product group code</value>
+  </data>
+  <data name="WH_maNK" xml:space="preserve">
+    <value>Warehouse code</value>
+  </data>
+  <data name="WH_maNuoc" xml:space="preserve">
+    <value>Country code</value>
+  </data>
+  <data name="WH_maSP" xml:space="preserve">
+    <value>Product code</value>
+  </data>
+  <data name="WH_maSPOwner" xml:space="preserve">
+    <value>Product Code Owner</value>
+  </data>
+  <data name="WH_maThamChieu" xml:space="preserve">
+    <value>Reference code</value>
+  </data>
+  <data name="WH_maXK" xml:space="preserve">
+    <value>Warehouse code</value>
+  </data>
+  <data name="WH_maXKKhongDuocBoTrong" xml:space="preserve">
+    <value>Delivery code must not be blank</value>
+  </data>
+  <data name="WH_maYCNK" xml:space="preserve">
+    <value>Code requires warehouse</value>
+  </data>
+  <data name="WH_maYCXK" xml:space="preserve">
+    <value>Code required to leave the warehouse</value>
+  </data>
+  <data name="WH_moiChonDVT" xml:space="preserve">
+    <value>Please select a calculation unit</value>
+  </data>
+  <data name="WH_moiChonKH" xml:space="preserve">
+    <value>Please choose a customer</value>
+  </data>
+  <data name="WH_moiChonNhomKhoHang" xml:space="preserve">
+    <value>Please select a warehouse group</value>
+  </data>
+  <data name="WH_moiChonNhomSP" xml:space="preserve">
+    <value>Please select a product group</value>
+  </data>
+  <data name="WH_moiChonSP" xml:space="preserve">
+    <value>Please choose a product</value>
+  </data>
+  <data name="WH_moiChonTrangThai" xml:space="preserve">
+    <value>Please select a status</value>
+  </data>
+  <data name="WH_moiNhapMaNhomKho" xml:space="preserve">
+    <value>Please enter the warehouse group code</value>
+  </data>
+  <data name="WH_moiNhapMaNhomSP" xml:space="preserve">
+    <value>Please enter the product group code</value>
+  </data>
+  <data name="WH_moiNhapMaSP" xml:space="preserve">
+    <value>Please enter the product code</value>
+  </data>
+  <data name="WH_moiNhapMaSPOwner" xml:space="preserve">
+    <value>Please enter the product owner code</value>
+  </data>
+  <data name="WH_moiNhapSDT" xml:space="preserve">
+    <value>Please enter your phone number</value>
+  </data>
+  <data name="WH_moiNhapTenKhoHang" xml:space="preserve">
+    <value>Please enter the warehouse name</value>
+  </data>
+  <data name="WH_moiNhapTenNhomSP" xml:space="preserve">
+    <value>Please enter the product group name</value>
+  </data>
+  <data name="WH_moiNhapTenSP" xml:space="preserve">
+    <value>Please enter the product name</value>
+  </data>
+  <data name="WH_moiNhapTenSPTimKiem" xml:space="preserve">
+    <value>Please enter the name of the product</value>
+  </data>
+  <data name="WH_moiNhapTrongLuong" xml:space="preserve">
+    <value>Please enter a weight</value>
+  </data>
+  <data name="WH_moTa" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="WH_ngayGioNhap" xml:space="preserve">
+    <value>Date and time of import</value>
+  </data>
+  <data name="WH_ngayHetHan" xml:space="preserve">
+    <value>Expiration date</value>
+  </data>
+  <data name="WH_ngayHHLonHonNgaySX" xml:space="preserve">
+    <value>Expiry date must be greater than manufacturing date</value>
+  </data>
+  <data name="WH_ngaySanXuat" xml:space="preserve">
+    <value>Date of manufacture</value>
+  </data>
+  <data name="WH_nhanVienCapNhat" xml:space="preserve">
+    <value>Updated staff</value>
+  </data>
+  <data name="WH_nhanVienTao" xml:space="preserve">
+    <value>Creation staff</value>
+  </data>
+  <data name="WH_nhapKhoChiTiet" xml:space="preserve">
+    <value>Warehouse details</value>
+  </data>
+  <data name="WH_nhapTheoMaSP" xml:space="preserve">
+    <value>Enter by product code</value>
+  </data>
+  <data name="WH_nhomKhoHang" xml:space="preserve">
+    <value>Warehouse group</value>
+  </data>
+  <data name="WH_nhomSP" xml:space="preserve">
+    <value>Product Groups</value>
+  </data>
+  <data name="WH_nvXacNhan" xml:space="preserve">
+    <value>Confirmation staff</value>
+  </data>
+  <data name="WH_phatSinhTrongKy" xml:space="preserve">
+    <value>Arised during the period</value>
+  </data>
+  <data name="WH_quanLyDanhMucNhomSP" xml:space="preserve">
+    <value>Manage product group catalog</value>
+  </data>
+  <data name="WH_quanLyDanhMucSP" xml:space="preserve">
+    <value>Product portfolio management</value>
+  </data>
+  <data name="WH_quanLyDanhSachKhachHang" xml:space="preserve">
+    <value>Customer list management</value>
+  </data>
+  <data name="WH_quanLyKho" xml:space="preserve">
+    <value>Warehouse manage</value>
+    <comment>WH</comment>
+  </data>
+  <data name="WH_quanLyNhapKho" xml:space="preserve">
+    <value>Warehouse management (In)</value>
+  </data>
+  <data name="WH_quanLyTaoKhoHangMoi" xml:space="preserve">
+    <value>Manage creating new warehouses</value>
+  </data>
+  <data name="WH_quanLyXuatKho" xml:space="preserve">
+    <value>Warehouse management (Out)</value>
+  </data>
+  <data name="WH_sanPham" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="WH_slTon" xml:space="preserve">
+    <value>Quantity Existed</value>
+  </data>
+  <data name="WH_soDienThoai" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="WH_soLuong" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="WH_soLuongKhongDuocTrong" xml:space="preserve">
+    <value>The number must not be blank and must be greater than 0</value>
+  </data>
+  <data name="WH_soLuongNhap" xml:space="preserve">
+    <value>Import quantity</value>
+  </data>
+  <data name="WH_soLuongTonKhongDu" xml:space="preserve">
+    <value>Quantity is not enough</value>
+  </data>
+  <data name="WH_soLuongXuat" xml:space="preserve">
+    <value>Export quantity</value>
+  </data>
+  <data name="WH_SPKhongConTrongKho" xml:space="preserve">
+    <value>This product is no longer in stock</value>
+  </data>
+  <data name="WH_SPKhongDuocTrong" xml:space="preserve">
+    <value>Product must not be blank</value>
+  </data>
+  <data name="WH_sua" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="WH_suaThanhCong" xml:space="preserve">
+    <value>Edit successful!</value>
+  </data>
+  <data name="WH_tamNgung" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="WH_tenKhachHang" xml:space="preserve">
+    <value>Customer name</value>
+  </data>
+  <data name="WH_tenKhoHang" xml:space="preserve">
+    <value>Warehouse name</value>
+  </data>
+  <data name="WH_tenNhomKho" xml:space="preserve">
+    <value>Name of warehouse group</value>
+  </data>
+  <data name="WH_tenNhomSP" xml:space="preserve">
+    <value>Product group name</value>
+  </data>
+  <data name="WH_tenSP" xml:space="preserve">
+    <value>Product's name</value>
+  </data>
+  <data name="WH_them" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="WH_themDanhMucNhomSP" xml:space="preserve">
+    <value>Add product group categories</value>
+  </data>
+  <data name="WH_themDanhMucSP" xml:space="preserve">
+    <value>Add product catalog</value>
+  </data>
+  <data name="WH_themThanhCong" xml:space="preserve">
+    <value>Add to success!</value>
+  </data>
+  <data name="WH_thoiGianCapNhat" xml:space="preserve">
+    <value>Time to update</value>
+  </data>
+  <data name="WH_thoiGianTao" xml:space="preserve">
+    <value>Creation time</value>
+  </data>
+  <data name="WH_thoiGianXacNhan" xml:space="preserve">
+    <value>Confirmation time</value>
+  </data>
+  <data name="WH_thongTinKhachHang" xml:space="preserve">
+    <value>Customer information</value>
+  </data>
+  <data name="WH_timKiem" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="WH_tinh" xml:space="preserve">
+    <value>Province</value>
+  </data>
+  <data name="WH_tonCuoiKy" xml:space="preserve">
+    <value>Ending stocks</value>
+  </data>
+  <data name="WH_tonDauKy" xml:space="preserve">
+    <value>Existing period</value>
+  </data>
+  <data name="WH_tongSo" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="WH_tonThucTe" xml:space="preserve">
+    <value>Actual inventory</value>
+  </data>
+  <data name="WH_trangThai" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="WH_vuiLongChonDongThaoTac" xml:space="preserve">
+    <value>Please select the line you want to operate</value>
+  </data>
+  <data name="WH_xa" xml:space="preserve">
+    <value>Commune</value>
+  </data>
+  <data name="WH_xacNhan" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="WH_xacNhanThanhCong" xml:space="preserve">
+    <value>Confirmation of success!</value>
+  </data>
+  <data name="WH_ycDaDuocHuy" xml:space="preserve">
+    <value>The request has been canceled</value>
+  </data>
+  <data name="WH_ycNKChiTiet" xml:space="preserve">
+    <value>Request warehouse details</value>
+  </data>
+  <data name="WH_ycXKChiTiet" xml:space="preserve">
+    <value>Request warehouse details</value>
+  </data>
+  <data name="chuyenmaKH" xml:space="preserve">
+    <value>Customer code conversion</value>
+  </data>
+  <data name="chuyenmathanhcong" xml:space="preserve">
+    <value>Convert successfully!</value>
+  </data>
+  <data name="khoiphucBPBK" xml:space="preserve">
+    <value>Restore bill</value>
+  </data>
+  <data name="khoiphucBPBKthanhcong" xml:space="preserve">
+    <value>Restore bill successfully!</value>
+  </data>
+  <data name="msgbotrongBPBK" xml:space="preserve">
+    <value>The track number must not be blank</value>
+  </data>
+  <data name="msgbotrongmakh" xml:space="preserve">
+    <value>Customer code must not be blank</value>
+  </data>
+  <data name="WH_coMuonInPhieuNK" xml:space="preserve">
+    <value>Do you want to print the import warehouse</value>
+  </data>
+  <data name="WH_trangThaiKhongDuoc" xml:space="preserve">
+    <value>The canceled status is not printed</value>
+  </data>
+  <data name="WH_coMuonInPhieuXK" xml:space="preserve">
+    <value>You want to print the export warehose</value>
+  </data>
+  <data name="quytrinhbooking" xml:space="preserve">
+    <value>Booking online tutorial</value>
+  </data>
+  <data name="tailieuhuongdan" xml:space="preserve">
+    <value>Instruction document</value>
+  </data>
+  <data name="videohuongdan" xml:space="preserve">
+    <value>Video Tutorial</value>
+  </data>
+  <data name="back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="dacotaikhoan" xml:space="preserve">
+    <value>Do you already have an account?</value>
+  </data>
+  <data name="dangky" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="dangkybookingonline" xml:space="preserve">
+    <value>Register booking online</value>
+  </data>
+  <data name="dangkythanhcong" xml:space="preserve">
+    <value>Account registration is successful.</value>
+  </data>
+  <data name="dcemail" xml:space="preserve">
+    <value>Email address</value>
+  </data>
+  <data name="diachilayhang" xml:space="preserve">
+    <value>Address pickup</value>
+  </data>
+  <data name="forgotpass" xml:space="preserve">
+    <value>Forgot password ?</value>
+  </data>
+  <data name="hotrokt" xml:space="preserve">
+    <value>Technical support</value>
+  </data>
+  <data name="khoiphuc" xml:space="preserve">
+    <value>Send email</value>
+  </data>
+  <data name="lienhetheosdt" xml:space="preserve">
+    <value>Please contact 0961.107.816 for assistance in changing the password</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="noteforgotpas" xml:space="preserve">
+    <value>Please enter the email address used to register on the system.</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="phonenumber" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="quanlayhang" xml:space="preserve">
+    <value>District pickup</value>
+  </data>
+  <data name="tenkh" xml:space="preserve">
+    <value>Customer name</value>
+  </data>
+  <data name="tinhlayhang" xml:space="preserve">
+    <value>Province pickup</value>
+  </data>
+  <data name="username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="vaddcemail" xml:space="preserve">
+    <value>Email must not be blank</value>
+  </data>
+  <data name="vaddcemail1" xml:space="preserve">
+    <value>Email address is incorrect</value>
+  </data>
+  <data name="vaddclayhang" xml:space="preserve">
+    <value>Address pickup must not be blank</value>
+  </data>
+  <data name="vadpass" xml:space="preserve">
+    <value>Password must not be blank</value>
+  </data>
+  <data name="vadquanlayhang" xml:space="preserve">
+    <value>County/district pickup must not be blank</value>
+  </data>
+  <data name="vadsdt" xml:space="preserve">
+    <value>Phone number must not be blank</value>
+  </data>
+  <data name="vadtendangnhap" xml:space="preserve">
+    <value>Username must not be blank</value>
+  </data>
+  <data name="vadtenkh" xml:space="preserve">
+    <value>Customer name must not be blank</value>
+  </data>
+  <data name="vadtinhlayhang" xml:space="preserve">
+    <value>Province pickup must not be blank</value>
+  </data>
+  <data name="chonchinhanhdetaodonhang" xml:space="preserve">
+    <value>Select a company to order</value>
+  </data>
+  <data name="chondonvi" xml:space="preserve">
+    <value>Choose a station code</value>
+  </data>
+  <data name="msgChonChiNhanh" xml:space="preserve">
+    <value>Please select a company branch</value>
+  </data>
+  <data name="msgLoi" xml:space="preserve">
+    <value>Error. Please refresh the page</value>
+  </data>
+  <data name="msgMadonvi" xml:space="preserve">
+    <value>Please enter the station code</value>
+  </data>
+  <data name="msgMaKhachHang" xml:space="preserve">
+    <value>Please enter customer code</value>
+  </data>
+  <data name="ngayyclayhang" xml:space="preserve">
+    <value>Pickup request date</value>
+  </data>
+  <data name="notedangnhapthanhcong" xml:space="preserve">
+    <value>Login successfully. Please choose station code and the company need Booking Online.</value>
+  </data>
+  <data name="bangtracuoc" xml:space="preserve">
+    <value>DELIVERY TARIFF</value>
+  </data>
+  <data name="den" xml:space="preserve">
+    <value>to</value>
+  </data>
+  <data name="tratungay" xml:space="preserve">
+    <value>From date</value>
+  </data>
+  <data name="makh" xml:space="preserve">
+    <value>Customer code</value>
+  </data>
+  <data name="maxacnhan" xml:space="preserve">
+    <value>Verification code</value>
+  </data>
+  <data name="msgmaxn" xml:space="preserve">
+    <value>Verification code cannot be left blank</value>
+  </data>
+  <data name="myprofile" xml:space="preserve">
+    <value>My Profile</value>
+  </data>
+  <data name="notexacnhanemail" xml:space="preserve">
+    <value>Please verify your account to register Booking Online</value>
+  </data>
+  <data name="Xacminhtaikhoan" xml:space="preserve">
+    <value>Account Verification successful</value>
+  </data>
+  <data name="xacnhan" xml:space="preserve">
+    <value>Verify</value>
+  </data>
+  <data name="dukientinhgia" xml:space="preserve">
+    <value>Expected price calculation</value>
+  </data>
+  <data name="ketqua" xml:space="preserve">
+    <value>Results</value>
+  </data>
+  <data name="msgdichvutinhgia" xml:space="preserve">
+    <value>Service type cannot empty</value>
+  </data>
+  <data name="msgsokientinhgia" xml:space="preserve">
+    <value>Package quantity must not empty and must be greater than 0</value>
+  </data>
+  <data name="msgtinhdentinhgia" xml:space="preserve">
+    <value>The destination province cannot empty</value>
+  </data>
+  <data name="msgtinhgiathanhcong" xml:space="preserve">
+    <value>Calculated finished!</value>
+  </data>
+  <data name="msgtrongluongtinhgia" xml:space="preserve">
+    <value>The weight must not empty and must be greater than 0</value>
+  </data>
+  <data name="phidichvu" xml:space="preserve">
+    <value>Service charge</value>
+  </data>
+  <data name="phixangdau" xml:space="preserve">
+    <value>Fuel charge</value>
+  </data>
+  <data name="thanhtien" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="thongtin" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="tinhgia" xml:space="preserve">
+    <value>Calculate</value>
+  </data>
+  <data name="vungsauvungxa" xml:space="preserve">
+    <value>Remote areas</value>
+  </data>
+  <data name="sodt" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="hoadon" xml:space="preserve">
+    <value>Invoice</value>
+  </data>
+  <data name="kthang" xml:space="preserve">
+    <value>Goods size</value>
+  </data>
+  <data name="sohoadon" xml:space="preserve">
+    <value>Invoice number</value>
+  </data>
+  <data name="vadkthang" xml:space="preserve">
+    <value>Goods size must not be blank</value>
+  </data>
+  <data name="vadsohoadon" xml:space="preserve">
+    <value>Invoice number must not be blank</value>
+  </data>
+  <data name="tthanghoa" xml:space="preserve">
+    <value>Service information</value>
+  </data>
+  <data name="ttnguoigui" xml:space="preserve">
+    <value>Sender and Goods information</value>
+  </data>
+  <data name="ttnguoinhan" xml:space="preserve">
+    <value>Receiver information</value>
+  </data>
+  <data name="vadhuyennhan" xml:space="preserve">
+    <value>The recipient's district cannot empty</value>
+  </data>
+  <data name="vadtinhnhan" xml:space="preserve">
+    <value>The recipient's province cannot empty</value>
+  </data>
+  <data name="msg_ket_thuc_phien_lam_viec" xml:space="preserve">
+    <value>The session has ended, please login again</value>
+  </data>
+  <data name="msg_role_using_action" xml:space="preserve">
+    <value>You don't have permission to use this action</value>
+  </data>
+  <data name="msg_role_reset_pass" xml:space="preserve">
+    <value>Sub-codes do not have permission to change passwords. Please contact the original code to change the password.</value>
+  </data>
+  <data name="quanlymaphu" xml:space="preserve">
+    <value>Sub-code management</value>
+  </data>
+  <data name="danhsach_ma_phu" xml:space="preserve">
+    <value>Sub-code list</value>
+  </data>
+  <data name="hoat_dong" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="khoa" xml:space="preserve">
+    <value>Disable account</value>
+  </data>
+  <data name="msg_khoa_ma_phu" xml:space="preserve">
+    <value>Are you sure you lock sub-code</value>
+  </data>
+  <data name="msg_luu_thanh_cong" xml:space="preserve">
+    <value>Save successfully!</value>
+  </data>
+  <data name="msg_pass" xml:space="preserve">
+    <value>Password cannot be empty</value>
+  </data>
+  <data name="msg_repass" xml:space="preserve">
+    <value>Re-enter password cannot be empty</value>
+  </data>
+  <data name="msg_ten_maphu" xml:space="preserve">
+    <value>Sub-code name cannot be empty</value>
+  </data>
+  <data name="msg_username" xml:space="preserve">
+    <value>Username can not be empty</value>
+  </data>
+  <data name="tao_ma_phu" xml:space="preserve">
+    <value>Create sub-code</value>
+  </data>
+  <data name="tao_moi" xml:space="preserve">
+    <value>Add new</value>
+  </data>
+  <data name="ten_ma_phu" xml:space="preserve">
+    <value>Sub-code name</value>
+  </data>
+  <data name="update_infor" xml:space="preserve">
+    <value>Update information</value>
+  </data>
+  <data name="msg_dia_chi_nguoi_gui" xml:space="preserve">
+    <value>Address's sender can't be empty</value>
+  </data>
+  <data name="doanhthu" xml:space="preserve">
+    <value>Fee (include VAT)</value>
+  </data>
+  <data name="chacchanInBPBK" xml:space="preserve">
+    <value>Do you want to print bill number</value>
+  </data>
+  <data name="inbpbk" xml:space="preserve">
+    <value>Print with bill code</value>
+  </data>
+  <data name="intheophieugui" xml:space="preserve">
+    <value>Print with order code</value>
+  </data>
+  <data name="msg_huyen_lh" xml:space="preserve">
+    <value>The district pickup incorrect. Please choose again.</value>
+  </data>
+  <data name="msg_huyen_nhan" xml:space="preserve">
+    <value>The district' receiver incorrect. Please choose again.</value>
+  </data>
+  <data name="gtdonhang" xml:space="preserve">
+    <value>Receipt amount</value>
+  </data>
+  <data name="hangdongkiem" xml:space="preserve">
+    <value>Co-check goods</value>
+  </data>
+  <data name="hoanBBBG" xml:space="preserve">
+    <value>Refunding handover records</value>
+  </data>
+  <data name="ngayhenphat" xml:space="preserve">
+    <value>Delivery date</value>
+  </data>
+  <data name="phatsieuthi" xml:space="preserve">
+    <value>Supermarket delivery</value>
+  </data>
+  <data name="dongkiem" xml:space="preserve">
+    <value>Co-checking</value>
+  </data>
+  <data name="dsNguoiNhan" xml:space="preserve">
+    <value>List of recipients</value>
+  </data>
+  <data name="errBBBGkokitudacbiet" xml:space="preserve">
+    <value>Delivery records may not enter special characters: } or {</value>
+  </data>
+  <data name="errChiTimKiemTrong1Thang" xml:space="preserve">
+    <value>Search only for 1 month!</value>
+  </data>
+  <data name="errChiTimKiemTrong3Thang" xml:space="preserve">
+    <value>Search only for 90 days!</value>
+  </data>
+  <data name="errChiUp1000dong" xml:space="preserve">
+    <value>Only upload up to 1000 parcels!</value>
+  </data>
+  <data name="errChonDH" xml:space="preserve">
+    <value>Please tick the order you want to request</value>
+  </data>
+  <data name="errDiaChiNguoiNhan" xml:space="preserve">
+    <value>The recipient address can only enter up to 300 characters</value>
+  </data>
+  <data name="errGTDHSaiDinhDang" xml:space="preserve">
+    <value>Receipt amount in wrong format</value>
+  </data>
+  <data name="errHoanBienBanBB" xml:space="preserve">
+    <value>Refund of handover records cannot empty.</value>
+  </data>
+  <data name="errKhongCoDH" xml:space="preserve">
+    <value>No orders, please add an order before saving</value>
+  </data>
+  <data name="errKhongTimThayBPBK" xml:space="preserve">
+    <value>Not found bill number in database.</value>
+  </data>
+  <data name="errKhongTimThayFile" xml:space="preserve">
+    <value>Not found the file upload</value>
+  </data>
+  <data name="errKhongTimThayKH" xml:space="preserve">
+    <value>Not found this customer</value>
+  </data>
+  <data name="errKhongTimThayTenSheet" xml:space="preserve">
+    <value>Not found sheet name</value>
+  </data>
+  <data name="errNgayHenPhatST" xml:space="preserve">
+    <value>Supermarket delivery date cannot empty.</value>
+  </data>
+  <data name="erroNgayPhatSTLonHonNgayHT" xml:space="preserve">
+    <value>Supermarket delivery date must greater than the current date</value>
+  </data>
+  <data name="erroNgayYCLonHonNgayHT" xml:space="preserve">
+    <value>Pickup request date must be greater than or equal to current date</value>
+  </data>
+  <data name="errSDTgui" xml:space="preserve">
+    <value>Sender's phone can't be blank</value>
+  </data>
+  <data name="errSoHDkokitudacbiet" xml:space="preserve">
+    <value>Invoice number must not enter special characters: } or {</value>
+  </data>
+  <data name="errTGHenSaiDinhDang" xml:space="preserve">
+    <value>Supermarket delivery date in the wrong format 'dd/MM/yyyy HH:mm' (Example: 11/10/2020 16:30)</value>
+  </data>
+  <data name="luudontam" xml:space="preserve">
+    <value>Save temporary orders</value>
+  </data>
+  <data name="msgCapNhatEmail" xml:space="preserve">
+    <value>Update email address success</value>
+  </data>
+  <data name="nhapttnguoinhan" xml:space="preserve">
+    <value>Enter the recipient's information</value>
+  </data>
+  <data name="quanlydonhangtam" xml:space="preserve">
+    <value>Temporary order</value>
+  </data>
+  <data name="qusChacChanLuuDonTam" xml:space="preserve">
+    <value>Are you sure to save temporary orders?</value>
+  </data>
+  <data name="errTenNguoiGui" xml:space="preserve">
+    <value>The sender's name cannot empty</value>
+  </data>
+  <data name="msgYCLayHangThanhCong" xml:space="preserve">
+    <value>Your order has been requested to pick up, please go to the Manage Orders tab for tracking</value>
+  </data>
+  <data name="yeucaulayhang" xml:space="preserve">
+    <value>Request pickup</value>
+  </data>
+  <data name="ttlayhang" xml:space="preserve">
+    <value>Pickup information</value>
+  </data>
+  <data name="chieucaokien" xml:space="preserve">
+    <value>Package height</value>
+  </data>
+  <data name="chieudaikien" xml:space="preserve">
+    <value>Package length</value>
+  </data>
+  <data name="chieurongkien" xml:space="preserve">
+    <value>Package width</value>
+  </data>
+  <data name="huyenden" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tlhangcongkenh" xml:space="preserve">
+    <value>Bulky goods, converted weight</value>
+  </data>
+  <data name="tl_kien" xml:space="preserve">
+    <value>Package weight</value>
+  </data>
+  <data name="denhuyenxa" xml:space="preserve">
+    <value>To District / Commune</value>
+  </data>
+  <data name="denquantp" xml:space="preserve">
+    <value>To District / City</value>
+  </data>
+  <data name="errkhongtimthaymadh" xml:space="preserve">
+    <value>Order code not found in the system.</value>
+  </data>
+  <data name="gom" xml:space="preserve">
+    <value>includes</value>
+  </data>
+  <data name="msgXoaDH" xml:space="preserve">
+    <value>Are you sure you delete order code</value>
+  </data>
+  <data name="msgXoaDonHang" xml:space="preserve">
+    <value>Are you sure you want to delete this order?</value>
+  </data>
+  <data name="xoadonhang" xml:space="preserve">
+    <value>Delete order</value>
+  </data>
+  <data name="xoaphieule" xml:space="preserve">
+    <value>Delete parcel</value>
+  </data>
+  <data name="msgChonQuanTP" xml:space="preserve">
+    <value>Please select "To District/City" or "To District/Commune</value>
+  </data>
+</root>

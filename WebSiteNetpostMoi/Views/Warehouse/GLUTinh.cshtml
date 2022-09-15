@@ -1,0 +1,44 @@
+﻿@model List<WebSite.Models.OP_ZONE_MASTERDTO>
+@{
+    var glu = Html.DevExpress().GridLookup(settings =>
+    {
+        settings.KeyFieldName = "ZONE_CODE";
+
+        settings.Name = "gluTinh";
+        settings.ControlStyle.CssClass = "form-control";
+        settings.GridViewProperties.CallbackRouteValues = new { Controller = "Warehouse", Action = "GLUTinh" };
+        //settings.Properties.MultiTextSeparator = ",";
+        settings.Properties.TextFormatString = "{1}";
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Mã tỉnh";
+            column.FieldName = "ZONE_CODE";
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+            column.Width = 30;
+            column.Visible = false;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Tên tỉnh";
+            column.FieldName = "TEN_CO_DAU";
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+            column.Width = 50;
+        });
+        settings.GridViewProperties.Settings.ShowFilterRow = true;
+        settings.GridViewProperties.Settings.ShowStatusBar = GridViewStatusBarMode.Visible;
+        settings.DataBound = (sender, e) =>
+        {
+            var gridLookup = (MVCxGridLookup)sender;
+            gridLookup.GridView.Width = 200;
+            gridLookup.GridView.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
+            gridLookup.GridView.Settings.VerticalScrollableHeight = 300;
+        };
+        settings.GridViewProperties.SettingsPager.Mode = GridViewPagerMode.ShowAllRecords;
+        settings.Width = 180;
+        settings.Height = 30;
+        settings.Properties.ClientSideEvents.ValueChanged = "function(s,e){changeTinh(s,e)}";
+    });
+}
+@glu.BindList(Model).GetHtml()
+

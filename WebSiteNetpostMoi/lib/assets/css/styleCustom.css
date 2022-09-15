@@ -1,0 +1,264 @@
+/**
+* Template Name: Eterna - v4.7.1
+* Template URL: https://bootstrapmade.com/eterna-free-multipurpose-bootstrap-template/
+* Author: BootstrapMade.com
+* License: https://bootstrapmade.com/license/
+*/
+
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+.NavbarTitle {
+    margin-right: 3rem;
+    margin-left: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.GadientRGB {
+    background: linear-gradient(90deg, rgb(182 253 255) 7%, rgb(255 204 234) 80%);
+    width: 7rem;
+    border-radius: 2rem;
+    height: 2.5rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*hero*/
+
+
+/*tabInput*/
+#tabInput {
+    height: 50vh;
+    z-index: 10;
+    width: 100%;
+    overflow: hidden;
+}
+
+.tabs {
+    width: 600px;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    width: 57%
+}
+
+    .tabs .tab {
+        float: left;
+        display: block;
+    }
+
+        .tabs .tab > input[type="radio"] {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        .tabs .tab > label {
+            display: block;
+            padding: 10px 30px;
+            font-size: 15px;
+            text-transform: uppercase;
+            cursor: pointer;
+            position: relative;
+            border: 1px solid #c7c7c7;
+            border-radius: 8px 8px 0 0;
+            font-weight: bold
+        }
+
+    .tabs .content {
+        z-index: 0; /* or display: none; */
+        overflow: hidden;
+        width: 73rem;
+        padding: 25px;
+        position: absolute;
+        top: 40px;
+        left: 172px;
+        background: #ededed;
+        opacity: 0;
+        transition: opacity 400ms ease-out;
+    }
+
+    .tabs > .tab > [id^="tab"]:checked + label {
+        top: 0;
+        background: #ff3c3c;
+        color: #F5F5F5;
+    }
+
+    .tabs > .tab > [id^="tab"]:checked ~ [id^="tab-content"] {
+        z-index: 1; /* or display: block; */
+        opacity: 1;
+        transition: opacity 400ms ease-out;
+    }
+
+/* target*/
+
+#target {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+    #target .carousel-container {
+        display: flex;
+        position: absolute;
+        top: 6rem;
+        width: 165rem;
+        height: 100rem;
+        margin-left: 6rem;
+    }
+
+    #target .text-container {
+        margin-left: 3rem;
+    }
+
+    #target .text {
+        width: 32rem;
+        text-align: center;
+        border-bottom: 5px solid red;
+    }
+
+    #target .carousel-content {
+        text-align: center;
+        /* width: 600px; */
+    }
+
+/* netpost*/
+#netpost {
+    width: 100%;
+    height: 125vh;
+    overflow: hidden;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+    #netpost .carousel-container {
+        display: flex;
+        position: absolute;
+        width: 190rem;
+        height: 100rem;
+        z-index: 0;
+        top: 4rem;
+    }
+
+    #netpost .text-container {
+        margin-left: 3rem;
+        position: absolute;
+        z-index: 1;
+    }
+
+    #netpost .text {
+        width: 32rem;
+        text-align: center;
+        background: #ff9696;
+        box-shadow: 7px 7px 5px 2px #766464;
+    }
+
+    #netpost .carousel-content {
+        text-align: center;
+    }
+/* Card*/
+#Featured {
+    height: 125vh;
+}
+    #Featured .card {
+        border: none;
+        transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+        overflow: hidden;
+        border-radius: 20px;
+        min-height: 350px;
+        box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
+    }
+
+@media (max-width: 768px) {
+    #Featured .card {
+        min-height: 350px;
+    }
+}
+
+@media (max-width: 420px) {
+    #Featured .card {
+        min-height: 300px;
+    }
+}
+
+#Featured .card.card-has-bg {
+    transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+    #Featured .card.card-has-bg:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        /*background: inherit;*/
+        -webkit-filter: grayscale(1);
+        -moz-filter: grayscale(100%);
+        -ms-filter: grayscale(100%);
+        -o-filter: grayscale(100%);
+        filter: grayscale(100%);
+    }
+
+    #Featured .card.card-has-bg:hover {
+        transform: scale(0.98);
+        box-shadow: 0 0 5px -2px rgba(0, 0, 0, 0.3);
+        background-size: 90%;
+        transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+        #Featured .card.card-has-bg:hover .card-img-overlay {
+            transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+            background: #F5F5F5;
+            background: linear-gradient(0deg, rgba(35, 79, 109, 0.3785889356) 0%, #b73535c7 100%);
+        }
+
+#Featured .card .card-footer {
+    background: none;
+    border-top: none;
+}
+
+    #Featured .card .card-footer .media img {
+        border: solid 3px rgba(255, 255, 255, 0.3);
+    }
+
+#Featured .card .card-meta {
+    color: #26bd75;
+}
+
+#Featured .card .card-body {
+    transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+#Featured .card:hover {
+    cursor: pointer;
+    transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+    #Featured .card:hover .card-body {
+        margin-top: 30px;
+        transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+#Featured .card .card-img-overlay {
+    transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+    background: #F5F5F5;
+    background: linear-gradient(0deg, rgba(35, 79, 109, 0.3785889356) 0%, #983232b5 100%);
+}
+/*About book*/
+#About {
+    height: 100vh;
+}
+   /*registers*/
+
+    

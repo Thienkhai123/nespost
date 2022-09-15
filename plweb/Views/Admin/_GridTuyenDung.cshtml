@@ -1,0 +1,118 @@
+﻿
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridView";
+        settings.CallbackRouteValues = new { Controller = "Admin", Action = "GridTuyenDung" };
+        settings.KeyFieldName = "ID";
+
+        settings.ControlStyle.CssClass = "grid-view griddata";
+        settings.SettingsPager.Visible = false;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFooter = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        settings.Settings.ShowHorizontalScrollBar = true;
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
+        settings.SettingsPager.Mode = GridViewPagerMode.ShowAllRecords;
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Tác vụ";
+            column.Width = 150;
+            column.CellStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Center;
+            column.SetDataItemTemplateContent(container =>
+            {
+                ViewContext.Writer.Write("<a style=\"font-size:20px;cursor: pointer;\"  onclick =\"ShowPopup('" + Convert.ToString(DataBinder.Eval(container.DataItem, "ID")) + "')\" title=\"Hồ sơ tuyển dụng\"><i class=\"fa fa-address-card-o\"></i> </a>");
+                ViewContext.Writer.Write("<a style=\"font-size:20px;cursor: pointer;margin-left: 15px; \" onclick=\"Update_Tin('" + Convert.ToString(DataBinder.Eval(container.DataItem, "ID")) + "')\" title=\"Xem chi tiết và Cập nhật\"><i class=\"fa fa-edit\"></i> </a>");
+                ViewContext.Writer.Write("<a onclick=\"Xoa_Tin('" + Convert.ToString(DataBinder.Eval(container.DataItem, "ID")) + "')\" style=\"font-size:20px;cursor: pointer;margin-left: 15px;\" title=\"Xóa tin\"><i class=\"fa fa-times-circle\"></i> </a>");
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "TIN_CHUA_DUYET";
+            column.Caption = "Hồ sơ chưa duyệt";
+            column.Width = 150;
+            column.CellStyle.ForeColor = System.Drawing.Color.Red;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ID";
+            column.Caption = "Mã tin";
+            column.Width = 100;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "TIEU_DE";
+            column.Caption = "Tiêu đề";
+            column.Width = 200;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "VI_TRI";
+            column.Caption = "Vị trí";
+            column.Width = 190;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "DIA_DIEM";
+            column.Caption = "Địa điểm";
+            column.Width = 150;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "KINH_NGHIEM";
+            column.Caption = "Kinh nghiệm";
+            column.Width = 120;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "HAN_NOP";
+            column.Caption = "Hạn nộp";
+            column.Width = 120;
+            column.PropertiesEdit.DisplayFormatString = "dd/MM/yyyy";
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "THOI_GIAN_STRING";
+            column.Caption = "Ngày tạo";
+            column.Width = 120;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+
+        //settings.SettingsDetail.AllowOnlyOneMasterRowExpanded = false;
+        //settings.SettingsDetail.ShowDetailRow = true;
+        //settings.SetDetailRowTemplateContent(c =>
+        //{
+        //    ViewContext.Writer.Write(
+        //        "<p style=\"font-weight:bold; margin-bottom: 10px; padding: 0;font-size:18px;\">Danh sách ứng tuyển</p>"
+
+        //    );
+        //    Html.RenderAction("ApplicationPartial", new { ID = DataBinder.Eval(c.DataItem, "ID") });
+        //});
+        //settings.PreRender = (sender, e) =>
+        //{
+        //    ((MVCxGridView)sender).DetailRows.ExpandRow(0);
+        //};
+        settings.SetFooterRowTemplateContent(c =>
+        {
+            Html.ViewContext.Writer.Write("<span style=\"padding:20px 10px;font-weight:bold;\">Tổng số hồ sơ chưa duyệt: " + ViewData["SO_HO_SO"] + "</span>");           
+        });
+
+    });
+}
+@grid.Bind(Model).GetHtml()
+

@@ -1,0 +1,731 @@
+﻿@using WebSite.Models;
+@{WebSite.Models.CSS_CRM_NGUOI_DUNGDTO user = (WebSite.Models.CSS_CRM_NGUOI_DUNGDTO)Session["User"];}
+@using WebSite.Language
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/css/css-checkinKHAeon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/lib/css/templatemo_style.css?date=@DateTime.Now.ToString("yyyyMMdd")" rel="stylesheet" />
+
+    <link href="~/lib/bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link rel="icon" href="~/lib/images/logo/favicon.png" type="image/x-icon">
+    <link href="~/lib/css/sweetalert2.css" rel="stylesheet" />
+    <link href="~/lib/css/sweetalert2.min.css" rel="stylesheet" />
+    <!--devexpress-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Content.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/Layout.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/GridView.css")" />
+    <link href="~/lib/dist/jquery.iviewer.css" rel="stylesheet" />
+    @Html.DevExpress().GetStyleSheets(
+       new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+       new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
+       new StyleSheet { ExtensionSuite = ExtensionSuite.Report },
+       new StyleSheet { ExtensionSuite = ExtensionSuite.GridView }
+    )
+    @Html.DevExpress().GetScripts(
+        new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+        new Script { ExtensionSuite = ExtensionSuite.Editors },
+        new Script { ExtensionSuite = ExtensionSuite.Report },
+        new Script { ExtensionSuite = ExtensionSuite.GridView }
+    )
+
+    <script type="text/javascript" src="@Url.Content("~/Content/Script.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/GridView.js")"></script>
+    <!--ANGULAR-->
+    <script src="~/lib/js/sweetalert2@9.js"></script>
+    <script type="text/javascript" src="~/lib/dist/jqueryui.js"></script>
+    <script type="text/javascript" src="~/lib/dist/jquery.mousewheel.min.js"></script>
+    <script type="text/javascript" src="~/lib/dist/jquery.iviewer.js"></script>
+    <style>
+        .swal2-popup.swal2-toast {
+            padding: 1.625em !important;
+        }
+
+            .swal2-popup.swal2-toast .swal2-title {
+                font-size: 1.25em !important;
+            }
+    </style>
+</head>
+<body style="overflow-x:hidden">
+    <div id="wrapper" class="active">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div id="main-header">
+                <div class="row" style="margin:0">
+                    <div class="logo pull-left">
+                        @*<a href=""><img src="~/lib/images/loginSagawa.png" title="Booking Sagawa" alt="Sagawa Website" style="width: 260px;"></a>*@
+                    </div>
+                    <div class="navbar pull-right">
+                        <ul class="navbar-nav float-right">
+                            @if (!user.CUSTOMER_CODE.Contains("ORDERS") && !user.CUSTOMER_CODE.Contains("NB") && string.IsNullOrWhiteSpace(user.EMAIL))
+                            {
+                                <li class="nav-item dropdown ">
+                                    <div class="alert alert-warning">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                                        <a href="javascript:;" data-toggle="modal" data-target="#ModalEmail" data-backdrop="static" title="@Booking.capnhatemail" style="color: #8a6d3b;">
+                                            <i class="fa fa-warning"></i>  <strong>@Booking.thongBao</strong>  @Booking.thongBaoMail
+                                        </a>
+                                    </div>
+                                </li>
+                            }
+                            @if (!user.CUSTOMER_CODE.Equals("0131858"))
+                            {
+                                var kieuin = user.LOAI_TK.Split(',')[0].Trim();
+                                kieuin = kieuin.Replace("{P:", "").Replace("}", "");
+                                <li class="nav-item dropdown chonmauin">
+                                    <a class="nav-link " style="font-size:19px; text-decoration:underline">@Booking.mauIn: <strong style="color:red">@kieuin</strong> </a>
+                                    <div class="dropdown-menu dropdown-menu-right lstmauin">
+                                        <a class="dropdown-item" href="javascript:;" onclick="chonkieuin('A5')"><i class="fa fa-file-pdf-o"></i> <strong style="color:red"> A5</strong></a>
+                                        <a class="dropdown-item" href="javascript:;" onclick="chonkieuin('A4')"><i class="fa fa-file-pdf-o"></i> <strong style="color:red"> A4</strong></a>
+                                    </div>
+                                </li>
+                            }
+                            <li class="nav-item dropdown">
+                                @{
+                                    if (Request.Cookies["language"].Value == "vi")
+                                    {
+                                        <a data-toggle="dropdown" class="nav-link dropdown-toggle" title="Tiếng Việt">
+                                            <span><img src="~/lib/images/vi.png" /></span>
+                                        </a>
+                                    }
+                                    else if (Request.Cookies["language"].Value == "en")
+                                    {
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown"
+                                           title="English" style="">
+                                            <span><img src="~/lib/images/en.png" /></span>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown"
+                                           title="日本語">
+                                            <span><img src="~/lib/images/ja.png" /></span>
+                                        </a>
+                                    }
+                                }
+                                <ul class="dropdown-menu dropdown-menu-right dropdown-language">
+                                    <li>
+                                        <a onclick="clickme('ja')" title="日本語"><span><img src="/lib/images/ja.png"></span> Japanese</a>
+
+                                    </li>
+                                    <li>
+                                        <a onclick="clickme('en')" title="English" style=""><span><img src="/lib/images/en.png"> English</span></a>
+                                    </li>
+                                    <li>
+                                        <a onclick="clickme('vi')" style="" title="Tiếng Việt">
+                                            <span><img src="/lib/images/vi.png"> Tiếng Việt</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown cus-user">
+                                <a class="nav-link"> <img src="~/lib/images/1.jpg" alt="user" class="rounded-circle" width="31"></a>
+                                <div class="dropdown-menu dropdown-menu-right drop-user">
+                                    <p style="text-align:center;padding: 5px;background: #eaedf2; font-weight: 500;color: indianred;"> @user.USER_NAME <br> @user.NAME </p>
+                                    @if (user.GHI_CHU.Equals("TAO_TK_BOOKING"))
+                                    {
+                                        <a class="dropdown-item" onclick="$('#ModalTaoTaiKhoan').modal('show')"><i class="fa fa-check"></i> Tạo tài khoản </a>
+                                    }
+                                    <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#ModalResetPass" data-backdrop="static" title="@Booking.doipass">
+                                        <i class="fa fa-key"> </i> @Booking.doipass
+                                    </a>
+                                    @if (!user.CUSTOMER_CODE.Contains("ORDERS") && !user.CUSTOMER_CODE.Contains("NB"))
+                                    {
+                                        <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#ModalEmail" data-backdrop="static" title="@Booking.capnhatemail">
+                                            <i class="fa fa-at"> </i> @Booking.capnhatemail
+                                        </a>
+                                    }
+                                    @if (user.login == "0")
+                                    {
+                                        <a class="dropdown-item" href="/Home/Logout" title="@Booking.dangxuat"><i class="glyphicon glyphicon-log-out"> </i> @Booking.dangxuat</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="dropdown-item" href="/Booking/DangXuat" title="@Booking.dangxuat"><i class="glyphicon glyphicon-log-out"> </i> @Booking.dangxuat</a>
+                                    }
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="top-header">
+                <div class="container" style="padding:0 25px;">
+                    <div class="row">
+                        <div class="col-md-11">
+                            <div class="navbar-brand">
+                                <a id="menu-toggle" href="#" class="glyphicon glyphicon-align-justify btn-menu toggle">
+                                </a>
+                            </div>
+                            <div class="main-menu">
+                                <ul>
+                                    <li id="quanlykho" class="current_item"><a href="/Warehouse/QuanLyKho">@Booking.WH_quanLyKho</a></li>
+                                    <li id="danhsachdonhang"><a href="/Booking/DanhSachDonHang">@Booking.danhsachdonhang</a></li>
+                                    <li id="dondathang"><a href="@Url.Action("DonHangMoiTuSinh", "Booking", new { id = "" })">@Booking.dondathang</a></li>
+                                    <li id="tracuoc"><a href="/Booking/TraCuocOnline">@Booking.tracuoconline</a></li>
+                                    <li id="huongdang"><a href="/Booking/HuongDan" target="_blank">@Booking.huongdang</a></li>
+                                    @*  <li id="huongdang"><a href="/Booking/HuongDan" target="_blank">Đánh giá</a></li>*@
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="breadcrumbs" style="line-height:30px">
+                <label style="font-weight:900 !important;padding-left:30px;color:#374694">Quản lý kho >> @ViewBag.Title</label>
+            </div>
+        </nav>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <nav id="sidebar" style="margin-top:30px">
+                <div class="sidebar-header">
+                    <h3>Menu</h3>
+                    <div class="row form-group">
+                        @using (Html.BeginForm("Search", "Home", FormMethod.Post, new { encType = "multipart/form-data", id = "SearchMenu", name = "SearchMenu" }))
+                        {
+                            <div class="col-md-10 col-right" style="padding-right:0px">
+                                <input type="text" class="form-control" placeholder="@Booking.WH_timKiem" name="TimKiem" autocomplete="off" />
+                            </div>
+                            <div class="col-md-2 col-left" style="text-align:left;padding-left:0px">
+                                <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        }
+                    </div>
+                    <hr />
+                </div>
+                <div class="sidebar-nav">
+                    @Html.Action("LeftPanelPartial", "Home")
+                </div>
+            </nav>
+        </div>
+        <!-- Page content -->
+        <div class="form">
+            <div id="page-content-wrapper">
+                <div class="page-content">
+                    <div class="container-fluid" style="margin-top:70px">
+                        <div class="content-index col-md-12">
+                            @RenderBody()
+                        </div>
+                    </div>
+                    <div class="footer-wrapper" id="footerWrapper">
+                        <div class="footer" style="background:#9999997d;">
+                            <div class="container">
+                                <p style="margin-bottom:5px !important;text-align:center">
+                                    <span style="color:black;font-style:normal">
+                                        Copyright © 2020 <a>Sagawa</a>
+                                        | Made by<span class="blue" style="font-style:normal">SGV System development</span>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ModalResetPass" class="modal fade" role="dialog" style="overflow:auto">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="title" style="color:red;margin: 0;"> @Booking.doipass </h5>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row" style="margin:0">
+                        <div class="col-lg-12 form-group">
+                            <label> @Booking.passcu<strong style="color:red">(*)</strong></label>
+                            <input class="form-control" id="oldpsw" name="psw" type="text" style="-webkit-text-security:disc" autocomplete="off" onchange="checkvadidate(this)" />
+                        </div>
+                        <div class="col-lg-12 form-group">
+                            <label> @Booking.passmoi<strong style="color:red">(*)</strong></label>
+                            <input class="form-control" id="psw" name="psw" type="text" style="-webkit-text-security:disc" autocomplete="off" onfocus="$('#msgPass').hide();$('#msgCheckPass').hide()" onchange="checkvadidate(this)" />
+                            <span id="msgPass" hidden style="color:red">Không được bỏ trống mật khẩu mới</span>
+                            <span id="msgCheckPass" hidden style="color:red">Mật khẩu mới gồm 6 ký tự trở lên</span>
+                        </div>
+                        <div class="col-lg-12 form-group">
+                            <label> @Booking.nhaplaipassmoi<strong style="color:red">(*)</strong></label>
+                            <input class="form-control" id="repsw" name="repsw" type="text" style="-webkit-text-security:disc" autocomplete="off" oninput="checkpass()" />
+                            <span id="msgRePass" hidden style="color:red">Nhập lại mật khẩu không đúng</span>
+                        </div>
+                        <div class="col-lg-12 form-group" style="text-align: right;">
+                            <button class="btn btn-primary" onclick="ResetPass()" style="margin-left: 70px;">@Booking.luu</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ModalTaoTaiKhoan" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header" style="padding-bottom: 0;text-align: center;">
+                    <h4 id="title" style="color:red"> @Booking.taoaccount</h4>
+                </div>
+                <div class="modal-body" style="padding-top: 15px;min-height: 130px;">
+                    <div class="row">
+                        <div class="form-group">
+                            <label>@Booking.makhachhang_noibo</label>
+                            <input type="text" id="idMaKhachhang" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding:8px 15px;">
+                    <div class="row">
+                        <a onclick="CheckUser()" class="btn btn-primary"><i class="fa fa-check"></i> Check</a>
+                        <a onclick="$('#ModalTaoTaiKhoan').modal('hide');$('#idMaKhachhang').val('');$('#idUser').val('');$('#idPass').val('')" class="btn btn-primary"><i class="fa fa-times"></i> Close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ModalEmail" class="modal fade" role="dialog" style="overflow:auto">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header" style="padding-bottom: 0;">
+                    <button type="button" class="close" data-dismiss="modal" style="margin-top: -20px;right: -15px;"><i class="fa fa-times-circle"></i></button>
+                    <h3 id="title" style="color:red;margin: 0;"> @Booking.capnhatemail</h3>
+                </div>
+                <div class="modal-body" style="padding: 10px;">
+                    <div class="row lstEmail" style="margin:0">
+                        @if (string.IsNullOrWhiteSpace(user.EMAIL))
+                        {
+                            <div class="form-group">
+                                <label> @Booking.newEmail</label>
+                                <input class="form-control" id="newEmail" name="newEmail" type="text" autocomplete="off" />
+                            </div>
+                        }
+                        else
+                        {
+                            var lstEmail = user.EMAIL.Split(';');
+                            foreach (var item in lstEmail)
+                            {
+                                <div class="form-group">
+                                    <label> @Booking.oldEmail</label>
+                                    <input class="form-control" name="newEmail" type="text" autocomplete="off" value="@item" />
+                                </div>
+                            }
+                        }
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group" style="text-align: right;">
+                            <button class="btn btn-primary" onclick="AddNew()"><i class="fa fa-plus"></i> @Booking.addNew</button>
+                            <button class="btn btn-danger" onclick="CapNhatEmail()"><i class="fa fa-save"></i> @Booking.luu</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/js/moment-with-locales.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/js/plugins.js"></script>
+
+    @if (Request.Browser.Browser == "IE" || Request.Browser.Browser == "InternetExplorer")
+    {
+        <script src="~/lib/js/core-2.4.1.js"></script>
+        <script src="~/lib/js/promise.min.js"></script>
+    }
+    <script type="text/javascript">
+        $(window).on('load', function () {
+            var href = location.href;
+            var lstMenu = $('ul.list-unstyled').find('a.itemhref');
+            for (var i = 0; i < lstMenu.length; i++) {
+                var path = lstMenu[i].pathname;
+                if (href.indexOf(path) !== -1) {
+                    $(lstMenu[i]).addClass("active");
+                }
+            }
+        });
+
+        $(".navbar-brand").click(function (e) {
+            e.preventDefault();
+            var width = screen.width - 40;
+            if ($("#wrapper").hasClass("active")) {
+                $("#wrapper").removeClass("active");
+                if ($("#grid").hasClass("active")) {
+                    gridView.SetWidth(width - 270 - 450);
+                }
+                else {
+                    gridView.SetWidth(width - 270);
+                }
+            }
+            else {
+                $("#wrapper").addClass("active");
+                if ($("#grid").hasClass("active")) {
+                    gridView.SetWidth(width - 450);
+                }
+                else {
+                    gridView.SetWidth(width);
+                }
+            }
+        });
+
+        $("#SearchMenu").on("submit", function (event) {
+            event.preventDefault();
+            var url = $(this).attr("action");
+            var formData = $(this).serialize();
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: formData,
+                dataType: "html",
+                success: function (data) {
+                    $('.sidebar-nav').html(data);
+                }
+            })
+        });
+
+        function ResetPass() {
+            element = document.querySelector('#msgCheckPass');
+            var a = element.style.display;
+            if (a.includes("inline") == true) {
+                return;
+            }
+            var pass = $('#psw').val();
+            if (pass == null || pass == "") {
+                $('#msgPass').show();
+                return;
+            }
+            if ($('#repsw').val() == null || $('#repsw').val() == "") {
+                Swal.fire('',
+                    'Nhập lại mật khẩu không được bỏ trống',
+                    'error')
+                return;
+            }
+            $.ajax({
+                url: "/Home/ResetPass",
+                type: "POST",
+                data: { pass: pass, oldPass: $('#oldpsw').val() },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.Error == true) {
+                        $('#psw').val('')
+                        $('#repsw').val('')
+                        $('#oldpsw').val('')
+                        Swal.fire('',
+                            data.Title,
+                            'error')
+                        return;
+                    }
+                    else {
+                        Swal.fire('',
+                            'Thay đổi mật khẩu thành công',
+                            'success').then((willDelete) => {
+                                if (willDelete) {
+                                    $('#ModalResetPass').modal('hide');
+                                }
+                            })
+                    }
+                }
+            });
+        }
+
+        $('#ModalResetPass').on('hide.bs.modal', function () {
+            $('#psw').val('');
+            $('#repsw').val('');
+            $('#oldpsw').val('');
+            $('#msgPass').hide();
+            $('#msgCheckPass').hide();
+            $('#msgRePass').hide();
+        });
+
+        function checkpass() {
+            var pass = $('#psw').val();
+            var repass = $('#repsw').val();
+            if (repass != pass) {
+                $('#msgRePass').show();
+            }
+            else {
+                $('#msgRePass').hide();
+            }
+        }
+
+        function checkvadidate(obj) {
+            var re = /[A-Za-z0-9]{6,}/;
+            if (re.test(obj.value) == false) {
+                $('#msgCheckPass').show();
+            }
+            else {
+                $('#msgCheckPass').hide();
+            }
+        }
+
+
+
+
+        $('#pswold').on('input', function () {
+            if ($(this).val() !== '') {
+                $(this).attr('type', 'password');
+            } else {
+                $(this).attr('type', 'text');
+            }
+        });
+        $('#psw').on('input', function () {
+            if ($(this).val() !== '') {
+                $(this).attr('type', 'password');
+            } else {
+                $(this).attr('type', 'text');
+            }
+        });
+        $('#repsw').on('input', function () {
+            if ($(this).val() !== '') {
+                $(this).attr('type', 'password');
+            } else {
+                $(this).attr('type', 'text');
+            }
+        });
+        $(window).on('load', function () {
+            var x = location.href;
+            var danhsachdonhang = x.indexOf("Booking/DanhSachDonHang");
+            var danhsachsearch = x.indexOf("/Booking/Search");
+            if (danhsachdonhang !== -1 || danhsachsearch !== -1) {
+                $('#danhsachdonhang').addClass("current_item");
+            }
+            else if (x.indexOf("TraCuocOnline") !== -1) {
+                $('#tracuoc').addClass("current_item");
+            }
+            else {
+                var dondathang = x.indexOf("/Booking/DonHangMoiTuSinh");
+                if (dondathang !== -1 || x.indexOf("/Booking/Upload") !== -1 || x.indexOf("/Booking/XoaDonHangTuSinh") !== -1) {
+                    $('#dondathang').addClass("current_item");
+                }
+                else {
+                    var huongdan = x.indexOf("/Excel/Quy trình booking trên web.docx")
+                    $('#huongdan').addClass("current_item");
+                }
+            }
+        });
+        function Reset() {
+            $('#refresh1').addClass("fa fa-spinner fa-spin");
+            var Username = $('#cuss').val();
+            var RePass = $('#psw').val();
+            var repass = $('#repsw').val();
+            var OldPass = $('#oldPass').val();
+            var reOldPass = $('#pswold').val();
+            if (reOldPass == "") {
+                $('#message1').html('@Html.Raw(@Booking.messpasscu)');
+                $('#message1').css("display", "block");
+                $('#refresh1').removeClass("fa fa-spinner fa-spin");
+                return;
+            }
+            if (OldPass != reOldPass) {
+                $('#message1').html('@Html.Raw(@Booking.msspasscu)');
+                $('#message1').css("display", "block");
+                $('#refresh1').removeClass("fa fa-spinner fa-spin");
+                return;
+            }
+            var re = /^[A-Za-z0-9]{4,}$/;
+            if (re.test(RePass) == false) {
+                $('#message').html('@Html.Raw(@Booking.vadidatepasssmoi)');
+                $('#message').show();
+                $('#refresh1').removeClass("fa fa-spinner fa-spin");
+                return;
+            }
+            if (repass != RePass) {
+                $('#message').html('@Html.Raw(@Booking.nhaplaipass)');
+                $('#message').show();
+                $('#refresh1').removeClass("fa fa-spinner fa-spin");
+                return;
+            }
+            if (RePass == reOldPass) {
+                $('#message').html('@Html.Raw(@Booking.passmoitrung)');
+                $('#message').show();
+                $('#refresh1').removeClass("fa fa-spinner fa-spin");
+                return;
+            }
+            if (Username != null && Username != "" && RePass != null && RePass != "") {
+                $.ajax({
+                    url: "/Booking/ResetPass",
+                    type: "POST",
+                    data: {
+                        Username: Username,
+                        Password: RePass
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.ID == 0) {
+                            Swal.fire({
+                                title: '@Html.Raw(@Booking.thaydoipass)',
+                                type: 'success',
+                                showCancelButton: false,
+                                cancelButtonText: 'No',
+                                confirmButtonText: 'OK'
+                            })
+                                .then(function (willDelete) {
+                                    if (willDelete.value) {
+                                        window.location.href = "/Booking/DanhSachDonHang";
+                                    }
+                                });
+                        }
+                        else {
+                            $('#message').html(data.Title);
+                            $('#message').show();
+                            $('#refresh1').removeClass("fa fa-spinner fa-spin");
+                        }
+                    }
+                })
+            }
+            else {
+                $('#message').html('@Html.Raw(@Booking.loithaydoipass)');
+                $('#message').show();
+                $('#refresh1').removeClass("fa fa-spinner fa-spin");
+            }
+        }
+        function checkpass1() {
+            var pass = $('#psw').val();
+            var repass = $('#repsw').val();
+            if (repass != pass) {
+                $('#message').html('@Html.Raw(@Booking.nhaplaipass)');
+                $('#message').show();
+            }
+            else {
+                $('#message').hide();
+            }
+        }
+        function checkvadidate1(obj) {
+            var re = /^[A-Za-z0-9]{4,}$/;
+            if (re.test(obj.value) == false) {
+                $('#message').html('@Html.Raw(@Booking.vadidatepasssmoi)');
+                $('#message').show();
+                return true;
+            }
+            else {
+                $('#message').hide();
+            }
+        }
+        function checkoldpass(obj) {
+            var OldPass = $('#oldPass').val();
+            if (OldPass != obj.value) {
+                $('#message1').html('@Html.Raw(@Booking.msspasscu)');
+                $('#message1').show();
+            }
+        }
+        function clickme(string) {
+            $.ajax({
+                url: "/Home/ChangeLanguage",
+                type: "POST",
+                data: {
+                    culture: string
+                },
+                dataType: 'json',
+                success: function (data) {
+                    window.location.reload();
+                }
+            });
+        }
+        function CheckUser() {
+            var makh = $('#idMaKhachhang').val();
+            if (makh=="") {
+                swal("Vui lòng nhập mã khách hàng.",
+                    '',
+                    'error')
+                return;
+            }
+            $.ajax({
+                url: "/Service/TaoTKOnline",
+                type: "POST",
+                data: {
+                    makh: makh
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.Error == true) {
+                            Swal.fire(data.Title,
+                                    '',
+                                    'error')
+                            return;
+                    }
+                    else {
+                        $('#idUser').val(data.Object.USER_NAME);
+                        $('#idPass').val(data.Object.PASSWORD);
+                        Swal.fire({
+                            title: 'Tài khoản Booking',
+                            type: 'info',
+                            html:
+                            '<p style="color:red"><strong> Username: ' + data.Object.USER_NAME +'</strong> <br/>' +
+                            '<strong> Password: ' + data.Object.PASSWORD +
+                            '</strong></p>',
+                            showCancelButton: true,
+                            showCancelButton: false
+                        });
+                    }
+                }
+            });
+        }
+        function chonkieuin(string) {
+            $.ajax({
+                url: "/Home/ChonKieuIn",
+                type: "POST",
+                data: {
+                    Print: string
+                },
+                dataType: 'json',
+                success: function (data) {
+                    window.location.reload();
+                }
+            });
+        }
+
+        function CapNhatEmail() {
+            var lst = [];
+            var lstEmail = $('#ModalEmail .lstEmail').find('input');
+
+            for (var i = 0; i < lstEmail.length; i++) {
+                var a = lstEmail[i].value;
+                if (a != "") {
+                    lst.push(a);
+                }
+            }
+            if (lst.length == 0) {
+                Swal.fire('@Html.Raw(Booking.vadidateEmail)',
+                    '',
+                    'error')
+            return;
+            }
+            $.ajax({
+                    url: "/Booking/CapNhatEmail",
+                    type: "POST",
+                    data: {
+                        lstEmail: lst
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (!data.Error) {
+                            Swal.fire(data.Title,
+                                    '',
+                                'success')
+                            $('#ModalEmail').modal('hide');
+                        }
+                        else {
+                             Swal.fire(data.Title,
+                                    '',
+                                 'error')
+                            return;
+                        }
+                    }
+                })
+        }
+
+        function AddNew() {
+            var str = '<div class="form-group"> <label> @Html.Raw(Booking.newEmail)</label> <input class="form-control" name="newEmail" type="text" autocomplete="off" /></div>';
+            $('#ModalEmail .lstEmail').append(str);
+        }
+    </script>
+</body>
+</html>

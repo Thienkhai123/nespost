@@ -1,0 +1,146 @@
+﻿@using WebSite.Models
+@model List<WebSite.Models.TINTUCDTO>
+@using WebSite.Language
+@{
+    ViewBag.Title = Resource.Sgx;
+}
+@{
+    List<TINTUCDTO> lstNoiDia = new List<TINTUCDTO>();
+    List<TINTUCDTO> lstQuocTe = new List<TINTUCDTO>();
+    List<TINTUCDTO> lstQDChung = new List<TINTUCDTO>();
+    if (Model != null && Model.Count > 0)
+    {
+        lstNoiDia = Model.Where(x=>x.NHOM_TIN == "CHUYEN_PHAT_ND").ToList();
+        lstQuocTe = Model.Where(x=>x.NHOM_TIN == "CHUYEN_PHAT_QUOC_TE").ToList();
+        lstQDChung = Model.Where(x=>x.NHOM_TIN == "QD_CHUNG_CHUYEN_PHAT").ToList();
+    }
+}
+
+<div class="container page-container">
+    <div id="post-402" class="post-402 page type-page status-publish hentry">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="javascript:;" onclick="viewcontent()">
+                    <span style="vertical-align: super;">
+                        <img src="~/lib/images/svg/trucking_1.png" style="width: 36px;" />
+                    </span>
+                    @Resource.phatnoidia
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="javascript:;"  onclick="viewcontent(true)">
+                    <span style="vertical-align: super;">
+                        <img src="~/lib/images/svg/sgx.png" style="width: 30px;" />
+                    </span>
+                    @Resource.phatquocte
+                </a>
+            </li>
+        </ul>
+        <div class="row page-wrapper chiller-theme d-none">
+            <nav id="sidebar" class="sidebar-wrapper">
+                <div class="sidebar-content">
+                    <div class="sidebar-menu">
+                        <ul id="noidia" class="phatnoidia">
+                            <li class="header-menu">
+                                <h8 class="hdTxt03"><span>@Resource.phatnoidia</span></h8>
+                            </li>
+                            @foreach (var item in lstNoiDia)
+                            {
+                                <li><a id="@item.ID" onclick="ClickMe('@item.ID')">@item.TIEU_DE</a></li>
+                            }
+                        </ul>
+                        <ul class="phatquocte">
+                            <li class="header-menu">
+                                <h8 class="hdTxt03"><span>@Resource.phatquocte</span></h8>
+                            </li>
+                            @foreach (var item in lstQuocTe)
+                            {
+                                <li><a id="@item.ID" onclick="ClickMe('@item.ID')">@item.TIEU_DE</a></li>
+                            }
+                        </ul>
+                        <ul class="quydinhchung">
+                            <li class="header-menu">
+                                <h8 class="hdTxt03"><span>@Resource.quydinhchuyenphat</span></h8>
+                            </li>
+                            @foreach (var item in lstQDChung)
+                            {
+                                <li><a id="@item.ID" onclick="ClickMe('@item.ID')">@item.TIEU_DE</a></li>
+                            }
+                        </ul>
+                    </div>
+                    <!-- sidebar-menu  -->
+                </div>
+                <!-- sidebar-content  -->
+            </nav>
+            <!-- sidebar-wrapper  -->
+            <main class="page-content d-none">
+                <div class="container-fluid row">
+                    <div class="contenttab">
+
+                    </div>
+                    <p class="pt-3 lienhe-link d-none" style="text-align:right;padding-right: 25px;width:100%">
+                        <a href="/Lien_He/Index" style="padding: 0 5px; border-bottom: 1px solid;"><i class="fa fa-forward"></i>  @Resource.lienhe </a>
+                    </p>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        if (screen.width > 1023) {
+        }
+        else {
+            $(".sidebar-menu ul").find("li").find("a").attr("title", "@Html.Raw(Resource.download)");
+        }
+
+        $('#post-402 .nav-item').tooltip({ title: "@Html.Raw(Resource.xemthem)", trigger: "hover", placement: "bottom" });
+    });
+
+    function viewcontent(isQuocTe) {
+        if (isQuocTe) {
+            $('.phatnoidia').addClass('d-none');
+            $('.phatquocte').removeClass('d-none');
+        }
+        else {
+            $('.phatnoidia').removeClass('d-none');
+            $('.phatquocte').addClass('d-none');
+        }
+        
+        $('.page-wrapper').removeClass('d-none');
+        $('.page-wrapper .page-content').addClass('d-none');
+    }
+
+    function ClickMe(ID) {
+        if (screen.width > 1023) {
+            $.ajax({
+                url: "/Dich_Vu/GetNoiDungDichVu",
+                type: "POST",
+                data: {id : ID},
+                dataType: 'json',
+                success: function (data) {
+                    
+                    $('.contenttab').html(data.Object[0].NOI_DUNG);
+
+                    var banner = $('#banner')[0];
+                    if (banner.style.display == "" || banner.style.display == "block") {
+                        $('html, body').scrollTop(600);
+                    }
+                    else {
+                        $('html, body').scrollTop(0);
+                    }
+
+                    $(".sidebar-menu ul").find("li").find("a").removeClass("active");
+                    $(".sidebar-menu ul").find("li").find("#" + ID).addClass("active");
+                    $('.page-wrapper .page-content').removeClass('d-none');
+                    $('.lienhe-link').removeClass('d-none');
+                }
+            });
+        }
+        else {
+            $(".sidebar-menu ul").find("li").find("a").removeClass("active");
+            $(".sidebar-menu ul").find("li").find("#" + ID).addClass("active");
+            window.location.href = "/Dich_Vu/DownLoadFile?id=" + ID;
+        }
+    }
+</script>

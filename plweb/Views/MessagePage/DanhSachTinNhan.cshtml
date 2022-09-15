@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "Danh sách tin nhắn";
+    Layout = "~/Views/Shared/_Layout_Message.cshtml";
+}
+
+<div id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar">
+        <div class="lstMesseage sidebar-content">
+            <div class="sidebar-brand">
+                <div class="form-row">
+                    <a class="sidebar-title">DANH SÁCH TIN NHẮN</a>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-12 form-group">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Tìm kiếm khách hàng/ CS" id="searchItem" onkeyup="filterItem()" autocomplete="off" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="mx-2 my-1" />
+            <div class="sidebar-menu">
+                <ul id="ListItemUser"></ul>
+            </div>
+        </div>
+        <img class="chat-message-loading" src="~/lib/images/loading.gif" />
+        <!-- sidebar-menu  -->
+    </div>
+    <!-- sidebar-content  -->
+</div>
+
+<div class="page-content">
+    <div id="divContainer" class="align-content-start d-none">
+        <div class="under-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <p class="py-2 text-left">
+                        <span id="UserNameKhach"></span>
+                    </p>
+                </div>
+                @*@if (user.LOAI_USER == "CS_ADMIN")
+                    {*@
+                <div class="col-md-3 text-right pt-1 btn-phantuyen">
+                    <button class="btn btn-primary" onclick="phanTuyen()"> Chuyển CS </button>
+                </div>
+                @*}*@
+            </div>
+        </div>
+        <hr class="mx-2 my-1" />
+        <div id="divChat" class="chatRoom row">
+            <div class="content col-md-12">
+
+
+            </div>
+            <div class="messageBar col-md-12 d-none">
+                <div class="input-group px-2">
+                    <input class="textbox form-control" type="text" id="txtMessage" />
+                    <div class="input-group-append">
+                        <button id="btnSendMsg" class="btn btn-primary">Send</button>
+                    </div>
+                </div>
+                <input id="touserName" type="hidden" />
+            </div>
+        </div>
+    </div>
+</div>
+<div id="sidebar-wrapper" class="sidebar-wrapper">
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <div class="form-row">
+                <a class="sidebar-title">THÀNH VIÊN</a>
+            </div>
+        </div>
+        <hr class="mx-2 my-1" />
+        <div class="sidebar-menu">
+            <img class="chat-message-loading" src="~/lib/images/loading.gif" />
+            <ul id="ListCS">
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(window).on('load', function () {
+        //Load dữ liệu
+        SearchAllMess();
+    });
+
+    function SearchAllMess() {
+        $('#sidebar .chat-message-loading').removeClass('d-none');
+        $.ajax({
+            url: "/MessagePage/SEARCH_ALL_MESS",
+            type: "POST",
+            dataType: 'json',
+            success: function (data) {
+                if (!data.Erorr) {
+                    $("ul#ListItemUser").empty();
+                    for (var i in data.Object) {
+                        var User = data.Object[i];
+                       
+                        var code = "";
+                        var Name = "Khách vãng lai " + User.Fr_UserName.substring(0, 5);
+
+                        var mess = User.Message;
+                        if (mess.length > 25) {
+                            mess = User.Message.substring(0, 25) + "...";
+                        }
+
+                        var str = '<li class="sidebar-dropdown user offline" id="' + User.Fr_UserID + '"  title="' + Name + '">';
+
+                        str += '<p><i class="fa fa-user"></i><span class="badge badge-pill badge-danger"></span>';
+
+                        str += '<span class="Name">' + Name + '<br/> (CS: ' + User.To_UserName + ')' + '</span></p><p class="mess-content"><span class="mess">' + mess + '</span><span class="timeshet">' + User.Time_String + ' </span></p></a></li>';
+
+                        code = $(str);
+
+                        $(code).click(function () {
+                            var idKH = $(this);
+                            chatHub.server.updateCsCare(idKH[0].id, true);
+                        });
+
+                        $("ul#ListItemUser").prepend(code);
+                    }
+                }
+
+                $('#sidebar .chat-message-loading').addClass('d-none');
+            }
+        });
+    }
+
+    function filterItem() {
+        var input, filter, ul, li, a, txtValue;
+        input = document.getElementById("searchItem");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("ListItemUser");
+        li = ul.getElementsByTagName("li");
+        for (var i = 0; i < li.length; i++) {
+            a = li[i].getElementsByClassName("Name");
+
+            txtValue = a[0].textContent || a[0].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            }
+            else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+</script>

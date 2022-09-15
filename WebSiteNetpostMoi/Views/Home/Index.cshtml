@@ -1,0 +1,734 @@
+﻿@using WebSite.Language;
+@using WebSite.Models;
+@{
+    ViewBag.Title = Resource.trangchu;
+}
+<style>
+    #main .page-container {
+        padding-top: 0;
+    }
+
+    .more-2 {
+        line-height: 4.2;
+        display: inline-block;
+        text-decoration: none;
+        transition: all .75s ease;
+        text-transform: uppercase;
+        float: right;
+        font-family: roboto-medium;
+    }
+
+    #tin_tuc img:hover {
+        width: 305px;
+        height: 225px;
+        padding: 0px;
+    }
+
+    #tin_tuc img {
+        width: 300px;
+        height: 220px;
+        padding: 5px;
+    }
+
+    .swiper-slide {
+        width: 280px;
+        cursor: pointer;
+        margin-right: 15px;
+        height: 430px;
+        height: auto;
+        margin: 5px;
+        border: 1px solid #f7efef;
+        box-shadow: rgb(169 169 169 / 50%) 0px 0 10px;
+        -webkit-box-shadow: rgb(169 169 169 / 60%) 0px 0 10px;
+        -moz-box-shadow: rgba(169, 169, 169, 0.6) 0px 0 10px;
+    }
+
+    .card {
+        margin-top: 7px;
+        min-width: 90%;
+    }
+
+    #hero .has-search .form-control {
+        padding-left: 2.375rem;
+    }
+
+    #hero .has-search .form-control-feedback {
+        position: absolute;
+        z-index: 2;
+        display: block;
+        width: 2.375rem;
+        height: 2.375rem;
+        line-height: 2.375rem;
+        text-align: center;
+        pointer-events: none;
+        color: #aaa;
+    }
+
+    #hero .containerInput {
+        width: 30%;
+        position: absolute;
+        z-index: 2;
+        top: 26%;
+        left: 11%;
+    }
+
+    #About .bookWrapper {
+        margin: auto;
+        width: 900px;
+        height: 542px;
+        
+    }
+
+    #About .bookBg {
+        position: relative;
+        background-color: #000;
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+    }
+
+    #About .pageBg {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        background-color: #999;
+        width: calc(100% - 20px);
+        height: calc(100% - 20px);
+        border-radius: 0px;
+    }
+
+    #About .pageWrapper {
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        float: left;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    #About .page {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    #About .pageFace {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    #About .front {
+        background: linear-gradient(to right, #d9d9d9 0%, #f9f9f9 3%, #ffffff 8%, #ffffff 100%);
+    }
+
+    #About .back {
+        background: linear-gradient(to right, #ffffff 0%, #ffffff 92%, #f9f9f9 97%, #d9d9d9 100%);
+    }
+
+    #About .pageFoldRight {
+        position: absolute;
+        width: 0px;
+        height: 0px;
+        top: 0;
+        right: 0;
+        border-left-width: 1px;
+        border-left-color: #DDDDDD;
+        border-left-style: solid;
+        border-bottom-width: 1px;
+        border-bottom-color: #DDDDDD;
+        border-bottom-style: solid;
+        box-shadow: -5px 5px 10px #dddddd;
+    }
+
+    #About .pageFoldLeft {
+        position: absolute;
+        width: 0px;
+        height: 0px;
+        top: 0;
+        left: 0;
+        border-right-width: 1px;
+        border-right-color: #DDDDDD;
+        border-right-style: solid;
+        border-bottom-width: 1px;
+        border-bottom-color: #DDDDDD;
+        border-bottom-style: solid;
+        box-shadow: 5px 5px 10px #dddddd;
+    }
+
+    #registers {
+        height: 125vh;
+    }
+
+    #new {
+        height: 125vh;
+    }
+</style>
+
+<!-- ======= Container-left ======= -->
+<section id="container" style="position: fixed; z-index: 1000; top: 35%; left: 1%; ">
+    <div class="mb-3">
+        <img src="~/lib/assets/img/Icon/Asset 9.png" style="border-radius: 100%; width: 10%; height: 5%;" />
+    </div>
+    <div class="mb-3">
+        <img src="~/lib/assets/img/Icon/Asset 10.png"  style="border-radius: 100%; width: 10%; height: 5%;" />
+    </div>
+    <div class="mb-3">
+        <img src="~/lib/assets/img/Icon/Asset 11.png"  style="border-radius: 100%; width: 10%; height: 5%;" />
+    </div>
+    <div class="mb-3">
+        <img src="~/lib/assets/img/Icon/Asset 12.png"  style="border-radius: 100%; width: 10%; height: 5%;" />
+    </div>
+</section>
+
+<!-- ======= Container-right======= -->
+@*<section id="container" style="position: fixed; z-index: 1000; right: 0%; top: 50%;">
+    <div>
+
+        <p>Tra cứu cước phí</p>
+    </div>
+    <div>
+
+        <p>Tạo vận đơn</p>
+    </div>
+    <div>
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        <p>Tra cứu vận đơn</p>
+    </div>
+
+</section>*@
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+    <div class="hero-container">
+        <div class="containerInput">
+            <div class="form-group has-search">
+                <span class="fa fa-search form-control-feedback"></span>
+                <input type="text" class="form-control" placeholder="Tra cứu vận đơn">
+            </div>
+        </div>
+        <div class="carousel-container" style=" width: 100%;">
+            <div class="carousel-content col-lg-6 col-md-12 col-sm-12 col-12">
+                <div class="d-flex justify-content-end align-items-center ml-md-n2 mr-md-n2 ml-n1 mr-n1">
+                    <div>
+                        <img style="width: 100%; height: 100%" src="~/lib/assets/img/Asset 7.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+                <div class="carousel-item active" style="background-image: url(/lib/assets/img/3c5d359c2e1eeb40b20f.jpg)"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ========= TabInput ======== -->
+<section id="tabInput" class="tabInput">
+    <ul class="tabs">
+        <li class="tab">
+            <input type="radio" name="tabs" checked="checked" id="tab1" />
+            <label for="tab1">Tra cứu vận đơn</label>
+
+            <div id="tab-content1" class="content">
+                <div class="d-flex justify-content-center">
+                    <h4 class="fw-bold">TRA CỨU HÀNH TRÌNH ĐƠN HÀNG</h4>
+                </div>
+                <div class="mt-3">
+                    <span>Quý khách nhập số vận đơn vào ô bên dưới:</span>
+                    <input style=" padding: 5px 10px; border: 1px solid #b1b1b1; margin-top: 10px;" class="w-100" type="text" />
+                </div>
+                <div class="d-flex justify-content-center mt-5 ">
+                    <button style="background: #ff3c3c; width: 7rem; height: 2rem; " class="text-white border-0">Tra cứu</button>
+                </div>
+            </div>
+        </li>
+
+        <li class="tab">
+            <input type="radio" name="tabs" id="tab2" />
+            <label for="tab2">Tra cứu cước phí</label>
+            <div id="tab-content2" class="content">
+
+            </div>
+        </li>
+
+        <li class="tab">
+            <input type="radio" name="tabs" id="tab3" />
+            <label for="tab3">Tạo vận đơn</label>
+            <div id="tab-content3" class="content">
+
+            </div>
+        </li>
+    </ul>
+</section>
+
+<!-- ======= Target Section ====== -->
+<section id="target">
+    <div class="target-container">
+        <div class="carousel-container">
+            <div class="carousel-content col-lg-6 col-md-12 col-sm-12 col-12">
+                <div class="d-flex align-items-center ml-md-n2 mr-md-n2 ml-n1 mr-n1">
+                    <div>
+                        <img style="width: 100%; height: 100%" src="~/lib/assets/img/Asset 11.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-container" style=" width: 100%">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                <div class="d-flex ml-md-n2 mr-md-n2 ml-n1 mr-n1">
+                    <div class="text">
+                        <img style="width: 30rem; height: 6rem" src="~/lib/assets/img/4e7234d4d25717094e46.jpg" />
+                        <h1 class="font-weight-bold" style="color: red">HÔM NAY & MAI SAU</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======= Netpost Section ====== -->
+<section id="netpost">
+    <div class="target-container">
+        <div class="text-container" style=" width: 100%">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                <div class="d-flex ml-md-n2 mr-md-n2 ml-n1 mr-n1">
+                    <div class="text">
+                        <h1 class="font-weight-bold" style="color: red; margin-top: 0.5rem">GIÁ TRỊ CỐT LỖI</h1>
+                        <h1 class="font-weight-bold" style="color: red">NETPOST MANG LẠI</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-container">
+            <div class="carousel-content col-lg-6 col-md-12 col-sm-12 col-12">
+                <div class="d-flex align-items-center ml-md-n2 mr-md-n2 ml-n1 mr-n1">
+                    <div>
+                        <img style="width: 100%; height: 100%" src="~/lib/assets/img/Asset 9.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======= Featured Section ======= -->
+<section id="Featured">
+    <div class="container">
+        <div class="section-title">
+            <h2>DỊCH VỤ CỦA CHÚNG TÔI</h2>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-4 mb-4">
+                <a href="@Url.Action("chuyen_phat_nhanh", "Dich_Vu")">
+                    <div class="card text-white card-has-bg click-col" style="background-image: url('../../lib/assets/img/imageContent/Toan.png');">
+                        <img class="card-img d-none" src="~/lib/assets/img/imageContent/Toan.png">
+                        <div class="card-img-overlay d-flex flex-column">
+                            <div class="card-body">
+                                <h4 class="card-title mt-0 text-white">@Resource.vtaiHK</h4>
+                                <p>Là dịch vụ chuyển phát nhanh trong nước và quốc tế theo thời gian được công bố trước, theo chỉ tiêu thời gian (xem phần chỉ tiêu thời gian) trong nước từ 12 đến 48 giờ.</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4 mb-4">
+                <a href="@Url.Action("phat_hoa_toc", "Dich_Vu")">
+                    <div class="card text-white card-has-bg click-col" style="background-image:url('../../lib/assets/img/imageContent/khang.png');">
+                        <img class="card-img d-none" src="~/lib/assets/img/imageContent/khang.png" alt="images">
+                        <div class="card-img-overlay d-flex flex-column">
+                            <div class="card-body">
+                                <h4 class="card-title mt-0 text-white">@Resource.vtaiBien</h4>
+                                <p>Dịch vụ phát Hỏa Tốc, Hẹn giờ, Trước 09h00: là dịch vụ mà bưu gửi được tổ chức khai thác và chuyển phát cùng hành trình với các bưu gửi CPN thông thường. Tuy nhiên sẽ được ưu tiên sắp xếp để phát đến người nhận trong khoảng thời gian trước 09 giờ.</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4 mb-4">
+                <a href="@Url.Action("gia_tri_cao", "Dich_Vu")">
+                    <div class="card text-white card-has-bg click-col" style="background-image: url('../../lib/assets/img/imageContent/Mai_01.png');">
+                        <img class="card-img d-none" src="~/lib/assets/img/imageContent/Mai_01.png" alt="images">
+                        <div class="card-img-overlay d-flex flex-column">
+                            <div class="card-body">
+                                <h4 class="card-title mt-0 text-white">@Resource.thutuchaiquan</h4>
+                                <p>Dịch vụ đặc thù mà bưu gửi được tổ chức khai thác và chuyển phát cùng hành trình với các bưu gửi CPN thông thường. Tuy nhiên sẽ được ưu tiên sắp xếp để phát đến người nhận trong khoảng thời gian trong buổi sáng. Mức độ ưu tiên sau Dịch vụ Hỏa Tốc.</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                <a href="@Url.Action("trucking", "Dich_Vu")">
+                    <div class="card text-white card-has-bg click-col" style="background-image: url('../../lib/assets/img/imageContent/Bao.png');">
+                        <img class="card-img d-none" src="~/lib/assets/img/imageContent/Bao.png" alt="images">
+                        <div class="card-img-overlay d-flex flex-column">
+                            <div class="card-body">
+                                <h4 class="card-title mt-0 text-white">@Resource.vtaiBo</h4>
+                                <p>Netpost cung cấp dịch vụ chuyển phát thường trong nước, nhận tận nơi và phát tận nơi theo yêu cầu của Quý khách hàng.Hàng hóa được vận chuyển bằng đường bộ thời gian chuyển phát tính theo ngày (Phù hợp với những hàng hóa không cần quá nhanh).</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                <a href="@Url.Action("tiet_kiem", "Dich_Vu")">
+                    <div class="card text-white card-has-bg click-col" style="background-image: url('../../lib/assets/img/imageContent/my_tra cuoc.png');">
+                        <img class="card-img d-none" src="~/lib/assets/img/imageContent/my_tra cuoc.png" alt="images">
+                        <div class="card-img-overlay d-flex flex-column">
+                            <div class="card-body">
+                                <h4 class="card-title mt-0 text-white">@Resource.khobai</h4>
+                                <p>Netpost cung cấp dịch vụ chuyển phát tiết kiệm. Đó là sự kết hợp giữa đường hàng không và đường bộ để tạo ra một dịch vụ tiết kiệm về chi phí nhưng vẫn đảm bảo cam kết về thời gian toàn trình.</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                <a href="@Url.Action("gia_tang", "Dich_Vu")">
+                    <div class="card text-white card-has-bg click-col" style="background-image: url('../../lib/assets/img/imageContent/truc_tra cuoc.png');">
+                        <img class="card-img d-none" src="~/lib/assets/img/imageContent/truc_tra cuoc.png" alt="images">
+                        <div class="card-img-overlay d-flex flex-column">
+                            <div class="card-body">
+                                <h4 class="card-title mt-0 text-white">@Resource.kiemkim</h4>
+                                <p>Netpost cung cấp các dịch vụ gia tăng như phát tận tay, khai giá, phát ngoài giờ hành chính, phát hàng thu tiền COD, báo phát, phát đồng kiểm, ...</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======= Registers == -->
+
+<section id="registers">
+    <div class="container">
+        <div class="section-title">
+            <h2>CÁC BƯỚC ĐĂNG KÝ - VẬN ĐƠN VỚI NETPOST</h2>
+        </div>
+        <div class="row">
+            <div class="carousel-content col-md-5 col-lg-5 col-sm-5 col-5">
+                <div class=" ml-md-n2 mr-md-n2 ml-n1 mr-n1" style="position: relative">
+                    <div>
+                        <img style="width: 70%; height: 70%" src="~/lib/assets/img/RGT/Asset 14.png" />
+                    </div>
+                    <div>
+                        <img style="width: 100%; height: 100%" src="~/lib/assets/img/RGT/Asset 15.png" />
+                    </div>
+                    <div style="position: absolute; top: 19rem;">
+                        <div style="margin-left: 15px;">
+                            <iframe width="332" height="215" src="https://www.youtube.com/embed/0JNveApOshw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 col-lg-7 col-sm-7 col-7">
+                <div style="position: relative" class=" ml-md-n2 mr-md-n2 ml-n1 mr-n1">
+                    <div style="position: absolute;top: 6rem">
+                        <img style="width: 50%; height: 50%" src="~/lib/assets/img/RGT/Asset 9.png" />
+                    </div>
+                    <div style="position: absolute; top: 0rem; left: 17.75rem;">
+                        <img style="width: 100%; height: 30%" src="~/lib/assets/img/RGT/Asset 10.png" />
+                    </div>
+                    <div style="position: absolute; top: 10rem; left: 19rem;">
+                        <img style="width: 100%; height: 30%" src="~/lib/assets/img/RGT/Asset 11.png" />
+                    </div>
+                    <div style="position: absolute; top: 22rem; left: 19rem;">
+                        <img style="width: 100%; height: 30%" src="~/lib/assets/img/RGT/Asset 12.png" />
+                    </div>
+                    <div style="position: absolute; top: 32rem; left: 14rem;">
+                        <img style="width: 100%; height: 30%" src="~/lib/assets/img/RGT/Asset 13.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======= About == -->
+<section id="About" class="services" style="background-image: url(../../lib/assets/img/background.jpg); background-position: center; background-repeat: no-repeat; background-size: cover;">
+    <div class="container">
+        <div class="section-title" style="padding-top: 1rem">
+            <h2 style="color: white">VỀ NETPOST</h2>
+        </div>
+        <div class="bookWrapper">
+            <div class="bookBg">
+                <div class="pageBg">
+                    <div class="pageWrapper">
+                        <div id="page10" class="page">
+                            <div class="pageFace front">
+                                <img style="width: 100%; height: 100%" src="~/lib/assets/img/ImgBook/19.png" />
+
+                                <div class="pageFoldRight"></div>
+                            </div>
+                            <div class="pageFace back">
+                                <img style="width: 100%; height: 100%" src="~/lib/assets/img/ImgBook/20.png" />
+
+                                <div class="pageFoldLeft"></div>
+                            </div>
+                        </div>
+                        <div id="page9" class="page">
+                            <div class="pageFace front">
+                                <img style="width: 100%; height: 100%" src="~/lib/assets/img/ImgBook/18.png" />
+                                <div class="pageFoldRight"></div>
+                            </div>
+                            <div class="pageFace back">
+                                <img style="width: 100%; height: 100%" src="~/lib/assets/img/ImgBook/17.png" />
+                                <div class="pageFoldLeft"></div>
+                            </div>
+                        </div>
+                        <div id="page8" class="page">
+                            <div class="pageFace front">
+                                <img style="width: 100%; height: 100%" src="~/lib/assets/img/ImgBook/16.png" />
+                                <div class="pageFoldRight"></div>
+                            </div>
+                            <div class="pageFace back">
+                                <img style="width: 100%; height: 100%" src="~/lib/assets/img/ImgBook/15.png" />
+                                <div class="pageFoldLeft"></div>
+                            </div>
+                        </div>
+                        <div id="page7" class="page">
+                            <div class="pageFace front">
+                                <img style="width: 100%; height: 100%" src="~/lib/assets/img/ImgBook/14.png" />
+                                <div class="pageFoldRight"></div>
+                            </div>
+                            <div class="pageFace back">
+                                <img style="width: 100%; height: 100%" src="~/lib/assets/img/ImgBook/13.png" />
+                                <div class="pageFoldLeft"></div>
+                            </div>
+                        </div>
+                        <div id="page6" class="page">
+                            <div class="pageFace front">
+                                <img style="width: 100%; height: 100%" src="~/lib/assets/img/ImgBook/12.png" />
+                                <div class="pageFoldRight"></div>
+                            </div>
+                            <div class="pageFace back">
+                                <img style="width: 100%; height: 100%" src="~/lib/assets/img/ImgBook/11.png" />
+                                <div class="pageFoldLeft"></div>
+                            </div>
+                        </div>
+                        <div id="page5" class="page">
+                            <div class="pageFace front">
+                                <img style="width: 100%; height: 100%" src="~/lib/assets/img/ImgBook/10.png" />
+                                <div class="pageFoldRight"></div>
+                            </div>
+                            <div class="pageFace back">
+                                <img style="width: 100%; height: 100%" src="~/lib/assets/img/ImgBook/9.png" />
+                                <div class="pageFoldLeft"></div>
+                            </div>
+                        </div>
+                        <div id="page4" class="page">
+                            <div class="pageFace front">
+                                <img style="width: 100%; height: 100%" src="~/lib/assets/img/ImgBook/8.png" />
+                                <div class="pageFoldRight"></div>
+                            </div>
+                            <div class="pageFace back">
+                                <img style="width: 100%; height: 100%" src="~/lib/assets/img/ImgBook/7.png" />
+                                <div class="pageFoldLeft"></div>
+                            </div>
+                        </div>
+                        <div id="page3" class="page">
+                            <div class="pageFace front">
+                                <img style="width: 100%; height: 100%" src="~/lib/assets/img/ImgBook/6.png" />
+                                <div class="pageFoldRight"></div>
+                            </div>
+                            <div class="pageFace back">
+                                <img style="width: 100%; height: 100%" src="~/lib/assets/img/ImgBook/5.png" />
+                                <div class="pageFoldLeft"></div>
+                            </div>
+                        </div>
+                        <div id="page2" class="page">
+                            <div class="pageFace front">
+                                <img style="width: 100%; height: 100%" src="~/lib/assets/img/ImgBook/4.png" />
+                                <div class="pageFoldRight"></div>
+                            </div>
+                            <div class="pageFace back">
+                                <img style="width: 100%; height: 100%" src="~/lib/assets/img/ImgBook/3.png" />
+                                <div class="pageFoldLeft"></div>
+                            </div>
+                        </div>
+                        <div id="page1" class="page">
+                            <div class="pageFace front">
+                                <img style="width: 100%; height: 100%" src="~/lib/assets/img/ImgBook/1.png" />
+                                <div class="pageFoldRight"></div>
+                            </div>
+                            <div class="pageFace back">
+                                <img style="width: 100%; height: 100%" src="~/lib/assets/img/ImgBook/2.png" />
+                                <div class="pageFoldLeft"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======= New == -->
+<section id="tintuc" class="news">
+    <div class="container">
+        <div class="section-title">
+            <h2>TIN TỨC</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12" id="tin_tuc">
+                <div class="news-slider swiper">
+                    <div class="swiper-wrapper align-items-center" id="tin_tuc_details">
+
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <a style="width: 30%" href="https://netpost.vn/Tin_Tuc" class="btn btn-danger mt-5">Xem tất cả</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ======= Giai_tri ======= -->
+<section id="Funny">
+    <div class="container">
+        <div class="section-title">
+            <h2>GIẢI TRÍ</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-lg-8 col-sm-8 col-8">
+                <div>
+                    <iframe style="width: 100%; height: 600px;" src="https://www.youtube.com/embed/OP6JcPpXwSs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-sm-4 col-4" id="Chill">
+                <div class="row">
+                    <div class="col-5">
+                        <iframe style="width: 100%; height: 60%" src="https://www.youtube.com/embed/0JNveApOshw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="col-7">
+                        <p>Nếu bạn gặp các vấn đề, thắc mắc hãy liên hệ với chúng tôi ngay qua hotline: 1900 3351.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+<script type="text/javascript">
+    //book
+
+    TweenLite.set(".pageBg", { xPercent: -50, yPercent: -50 });
+    TweenLite.set(".pageWrapper", { left: "50%", perspective: 1000 });
+    TweenLite.set(".page", { transformStyle: "preserve-3d" });
+    TweenLite.set(".back", { rotationY: -180 });
+    TweenLite.set([".back", ".front"], { backfaceVisibility: "hidden" });
+
+    $(".page").click(function () {
+        if (pageLocation[this.id] === undefined || pageLocation[this.id] == "right") {
+            zi = $(".left").length + 1;
+            TweenMax.to($(this), 1, {
+                force3D: true,
+                rotationY: -180,
+                transformOrigin: "-1px top",
+                className: "+=left",
+                z: zi,
+                zIndex: zi
+            });
+            TweenLite.set($(this), { className: "-=right" });
+            pageLocation[this.id] = "left";
+        } else {
+            zi = $(".right").length + 1;
+            TweenMax.to($(this), 1, {
+                force3D: true,
+                rotationY: 0,
+                transformOrigin: "left top",
+                className: "+=right",
+                z: zi,
+                zIndex: zi
+            });
+            TweenLite.set($(this), { className: "-=left" });
+            pageLocation[this.id] = "right";
+        }
+    });
+
+    $(".front").hover(
+        function () {
+            TweenLite.to($(this).find(".pageFoldRight"), 0.3, {
+                width: "50px",
+                height: "50px",
+                backgroundImage:
+                    "linear-gradient(45deg,  #fefefe 0%,#f2f2f2 49%,#ffffff 50%,#ffffff 100%)"
+            });
+        },
+        function () {
+            TweenLite.to($(this).find(".pageFoldRight"), 0.3, {
+                width: "0px",
+                height: "0px"
+            });
+        }
+    );
+
+    $(".back").hover(
+        function () {
+            TweenLite.to($(this).find(".pageFoldLeft"), 0.3, {
+                width: "50px",
+                height: "50px",
+                backgroundImage:
+                    "linear-gradient(135deg,  #ffffff 0%,#ffffff 50%,#f2f2f2 51%,#fefefe 100%)"
+            });
+        },
+        function () {
+            TweenLite.to($(this).find(".pageFoldLeft"), 0.3, {
+                width: "0px",
+                height: "0px"
+            });
+        }
+    );
+
+    var pageLocation = [],
+        lastPage = null;
+    zi = 0;
+
+
+    // tra cứu vận đơn
+    function tracktrade() {
+        var hawbNo = $('#txt_ma_van_don').val();
+        window.location.href = '/Home/tra_cuu_van_don?hawbNo=' + hawbNo;
+    }
+    $(document).ready(function () {
+        $.ajax({
+            url: "/Tin_Tuc/Search_trang_chu",
+            type: "POST",
+            dataType: 'json',
+            success: function (data) {
+                if (!data.Error) {
+                    var lstTintuc = data.Object
+                    for (var i = 0; i < lstTintuc.length; i++) {
+                        $('#tin_tuc_details').append('<div onclick="viewNews(' + lstTintuc[i].ID + ')" class="card m-2" style="width: 25% !important; min-width: 24%; max-width: 24%">'
+                            + '<img src="' + lstTintuc[i].FILE_IMG + '" class="card-img-top img-fluid" alt="" height="220">'
+                            + '    <div class="card-body">'
+                            + '      <h5 class="card-title"><a href="/Tin_Tuc/Detail?id=' + lstTintuc[i].ID + '">' + lstTintuc[i].TIEU_DE + '</a></h5>'
+                            + '       <p class="card-text">' + lstTintuc[i].MO_TA + '</p>'
+                            + '       <a href="/Tin_Tuc/Detail?id=' + lstTintuc[i].ID + '" class="card-detail">Xem chi tiết</a>'
+                            + '   </div>'
+                            + '</div>')
+                    }
+                }
+            }
+        });
+    });
+
+    function viewNews(id) {
+        window.location.href = '/Tin_Tuc/Detail?id=' + id;
+    }
+
+    $('#txt_ma_van_don').on('keydown', function (event) {
+        if (event.keyCode == 13) {
+            var hawbNo = $('#txt_ma_van_don').val();
+            window.location.href = '/Home/tra_cuu_van_don?hawbNo=' + hawbNo;
+        }
+    });
+</script>
+

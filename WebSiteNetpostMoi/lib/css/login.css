@@ -1,0 +1,226 @@
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+body {
+    font-size: 14px !important;
+    margin: 0;
+    padding: 0;
+    background-image: url(../images/backgroundBooking.jpg);
+    background-color: #da251d;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    /* font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"; */
+}
+
+.hotline {
+    text-align: center;
+    font-size: 19px;
+    font-weight: 600;
+    /* font-family: 'Garamond', sans-serif; */
+}
+.header {
+    padding: 30px 20px 50px;
+    color: #c41c1c;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    /* font-family: 'Arial Black', sans-serif; */
+    text-align: center;
+}
+
+.login, .register-content, .login .login-content .row, .login .video-booking{
+    height: calc(100% - 140px);
+}
+
+.footer {
+    color: white;
+}
+    .footer .language {
+        color: white;
+    }
+
+.login .login-detail, .register-content .verify_account {
+    width: 420px;
+    min-height: 450px;
+    padding: 15px 20px;
+    background: ghostwhite;
+    border-radius: 10px;
+}
+.register-detail {
+    width: 800px;
+    min-height: 450px;
+    padding: 15px 20px;
+    background: ghostwhite;
+    border-radius: 10px;
+    margin: auto;
+}
+    .login .des, .register-detail .des, .register-content .verify_account .des{
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        color: #495057;
+    }
+.login-detail .register, .register-detail .loginnow, .arrow-back {
+    text-decoration: none;
+    color: #2b72aa;
+    font-weight: 600;
+    border-bottom: 1px solid;
+}
+.alert {
+    margin: 0;
+    padding: 10px;
+    font-style: italic;
+    font-family: Bookman, Tahoma, Verdana;
+    font-size: 14px;
+}
+
+.resetPass p, .forgotpass p, .verify_account  p{
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+iframe{
+    border-radius:10px;
+}
+.btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 9px 10px;
+    height: 34px;
+}
+.row {
+    margin: 0;
+}
+.col-form-label {
+    font-weight: 500;
+    padding-top: calc(.375rem + 1px);
+    padding-bottom: calc(.375rem + 1px);
+    margin-bottom: 0;
+    font-size: inherit;
+    line-height: 1.5;
+}
+
+.login input[type=password]:focus, .login input[type=text]:focus, .login .button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+    .login input[type=password]::-webkit-input-placeholder { /* Edge */
+    color: #771616;
+    opacity: 0.8;
+}
+
+    .login input[type=password]:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #4f4b4b;
+        opacity: 0.8;
+    }
+
+/*style _layout*/
+div::-moz-selection { /* Code for Firefox */
+    color: none;
+    background: none;
+}
+
+div::selection {
+  color: none;
+  /* background: none; */
+}
+span::-moz-selection { /* Code for Firefox */
+  color: none;
+  background: none;
+}
+
+span::selection {
+  color: none; 
+  background: none;
+}
+
+.swal2-popup.swal2-toast {
+    max-width: 25rem;
+}
+
+button.close {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.modal-header .close {
+    margin: -24px -24px -24px auto;
+    padding: 0;
+    opacity: 1;
+}
+
+.close {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+}
+
+.modal-header .close i {
+    font-size: 35px;
+}
+
+p.tailieu {
+    color: white;
+    padding: 18px 10px;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+}
+
+    p.tailieu span {
+        border-bottom: 1px solid;
+        color: gold;
+    }
+    p.tailieu a {
+        color: white;
+    }
+        p.tailieu a:hover {
+           color: #0f0;
+        }
+
+.modal-header h3, .modal-header h4 {
+    text-align: center;
+    color: #3e4fa7;
+}
+
+    .modal-header h3 span, .modal-header h4 span {
+        padding: 0 10px 2px;
+        border-bottom: 1px solid;
+    }
+
+.modal-header button.close i {
+    font-size: 35px;
+}
+
+.forgetpass {
+    color: #3578bf;
+    font-size: 15px;
+    font-weight: 600;
+}
+.forgetpass span{
+    padding-bottom:2px;
+    border-bottom:1px solid;
+}
+
+@media(max-width:991px){
+    .login .login-detail{
+        margin:auto;
+    }
+    iframe{
+        width:100%;
+    }
+}

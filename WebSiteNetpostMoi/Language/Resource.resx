@@ -1,0 +1,799 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="bacninh" xml:space="preserve">
+    <value>バクニン省 (保税、一般倉庫)</value>
+  </data>
+  <data name="baogiaphatnoidia" xml:space="preserve">
+    <value>Service fee for domestic courier service</value>
+  </data>
+  <data name="baogiaphatquocte" xml:space="preserve">
+    <value>Service fee for international courier service</value>
+  </data>
+  <data name="cacdieukhoan" xml:space="preserve">
+    <value>GDPRプライバシーポリシー</value>
+  </data>
+  <data name="chinhsachbaomat" xml:space="preserve">
+    <value>個人情報保護方針</value>
+  </data>
+  <data name="chitiet" xml:space="preserve">
+    <value>詳 細</value>
+  </data>
+  <data name="condition" xml:space="preserve">
+    <value>トラック約款</value>
+  </data>
+  <data name="CPN_SGX" xml:space="preserve">
+    <value>Sgx(日本向け国際宅配便)</value>
+  </data>
+  <data name="dichvu" xml:space="preserve">
+    <value>サービス一覧</value>
+  </data>
+  <data name="donchuyen" xml:space="preserve">
+    <value>引越サービス</value>
+  </data>
+  <data name="donggoihh" xml:space="preserve">
+    <value>Packing regulation of documents and goods</value>
+  </data>
+  <data name="donnhavp" xml:space="preserve">
+    <value>引越しサービス(海外お引越し、ベトナム国内お引越し)</value>
+  </data>
+  <data name="download" xml:space="preserve">
+    <value>Download file</value>
+  </data>
+  <data name="duongbien" xml:space="preserve">
+    <value>海上輸送サービス (輸出、輸入)</value>
+  </data>
+  <data name="duongbo" xml:space="preserve">
+    <value>トラック運送サービス</value>
+  </data>
+  <data name="dvukhobai" xml:space="preserve">
+    <value>倉庫サービス</value>
+  </data>
+  <data name="gtgtnoidia" xml:space="preserve">
+    <value>Value added services of domestic postal</value>
+  </data>
+  <data name="haiquan" xml:space="preserve">
+    <value>通関サービス (輸出、輸入)</value>
+  </data>
+  <data name="hangkhong" xml:space="preserve">
+    <value>航空輸送サービス (輸出、輸入)</value>
+  </data>
+  <data name="hoadonchungtu" xml:space="preserve">
+    <value>Required document to be enclosed with goods</value>
+  </data>
+  <data name="hochiminh" xml:space="preserve">
+    <value>ホーチミン (リンチュン CFS、保税、一般倉庫)</value>
+  </data>
+  <data name="khobai" xml:space="preserve">
+    <value>倉庫サービス</value>
+  </data>
+  <data name="khoCFS" xml:space="preserve">
+    <value>CFS 倉庫</value>
+  </data>
+  <data name="khokiemkim" xml:space="preserve">
+    <value>検針＆検品エリア</value>
+  </data>
+  <data name="kholanh" xml:space="preserve">
+    <value>冷蔵＆冷凍倉庫</value>
+  </data>
+  <data name="khonguyhiem" xml:space="preserve">
+    <value>危険品倉庫</value>
+  </data>
+  <data name="khothuong" xml:space="preserve">
+    <value>一般倉庫</value>
+  </data>
+  <data name="kiemkim" xml:space="preserve">
+    <value>検品・検針業務</value>
+  </data>
+  <data name="kiemkimkiempham" xml:space="preserve">
+    <value>検品業務、検針業務</value>
+  </data>
+  <data name="kyso" xml:space="preserve">
+    <value>（10 桁もしくは 12 桁の半角数字）</value>
+  </data>
+  <data name="lienhe" xml:space="preserve">
+    <value>お問い合わせ</value>
+  </data>
+  <data name="linhtrung" xml:space="preserve">
+    <value>Linh Trung Warehouse</value>
+  </data>
+  <data name="ND_donchuyen" xml:space="preserve">
+    <value>ベトナム～日本・海外へお引越しされるお客様やベトナム国内でお引越しされるお客様のお荷物を安全・確実・丁寧にお取り扱いさせて頂きます。お客様のお手を煩わせる事なく大切にされているお皿1枚から大型の家具まで、当社引越し専門のスタッフが責任を持って梱包させて頂いております。
+品質第一、経験豊富な日本人担当者が最適なプランをご提案させて頂きます。</value>
+  </data>
+  <data name="ND_duongbo" xml:space="preserve">
+    <value>SG 佐川ベトナムでは、佐川急便で培ったノウハウを生かし、ベトナム国内トラック輸送 （ハノイ～ホーチミン間の長距離輸送から市内配送まで）、クロスボーダートラック輸送 （ベトナム⇔タイ、ラオス、カンボジア）をご提案させていただいております。</value>
+  </data>
+  <data name="ND_haiquan" xml:space="preserve">
+    <value>SG 佐川ベトナムでは、輸出入手続が煩雑なベトナムにおいて、豊富な経験を活かし、迅速確実にお客様の輸出入通関手続の代行業務をさせていただいております。</value>
+  </data>
+  <data name="ND_khobai" xml:space="preserve">
+    <value>SG 佐川ベトナムでは、佐川グローバルロジスティクスのノウハウを活かし、ベトナム主要都市で保税倉庫、CFS倉庫、一般倉庫の運営をさせていただいております。</value>
+  </data>
+  <data name="ND_kiemkim" xml:space="preserve">
+    <value>SG 佐川ベトナムでは、アパレル会社様のご要望にお答えし、検品・検針作業を行っております。お客様のご要望に合わせ出張検品も対応させていただいております。</value>
+  </data>
+  <data name="ND_trienkhai" xml:space="preserve">
+    <value>SG 佐川ベトナムではお客様のご要望にあわせオーダーメードで物流を組み立てます。重量物の梱包輸送、3PL物流のご提案、お客様のお取引先へのJIT（ジャストインタイム)納品なども行っております。
+物流でお困りの場合は、経験豊富なSG 佐川ベトナムへ是非ご相談下さい。</value>
+  </data>
+  <data name="ngoaiquan" xml:space="preserve">
+    <value>保税倉庫</value>
+  </data>
+  <data name="nhapsodonhang" xml:space="preserve">
+    <value>運送状番号を入力してく</value>
+  </data>
+  <data name="nhontrach" xml:space="preserve">
+    <value>ニョンチャック倉庫</value>
+  </data>
+  <data name="noidungBien" xml:space="preserve">
+    <value>SG佐川ベトナムでは、ベトナムの主要港（ハイフォン港、ホーチミン港、ダナン港）において、輸出入の海上貨物輸送サービスの手配を行っております。コンテナ単位の輸送から、LCL貨物の輸送、特殊コンテナ輸送もご提案させていただいております。
+※LCL･･･Less than Container Loadの略称で複数の荷主貨物が、ひとつのコンテナに混載して輸送する方法。</value>
+  </data>
+  <data name="noidungHK" xml:space="preserve">
+    <value>SG 佐川ベトナムでは、世界各国向けに輸出航空貨物の手配をさせていただいており、また、世界各国からベトナム向けの輸入航空貨物も手配いたします。直行便、経由便も含めお客様の幅広いニーズに合わせた航空貨物輸送サービスをご提案させていただいております。</value>
+  </data>
+  <data name="phatnoidia" xml:space="preserve">
+    <value>国内エクスプレスサービス</value>
+  </data>
+  <data name="phatquocte" xml:space="preserve">
+    <value>国際エクスプレスサービス</value>
+  </data>
+  <data name="qtrphatquocte" xml:space="preserve">
+    <value>International courier process</value>
+  </data>
+  <data name="qtrphattrongnuoc" xml:space="preserve">
+    <value>Domestic courier process</value>
+  </data>
+  <data name="qtrtrachnhiem" xml:space="preserve">
+    <value>Damages Compensation &amp; Complaints Resolve</value>
+  </data>
+  <data name="qtrvanchuyennoidia" xml:space="preserve">
+    <value>Rules for cargo of domestic courier service</value>
+  </data>
+  <data name="qtrvanchuyenquocte" xml:space="preserve">
+    <value>Rules for cargo international courier service</value>
+  </data>
+  <data name="qtrxulybpbk" xml:space="preserve">
+    <value>The process delivery parcel handling</value>
+  </data>
+  <data name="quevo" xml:space="preserve">
+    <value>Que Vo Warehouse</value>
+  </data>
+  <data name="quytrinhsudung" xml:space="preserve">
+    <value>ウェブサイトのご利用について</value>
+  </data>
+  <data name="Sgx" xml:space="preserve">
+    <value>国内・国際エクスプレスサービス</value>
+  </data>
+  <data name="SGXStandard" xml:space="preserve">
+    <value>FORWARDING約款</value>
+  </data>
+  <data name="sodoweb" xml:space="preserve">
+    <value>サイトマップ</value>
+  </data>
+  <data name="Standard" xml:space="preserve">
+    <value>SGX約款</value>
+  </data>
+  <data name="theodoidonhang" xml:space="preserve">
+    <value>貨 物 追 跡</value>
+  </data>
+  <data name="thutuchaiquan" xml:space="preserve">
+    <value>通関サービス</value>
+  </data>
+  <data name="tieuchuanchatluong" xml:space="preserve">
+    <value>Quality postal service standard</value>
+  </data>
+  <data name="TimKiem" xml:space="preserve">
+    <value>検索</value>
+  </data>
+  <data name="timquocnoi" xml:space="preserve">
+    <value>国内貨物はこ ち ら</value>
+  </data>
+  <data name="timquocte" xml:space="preserve">
+    <value>海外貨物はこ ち ら</value>
+  </data>
+  <data name="tinhdongnai" xml:space="preserve">
+    <value>ドンナイ省　（ニョンチャック倉庫：保税倉庫、冷蔵＆冷凍倉庫、一般倉庫、危険品倉庫）</value>
+  </data>
+  <data name="tintuc" xml:space="preserve">
+    <value>新着情報</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>SG佐川ベトナム及び佐川急便ベトナム有限会社 は SGホールディングス株式会社のベトナム現地法人として、ベトナムの総合物流ソリューションをご提供しております。</value>
+  </data>
+  <data name="trangchu" xml:space="preserve">
+    <value>ホーム</value>
+  </data>
+  <data name="trienkhaihangduan" xml:space="preserve">
+    <value>プロジェクト貨物</value>
+  </data>
+  <data name="trienkhaihanghoa" xml:space="preserve">
+    <value>プロジェクトカーゴ</value>
+  </data>
+  <data name="ttcty" xml:space="preserve">
+    <value>会社の情報</value>
+  </data>
+  <data name="tuyendung" xml:space="preserve">
+    <value>採用情報</value>
+  </data>
+  <data name="vtaiBien" xml:space="preserve">
+    <value>海上貨物輸送サービス</value>
+  </data>
+  <data name="vtaiBo" xml:space="preserve">
+    <value>トラック配送サービス</value>
+  </data>
+  <data name="vtaiHK" xml:space="preserve">
+    <value>航空貨物輸送サービス</value>
+  </data>
+  <data name="xemtiep" xml:space="preserve">
+    <value>続く</value>
+  </data>
+  <data name="xulybp" xml:space="preserve">
+    <value>Handling parcel without receiver</value>
+  </data>
+  <data name="Cambodia" xml:space="preserve">
+    <value>カンボジア支店</value>
+  </data>
+  <data name="chinhanhBacNinh" xml:space="preserve">
+    <value>バクニン支店</value>
+  </data>
+  <data name="chinhanhDaNang" xml:space="preserve">
+    <value>ダナン支店</value>
+  </data>
+  <data name="chinhanhDongNai" xml:space="preserve">
+    <value>ドンナイ支店</value>
+  </data>
+  <data name="chinhanhHCM" xml:space="preserve">
+    <value>ホーチミン本社</value>
+  </data>
+  <data name="chinhanhHN" xml:space="preserve">
+    <value>ハノイ支店</value>
+  </data>
+  <data name="chinhanhHP" xml:space="preserve">
+    <value>ハイフォン事務所</value>
+  </data>
+  <data name="dactrung" xml:space="preserve">
+    <value>特徴</value>
+  </data>
+  <data name="dactrung_detail" xml:space="preserve">
+    <value>ベトナムの外資系企業では唯一総合物流全免許、輸出入通関、国際航空海上輸送、トラック、一般倉庫、CFS倉庫、保税倉庫を取得しており、 高い輸送品質を提供することで信頼を得ています。</value>
+  </data>
+  <data name="danang" xml:space="preserve">
+    <value>DANANG BRANCH</value>
+  </data>
+  <data name="danang_gom" xml:space="preserve">
+    <value>(Sea/Air Freight Forwarding, Local Transportation, Customs Clearance and Container Trucking)</value>
+  </data>
+  <data name="diachidanang" xml:space="preserve">
+    <value>Lot B1-10, B1-11, B1-12 Nguyen Phuc Street, Danang Aquaculture Service Industrial Park,</value>
+  </data>
+  <data name="diachidanang_tiep" xml:space="preserve">
+    <value> Tho Quang Ward, Son Tra District, Danang City, Vietnam.</value>
+  </data>
+  <data name="diachidienbienphu" xml:space="preserve">
+    <value>169 Dien Bien Phu Street, Ward 15, Binh Thanh District, Ho Chi Minh City, Vietnam</value>
+  </data>
+  <data name="diachiDN" xml:space="preserve">
+    <value>Lot B1-10, B1-11, B1-12 Nguyen Phuc Street, Danang Aquaculture Service Industrial Park, Tho Quang Ward, Son Tra District, Danang City, Vietnam.</value>
+  </data>
+  <data name="diachiDongNai1" xml:space="preserve">
+    <value>Street No. 6, Nhon Trach 3 Industrial Park -Phase 2,</value>
+  </data>
+  <data name="diachiDongNai2" xml:space="preserve">
+    <value>Long Tho Ward, Nhon Trach District, Dong Nai Province, Vietnam.</value>
+  </data>
+  <data name="diachihanoi" xml:space="preserve">
+    <value>03 Floor, MHDI Apartment, 60 Hoang Quoc Viet Street, Nghia Do Ward, Cau Giay District, Hanoi City, Vietnam</value>
+  </data>
+  <data name="diachiHP1" xml:space="preserve">
+    <value>Km 12 National Road No.5,
+Nomura Industrial Zone</value>
+  </data>
+  <data name="diachiHP2" xml:space="preserve">
+    <value>Area, Hai Phong City, Vietnam</value>
+  </data>
+  <data name="diachiTuSon1" xml:space="preserve">
+    <value>Unit 1-2-3, Block 19, Lot 66 VSIP, </value>
+  </data>
+  <data name="diachiTuSon2" xml:space="preserve">
+    <value>Phu Chan, Tu Son, Bac Ninh, Vietnam</value>
+  </data>
+  <data name="diachiVPQueVo1" xml:space="preserve">
+    <value>Lot D, Que Vo Industrial Park,</value>
+  </data>
+  <data name="diachiVPQueVo2" xml:space="preserve">
+    <value>Que Vo District, Bac Ninh Province, Vietnam</value>
+  </data>
+  <data name="diachi_DBP1" xml:space="preserve">
+    <value>169 Dien Bien Phu Street, Ward 15,</value>
+  </data>
+  <data name="diachi_DBP2" xml:space="preserve">
+    <value>Binh Thanh District, Ho Chi Minh City, Vietnam</value>
+  </data>
+  <data name="diachi_truongson" xml:space="preserve">
+    <value>87 Truong Son Street, Ward 2, Tan Binh District, HCMC., Vietnam</value>
+  </data>
+  <data name="dvnhanvien" xml:space="preserve">
+    <value>名 (2019年05月）</value>
+  </data>
+  <data name="gui" xml:space="preserve">
+    <value>送信</value>
+  </data>
+  <data name="HaNoi" xml:space="preserve">
+    <value>HANOI BRANCH</value>
+  </data>
+  <data name="khoTuSon" xml:space="preserve">
+    <value>トゥーソン事務所、保税倉庫</value>
+  </data>
+  <data name="ngaylap" xml:space="preserve">
+    <value>会社設立日</value>
+  </data>
+  <data name="phongbanDBP" xml:space="preserve">
+    <value>(Departments: Board of Director, Administration, Accounting, Removal,Custom Clearance,SeaFreight ,e-Global, Sales)</value>
+  </data>
+  <data name="sev" xml:space="preserve">
+    <value>佐川急便ベトナム有限会社</value>
+  </data>
+  <data name="sevngaylap" xml:space="preserve">
+    <value>1997年 6月 12日</value>
+  </data>
+  <data name="sgv" xml:space="preserve">
+    <value>SG佐川ベトナム有限会社</value>
+  </data>
+  <data name="sgvngaylap" xml:space="preserve">
+    <value>2015年 05月 01日</value>
+  </data>
+  <data name="sochinh" xml:space="preserve">
+    <value>HEAD OFFICE</value>
+  </data>
+  <data name="sochinh_address" xml:space="preserve">
+    <value>Lot 117 Industrial Park in Sai Gon- Linh Trung Export Processing Zone, Thu Duc District, HCMC, Vietnam</value>
+  </data>
+  <data name="soluongnv" xml:space="preserve">
+    <value>社員数</value>
+  </data>
+  <data name="thongdiep" xml:space="preserve">
+    <value>メッセージ本文</value>
+  </data>
+  <data name="tieude" xml:space="preserve">
+    <value>題名</value>
+  </data>
+  <data name="trusochinh" xml:space="preserve">
+    <value>Head Office :</value>
+  </data>
+  <data name="vpdienbienphu" xml:space="preserve">
+    <value>DIEN BIEN PHU OFFICE</value>
+  </data>
+  <data name="VPQueVo" xml:space="preserve">
+    <value>クエボ事務所、保税一般倉庫</value>
+  </data>
+  <data name="VPvtaiHK" xml:space="preserve">
+    <value>AIR FREIGHT OFFICE</value>
+  </data>
+  <data name="VPvtaiHK_diachi" xml:space="preserve">
+    <value>87 Truong Son Street, Ward 2, Tan Binh District, HCMC., Vietnam</value>
+  </data>
+  <data name="VPvtaiHK_ghichu" xml:space="preserve">
+    <value>(Close to Tan Son Nhat International Airport)</value>
+  </data>
+  <data name="VP_DBP" xml:space="preserve">
+    <value>Dien Bien Phu Office:</value>
+  </data>
+  <data name="VP_TruongSon" xml:space="preserve">
+    <value>Truong Son Office:</value>
+  </data>
+  <data name="Xoa" xml:space="preserve">
+    <value>ク リア</value>
+  </data>
+  <data name="youremail" xml:space="preserve">
+    <value>メール</value>
+  </data>
+  <data name="yourname" xml:space="preserve">
+    <value>お名前 (必須）</value>
+  </data>
+  <data name="tracuu" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chuky" xml:space="preserve">
+    <value>受信者の署名を見る</value>
+  </data>
+  <data name="dathangonline" xml:space="preserve">
+    <value>オンライン注文</value>
+  </data>
+  <data name="detail" xml:space="preserve">
+    <value>詳細を見る</value>
+  </data>
+  <data name="khongtimthayvandon" xml:space="preserve">
+    <value>この郵便番号に関する情報はありません。郵便番号を再入力してください</value>
+  </data>
+  <data name="maKH" xml:space="preserve">
+    <value>顧客コード</value>
+  </data>
+  <data name="mavandon" xml:space="preserve">
+    <value>郵便番号</value>
+  </data>
+  <data name="mess_vandon" xml:space="preserve">
+    <value>郵便番号は空白にできません。 郵便番号を再入力してください</value>
+  </data>
+  <data name="msgPass" xml:space="preserve">
+    <value>パスワードを入力してください</value>
+  </data>
+  <data name="msgUser" xml:space="preserve">
+    <value>ユーザー名を入力してください</value>
+  </data>
+  <data name="nhapvandon" xml:space="preserve">
+    <value>運送状番号を入力してく</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>サーチ</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>状態</value>
+  </data>
+  <data name="tenKH" xml:space="preserve">
+    <value>顧客</value>
+  </data>
+  <data name="tepdinhkem" xml:space="preserve">
+    <value>取り付け</value>
+  </data>
+  <data name="time" xml:space="preserve">
+    <value>時間</value>
+  </data>
+  <data name="tracuoconline" xml:space="preserve">
+    <value>チェックコスト</value>
+  </data>
+  <data name="tracuuBPBK" xml:space="preserve">
+    <value>郵便番号を調べる</value>
+  </data>
+  <data name="timkiemvandon" xml:space="preserve">
+    <value>郵便番号の検索</value>
+  </data>
+  <data name="cuocphatsinh" xml:space="preserve">
+    <value>この期間は料金が発生されていません</value>
+  </data>
+  <data name="cuoctamtinh" xml:space="preserve">
+    <value>上記送達電荷を一時的に計算されます。</value>
+  </data>
+  <data name="lienhecuoc" xml:space="preserve">
+    <value>ご不明な点がありましたら、小切手手数料部門にお問い合わせください</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>ログイン</value>
+  </data>
+  <data name="chucdanh" xml:space="preserve">
+    <value>職名</value>
+  </data>
+  <data name="cus" xml:space="preserve">
+    <value>顧客</value>
+  </data>
+  <data name="danhgia" xml:space="preserve">
+    <value>率と</value>
+  </data>
+  <data name="diadiem" xml:space="preserve">
+    <value>場所</value>
+  </data>
+  <data name="hannop" xml:space="preserve">
+    <value>有効期限</value>
+  </data>
+  <data name="hotro" xml:space="preserve">
+    <value>サポート</value>
+  </data>
+  <data name="khieunai" xml:space="preserve">
+    <value>問い合わせ</value>
+  </data>
+  <data name="luong" xml:space="preserve">
+    <value>給料</value>
+  </data>
+  <data name="supp" xml:space="preserve">
+    <value>サポート</value>
+  </data>
+  <data name="thoathuan" xml:space="preserve">
+    <value>交渉可能</value>
+  </data>
+  <data name="tukhoa" xml:space="preserve">
+    <value>キーワード</value>
+  </data>
+  <data name="vitri" xml:space="preserve">
+    <value>職種</value>
+  </data>
+  <data name="cachthuc" xml:space="preserve">
+    <value>適用する方法</value>
+  </data>
+  <data name="donUT" xml:space="preserve">
+    <value>申込書</value>
+  </data>
+  <data name="dungluongbe" xml:space="preserve">
+    <value>2MB未満のファイルをアップロード</value>
+  </data>
+  <data name="emaillienlac" xml:space="preserve">
+    <value>メール連絡先</value>
+  </data>
+  <data name="HDtuyendung" xml:space="preserve">
+    <value>興味のある候補者は、「適用」ボタンをクリックして履歴書を人事部に送信してください。</value>
+  </data>
+  <data name="hoten" xml:space="preserve">
+    <value>尊名</value>
+  </data>
+  <data name="motacv" xml:space="preserve">
+    <value>仕事内容</value>
+  </data>
+  <data name="msgEmail" xml:space="preserve">
+    <value>メールアドレスを入力してください</value>
+  </data>
+  <data name="msgHoten" xml:space="preserve">
+    <value>あなたの名前は空白であってはなりません</value>
+  </data>
+  <data name="msgPhone" xml:space="preserve">
+    <value>連絡先電話番号を入力してください</value>
+  </data>
+  <data name="nopdon" xml:space="preserve">
+    <value>仕事をする</value>
+  </data>
+  <data name="sdt" xml:space="preserve">
+    <value>電番</value>
+  </data>
+  <data name="TDsupport" xml:space="preserve">
+    <value>この求人はベトナム語のみをサポートしています</value>
+  </data>
+  <data name="thongtinlienhe" xml:space="preserve">
+    <value>連絡先と申込書</value>
+  </data>
+  <data name="ttTD" xml:space="preserve">
+    <value>募集情報</value>
+  </data>
+  <data name="ungtuyen" xml:space="preserve">
+    <value>施す</value>
+  </data>
+  <data name="UTsucc" xml:space="preserve">
+    <value>正常に適用されます！</value>
+  </data>
+  <data name="vadTep" xml:space="preserve">
+    <value>アップロードファイルを選択してください</value>
+  </data>
+  <data name="DNbranch" xml:space="preserve">
+    <value>ダナン支店</value>
+  </data>
+  <data name="HCMbranch" xml:space="preserve">
+    <value>ホーチミン支店</value>
+  </data>
+  <data name="HNbranch" xml:space="preserve">
+    <value>ハノイ支店</value>
+  </data>
+  <data name="noidia" xml:space="preserve">
+    <value>国内配送ホットライン</value>
+  </data>
+  <data name="support" xml:space="preserve">
+    <value>オンラインサポート</value>
+  </data>
+  <data name="CSbusy" xml:space="preserve">
+    <value>現在、すべてのスタッフが忙しい、メッセージを残してください！</value>
+  </data>
+  <data name="khongcotinTD" xml:space="preserve">
+    <value>現在、求人情報はありません。後で戻ってください。</value>
+  </data>
+  <data name="tinhden" xml:space="preserve">
+    <value>州へ</value>
+  </data>
+  <data name="tinhdi" xml:space="preserve">
+    <value>州から</value>
+  </data>
+  <data name="loinhan" xml:space="preserve">
+    <value>私たちにメッセージを残してください！</value>
+  </data>
+  <data name="ndSGX" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ourservices" xml:space="preserve">
+    <value>私たちのサービス</value>
+  </data>
+  <data name="quydinhchuyenphat" xml:space="preserve">
+    <value>一般的な規制</value>
+  </data>
+  <data name="dong" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
+  <data name="vpBacNinh" xml:space="preserve">
+    <value>Bac Ninh Branch</value>
+  </data>
+  <data name="vpHaiPhong" xml:space="preserve">
+    <value>Hai Phong Office</value>
+  </data>
+  <data name="presskey" xml:space="preserve">
+    <value>検索キーワードを入力してください</value>
+  </data>
+  <data name="kinhnghiem" xml:space="preserve">
+    <value>経験</value>
+  </data>
+  <data name="DongNai" xml:space="preserve">
+    <value>DONG NAI BRANCH</value>
+  </data>
+  <data name="tuson" xml:space="preserve">
+    <value>Tu Son Warehouse</value>
+  </data>
+  <data name="haiphong" xml:space="preserve">
+    <value>HAI PHONG OFFICE</value>
+  </data>
+  <data name="chinhsachKH" xml:space="preserve">
+    <value>販売方針</value>
+  </data>
+  <data name="hoancuoc" xml:space="preserve">
+    <value>顧客に手数料を返却する</value>
+  </data>
+  <data name="ttIndex" xml:space="preserve">
+    <value>顧客コードとパスワードを使用してシステムにログインし、ホット料金を確認し、過去の期間やその他のユーティリティを探してください。 顧客IDがない場合は、コールセンター1900 54 55 38（内線4008）に連絡して指示を求め、顧客コードを作成してください。</value>
+  </data>
+  <data name="chuyenphat" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chonchinhanh" xml:space="preserve">
+    <value>コンサルタントのサポートのために支店を選択してください</value>
+  </data>
+  <data name="nhantin" xml:space="preserve">
+    <value>会話を開始するメッセージ。</value>
+  </data>
+  <data name="donchuyentiep" xml:space="preserve">
+    <value />
+  </data>
+  <data name="quydinhvtbien" xml:space="preserve">
+    <value>海上貨物サービスの規制</value>
+  </data>
+  <data name="xemthem" xml:space="preserve">
+    <value>もっと見る</value>
+  </data>
+  <data name="msgMess" xml:space="preserve">
+    <value>コンテンツは空にできません</value>
+  </data>
+  <data name="msgSubject" xml:space="preserve">
+    <value>タイトルは空白にできません</value>
+  </data>
+  <data name="chinhanhlienhe" xml:space="preserve">
+    <value>連絡先</value>
+  </data>
+  <data name="msgCompany" xml:space="preserve">
+    <value>担当の支店を選択してください</value>
+  </data>
+  <data name="dichvuchuyenphat" xml:space="preserve">
+    <value>エクスプレスサービス</value>
+  </data>
+  <data name="baocaosaipham" xml:space="preserve">
+    <value>違反を報告する</value>
+  </data>
+  <data name="baocaosaiphamthanhcong" xml:space="preserve">
+    <value>セーブに成功。 弊社へのフィードバックありがとうございます。</value>
+  </data>
+  <data name="vadnoidung" xml:space="preserve">
+    <value>内容を入力してください</value>
+  </data>
+  <data name="sdtlienhe" xml:space="preserve">
+    <value>連絡先電話</value>
+  </data>
+  <data name="motachinhsachbh" xml:space="preserve">
+    <value />
+  </data>
+  <data name="taovandon" xml:space="preserve">
+    <value />
+  </data>
+  <data name="errchonCNdehotro" xml:space="preserve">
+    <value>Please select a branch for consultants' support</value>
+  </data>
+  <data name="loaihinhdichvu" xml:space="preserve">
+    <value>サービスの種類</value>
+  </data>
+</root>

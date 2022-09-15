@@ -1,0 +1,97 @@
+﻿
+.horizontal-menu .bottom-navbar .page-navigation.navbar-left {
+    width: 80%;
+    justify-content: flex-start;
+    float: left;
+}
+
+.horizontal-menu .bottom-navbar .page-navigation.navbar-right {
+    width: 20%;
+    float: right;
+    justify-content: flex-end;
+}
+.cke_contents {
+    min-height: 500px;
+}
+@media (min-width: 992px) {
+    .horizontal-menu .bottom-navbar .page-navigation.navbar-left > .nav-item {
+        width: 27%;
+    }
+
+        .horizontal-menu .bottom-navbar .page-navigation.navbar-left > .nav-item:first-child {
+            width: 25%;
+        }
+
+            .horizontal-menu .bottom-navbar .page-navigation.navbar-left > .nav-item:first-child > .nav-link {
+                justify-content: flex-start;
+            }
+
+        .horizontal-menu .bottom-navbar .page-navigation.navbar-left > .nav-item > .nav-link {
+            justify-content: center;
+        }
+
+        .horizontal-menu .bottom-navbar .page-navigation.navbar-left > .nav-item:last-child > .nav-link {
+            padding: 15px;
+        }
+}
+
+@media(min-width:1023px){
+    .modal-lg {
+        max-width: 1128px;
+    }
+}
+
+.griddata .dxgvCSD {
+    height: calc(100vmin - 270px) !important;
+}
+.griddetail .dxgvCSD {
+    height: calc(100vmin - 200px) !important;
+}
+.update-trangthai {
+    padding: 0;
+    margin: 0;
+}
+    .update-trangthai span {
+        font-size: 17px;
+        color: red;
+        margin-right: 10px;
+    }
+    .update-trangthai i {
+        color: white;
+    }
+    .update-trangthai .btn-info {
+        margin-right: 10px;
+    }
+
+h4 {
+    color: rebeccapurple;
+    text-align: center;
+    padding: 10px 0;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+}
+    h4 span{
+        border-bottom:2px solid;
+    }
+
+.nav-tabs{
+    border-bottom:1px solid lightgray;
+}
+.tab-content .tab-pane{
+    padding-top:15px;
+}
+.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+    border-color: lightgray;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    font-weight: 600;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+.nav-tabs .nav-link{
+    color:black;
+    padding-left:14px;
+    padding-right:14px;
+}

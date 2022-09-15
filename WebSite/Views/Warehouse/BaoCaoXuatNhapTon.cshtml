@@ -1,0 +1,73 @@
+﻿@model WebSite.Models.Warehouse.BaoCaoXuatNhapTonKhoVinMartParaDTO
+@{
+    ViewBag.Title = Booking.WH_baoCaoXuatNhapTon;
+    Layout = "~/Views/Shared/_Layout_Warehouse.cshtml";
+}
+@using WebSite.Language
+<div class="row" style="margin-top:20px">
+    @using (Html.BeginForm("BaoCaoXuatNhapTon", "Warehouse", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-md-3 form-group">
+            <div class="col-md-4" style="margin-top:5px">@Html.LabelFor(model => model.TU_NGAY, Booking.tungay, htmlAttributes: new { @class = "control-label" })</div>
+            <div class="col-md-8">
+                @Html.DevExpress().DateEditFor(u => u.TU_NGAY, settings =>
+           {
+               settings.Name = "detTuNgay";
+               settings.Properties.EditFormat = EditFormat.Custom;
+               settings.Properties.UseMaskBehavior = true;
+               settings.Properties.EditFormatString = "dd/MM/yyyy hh:mm tt";
+               settings.ControlStyle.CssClass = "form-control col-md-12";
+               settings.Properties.TimeSectionProperties.Visible = true;
+               settings.Properties.TimeSectionProperties.Adaptive = true;
+               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Custom;
+               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormatString = "dd/MM/yyyy hh:mm tt";
+               settings.Date = DateTime.Now;
+               settings.Properties.CalendarProperties.FastNavProperties.DisplayMode = FastNavigationDisplayMode.Inline;
+           }).GetHtml()
+            </div>
+        </div>
+        <div class="col-md-3 form-group">
+            <div class="col-md-4" style="margin-top:5px">@Html.LabelFor(model => model.DEN_NGAY, Booking.denngay, htmlAttributes: new { @class = "control-label" })</div>
+            <div class="col-md-8">
+                @Html.DevExpress().DateEditFor(u => u.DEN_NGAY, settings =>
+           {
+               settings.Name = "detDenNgay";
+               settings.Properties.EditFormat = EditFormat.Custom;
+               settings.Properties.UseMaskBehavior = true;
+               settings.Properties.EditFormatString = "dd/MM/yyyy hh:mm tt";
+               settings.ControlStyle.CssClass = "form-control col-md-12";
+               settings.Properties.TimeSectionProperties.Visible = true;
+               settings.Properties.TimeSectionProperties.Adaptive = true;
+               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Custom;
+               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormatString = "dd/MM/yyyy hh:mm tt";
+               settings.Date = DateTime.Now;
+               settings.Properties.CalendarProperties.FastNavProperties.DisplayMode = FastNavigationDisplayMode.Inline;
+           }).GetHtml()
+            </div>
+        </div>
+        <div class="col-md-1">
+            <input type="submit" class="form-control btn-primary" id="txtTimKiem" value="@Booking.WH_timKiem" />
+        </div>
+    }
+</div>
+<div class="row" style="margin-top:10px">
+    @using (Html.BeginForm())
+    {
+        @Html.Action("grvBaoCaoXuatNhapTon")
+    }
+</div>
+
+@if (ViewBag.Message != null)
+{
+    <text>
+        <script>
+            $(document).ready(function () {
+                Swal.fire('@Html.Raw(@Booking.WH_coLoiXayRa)',
+                    "@ViewBag.Message",
+                    'error');
+            });
+        </script>
+    </text>
+}
+

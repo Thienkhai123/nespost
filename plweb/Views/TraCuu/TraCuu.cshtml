@@ -1,0 +1,675 @@
+﻿@{
+    Layout = null;
+}
+@{WebSite.Models.CSS_CRM_NGUOI_DUNGDTO user = (WebSite.Models.CSS_CRM_NGUOI_DUNGDTO)Session["User"];}
+<!DOCTYPE html>
+<html class="no-js" style="height:100%">
+<head>
+    <meta charset="utf-8">
+    <title>Tra cứu trạng thái bưu phẩm bưu kiện</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/lib/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/lib/css/testimonails-slider.css" rel="stylesheet" />
+    <link href="~/lib/DataTables_2/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/lib/css/sweetalert2.css" rel="stylesheet" />
+    <link href="~/lib/css/sweetalert2.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+    <script src="~/lib/js/jquery.min.js"></script>
+    <script src="~/lib/js/sweetalert2.js"></script>
+    <script src="~/lib/js/sweetalert2.all.min.js"></script>
+    <style>
+        .dataTables_wrapper .dataTables_processing {
+            margin-top: 15px !important;
+            padding-top: 5px !important;
+        }
+
+        strong {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body style="margin:0;
+   padding:0;
+   height:100%;">
+    <div class="container" style="width: 100%;min-height: 100%;position: relative;background-color: #f1f9f8;padding:0">
+        <div class="header">
+            <div id="main-header" style="background: white;">
+
+                <div class="row" style="margin:0">
+                    <div class="col-md-3">
+                        <div class="logo">
+                            <a><img src="~/lib/images/logoSGH.png" title="Sagawa" alt="Sagawa Website" style="height:60px"></a>
+                        </div>
+                    </div>
+                    <div class="col-md-9 pull-right">
+                        <div class="cart-info pull-right" style="padding-top: 40px;">
+                            <a href="#" style="padding-right: 10px; border-right: 1px solid;">@user.CUSTOMER_CODE - @user.NAME</a>
+                            @if (user.login == "0")
+                            {
+                                <a href="/Home/Logout" title="Đăng xuất"><i class="glyphicon glyphicon-log-out"> </i> Đăng xuất</a>
+                            }
+                            else
+                            {
+                                <a href="/Booking/DangXuat" title="Đăng xuất"><i class="glyphicon glyphicon-log-out"> </i> Đăng xuất</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="top-header" style="height:45px;background: #428bca;color:white">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="main-menu">
+
+                            <h3 style="text-align:center;"> BÁO CÁO TRA CỨU BƯU PHẨM BƯU KIỆN</h3>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="content" style="padding-bottom:60px">
+            <div class="container" style="width: 1280px;">
+                <div class="row" style="margin-top: 20px;">
+                    @{
+                        if (user.CUSTOMER_CODE.Equals("0230013"))
+                        {
+                            <div class="col-md-2">
+                                <label> Ngày nhận từ</label>
+                                <div class='input-group date' id='datetimepicker3'>
+                                    <input type='text' class="form-control" name="FromDate" id="FromDate" value="@ViewBag.FromDate" />
+                                    <span class="input-group-addon">
+                                        <fa class="fa fa-calendar"></fa>
+                                    </span>
+                                </div>
+                                <script type="text/javascript">
+                                    var date1 = new Date();
+                                    var year1 = date1.getFullYear();
+                                    var month1 = date1.getMonth()-1;
+                                    var day1 = date1.getDate();
+
+                                   // $('#FromDate').val(day1 + '/' + month1 + '/' + year1)
+                                    $(function () {
+                                        $("#FromDate").datetimepicker({ format: 'DD/MM/YYYY' });
+                                });
+                                </script>
+                            </div>
+                            <div class="col-md-2">
+                                <label> Đến ngày</label>
+                                <div class='input-group date' id='datetimepicker2'>
+                                    <input type='text' class="form-control" name="ToDate" id="ToDate" value="@ViewBag.ToDate" />
+                                    <span class="input-group-addon">
+                                        <fa class="fa fa-calendar"></fa>
+                                    </span>
+                                </div>
+                                <script type="text/javascript">
+                                    var date = new Date();
+                                    var year = date.getFullYear();
+                                    var month = date.getMonth();
+                                    var day = date.getDate();
+                                   // $('#ToDate').val(day + '/' + month + '/' + year)
+                                    $(function () {
+                                        $('#ToDate').datetimepicker({
+                                            format: 'DD/MM/YYYY'
+                                        });
+                                    })
+
+                                </script>
+                            </div>
+                            <div class="col-md-2">
+                                <label>Mã BPBK/Mã OR </label>
+                                <div class='input-group date'>
+                                    <input type='text' class="form-control" id="Ma_BPBK" placeholder="Mã bill" />
+                                </div>
+                            </div>
+                            <div class="col-md-2" style="padding-right: 0;">
+                                <label>Trạng thái</label>
+                                <select id="ListTrangThai" class="form-control">
+                                    <option value="Tất cả" selected>Tất cả</option>
+                                    <option value="Chưa phát">Chưa phát</option>
+                                    <option value="Đã phát">Đã phát</option>
+                                    <option value="Chưa checkin">Chưa check in</option>
+                                </select>
+                            </div>
+                            <div class="col-md-1">
+                                <button type="submit" class="btn btn-primary" style="margin-top:26px" onclick="Search()"><i class="fa fa-search"></i> Tìm kiếm</button>
+                            </div>
+                            <div class="col-md-3">
+                                <a class="btn btn-danger pull-right" style="margin-top:26px" onclick="ExportExcel()"> Export Excel</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-2">
+                                <label> Ngày nhận từ</label>
+                                <div class='input-group date' id='datetimepicker3'>
+                                    <input type='text' class="form-control" name="FromDate" id="FromDate" value="@ViewBag.FromDate" />
+                                    <span class="input-group-addon">
+                                        <fa class="fa fa-calendar"></fa>
+                                    </span>
+                                </div>
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $("#FromDate").datetimepicker({ format: 'DD/MM/YYYY'});
+                                    });
+                                </script>
+                            </div>
+                                    <div class="col-md-2">
+                                        <label> Đến ngày</label>
+                                        <div class='input-group date' id='datetimepicker2'>
+                                            <input type='text' class="form-control" name="ToDate" id="ToDate" value="@ViewBag.ToDate" />
+                                            <span class="input-group-addon">
+                                                <fa class="fa fa-calendar"></fa>
+                                            </span>
+                                        </div>
+                                        <script type="text/javascript">
+                                var date = new Date();
+                                var year = date.getFullYear();
+                                var month = date.getMonth();
+                                var day = date.getDate();
+                                // $('#ToDate').val(day + '/' + month + '/' + year)
+                                $(function () {
+                                    $('#ToDate').datetimepicker({
+                                        format: 'DD/MM/YYYY'
+                                    });
+                                })
+                                        </script>
+                                    </div>
+                                    <div class="col-md-2" hidden>
+                                        <label>Mã BPBK </label>
+                                        <div class='input-group date'>
+                                            <input type='text' class="form-control" id="Ma_BPBK" placeholder="Mã bill" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" style="padding-right: 0;">
+                                        <label>Trạng thái</label>
+
+                                        <select id="ListTrangThai" class="form-control">
+                                            <option value="Tất cả" selected>Tất cả</option>
+                                            <option value="Chưa phát">Chưa phát</option>
+                                            <option value="Đã phát">Đã phát</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button type="submit" class="btn btn-primary" style="margin-top:26px" onclick="Search()"><i id="Search" class="fa fa-search"></i> Tìm kiếm</button>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <a class="btn btn-danger pull-right" style="margin-top:26px" onclick="ExportExcel()"> Export Excel</a>
+                                    </div>
+                        }
+                    }
+
+                </div>
+                <div class="col-md-12 " style="padding:15px 0 20px;">
+                    <table id="demoGrid" class="table table-striped table-hover table-checkable order-column nowrap" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Ngày nhận</th>
+                                <th>Mã bill</th>
+                                <th>Tỉnh phát</th>
+                                <th>Ngày phát</th>
+                                <th>Giờ phát</th>
+                                <th>Người nhận</th>
+                                <th>Trạng thái</th>
+                                @{
+                                    if (user.CUSTOMER_CODE == "0230013")
+                                    {
+                                        <th>Giờ hẹn phát</th>
+                                        <th>Ghi chú</th>
+                                    }
+                                }
+
+                                <th>Ảnh liên vàng</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="footer" style="background:#9999997d;position: absolute;bottom: 0;width: 100%;">
+            <div class="container">
+                <div class="bottom-footer" style="padding:0px;text-align: center;">
+                    <p style="margin-bottom:5px !important">
+                        <span>
+                            Copyright © @DateTime.Now.Year <a>Sagawa</a>
+                            | Design by <span class="blue">SG Sagawa Software Department</span>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="ThongBao" class="modal fade">
+        <div class="modal-dialog modal-xl" style="">
+            <!-- Modal content-->
+            <div class="modal-content">
+
+                <div class="modal-body" style="padding-bottom: 0px;">
+                    <div class="col-md-12">
+                        <p id="msg">
+                           
+
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer" style="border:none; padding-top: 10px">
+                    @* <button type="button" class="btn btn-default" data-dismiss="modal" id="close"> Đóng </button>*@
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="Show_MoTa" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-xm" style="width: 450px;">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title col-md-11" style="font-weight:bold">Ghi chú</h5>
+                </div>
+                <div class="modal-body" style="padding-bottom: 0px;padding-top:0">
+                    <div class="row" style="padding:10px">
+                        <p id="Mota" style="padding:0px 20px"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="TRACK_AND_TRACE" class="modal fade" role="dialog" style="overflow:auto">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding-bottom: 0;border: none;">
+                    @* <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>*@
+                    <h5 id="title" style="color:red"> </h5>
+                </div>
+                <div class="modal-body" style="padding-top: 0;padding-bottom:0">
+                    <table id="listTrackAndTrace" class="table table-hover" style="width:100%">
+                        <thead>
+                            <tr style="border-bottom: 1px solid #99999938;">
+                                <th style="width:125px;text-align:center">
+                                    Thời gian
+                                </th>
+                                <th style="text-align:center">
+                                    Chi tiết
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="modal-footer" style="padding:5px">
+                    <a onclick="$('#TRACK_AND_TRACE').modal('hide');" class="btn btn-primary">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="GHI_LOG" class="modal fade" style="overflow:auto">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding-bottom: 0;padding-top:5px">
+                    @* <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>*@
+                    <h3 style="color:red; margin-top: 10px;">Ghi chú </h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12" hidden>
+                            <label>Mã bill:</label>
+                            <input type='text' class="form-control" id="MA_BILL" />
+                        </div>
+                        <div class="col-md-12">
+                            <label>Nhập ngày hẹn phát:</label>
+                            <div class="col-md-12">
+                                <div class='input-group date'>
+                                    <input type='text' class="form-control" id="GIO_HEN_PHAT" />
+                                    <span class="input-group-addon">
+                                        <fa class="fa fa-calendar"></fa>
+                                    </span>
+                                </div>
+                                <script type="text/javascript">
+                                $(function () {
+                                    $("#GIO_HEN_PHAT").datetimepicker({ format: 'HH:mm DD/MM/YYYY'});
+                            });
+                                </script>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label>Nhập ghi chú:</label>
+                            <div class="col-md-12">
+                                <textarea class="form-control" rows="4" id="GHI_CHU" onfocus="$('#msgGHI_CHU').hide()"></textarea>
+                                <span id="msgGHI_CHU" style="color:red;font-style:italic;" hidden>Ghi chú không được bỏ trống.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding:5px">
+                    <button class="btn btn-primary" onclick="GhiLog()">Lưu</button>
+                    <button class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/DataTables_2/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/js/moment-with-locales.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    @if (Request.Browser.Browser == "IE" || Request.Browser.Browser == "InternetExplorer")
+    {
+        <script src="~/lib/js/core-2.4.1.js"></script>
+        <script src="~/lib/js/promise.min.js"></script>
+    }
+
+    @{
+        if (user.CUSTOMER_CODE == "0230013")
+        {
+            <script>
+                var table;
+                $(document).ready(function () {
+                    table = $("#demoGrid").DataTable({
+                        "processing": true, // for show progress bar
+                        "serverSide": true, // for process server side
+                        "filter": false,// this is for disable filter (search box)
+                        "orderMulti": true, // for disable multiple column at once
+                        "pageLength": 10,
+                        "scrollX": true,
+                        "destroy": true,
+                        "orderCellsTop": true,
+                        "fixedHeader": true,
+                        "sort":false,
+                        "lengthChange": false,
+
+                        "initComplete": function( settings, json ) {
+
+                        },
+
+                        "ajax": {
+                            "url": "/TraCuu/LoadData",
+                            "type": "POST",
+                            "data": function (d) {
+                                d.TrangThai = $('#ListTrangThai').val();
+                                d.fromDate = $('#FromDate').val();
+                                d.toDate = $('#ToDate').val();
+                                d.Ma_BPBK = $('#Ma_BPBK').val();
+                            },
+                            "datatype": "json",
+                            "complete": function(){
+                                $("#Search").removeClass("fa fa-spinner fa-spin");
+                                $("#Search").addClass("fa fa-search");
+                            }
+                        },
+                        "columnDefs": true,
+                        "columns": [
+                             { "data": "STT", "name": "STT", "autoWidth": true },
+                              { "data": "NGAY_NHAN_STRING", "name": "Ngày nhận", "autoWidth": true },
+                              {
+                                  "render": function (data, type, full, meta) {
+                                      return "<a href=\"\" onclick=\"TRACK_AND_TRACE('"+full.MA_BILL+"')\" data-toggle=\"modal\" data-target=\"#TRACK_AND_TRACE\">" +full.MA_BILL+"</a>";
+                                  }
+                              },
+                              { "data": "TINH_PHAT", "name": "Tỉnh nhận", "autoWidth": true },
+                              { "data": "NGAY_PHAT_STRING", "name": "Ngày phát", "autoWidth": true },
+                              { "data": "GIO_PHAT_STRING", "name": "Giờ phát", "autoWidth": true },
+                              { "data": "NGUOI_NHAN", "name": "Người nhận", "autoWidth": true },
+                              { "data": "TINH_TRANG", "name": "Trạng thái", "autoWidth": true },
+                              {"render": function (data, type, full, meta) {
+                                      return full.GIO_HEN_PHAT_STRING;
+                              },"addClass":"vis"
+                              },
+                              {
+                                  "render": function (data, type, full, meta) {
+                                  if(full.LOAI_USER=="0"){
+                                      if(full.GHI_CHU==null || full.GHI_CHU==""){
+                                          return "<a href=\"\" title=\"Nhập ghi chú\" onclick=\"openGHI_LOG('"+full.MA_BILL+"','"+full.GIO_HEN_PHAT_STRING+"','"+full.GHI_CHU+"')\" data-toggle=\"modal\" data-target=\"#GHI_LOG\" data-backdrop=\"static\"><strong> ....</strong> </a>";
+                                      }
+                                      else if(full.GHI_CHU.length<30){
+
+
+                                          return "<a href=\"\" title=\"Nhập ghi chú\" onclick=\"openGHI_LOG('"+full.MA_BILL+"','"+full.GIO_HEN_PHAT_STRING+"','"+full.GHI_CHU.replace(/\n/g, "<br/>")+"')\" data-toggle=\"modal\" data-target=\"#GHI_LOG\" data-backdrop=\"static\">" +full.GHI_CHU + " </a>";
+                                      }
+                                      else{
+                                          var a =full.GHI_CHU.replace(/\n/g, "<br/>");
+                                          return "<a href=\"\" title=\"Nhập ghi chú\" onclick=\"openGHI_LOG('"+full.MA_BILL+"','"+full.GIO_HEN_PHAT_STRING+"','"+full.GHI_CHU.replace(/\n/g, "<br/>")+"')\" data-toggle=\"modal\" data-target=\"#GHI_LOG\" data-backdrop=\"static\">" +full.GHI_CHU.substring(0, 30) + " <strong> ....</strong> </a>";
+                                      }
+                                  }
+                                  else{
+                                      if(full.GHI_CHU==null || full.GHI_CHU==""){
+                                          return "";
+                                      }
+                                      else if(full.GHI_CHU.length<30){
+                                          return full.GHI_CHU;
+                                      }
+                                      else{
+                                          return "<a href=\"\" title=\""+full.GHI_CHU+"\"> " + full.GHI_CHU.substring(0, 25) + ".....</a>";
+                                      }
+                                  }
+                                  },"addClass":"vis"
+                              },
+                               {
+                                   "render": function (data, type, full, meta) {
+                                       if(full.ANH_LIEN_VANG !=null && full.ANH_LIEN_VANG != ""){
+                                           //return "<a onclick=\"ShowPic('"+ full.MA_BILL +"')\">Xem ảnh</a>";
+                                           return '<a href="http://hawb.sagawa.vn:8899/hawb/'+full.ANH_LIEN_VANG+'"> Xem ảnh </a> ';
+                                       }
+                                       else
+                                           return "";
+                                   }
+                               }
+
+
+                        ]
+                    });
+                });
+            </script>
+        }
+        else
+        {
+            <script>
+                var table;
+                $(document).ready(function () {
+                    table = $("#demoGrid").DataTable({
+                        "processing": true, // for show progress bar
+                        "serverSide": true, // for process server side
+                        "filter": false,// this is for disable filter (search box)
+                        "orderMulti": true, // for disable multiple column at once
+                        "pageLength": 10,
+                        "scrollX": true,
+                        "destroy": true,
+                        "orderCellsTop": true,
+                        "fixedHeader": true,
+                        "sort":false,
+                        "lengthChange": false,
+                        "initComplete": function( settings, json ) {
+
+                        },
+                        "ajax": {
+                            "url": "/TraCuu/LoadData",
+                            "type": "POST",
+                            "data": function (d) {
+                                d.TrangThai = $('#ListTrangThai').val();
+                                d.fromDate = $('#FromDate').val();
+                                d.toDate = $('#ToDate').val();
+                                d.Ma_BPBK = $('#Ma_BPBK').val();
+                            },
+                            "datatype": "json",
+                            "complete": function(){
+                                $("#Search").removeClass("fa fa-spinner fa-spin");
+                                $("#Search").addClass("fa fa-search");
+                            }
+                        },
+                        "columnDefs": true,
+                        "columns": [
+                             { "data": "STT", "name": "STT", "autoWidth": true },
+                              { "data": "NGAY_NHAN_STRING", "name": "Ngày nhận", "autoWidth": true },
+                              {
+                                  "render": function (data, type, full, meta) {
+                                      return "<a href=\"\" onclick=\"TRACK_AND_TRACE('"+full.MA_BILL+"')\" data-toggle=\"modal\" data-target=\"#TRACK_AND_TRACE\">" +full.MA_BILL+"</a>";
+                                  }
+                              },
+                              { "data": "TINH_PHAT", "name": "Tỉnh nhận", "autoWidth": true },
+                              { "data": "NGAY_PHAT_STRING", "name": "Ngày phát", "autoWidth": true },
+                              { "data": "GIO_PHAT_STRING", "name": "Giờ phát", "autoWidth": true },
+                              { "data": "NGUOI_NHAN", "name": "Người nhận", "autoWidth": true },
+                              { "data": "TINH_TRANG", "name": "Trạng thái", "autoWidth": true },
+
+                               {
+                                   "render": function (data, type, full, meta) {
+                                       if(full.ANH_LIEN_VANG !=null && full.ANH_LIEN_VANG != ""){
+                                           //return "<a onclick=\"ShowPic('"+ full.MA_BILL +"')\">Xem ảnh</a>";
+                                           return '<a href="http://hawb.sagawa.vn:8899/hawb/'+full.ANH_LIEN_VANG+'"> Xem ảnh </a> ';
+                                       }
+                                       else
+                                           return "";
+                                   }
+                               }
+
+
+                        ]
+                    });
+                });
+            </script>
+        }
+    }
+    <script>
+      function ShowMota(string) {
+          $('#Mota').html(string);
+          $('#Show_MoTa').modal('show');
+      }
+      function Search() {
+          $("#Search").removeClass("fa fa-search");
+          $("#Search").addClass("fa fa-spinner fa-spin");
+          $.ajax({
+              url: "/TraCuu/CheckVadidate",
+              type: "POST",
+              dataType: 'json',
+              success: function (data) {
+                  var table = $('#demoGrid').DataTable();
+                  table.ajax.reload();
+              }
+          });
+
+          //muốn giữ lại trang hiện tại khi reload table thì: table.ajax.reload(null, false)
+          // table.page(0).draw('page');
+      }
+      function ExportExcel() {
+          var table = $('#demoGrid').DataTable();
+          if(table.rows().data().toArray()==0){
+              swal('Không có dữ liệu để export excel',
+                '',
+                'warning')
+              return;
+          }
+          window.location.href = '/TraCuu/ExportToExcel?tuNgay=' + @ViewBag.FromDate + '&denNgay='+ @ViewBag.ToDate;
+      }
+      function ShowPic(MA_BILL){
+
+          $.ajax({
+              url: "/TraCuu/ImageToBase64",
+              type: "POST",
+              data: {MA_BILL:MA_BILL},
+              dataType: 'json',
+              success: function (data) {
+                  if(data.Error){
+
+                  }
+                  else{
+                      // $('#msg').append('<img src ="'+data.Title+'" style="width:100%"/>');
+                      $('#ThongBao').modal('show');
+
+                  }
+              }
+          });
+          //setTimeout(function(){
+          //    $('#ThongBao').modal('show');
+          //}, 500);
+      }
+
+      function TRACK_AND_TRACE(MaBPBK) {
+          $('#loading').show();
+          $('#title').html("");
+          $('#listTrackAndTrace tbody').empty();
+
+          $.ajax({
+              url: "/Booking/ListTrackAndTrace",
+              type: "POST",
+              data: {
+                  MaBPBK: MaBPBK
+              },
+              dataType: 'json',
+              success: function (data) {
+                  if (data.Title == "Get list success!") {
+
+                      for (var i in data.Object) {
+                          $('#title').html("Mã vận đơn: " + data.Object[i].HAWB_NO)
+                          var list = "<tr style= \"border-bottom: 1px solid #99999938;\"><td>" + data.Object[i].INSERT_TIME_STRING + "</td><td>" + data.Object[i].DESC + "</td></tr>";
+
+                          $('#listTrackAndTrace tbody').append(list);
+                      }
+                  }
+                  $('#loading').hide();
+              }
+          });
+         // $('#TRACK_AND_TRACE').show("display", "block");
+      }
+      function openGHI_LOG(Ma_Bill, GIO_HEN_PHAT, GHI_CHU){
+          $('#GIO_HEN_PHAT').val(GIO_HEN_PHAT);
+          if(GHI_CHU!=null||GHI_CHU!=""){
+              GHI_CHU = GHI_CHU.replace(/<br\/>/g, "\n");
+          }
+          $('#GHI_CHU').val(GHI_CHU!="null"?GHI_CHU:"");
+          $('#MA_BILL').val(Ma_Bill);
+      }
+      function GhiLog(){
+          var MA_BILL = $('#MA_BILL').val();
+          var GIO_HEN_PHAT = $('#GIO_HEN_PHAT').val();
+          var GHI_CHU = $('#GHI_CHU').val();
+          if(GHI_CHU==null || GHI_CHU==""){
+              $('#msgGHI_CHU').show();
+              return;
+          }
+          $.ajax({
+              url: "/TraCuu/GHI_LOG",
+              type: "POST",
+              data: {MA_BILL:MA_BILL,GIO_HEN_PHAT:GIO_HEN_PHAT,GHI_CHU:GHI_CHU},
+              dataType: 'json',
+              success: function (data) {
+                  if(data.Error){
+                      swal('Xảy ra lỗi',
+                        data.Title,
+                        'error')
+                      return;
+                  }
+                  else{
+
+                      swal('',
+                        data.Title,
+                        'success').then((willDelete) => {
+                            if (willDelete) {
+                                $('#GHI_LOG').modal('hide');
+                                var table = $('#demoGrid').DataTable();
+                                table.ajax.reload(null, false);
+                            }
+                        });
+
+                  }
+              }
+          });
+      }
+    </script>
+</body>
+</html>

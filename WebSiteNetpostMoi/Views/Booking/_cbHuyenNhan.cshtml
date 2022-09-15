@@ -1,0 +1,18 @@
+﻿@Html.DevExpress().ComboBox(settings =>
+{
+    settings.Name = ViewData["cbName"].ToString();
+    settings.Properties.DropDownStyle = DropDownStyle.DropDownList;
+    settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+    settings.ControlStyle.CssClass = "form-control form-boder";
+    settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+    settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+    settings.Properties.TextField = "DISTRICT_NAME";
+    settings.Properties.ValueField = "DISTRICT_CODE";
+    settings.Properties.ClientSideEvents.Init = "function(s,e){s.SetValue("+ViewData["district_code"].ToString()+")}";
+    if (ViewData["cbName"].ToString() != "cbHuyenLayHang")
+    {
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){cbHuyenNhan_OnSelectedChanged(s,e)}";
+    }
+    
+}).BindList(Model).GetHtml()

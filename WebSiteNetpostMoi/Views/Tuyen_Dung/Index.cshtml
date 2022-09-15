@@ -1,0 +1,159 @@
+﻿@model PagedList.IPagedList<WebSite.Models.TINTUCDTO>
+@using PagedList;
+@using PagedList.Mvc;
+@using WebSite.Language
+@{
+    ViewBag.Title = @Resource.tuyendung;
+}
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<style>
+    #main .page-container{
+        padding-top: 0;
+    }
+
+    .pagination-container {
+        float: right;
+    }
+    .indexcontent {
+        width: 100%;
+        min-height: 900px;
+        padding-top: 50px;
+    }
+</style>
+<div class="banner-career">
+
+</div>
+<div class="container">
+    <div class="indexcontent row">
+        <div class="col-md-3 col-left">
+            <form action="/Tuyen_Dung/Search" method="post" style="width:100%" id="SearchTD" autocomplete="off">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group-sm">
+                            <label class="label" style="font-weight:bold">@Resource.search</label>
+                            <input class="form-control" type="text" placeholder="@Resource.tukhoa" name="KEY" value="@ViewBag.KEY" />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group-sm">
+                            <label class="label" style="font-weight:bold">@Resource.vitri</label>
+                            <input type="text" hidden id="VtriTD" />
+                            <input class="form-control" type="text" placeholder="@Resource.vitri" list="LstVitri" id="ViTri" name="VI_TRI" value="@ViewBag.VI_TRI" />
+                            <datalist id="LstVitri">
+                                @if (Model != null && Model.Count > 0)
+                                {
+                                    List<WebSite.Models.TINTUCDTO> lst = new List<WebSite.Models.TINTUCDTO>();
+                                    foreach (var item in Model)
+                                    {
+                                        if (lst.Where(x => x.VI_TRI.ToLower().Contains(item.VI_TRI.ToLower())).Count() == 0)
+                                        {
+                                            <option data-value="@item.VI_TRI" value="@item.VI_TRI" />
+                                            lst.Add(item);
+                                        }
+
+                                    }
+                                }
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group-sm">
+                            <label class="label" style="font-weight:bold">@Resource.diadiem</label>
+                            <div class="position-relative">
+                                @Html.DevExpress().ComboBox(settings =>
+                            {
+                                settings.Name = "cbTinhNhan";
+                                settings.SelectedIndex = -1;
+                                settings.Properties.DropDownStyle = DropDownStyle.DropDownList;
+                                settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                                settings.ControlStyle.CssClass = "form-control form-boder";
+                                settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                                settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                settings.Properties.TextField = "TEN_CO_DAU";
+                                settings.Properties.ValueField = "ZONE_CODE";
+                                settings.Properties.AllowNull = true;
+                                settings.Properties.ClientSideEvents.Init = "function(){cbTinhNhan.SetValue('" + ViewBag.MA_DIA_DIEM + "');console.log(cbTinhNhan.GetValue())}";
+                            }).BindList(WebSite.Models.CommonData.GetZone()).GetHtml()
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group-sm">
+                            <button class="btn btn-danger" style="padding:12px 20px !important;">@Resource.search </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-9 content-career col-right col-left">
+            @if (Model != null && Model.Count > 0)
+                {
+                    <div class="row lstTuyenDung" style="padding-top: 12px;min-height: 350px;">
+                        <table id="TuyenDung" class="table table-scrolled table-fixed table-hover" style="margin-bottom:0;">
+                            <thead>
+                                <tr>
+                                    <th style="width:400px"> @Resource.chucdanh</th>
+                                    <th style="width:175px"> @Resource.diadiem</th>
+                                    <th style="width:175px"> @Resource.hannop</th>
+                                    <th style="width:152px"> @Resource.luong</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td style="width:400px">
+                                            <p style="padding:0;margin:0"><a href="@Url.Action("Detail","Tuyen_Dung", new { id = @item.ID })">@item.TIEU_DE</a>    </p>
+                                            <p style="padding-top:10px;margin:0; font-weight:bold"><i class="fa fa-filter fa-fw"></i>  @item.KINH_NGHIEM @Resource.kinhnghiem</p>
+                                        </td>
+                                        <td style="width:175px">  @item.DIA_DIEM  </td>
+                                        <td style="width:175px">  @item.HAN_NOP_STRING  </td>
+                                        <td style="width:152px">@Resource.thoathuan</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-8" style="float: right;width: 100%;">
+                            @if (Model != null && Model.Count > 10)
+                            {
+                                @Html.PagedListPager(Model, page => Url.Action("Search", new { page, key = ViewBag.KEY, vitri = ViewBag.VI_TRI, madiadiem = ViewBag.MA_DIA_DIEM, diadiem = ViewBag.DIA_DIEM }))
+                            }
+                        </div>
+                    </div>
+                }
+            else
+            {
+                <div class="alert alert-danger" role="alert" id="mess_apply" style="margin-top:10px;width:100%">@Resource.khongcotinTD</div>
+            }
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //vị trí
+    $("#ViTri").on('input', function () {
+        var id = document.querySelector("#LstVitri option[value='" + $(this).val() + "']") == null ? "" : document.querySelector("#LstVitri option[value='" + $(this).val() + "']").dataset.value;
+        if (id != undefined && id != '') {
+            $("#VtriTD").val(id);
+            $(this).blur();
+            console.log(id)
+        }
+    });
+    $("#ViTri").on('blur', function () {
+        if ($(this).val() == "") {
+            if ($("#VtriTD").val() != "") {
+                var a = document.querySelector("#LstVitri option[data-value='" + $("#VtriTD").val() + "']").value;
+                $(this).val(a);
+            }
+        }
+    });
+
+    $("#ViTri").on('focus', function () {
+        $("#ViTri").val('');
+    });
+</script>

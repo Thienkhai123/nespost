@@ -1,0 +1,303 @@
+﻿@using WebSite.Models;
+@using WebSite.Language;
+@using System.Web.UI.WebControls;
+@{WebSite.Models.CSS_CRM_NGUOI_DUNGDTO user = (WebSite.Models.CSS_CRM_NGUOI_DUNGDTO)Session["User"];}
+@model List<WebSite.Models.CSS_OP_BOOKING_SGEV_WEB_EX>
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridView";
+        settings.KeyFieldName = "id";
+        settings.CallbackRouteValues = new { Controller = "Booking", Action = "_grvListBooking" };
+
+        settings.ControlStyle.CssClass = "grid-view gridBooking";
+        settings.Width = Unit.Percentage(100);
+        settings.Styles.Cell.Wrap = DefaultBoolean.False;
+        settings.Styles.PagerBottomPanel.CssClass = "pager";
+        settings.Styles.FocusedRow.CssClass = "focused";
+        settings.Styles.Cell.Font.Size = FontUnit.Smaller;
+
+        settings.SettingsBehavior.AllowFocusedRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsBehavior.AllowDragDrop = false;
+        settings.SettingsBehavior.AllowSort = false;
+
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Auto;
+        settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+
+        settings.SettingsPager.Mode = GridViewPagerMode.EndlessPaging;
+
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowHeaderFilterButton = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Left;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.tacvu;
+            column.Width = 60;
+            column.CellStyle.HorizontalAlign = HorizontalAlign.Center;
+            column.SetDataItemTemplateContent(container =>
+            {
+                ViewContext.Writer.Write("<a onclick=\"XoaDonHangTuSinh('" + Convert.ToString(DataBinder.Eval(container.DataItem, "id")) + "')\" style=\"font-size:19px;cursor: pointer;text-align:center;\" title=\"" + Booking.xoaBPBK + "\"><i class=\"fa fa-times-circle\"></i> </a>");
+            });
+        });
+        List<CUSTOMER> lstCust = Session["DANH_SACH_KH"] as List<CUSTOMER>;
+        if (lstCust.Count > 1)
+        {
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.makhachhang;
+                column.FieldName = "TEN_KHACH_HANG";
+                column.Width = 180;
+            });
+        }
+        if (user.CUSTOMER_CODE.Equals("0131858"))
+        {
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.thoigiangui;
+                column.FieldName = "THOI_GIAN_GUI";
+                column.Width = 150;
+                column.SetDataItemTemplateContent(container =>
+                {
+                    DateTime time = (DateTime)DataBinder.Eval(container.DataItem, "THOI_GIAN_GUI");
+                    if (time.Year == 1)
+                    {
+                        ViewContext.Writer.Write("");
+                    }
+                    else
+                    {
+                        ViewContext.Writer.Write(time.ToString("dd/MM/yyyy HH:mm"));
+                    }
+                });
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.mashipment;
+                column.FieldName = "SO_THAM_CHIEU";
+                column.Width = 150;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.tennguoigui;
+                column.FieldName = "TEN_NGUOI_GUI";
+                column.Width = 150;
+
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.dichinguoigui;
+                column.FieldName = "DIA_CHI_NGUOI_GUI";
+                column.Width = 180;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.tennguoinhan;
+                column.FieldName = "TEN_NGUOI_NHAN";
+                column.Width = 150;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.diachi;
+                column.FieldName = "DIA_CHI";
+                column.Width = 180;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = "COD";
+                column.FieldName = "SO_COD";
+                column.Width = 130;
+                column.PropertiesEdit.DisplayFormatString = "N0";
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.noidunghh;
+                column.FieldName = "NOI_DUNG";
+                column.Width = 180;
+            });
+            //settings.Columns.Add(column =>
+            //{
+            //    column.Caption = Booking.sokien;
+            //    column.Width = 120;
+            //    column.FieldName = "SO_KIEN";
+            //});
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.trongluong;
+                column.FieldName = "TRONG_LUONG";
+                column.Width = 120;
+                column.PropertiesEdit.DisplayFormatString = "f2";
+            });
+            //settings.Columns.Add(column =>
+            //{
+            //    column.Caption = Booking.TLquydoi;
+            //    column.FieldName = "TL_QUY_DOI";
+            //    column.Width = 120;
+            //    column.PropertiesEdit.DisplayFormatString = "f2";
+            //});
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.dichvu;
+                column.FieldName = "LOAI_DV";
+                column.Width = 150;
+            });
+            //settings.Columns.Add(column =>
+            //{
+            //    column.Caption = Booking.dongkiem;
+            //    column.FieldName = "isDONG_KIEM";
+            //    column.Width = 120;
+            //    column.ColumnType = MVCxGridViewColumnType.CheckBox;
+            //});
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.ghichu;
+                column.FieldName = "GHI_CHU";
+                column.Width = 150;
+            });
+        }
+        else
+        {
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.tennguoigui;
+                column.FieldName = "TEN_NGUOI_GUI";
+                column.Width = 150;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.sdtnguoigui;
+                column.FieldName = "SDT_GUI";
+                column.Width = 150;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.dichinguoigui;
+                column.FieldName = "DIA_CHI_NGUOI_GUI";
+                column.Width = 150;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.tennguoinhan;
+                column.FieldName = "TEN_NGUOI_NHAN";
+                column.Width = 150;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.sdt;
+                column.FieldName = "SDT_NHAN";
+                column.Width = 150;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.tinhnhan;
+                column.FieldName = "TINH_NHAN";
+                column.Width = 150;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.huyennhan;
+                column.FieldName = "HUYEN_NHAN";
+                column.Width = 150;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.diachi;
+                column.FieldName = "DIA_CHI";
+                column.Width = 180;
+
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.dichvu;
+                column.FieldName = "DICH_VU";
+                column.Width = 120;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = "Loại BPBK";
+                column.FieldName = "LOAI_BPBK";
+                column.Width = 120;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = "HT thanh toán";
+                column.FieldName = "HT_THANH_TOAN";
+                column.Width = 120;
+            });
+
+            //settings.Columns.Add(column =>
+            //{
+            //    column.Caption = Booking.trongluong;
+            //    column.FieldName = "TRONG_LUONG";
+            //    column.Width = 120;
+            //    column.PropertiesEdit.DisplayFormatString = "f2";
+            //});
+            //settings.Columns.Add(column =>
+            //{
+            //    column.Caption = Booking.sokien;
+            //    column.Width = 120;
+            //    column.FieldName = "SO_KIEN";
+            //});
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.noidung;
+                column.FieldName = "NOI_DUNG";
+                column.Width = 140;
+            });
+            //settings.Columns.Add(column =>
+            //{
+            //    column.Caption = Booking.sohoadon;
+            //    column.Width = 120;
+            //    column.FieldName = "SO_HOA_DON";
+            //});
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.sothamchieu;
+                column.FieldName = "SO_THAM_CHIEU";
+                column.Width = 150;
+            });
+            settings.Columns.Add(column =>
+            {
+                column.Caption = "Số tiền COD";
+                column.FieldName = "SO_COD";
+                column.Width = 120;
+                column.PropertiesEdit.DisplayFormatString = "c0";
+            });
+            //settings.Columns.Add(column =>
+            //{
+            //    column.Caption = Booking.hoanBBBG;
+            //    column.Width = 120;
+            //    column.FieldName = "HOAN_BBBG";
+            //});
+            //settings.Columns.Add(column =>
+            //{
+            //    column.Caption = Booking.ngayhenphat;
+            //    column.Width = 120;
+            //    column.FieldName = "NGAY_HEN_PHAT_SIEU_THI";
+            //});
+            //settings.Columns.Add(column =>
+            //{
+            //    column.Caption = Booking.gtdonhang;
+            //    column.Width = 120;
+            //    column.FieldName = "GT_DON_HANG";
+            //    column.PropertiesEdit.DisplayFormatString = "N0";
+            //});
+        }
+
+        settings.Settings.ShowFooter = true;
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Count, "TEN_NGUOI_GUI").DisplayFormat = "Số lượng = {0}";
+
+        settings.PreRender = (sender, e) =>
+        {
+            ((MVCxGridView)sender).ExpandAll();
+        };
+    });
+}
+@grid.Bind(Model).GetHtml()

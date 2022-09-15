@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    ViewBag.Title = "Quản trị tin tức";
+}
+
+<div class="row">
+    <div class="col-md-12 form-group text-right">
+        <a href="@Url.Action("ThemTinTuc")" class="btn btn-primary">Thêm mới</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        {
+            @Html.Action("GridViewPartial")
+        }
+    </div>
+</div>
+<script>
+    function Xoa_Tin(id) {
+        Swal.fire({
+            title: 'Bạn có chắc chắn xóa tin mã ' + id + ' không?',
+            text: "",
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'No',
+            confirmButtonText: 'Yes'
+        })
+            .then(function (result) {
+                if (result.value) {
+                    $.ajax({
+                        url: "/Admin/Delete",
+                        type: "POST",
+                        data: { id: id },
+                        dataType: 'json',
+                        success: function (data) {
+                            if (!data.Error) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    text: 'Xóa tin thành công!',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                                window.location.reload();
+                            }
+                            else {
+                                Swal.fire(data.Title,
+                                    '',
+                                    'error')
+                                return;
+                            }
+                        }
+                    });
+                }
+            });
+
+    }
+
+    function Update_Tin(id) {
+        window.location.href = "/Admin/ThemTinTuc?id=" + id;
+    }
+</script>

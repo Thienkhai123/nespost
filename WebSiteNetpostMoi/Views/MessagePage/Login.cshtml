@@ -1,0 +1,145 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="robots" content="noindex,nofollow">
+    <!--title-->
+    <title>@ViewBag.Title</title>
+
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/lib/vendor/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/lib/vendor/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="~/lib/vendor/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/lib/vendor/font-awesome/css/font-awesome.min.css" />
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="~/lib/css/style-booking.css?vr=1.1" />
+    <link href="~/lib/css/login.css?vr=1.1" rel="stylesheet" />
+
+    <!-- plugins:js -->
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/lib/vendor/js/vendor.bundle.base.js"></script>
+    <script src="~/lib/js/sweetalert2@10.js"></script>
+    <!-- endinject -->
+</head>
+<body>
+    <div class="container-scroller">
+        <div class="row header m-0 justify-content-center">
+            <div class="logo">
+                Netpost.vn
+            </div>
+        </div>
+        <div class="container">
+            <div class="login">
+                <div class="row page-container justify-content-center align-self-center" style="height: 100%;">
+                    <div class="login-detail">
+                        <div class="col-md-12 des">
+                            Login Message Page
+                        </div>
+                        <hr />
+                        <div class="fmlogin">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Username</label>
+                                        <input type="text" required id="user" class="form-control" onfocus="$('#success_message').addClass('d-none')" autofocus>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Password</label>
+                                        <input type="password" required id="pass" class="form-control" onfocus="$('#success_message').addClass('d-none')">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 py-2">
+                                    <button class="btn btn-primary button btn-login" onclick="Login()"><i class="" id="refresh"> </i>  Login </button>
+                                </div>
+                                <div class="col-md-12" style="height:115px;">
+                                    <div class="form-group pt-2">
+                                        <div class="alert alert-danger d-none" role="alert" id="success_message" style="margin-bottom:5px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    @if (Request.Browser.Browser == "IE" || Request.Browser.Browser == "InternetExplorer")
+    {
+        <script src="~/lib/js/core-2.4.1.js"></script>
+        <script src="~/lib/js/promise-polyfill@8.js"></script>
+    }
+    <script type="text/javascript">
+        //Swal.fire(
+        //    '',
+        //    'Tính năng này chưa được hỗ trợ.',
+        //    'error')
+
+
+        function Login() {
+            //        Swal.fire(
+            //'',
+            //'Tính năng này chưa được hỗ trợ.',
+            //'error')
+
+            $('#success_message').addClass("d-none");
+            var Username = $('#user').val();
+            var Password = $('#pass').val();
+            $('#refresh').addClass("fa fa-spinner fa-spin");
+            if (Username == null || Username == "") {
+                $('#refresh').removeClass("fa fa-spinner fa-spin");
+                $('#success_message').html("Please enter your Username");
+                $('#success_message').removeClass("d-none");
+                return;
+            }
+            if (Password == null || Password == "") {
+                $('#refresh').removeClass("fa fa-spinner fa-spin");
+                $('#success_message').html("Please enter your Password");
+                $('#success_message').removeClass("d-none");
+                return;
+            }
+            $.ajax({
+                url: "/MessagePage/Login",
+                type: "POST",
+                data: {
+                    Username: Username,
+                    Password: Password
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (!data.Error) {
+                        window.location.href = "/MessagePage/Index";
+                    }
+                    else {
+                        $('#refresh').removeClass("fa fa-spinner fa-spin");
+                        $('#success_message').html(data.Title);
+                        $('#success_message').removeClass("d-none");
+                    }
+                }
+            });
+        }
+
+        $(document).on("keypress", function (e) {
+            /* ENTER PRESSED*/
+            if (e.keyCode == 13) {
+                /* FOCUS ELEMENT */
+                Login();
+            }
+        });
+    </script>
+</body>
+</html>
+

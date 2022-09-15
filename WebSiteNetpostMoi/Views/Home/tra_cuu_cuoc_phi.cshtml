@@ -1,0 +1,229 @@
+﻿@using WebSite.Language;
+@using WebSite.Models;
+@{
+    ViewBag.Title = "Tra cứu cước phí";
+}
+
+<section class="tra_cuu_cuoc_phi">
+    <div class="container">
+        <div class="section-title">
+            <h2>Tra cứu cước phí</h2>
+        </div>
+        <div class="row align-items-start form-group-sm">
+            <div class="col-md-3 mb-3">
+                <label class="label">Gửi từ <span class="text-danger">*</span></label>
+                <div class="position-relative">
+                    @Html.DevExpress().ComboBox(settings =>
+                   {
+                       settings.Name = "cboTinhDi";
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       settings.SelectedIndex = 0;
+                       settings.ControlStyle.CssClass = "form-control";
+                       settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                       settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                       settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                       settings.Properties.ValueType = typeof(string);
+                       settings.Properties.TextField = "TEN_CO_DAU";
+                       settings.Properties.ValueField = "ZONE_CODE";
+                   }).BindList(ViewData["_listZone"] as List<OP_ZONE_MASTERDTO>).GetHtml()
+                </div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label class="label">Gửi đến <span class="text-danger">*</span></label>
+                <div class="position-relative">
+                    @Html.DevExpress().ComboBox(settings =>
+               {
+                   settings.Name = "cboTinhDen";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.SelectedIndex = 1;
+                   settings.ControlStyle.CssClass = "form-control";
+                   settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                   settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                   settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.TextField = "TEN_CO_DAU";
+                   settings.Properties.ValueField = "ZONE_CODE";
+               }).BindList(ViewData["_listZone"] as List<OP_ZONE_MASTERDTO>).GetHtml()
+                </div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label class="label">Trọng lương (kg) <span class="text-danger">*</span></label>
+                @Html.DevExpress().TextBox(settings =>
+               {
+                   settings.Name = "txtTrongLuong";
+                   settings.ControlStyle.CssClass = "form-control";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.MaskSettings.Mask = "<0..99999g>.<00..99>";
+                   settings.Properties.MaskSettings.IncludeLiterals = MaskIncludeLiteralsMode.DecimalSymbol;
+                   settings.Properties.ValidationSettings.Display = Display.None;
+               }).GetHtml()
+            </div>
+            <div class="col-md-3 mb-3">
+                <label class="label">Giá DV cộng thêm (tham khảo)</label>
+                <div class="position-relative">
+                    @Html.DevExpress().ComboBox(settings =>
+               {
+                   settings.Name = "cbDichVu";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.SelectedIndex = -1;
+                   settings.ControlStyle.CssClass = "form-control";
+                   settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                   settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                   settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.ValueField = "Value";
+                   settings.Properties.TextField = "Text";
+                   settings.ReadOnly = true;
+               }).BindList(new List<SelectListItem> { new SelectListItem { Value = "5000", Text = "Báo phát (5,000 đ)" }, new SelectListItem { Value = "10000", Text = "Phát tận tay (10,000 đ)" }, new SelectListItem { Value = "10000", Text = "Phát siêu thị (10,000 đ)" } }).GetHtml()
+                </div>
+            </div>
+            <div class="col-md-2 mb-3" style="padding-top:8px">
+                <br />
+                @Html.DevExpress().CheckBox(settings =>
+                {
+                    settings.Name = "ckDenHuyenXa";
+                    settings.ControlStyle.CssClass = "label";
+                    settings.Text = "Đến Huyện/Xã";
+                }).GetHtml()
+            </div>
+        </div>
+        
+        <div class="row justify-content-center mb-3">
+            <div class="item-form istable table-responsive kich_thuoc_hang_hoa">
+                <h6>Kích thước hàng hóa (nếu là hàng cồng kềnh)</h6>
+                <table id="DimensionsLine" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Số kiện</th>
+                            <th>Chiều dài (CM)</th>
+                            <th>Chiều rộng (CM)</th>
+                            <th>Chiều cao (CM)</th>
+                            <th>Xóa dòng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <a id="addDimensionsLine" class="themkien" href="javasrcipt:;"><i class="fa fa-plus"></i> Thêm kiện mới</a>
+            </div>
+        </div>
+        <div class="row justify-content-center mb-3">
+            <div class="col-md-3 text-center">
+                <button id="btn-tra_cuoc" class="btn btn-danger" style="padding: 12px !important;"><i class="" id="refresh"> </i>Tra cước</button>
+            </div>
+        </div>
+        <div class="thong_tin_cuoc_phi row justify-content-between align-items-start form-group-lg mt-5 d-none">
+            <div class="col-md-12">
+                <h4 class="alert-heading">Thông tin cước</h4>
+                <table id="table_thong_tin_cuoc" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tỉnh nhận</th>
+                            <th scope="col">Tỉnh phát</th>
+                            <th scope="col">Trọng lượng tính cước</th>
+                            <th scope="col">Dịch vụ</th>
+                            <th scope="col">Cước chính tạm tính</th>
+                            @*<th scope="col">Cước dịch vụ gia tăng </th>*@
+                            <th scope="col">Tổng cước </th>
+                            @*<th scope="col">Thời gian dự kiến</th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div style="opacity:50%">
+                    <p class="font-italic px-0">Chưa bao gồm pp</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+
+    // tra cứu cước phí
+    $('#addDimensionsLine').on('click', function () {
+        var tr_tag = $('#DimensionsLine tbody');
+        if (tr_tag != null) {
+            var count = tr_tag[0].children.length + 1;
+            $('#DimensionsLine tbody').append('<tr id="rowDIndex_' + count + '"><td class="dataField">' + count + '<input type="hidden" value="" id="ordering_d' + count + '"></td><td class="dataField"><input type="text" id="d_package' + count + '" name="d_package[]" size="10" class="d_package" value="1"></td><td class="dataField"><input type="text" id="d_length' + count + '" name="d_length[]" size="10" class="lineDimension"></td><td class="dataField"><input type="text" id="d_width' + count + '" name="d_width[]" size="10" class="d_width"></td><td class="dataField"><input type="text" id="d_height' + count + '" name="d_height[]" size="10" class="d_height"></td><td class="dataField"><input style="text-decoration: underline;" onclick="xoa_dong_kich_thuoc(' + count + ')" type="button" title="Xóa" value="Xóa" class="button btnDelete" /></td></tr>');
+        }
+    });
+
+    $('#btn-tra_cuoc').on('click', function () {
+        var tr_tag = $('#DimensionsLine tbody');
+        $('#refresh').addClass("fa fa-spinner fa-spin");
+
+        var lst_kich_thuoc = [];
+        if (tr_tag != null) {
+            var children = tr_tag[0].children;
+            for (var i = 0; i < children.length; i++) {
+                var index = i + 1;
+                var so_kien = $('#d_package' + index).val() != "" && $('#d_package' + index).val() != undefined ? $('#d_package' + index).val() : 0;
+                var chieu_dai = $('#d_length' + index).val() != "" && $('#d_length' + index).val() != undefined ? $('#d_length' + index).val() : 0;
+                var chieu_rong = $('#d_width' + index).val() != "" && $('#d_width' + index).val() != undefined ? $('#d_width' + index).val() : 0;
+                var chieu_cao = $('#d_height' + index).val() != "" && $('#d_height' + index).val() != undefined ? $('#d_height' + index).val() : 0;
+
+                lst_kich_thuoc.push({
+                    SO_KIEN: parseFloat(so_kien),
+                    CHIEU_DAI: parseFloat(chieu_dai),
+                    CHIEU_RONG: parseFloat(chieu_rong),
+                    CHIEU_CAO: parseFloat(chieu_cao)
+                });
+            }
+        }
+
+        var lstDichVu = ['CPN', 'EXP', 'PHT', 'PTK', 'CPT'];
+
+        if (parseFloat(txtTrongLuong.GetValue().replace(',', '.')) <= 0) {
+            Swal.fire('', "Mời bạn nhập trọng lượng", 'error');
+            $('#refresh').removeClass("fa fa-spinner fa-spin");
+            return;
+        }
+        var data = new FormData();
+        data.append("WEIGHT", txtTrongLuong.GetValue());
+        data.append("NO_PIECES", 1);
+        data.append("DEST_ZONE", cboTinhDen.GetValue());
+        data.append("ORIGIN_ZONE", cboTinhDi.GetValue());
+        data.append("lstDichVu", lstDichVu);
+        data.append("lst_kich_thuoc", JSON.stringify(lst_kich_thuoc));
+        data.append("isDiHuyenxa", ckDenHuyenXa.GetValue())
+
+        $.ajax({
+            url: "/Home/TinhGia",
+            type: "POST",
+            cache: false,
+            processData: false,
+            contentType: false,
+            data: data,
+            success: function (data) {
+                $('#table_thong_tin_cuoc tbody').empty();
+                if (data.Error) {
+                    Swal.fire('', data.Title, 'error');
+                }
+                else {
+                    var tinh_di = cboTinhDi.GetText();
+                    var tinh_den = cboTinhDen.GetText();
+
+                    var lst = data.Object;
+                    for (var i in lst) {
+                        $('#table_thong_tin_cuoc tbody').append('<tr><td class="dataField">' + tinh_di + '</td><td class="dataField">' + tinh_den +
+                            '</td><td class="dataField">' + lst[i].TRONG_LUONG_QUY_DOI +
+                            '</td><td class="dataField">' + lst[i].TOS +
+                            '</td><td class="dataField">' + lst[i].AMOUNT_STR +
+                            '</td>'/*<td class="dataField">' + lst[i].SERVICE_CHARGE +*/ +
+                            '<td class="dataField">' + lst[i].VIETNAMESE_NET_AMT_STR +
+                            '</td>'/*<td class="dataField">' + lst[i].THOI_GIAN_DU_KIEN + '</td></tr>'*/);
+                    }
+                    $('.thong_tin_cuoc_phi').removeClass('d-none');
+                }
+                $('#refresh').removeClass("fa fa-spinner fa-spin");
+            },
+        });
+    });
+
+    function xoa_dong_kich_thuoc(stt) {
+        $('#DimensionsLine tbody').find('tr#rowDIndex_' + stt).remove();
+    }
+</script>

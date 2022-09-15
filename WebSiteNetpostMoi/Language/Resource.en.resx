@@ -1,0 +1,802 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="bacninh" xml:space="preserve">
+    <value>Bac Ninh province (Bonded warehouse, general warehouse)</value>
+  </data>
+  <data name="baogiaphatnoidia" xml:space="preserve">
+    <value>Service fee for domestic courier service</value>
+  </data>
+  <data name="baogiaphatquocte" xml:space="preserve">
+    <value>Service fee for international courier service</value>
+  </data>
+  <data name="cacdieukhoan" xml:space="preserve">
+    <value>GDPR Privacy Policy</value>
+  </data>
+  <data name="chinhsachbaomat" xml:space="preserve">
+    <value>Personal information protection</value>
+  </data>
+  <data name="chitiet" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="condition" xml:space="preserve">
+    <value>Trucking standard condition</value>
+  </data>
+  <data name="CPN_SGX" xml:space="preserve">
+    <value>SGX E-global service</value>
+  </data>
+  <data name="dichvu" xml:space="preserve">
+    <value>Services</value>
+  </data>
+  <data name="donchuyen" xml:space="preserve">
+    <value>Removal Service</value>
+  </data>
+  <data name="donggoihh" xml:space="preserve">
+    <value>Packing regulation of documents and goods</value>
+  </data>
+  <data name="donnhavp" xml:space="preserve">
+    <value>Removal service (domestic and international)</value>
+  </data>
+  <data name="download" xml:space="preserve">
+    <value>Download file</value>
+  </data>
+  <data name="duongbien" xml:space="preserve">
+    <value>Transportation service (sea export, sea import)</value>
+  </data>
+  <data name="duongbo" xml:space="preserve">
+    <value>Trucking service</value>
+  </data>
+  <data name="dvukhobai" xml:space="preserve">
+    <value>tiet_kiem service</value>
+  </data>
+  <data name="gtgtnoidia" xml:space="preserve">
+    <value>Value added services of domestic postal</value>
+  </data>
+  <data name="haiquan" xml:space="preserve">
+    <value>Customs clearance service</value>
+  </data>
+  <data name="hangkhong" xml:space="preserve">
+    <value>Air freight transportation service (air export, air import)</value>
+  </data>
+  <data name="hoadonchungtu" xml:space="preserve">
+    <value>Required document to be enclosed with goods</value>
+  </data>
+  <data name="hochiminh" xml:space="preserve">
+    <value>HCM (Linh Trung: CFS, Bonded warehouse, general warehouse)</value>
+  </data>
+  <data name="khobai" xml:space="preserve">
+    <value>tiet_kiem service</value>
+  </data>
+  <data name="khoCFS" xml:space="preserve">
+    <value>CFS Warehouse</value>
+  </data>
+  <data name="khokiemkim" xml:space="preserve">
+    <value>Needle Inspection &amp; Quality check</value>
+  </data>
+  <data name="kholanh" xml:space="preserve">
+    <value>Cool &amp; Frozen WH</value>
+  </data>
+  <data name="khonguyhiem" xml:space="preserve">
+    <value>DG Warehouse</value>
+  </data>
+  <data name="khothuong" xml:space="preserve">
+    <value>General warehouse</value>
+  </data>
+  <data name="kiemkim" xml:space="preserve">
+    <value>Inspection – Metering services</value>
+  </data>
+  <data name="kiemkimkiempham" xml:space="preserve">
+    <value>Inspection, Quality control service</value>
+  </data>
+  <data name="kyso" xml:space="preserve">
+    <value>(10 or 12 digits)</value>
+  </data>
+  <data name="lienhe" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="linhtrung" xml:space="preserve">
+    <value>Linh Trung Warehouse</value>
+  </data>
+  <data name="ND_donchuyen" xml:space="preserve">
+    <value>We provide the removal service in carefully, safety and accurately for customers who having removal service in Vietnam or from Vietnam to Japan and others countries.  Our staff has well trained  and profession to satisfy our customer's reqirements from pay attention small parcels such as a dish to large furniture. With the motto: “ Quality is the First”, we have Japanese staff that are dedicated and experienced who will  categorize and package  base on each item's characteristics.</value>
+  </data>
+  <data name="ND_duongbo" xml:space="preserve">
+    <value>We deploy trucking services in Vietnam based on our long experience gained in Japan. We handle domestic trucking service ( from Hanoi to Ho Chi Minh and inner city) . In addition, we provide international cross-border trucking  from Vietnam to Thailand, Laos, and Cambodia.</value>
+  </data>
+  <data name="ND_haiquan" xml:space="preserve">
+    <value>We - Netpost - has our accumulated years of experience in implementing import and export customs procedures in the Vietnamese market, where customs procedures are complex, to implement and handle that procedures smoothly.</value>
+  </data>
+  <data name="ND_khobai" xml:space="preserve">
+    <value>Using professional knowledge of Netpost, we put in running business of the Bonded warehouse, CFS, and general warehouse at the big cities in Vietnam</value>
+  </data>
+  <data name="ND_kiemkim" xml:space="preserve">
+    <value>At Netpost company, we conduct the professional knowledge about Inspection-Quality control to meet the requirements of textile  enterprise customers. We will support to provide quality staff for customer’s company that suitable with your need and situation</value>
+  </data>
+  <data name="ND_trienkhai" xml:space="preserve">
+    <value>At Netpost, we set up the delivery system in accordance with the requests of customers. We conduct packaging transportation with heavy weight, provide 3PL, deliver Just in Time to the customer’s destination</value>
+  </data>
+  <data name="ngoaiquan" xml:space="preserve">
+    <value>Bonded warehouse</value>
+  </data>
+  <data name="nhapsodonhang" xml:space="preserve">
+    <value>Enter tracking number</value>
+  </data>
+  <data name="nhontrach" xml:space="preserve">
+    <value>Nhon Trach Warehouse</value>
+  </data>
+  <data name="noidungBien" xml:space="preserve">
+    <value>Netpost handle &amp; serve a wide of  import &amp; export cargo by  Ocean Freight at most  of major port inVietnam (Hai Phong Port, Ho Chi Minh Port, Da Nang Port). We transport fromFull Container Loads (FCL) to Less than Container loads (LCL) and special containers.</value>
+  </data>
+  <data name="noidungHK" xml:space="preserve">
+    <value>Netpost does not only provide the cargoes export service to others countries but also handle the cargoes import sevice to Vietnam from everywhere around the world through Air Freight Transporation. We will propose the the air freight  transportation service suitable with our customer's demand by direct and indirect flight</value>
+  </data>
+  <data name="phatnoidia" xml:space="preserve">
+    <value>Domestic courier service</value>
+  </data>
+  <data name="phatquocte" xml:space="preserve">
+    <value>International courier service</value>
+  </data>
+  <data name="qtrphatquocte" xml:space="preserve">
+    <value>International courier process</value>
+  </data>
+  <data name="qtrphattrongnuoc" xml:space="preserve">
+    <value>Domestic courier process</value>
+  </data>
+  <data name="qtrtrachnhiem" xml:space="preserve">
+    <value>Damages Compensation &amp; Complaints Resolve</value>
+  </data>
+  <data name="qtrvanchuyennoidia" xml:space="preserve">
+    <value>Rules for cargo of domestic courier service</value>
+  </data>
+  <data name="qtrvanchuyenquocte" xml:space="preserve">
+    <value>Rules for cargo international courier service</value>
+  </data>
+  <data name="qtrxulybpbk" xml:space="preserve">
+    <value>The process delivery parcel handling</value>
+  </data>
+  <data name="quevo" xml:space="preserve">
+    <value>Que Vo Warehouse</value>
+  </data>
+  <data name="quytrinhsudung" xml:space="preserve">
+    <value>WebSite policy</value>
+  </data>
+  <data name="Sgx" xml:space="preserve">
+    <value>Courier Service </value>
+  </data>
+  <data name="SGXStandard" xml:space="preserve">
+    <value>SGX Standard Condition</value>
+  </data>
+  <data name="sodoweb" xml:space="preserve">
+    <value>Sitemap</value>
+  </data>
+  <data name="Standard" xml:space="preserve">
+    <value>Forwarder Standard Terms and Conditions</value>
+  </data>
+  <data name="theodoidonhang" xml:space="preserve">
+    <value>Cargo Tracking</value>
+  </data>
+  <data name="thutuchaiquan" xml:space="preserve">
+    <value>Customs clearance</value>
+  </data>
+  <data name="tieuchuanchatluong" xml:space="preserve">
+    <value>Quality postal service standard</value>
+  </data>
+  <data name="TimKiem" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="timquocnoi" xml:space="preserve">
+    <value>Check domestic bill</value>
+  </data>
+  <data name="timquocte" xml:space="preserve">
+    <value>Check international bill</value>
+  </data>
+  <data name="tinhdongnai" xml:space="preserve">
+    <value>Dong Nai Province (Nhon Trach WH: Bonded warehouse, Cool &amp; Frozen WH, General warehouse, DG warehouse)</value>
+  </data>
+  <data name="tintuc" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Netpost – general logistic at Vietnam</value>
+  </data>
+  <data name="trangchu" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="trienkhaihangduan" xml:space="preserve">
+    <value>Project Cargo</value>
+  </data>
+  <data name="trienkhaihanghoa" xml:space="preserve">
+    <value>Project cargoes service</value>
+  </data>
+  <data name="ttcty" xml:space="preserve">
+    <value>About us</value>
+  </data>
+  <data name="tuyendung" xml:space="preserve">
+    <value>Careers</value>
+  </data>
+  <data name="vtaiBien" xml:space="preserve">
+    <value>Ocean freight service</value>
+  </data>
+  <data name="vtaiBo" xml:space="preserve">
+    <value>Trucking service</value>
+  </data>
+  <data name="vtaiHK" xml:space="preserve">
+    <value>Air freight service</value>
+  </data>
+  <data name="xemtiep" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="xulybp" xml:space="preserve">
+    <value>Handling parcel without receiver</value>
+  </data>
+  <data name="Cambodia" xml:space="preserve">
+    <value>Cambodia Branch</value>
+  </data>
+  <data name="chinhanhBacNinh" xml:space="preserve">
+    <value>Bac Ninh Branch</value>
+  </data>
+  <data name="chinhanhDaNang" xml:space="preserve">
+    <value>Da Nang Branch</value>
+  </data>
+  <data name="chinhanhDongNai" xml:space="preserve">
+    <value>Dong Nai Branch</value>
+  </data>
+  <data name="chinhanhHCM" xml:space="preserve">
+    <value>Ho Chi Minh Branch</value>
+  </data>
+  <data name="chinhanhHN" xml:space="preserve">
+    <value>Ha Noi Branch</value>
+  </data>
+  <data name="chinhanhHP" xml:space="preserve">
+    <value>Hai Phong Office</value>
+  </data>
+  <data name="dactrung" xml:space="preserve">
+    <value>Features</value>
+  </data>
+  <data name="dactrung_detail" xml:space="preserve">
+    <value>Is a unique company among the leading foreign companies at Vietnam has the general certificate about logistic services: domestic and international transportation service by Air freight, Sea freight and Trucking, tiet_kiem service (Bonded warehouse, CFS, general warehouse). Supply a service with high quality that customers can trust to use.</value>
+  </data>
+  <data name="danang" xml:space="preserve">
+    <value>DANANG BRANCH</value>
+  </data>
+  <data name="danang_gom" xml:space="preserve">
+    <value>(Sea/Air Freight Forwarding, Local Transportation, Customs Clearance and Container Trucking)</value>
+  </data>
+  <data name="diachidanang" xml:space="preserve">
+    <value>Lot B1-10, B1-11, B1-12 Nguyen Phuc Street, Danang Aquaculture Service Industrial Park, </value>
+  </data>
+  <data name="diachidanang_tiep" xml:space="preserve">
+    <value>Tho Quang Ward, Son Tra District, Danang City, Vietnam</value>
+  </data>
+  <data name="diachidienbienphu" xml:space="preserve">
+    <value>169 Dien Bien Phu Street, Ward 15, Binh Thanh District, HCMC, Vietnam</value>
+  </data>
+  <data name="diachiDN" xml:space="preserve">
+    <value>Lot B1-10, B1-11, B1-12 Nguyen Phuc Street, Danang Aquaculture Service Industrial Park, Tho Quang Ward, Son Tra District, Danang City, Vietnam</value>
+  </data>
+  <data name="diachiDongNai1" xml:space="preserve">
+    <value>Street No. 6, Nhon Trach 3 Industrial Park – Phase 2,</value>
+  </data>
+  <data name="diachiDongNai2" xml:space="preserve">
+    <value>Long Tho Ward, Nhon Trach District, Dong Nai Province, Vietnam.</value>
+  </data>
+  <data name="diachihanoi" xml:space="preserve">
+    <value>03 Floor, MHDI Apartment, 60 Hoang Quoc Viet Street, Nghia Do Ward, Cau Giay District, Hanoi City, Vietnam</value>
+  </data>
+  <data name="diachiHP1" xml:space="preserve">
+    <value>Km 12, National Road No. 5, Nomura Industrial Zone </value>
+  </data>
+  <data name="diachiHP2" xml:space="preserve">
+    <value>Area, Hai Phong City, Vietnam</value>
+  </data>
+  <data name="diachiTuSon1" xml:space="preserve">
+    <value>Unit 1-2-3, Block 19, Lot 66 VSIP,</value>
+  </data>
+  <data name="diachiTuSon2" xml:space="preserve">
+    <value>Phu Chan, Tu Son, Bac Ninh, Vietnam</value>
+  </data>
+  <data name="diachiVPQueVo1" xml:space="preserve">
+    <value>Lot D, Que Vo Industrial Park, </value>
+  </data>
+  <data name="diachiVPQueVo2" xml:space="preserve">
+    <value>Que Vo District, Bac Ninh Province, Vietnam</value>
+  </data>
+  <data name="diachi_DBP1" xml:space="preserve">
+    <value>169 Dien Bien Phu Street, Ward 15,</value>
+  </data>
+  <data name="diachi_DBP2" xml:space="preserve">
+    <value>Binh Thanh Dist, HCMC., Vietnam</value>
+  </data>
+  <data name="diachi_truongson" xml:space="preserve">
+    <value>87 Truong Son Street, Ward 2, Tan Binh Dist, HCMC., Vietnam</value>
+  </data>
+  <data name="dvnhanvien" xml:space="preserve">
+    <value>staff(05/2019)</value>
+  </data>
+  <data name="gui" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="HaNoi" xml:space="preserve">
+    <value>HANOI BRANCH</value>
+  </data>
+  <data name="khoTuSon" xml:space="preserve">
+    <value>Tu Son Warehouse</value>
+  </data>
+  <data name="ngaylap" xml:space="preserve">
+    <value>Date of establishment</value>
+  </data>
+  <data name="phongbanDBP" xml:space="preserve">
+    <value>(Departments: Board of Director, Administration, Accounting, Removal,Custom Clearance,SeaFreight ,e-Global, Sales)</value>
+  </data>
+  <data name="sev" xml:space="preserve">
+    <value>Netpost Việt Nam</value>
+  </data>
+  <data name="sevngaylap" xml:space="preserve">
+    <value>June 12, 1997</value>
+  </data>
+  <data name="sgv" xml:space="preserve">
+    <value>Netpost
+COMPANY LIMITED</value>
+  </data>
+  <data name="sgvngaylap" xml:space="preserve">
+    <value>May 01, 2015</value>
+  </data>
+  <data name="sochinh" xml:space="preserve">
+    <value>HEAD OFFICE</value>
+  </data>
+  <data name="sochinh_address" xml:space="preserve">
+    <value>SỐ 12B LÔ A10 KĐT NAM TRUNG YÊN, PHƯỜNG YÊN HÒA, QUẬN CẦU GIẤY, TP. HÀ NỘI</value>
+  </data>
+  <data name="soluongnv" xml:space="preserve">
+    <value>Employee quantity</value>
+  </data>
+  <data name="thongdiep" xml:space="preserve">
+    <value>Your message</value>
+  </data>
+  <data name="tieude" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="trusochinh" xml:space="preserve">
+    <value>Head Office :</value>
+  </data>
+  <data name="vpdienbienphu" xml:space="preserve">
+    <value>DIEN BIEN PHU OFFICE</value>
+  </data>
+  <data name="VPQueVo" xml:space="preserve">
+    <value>Que Vo Warehouse</value>
+  </data>
+  <data name="VPvtaiHK" xml:space="preserve">
+    <value>AIR FREIGHT OFFICE</value>
+  </data>
+  <data name="VPvtaiHK_diachi" xml:space="preserve">
+    <value>87 Truong Son Street, Ward 2, Tan Binh Dist, HCMC., Vietnam</value>
+  </data>
+  <data name="VPvtaiHK_ghichu" xml:space="preserve">
+    <value>(Close to Tan Son Nhat International Airport)</value>
+  </data>
+  <data name="VP_DBP" xml:space="preserve">
+    <value>Dien Bien Phu Office:</value>
+  </data>
+  <data name="VP_TruongSon" xml:space="preserve">
+    <value>Truong Son Office:</value>
+  </data>
+  <data name="Xoa" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="youremail" xml:space="preserve">
+    <value>Your email</value>
+  </data>
+  <data name="yourname" xml:space="preserve">
+    <value>Your name</value>
+  </data>
+  <data name="tracuu" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chuky" xml:space="preserve">
+    <value>See recipient signature</value>
+  </data>
+  <data name="dathangonline" xml:space="preserve">
+    <value>Order online</value>
+  </data>
+  <data name="detail" xml:space="preserve">
+    <value>View detail </value>
+  </data>
+  <data name="khongtimthayvandon" xml:space="preserve">
+    <value>No information for this postal code. Please re-enter the postal code</value>
+  </data>
+  <data name="maKH" xml:space="preserve">
+    <value>Customer code</value>
+  </data>
+  <data name="mavandon" xml:space="preserve">
+    <value>Postal code</value>
+  </data>
+  <data name="mess_vandon" xml:space="preserve">
+    <value>Postal code cannot be blank. Re-enter the postal code</value>
+  </data>
+  <data name="msgPass" xml:space="preserve">
+    <value>Please enter your Password</value>
+  </data>
+  <data name="msgUser" xml:space="preserve">
+    <value>Please enter your Username</value>
+  </data>
+  <data name="nhapvandon" xml:space="preserve">
+    <value>Enter the postal code</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="tenKH" xml:space="preserve">
+    <value>Customer name</value>
+  </data>
+  <data name="tepdinhkem" xml:space="preserve">
+    <value>Attachments</value>
+  </data>
+  <data name="time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="tracuoconline" xml:space="preserve">
+    <value>Checking fee online</value>
+  </data>
+  <data name="tracuuBPBK" xml:space="preserve">
+    <value>Look up postal code</value>
+  </data>
+  <data name="timkiemvandon" xml:space="preserve">
+    <value>Search for postal code</value>
+  </data>
+  <data name="cuocphatsinh" xml:space="preserve">
+    <value>This period is not accrued charges.</value>
+  </data>
+  <data name="cuoctamtinh" xml:space="preserve">
+    <value>The above delivery charge is temporarily calculated.</value>
+  </data>
+  <data name="lienhecuoc" xml:space="preserve">
+    <value>If you have any questions, please contact the check fee department</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="chucdanh" xml:space="preserve">
+    <value>Job title</value>
+  </data>
+  <data name="cus" xml:space="preserve">
+    <value>Customer </value>
+  </data>
+  <data name="danhgia" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="diadiem" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="hannop" xml:space="preserve">
+    <value>Expired Date</value>
+  </data>
+  <data name="hotro" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="khieunai" xml:space="preserve">
+    <value>Enquiry</value>
+  </data>
+  <data name="luong" xml:space="preserve">
+    <value>Salary</value>
+  </data>
+  <data name="supp" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="thoathuan" xml:space="preserve">
+    <value>Negotiable</value>
+  </data>
+  <data name="tukhoa" xml:space="preserve">
+    <value>Keyword</value>
+  </data>
+  <data name="vitri" xml:space="preserve">
+    <value>Job Category</value>
+  </data>
+  <data name="cachthuc" xml:space="preserve">
+    <value>How to apply</value>
+  </data>
+  <data name="donUT" xml:space="preserve">
+    <value>Application form</value>
+  </data>
+  <data name="dungluongbe" xml:space="preserve">
+    <value>Upload file less than 2MB</value>
+  </data>
+  <data name="emaillienlac" xml:space="preserve">
+    <value>Email Contact</value>
+  </data>
+  <data name="HDtuyendung" xml:space="preserve">
+    <value>Interested candidates please click the "Apply" button to send the resume to HR department.</value>
+  </data>
+  <data name="hoten" xml:space="preserve">
+    <value>Your name</value>
+  </data>
+  <data name="motacv" xml:space="preserve">
+    <value>Job description</value>
+  </data>
+  <data name="msgEmail" xml:space="preserve">
+    <value>Email address must not be blank</value>
+  </data>
+  <data name="msgHoten" xml:space="preserve">
+    <value>Your name must not be blank</value>
+  </data>
+  <data name="msgPhone" xml:space="preserve">
+    <value>Contact phone number must not be blank</value>
+  </data>
+  <data name="nopdon" xml:space="preserve">
+    <value>Apply Job</value>
+  </data>
+  <data name="sdt" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="TDsupport" xml:space="preserve">
+    <value>This job offer only supports Vietnamese</value>
+  </data>
+  <data name="thongtinlienhe" xml:space="preserve">
+    <value>Contact information and application form</value>
+  </data>
+  <data name="ttTD" xml:space="preserve">
+    <value>Recruitment information</value>
+  </data>
+  <data name="ungtuyen" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="UTsucc" xml:space="preserve">
+    <value>Apply successfully!</value>
+  </data>
+  <data name="vadTep" xml:space="preserve">
+    <value>Please select an upload file</value>
+  </data>
+  <data name="DNbranch" xml:space="preserve">
+    <value>Da Nang branch</value>
+  </data>
+  <data name="HCMbranch" xml:space="preserve">
+    <value>Ho Chi Minh branch</value>
+  </data>
+  <data name="HNbranch" xml:space="preserve">
+    <value>Ha Noi branch</value>
+  </data>
+  <data name="noidia" xml:space="preserve">
+    <value>Domestic delivery hotline</value>
+  </data>
+  <data name="support" xml:space="preserve">
+    <value>Online support</value>
+  </data>
+  <data name="CSbusy" xml:space="preserve">
+    <value>Currently, all staff busy, please leave a message!</value>
+  </data>
+  <data name="khongcotinTD" xml:space="preserve">
+    <value>Currently no job information, please come back later.</value>
+  </data>
+  <data name="tinhden" xml:space="preserve">
+    <value>To province</value>
+  </data>
+  <data name="tinhdi" xml:space="preserve">
+    <value>From province</value>
+  </data>
+  <data name="loinhan" xml:space="preserve">
+    <value>Leave a message for us!</value>
+  </data>
+  <data name="ndSGX" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ourservices" xml:space="preserve">
+    <value>Our services</value>
+  </data>
+  <data name="quydinhchuyenphat" xml:space="preserve">
+    <value>General regulations</value>
+  </data>
+  <data name="dong" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="vpBacNinh" xml:space="preserve">
+    <value>Bac Ninh Branch</value>
+  </data>
+  <data name="vpHaiPhong" xml:space="preserve">
+    <value>Hai Phong Office</value>
+  </data>
+  <data name="presskey" xml:space="preserve">
+    <value>Please enter search keywords</value>
+  </data>
+  <data name="kinhnghiem" xml:space="preserve">
+    <value>experience</value>
+  </data>
+  <data name="DongNai" xml:space="preserve">
+    <value>DONG NAI BRANCH</value>
+  </data>
+  <data name="tuson" xml:space="preserve">
+    <value>Tu Son Warehouse</value>
+  </data>
+  <data name="haiphong" xml:space="preserve">
+    <value>HAI PHONG OFFICE</value>
+  </data>
+  <data name="chinhsachKH" xml:space="preserve">
+    <value>Sales policy</value>
+  </data>
+  <data name="hoancuoc" xml:space="preserve">
+    <value>Return the fee to the custome</value>
+  </data>
+  <data name="ttIndex" xml:space="preserve">
+    <value>Please login to the system with customer code and password to check hot fees, look for previous periods and other utilities. If you do not have a Customer ID, please contact Call Center 1900 54 55 38 (Ext. 4008) for instructions and create a Customer Code.</value>
+  </data>
+  <data name="chuyenphat" xml:space="preserve">
+    <value>(International - Domestic Express)</value>
+  </data>
+  <data name="chonchinhanh" xml:space="preserve">
+    <value>Please select a branch for consultants' support</value>
+  </data>
+  <data name="nhantin" xml:space="preserve">
+    <value>Message to start the conversation.</value>
+  </data>
+  <data name="donchuyentiep" xml:space="preserve">
+    <value>removal service</value>
+  </data>
+  <data name="quydinhvtbien" xml:space="preserve">
+    <value>Regulation of ocean freight service</value>
+  </data>
+  <data name="xemthem" xml:space="preserve">
+    <value>View more</value>
+  </data>
+  <data name="ghichu" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="thoigiangui" xml:space="preserve">
+    <value>Delivery time</value>
+  </data>
+  <data name="msgMess" xml:space="preserve">
+    <value>The content must not be empty</value>
+  </data>
+  <data name="msgSubject" xml:space="preserve">
+    <value>The title must not be empty</value>
+  </data>
+  <data name="chinhanhlienhe" xml:space="preserve">
+    <value>Contact branch</value>
+  </data>
+  <data name="msgCompany" xml:space="preserve">
+    <value>Please select the branch to contact</value>
+  </data>
+  <data name="dichvuchuyenphat" xml:space="preserve">
+    <value>Courier service</value>
+  </data>
+  <data name="baocaosaipham" xml:space="preserve">
+    <value>Report violation</value>
+  </data>
+  <data name="baocaosaiphamthanhcong" xml:space="preserve">
+    <value>Save successfully. Thanks for the feedback to our company.</value>
+  </data>
+  <data name="vadnoidung" xml:space="preserve">
+    <value>Please input content</value>
+  </data>
+  <data name="sdtlienhe" xml:space="preserve">
+    <value>Contact phone</value>
+  </data>
+  <data name="motachinhsachbh" xml:space="preserve">
+    <value>Branch of Netpost CO., LTD. in Hanoi is a reputable Japanese enterprise, always pioneering in the field of domestic and international courier and always puts the interests of customers first with the criteria of 'Safety – Efficiency – Reliability'</value>
+  </data>
+  <data name="taovandon" xml:space="preserve">
+    <value>BOOKING</value>
+  </data>
+  <data name="errchonCNdehotro" xml:space="preserve">
+    <value>Please select a branch for consultants' support</value>
+  </data>
+  <data name="loaihinhdichvu" xml:space="preserve">
+    <value>Type of service</value>
+  </data>
+</root>

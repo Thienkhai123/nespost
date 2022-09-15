@@ -1,0 +1,132 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    ViewBag.Title = "Quản trị tuyển dụng";
+}
+
+<div class="row">
+    <div class="col-md-12 form-group text-right">
+        <a href="@Url.Action("ThemTinTuyenDung")" class="btn btn-primary">Thêm mới</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        {
+            @Html.Action("GridTuyenDung")
+        }
+    </div>
+</div>
+
+<div id="Status" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 10px;">
+                <h4 style="text-align:left"><span>Cập nhật trạng thái</span></h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="GridView.Refresh()"><i class="fa fa-times-circle"></i></button>
+            </div>
+            <div class="modal-body" style="padding-top: 10px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.Action("ApplicationPartial")
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function Update_Tin(id) {
+        window.location.href = "/Admin/ThemTinTuyenDung?id=" + id;
+    }
+
+    function ShowPopup(id) {
+        $('#imgload').show();
+        $.ajax({
+            url: "/Admin/ShowHoSoTuyenDung",
+            type: "POST",
+            data: { ID: id },
+            dataType: 'json',
+            success: function (data) {
+                if (!data.Error) {
+                    GrvDetail.Refresh();
+                    $('#Status').modal({ backdrop: "static" });
+                }
+                else {
+                    Swal.fire(data.Title,
+                        '',
+                        'error')
+                    return;
+                }
+            },
+            complete: function () {
+                $('#imgload').hide();
+            }
+        });
+    }
+
+    function UpdateStatus(id, status) {
+        $.ajax({
+            url: "/Admin/UpdatePartial",
+            type: "POST",
+            data: { id: id, status: status },
+            dataType: 'json',
+            success: function (data) {
+
+                if (!data.Error) {
+                    $('#span' + id).html(data.Title);
+                }
+                else {
+
+                    Swal.fire(data.Title,
+                        '',
+                        'error')
+                    return;
+                }
+            }
+        });
+    }
+
+    function Xoa_Tin(id) {
+        Swal.fire({
+            title: 'Bạn có chắc chắn xóa tin mã ' + id + ' không?',
+            text: "",
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'No',
+            confirmButtonText: 'Yes'
+        })
+            .then(function (result) {
+                if (result.value) {
+                    $.ajax({
+                        url: "/Admin/Delete",
+                        type: "POST",
+                        data: { id: id },
+                        dataType: 'json',
+                        success: function (data) {
+                            if (!data.Error) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    text: 'Xóa tin thành công!',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                                window.location.reload();
+                            }
+                            else {
+                                Swal.fire(data.Title,
+                                    '',
+                                    'error')
+                                return;
+                            }
+                        }
+                    });
+                }
+            });
+
+    }
+</script>

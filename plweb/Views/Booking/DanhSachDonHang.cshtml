@@ -1,0 +1,702 @@
+﻿@using WebSite.Models;
+@using WebSite.Filter;
+@using WebSite.Language;
+@{WebSite.Models.CSS_CRM_NGUOI_DUNGDTO user = (WebSite.Models.CSS_CRM_NGUOI_DUNGDTO)Session["User"];}
+@{
+    ViewBag.Title = Booking.danhsachdonhang;
+    Layout = "~/Views/Shared/_Layout_Booking.cshtml";
+}
+
+<div class="form-row form-group timkiemdonhang">
+    <div class="col-md-2 col-6">
+        <label class="control-label"> @Booking.tungay</label>
+        <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+            <input type="text" class="form-control" name="FromDate" id="FromDate" value="@DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy")" />
+            <div class="input-group-append">
+                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-6">
+        <label class="control-label">@Booking.denngay</label>
+        <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+            <input type="text" class="form-control" name="ToDate" id="ToDate" value="@DateTime.Now.ToString("dd/MM/yyyy")" />
+            <div class="input-group-append">
+                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-6">
+        <label class="control-label">@Booking.madonhang</label>
+        <input id="MA_DAT_HANG" class="form-control" style="padding:6px;" name="MA_DAT_HANG" type="text" />
+    </div>
+    <div class="col-md-2 col-6 NGUOI_NHAN">
+        <label class="control-label">@Booking.nguoinhan</label>
+        <input id="NGUOI_NHAN" class="form-control" style="padding:6px;" name="NGUOI_NHAN" type="text" />
+    </div>
+    <div class="col-md-4 col-6 btn-primary-group">
+        <button type="submit" class="btn btn-primary pull-left" onclick="LoadData()"><i class="fa fa-search" style="font-size:10px"></i> </button>
+        <button type="button" class="btn btn-primary pull-right" style="padding: 0;margin-left:3px;" onclick="gridView.ExportTo(ASPxClientGridViewExportFormat.Xlsx);" title="Export Excel">
+            <img src="~/lib/images/icon-document.png" width="55" />
+        </button>
+        @if (ClientSession.getLstMaKH().Count > 1)
+        {
+            <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modal-chuyenMaKH">
+                @Booking.chuyenmaKH
+            </button>
+        }
+        <button type="button" class="btn btn-primary pull-right" style="margin-right:3px;" data-toggle="modal" data-target="#modal-khoiphucBPBK">
+            @Booking.khoiphucBPBK
+        </button>
+    </div>
+</div>
+
+<div class="row table-booking">
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        {
+            <div class="img-loading d-none" style="position: absolute; left: 50%;left: 40%;top: 145px; padding: 15px 115px; border-radius: 5px; background: #ebebeb; border:1px solid lightgray ">
+                <img src="~/lib/images/loading.gif" style="width: 25px;" />    Loading
+            </div>
+            @Html.Action("GridViewPartial")
+        }
+    </div>
+</div>
+
+<div id="TRACK_AND_TRACE" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-xm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="title" style="color:red"> </h5>
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
+            </div>
+            <div class="modal-body" style="padding-top: 0;">
+                <table id="listTrackAndTrace" class="table table-hover" style="width:100%">
+                    <thead>
+                        <tr style="border-bottom: 1px solid #99999938;">
+                            <th style="width:125px;text-align:center">
+                                @Booking.time
+                            </th>
+                            <th style="text-align:center">
+                                @Booking.chitiet
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal1" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 0px 15px 10px;">
+                <iframe src="" height="550" style="width:100%">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-anhlienvang" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="overflow: hidden;min-height:500px; padding: 0px 15px 10px;">
+                <div class="row">
+                    <input id="idAnhPOD" type="text" hidden />
+                    <div id="viewer" class="viewer"></div>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 10px;">
+                <div class="col-md-12 text-center">
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#modal-baocaosaipham"><i class="mdi mdi-alert-octagon"></i> @Resource.baocaosaipham</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-baocaosaipham" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-xm modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 10px;">
+                <div class="row m-0">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label> @Resource.sdtlienhe</label>
+                            <input class="form-control" type="text" id="txtsdtlienhe" />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label> @Booking.noidung <strong style="color:red">*</strong> </label>
+                            <textarea class="form-control" rows="10" id="txtNote"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="text-align:center">
+                        <button class="btn btn-primary" onclick="baocaosaipham()"><i class="fa fa-save"></i> @Booking.luu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-chuyenMaKH" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-xm modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h3>
+                    <span>
+                        @Booking.chuyenmaKH
+                    </span>
+                </h3>
+                <button type="button" class="close" data-dismiss="modal" onclick="$('#txtLstBPBK').val('');cbKhachHang.SetSelectedIndex(-1)">
+                    <i class="fa fa-times-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 10px;">
+                <div class="row m-0">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label> @Booking.maBPBK <strong style="color:red">*</strong> </label>
+                            <textarea class="form-control" rows="20" id="txtLstBPBK" placeholder="893195000930540 893195000930562"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label> @Booking.makhachhang <strong style="color:red">*</strong></label>
+                            <div class="combobox-body position-relative">
+                                @Html.DevExpress().ComboBox(settings =>
+                                {
+                                    settings.Name = "cbKhachHang";
+                                    settings.Properties.DropDownStyle = DropDownStyle.DropDownList;
+                                    settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                                    settings.Properties.NullText = "";
+                                    settings.ControlStyle.CssClass = "form-control";
+                                    settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                                    settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                    settings.Properties.TextField = "FULL_NAME";
+                                    settings.Properties.ValueField = "CUSTOMER_CODE";
+                                    settings.SelectedIndex = -1;
+                                 }).BindList(ClientSession.getFullLstMaKH()).GetHtml()
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-group text-right">
+                        <button class="btn btn-primary" onclick="chuyenmakhachhang()"><i class="fa fa-save"></i> @Booking.luu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-khoiphucBPBK" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h3>
+                    <span>
+                        @Booking.khoiphucBPBK
+                    </span>
+                </h3>
+                <button type="button" class="close" data-dismiss="modal" onclick="$('#txtLstBPBKkp').val('')">
+                    <i class="fa fa-times-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 10px;">
+                <div class="row m-0">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label> @Booking.maBPBK <strong style="color:red">*</strong> </label>
+                            <textarea class="form-control" rows="10" id="txtLstBPBKkp" placeholder="893195000930540 893195000930562" style="padding-left: 20px; padding-right: 20px;"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-group text-center">
+                        <button class="btn btn-primary" onclick="khoiphucBPBK()"><i class="fa fa-save"></i> @Booking.luu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var iv1 = $("#viewer").iviewer({
+        fill_container: true,
+        src: "/lib/images/No_Image_Available.jpg",
+        initCallback: function () {
+            iviewer = this;
+        },
+        //zoom_min: 13,
+    });
+
+    $(window).on('load', function () {
+        //Load dữ liệu
+            LoadData();
+    });
+
+    function LoadData() {
+        $('.img-loading').removeClass("d-none");
+        var FromDate = $('#FromDate').val() == undefined ? '' : $('#FromDate').val();
+        var ToDate = $('#ToDate').val() == undefined ? '' : $('#ToDate').val();
+        var MA_DAT_HANG = $('#MA_DAT_HANG').val() == undefined ? '' : $('#MA_DAT_HANG').val();
+        var NGUOI_NHAN = $('#NGUOI_NHAN').val() == undefined ? '' : $('#NGUOI_NHAN').val();
+        var data = {
+            FromDate: FromDate,
+            ToDate: ToDate,
+            MA_DAT_HANG: MA_DAT_HANG,
+            NGUOI_NHAN:NGUOI_NHAN
+        }
+        $.ajax({
+            type: "post",
+            url: "/Booking/Search",
+            data: data,
+            success: function (data) {
+                if (data.Error) {
+                    Swal.fire(
+                        '',
+                        data.Title,
+                        'error')
+                    return;
+                }
+                gridView.Refresh();
+            },
+            complete: function () {
+                  $('.img-loading').addClass("d-none");
+            }
+        });
+    }
+
+    function TRACK_AND_TRACE(MaBPBK) {
+        $('#title').html("");
+        $('#listTrackAndTrace tbody').empty();
+        $.ajax({
+            url: "/Booking/ListTrackAndTrace",
+            type: "POST",
+            data: {
+                MaBPBK: MaBPBK
+            },
+            dataType: 'json',
+            success: function (data) {
+                var str = "";
+                if (data.Title == "Get list success!") {
+                    for (var i in data.Object) {
+                        var lst = data.Object[i];
+                        if ((lst[0].ID_MONGO != null && lst[0].ID_MONGO != "") || (lst[0].URLImage != null && lst[0].URLImage != "")) {
+                            var url = lst[0].URLImage == null ? "" : lst[0].URLImage.replace(/\\/g, "\\\\");
+                            str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td colspan=\"2\"> Mã vận đơn: " + i + " (<a href=\"javascript:;\" onclick = 'ShowAnhLienVang(\"" + lst[0].ID_MONGO + "\",\"" + url + "\", \"" + lst[0].CONTENT_TYPE + "\" )' > @Html.Raw(Resource.chuky) </a>)</td></tr>";
+                        }
+                        else {
+                            str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td  colspan=\"2\"> @Html.Raw(Resource.mavandon): " + i + "</td></tr>";
+                        }
+                        for (var j in lst) {
+                            str = str + "<tr style= \"border-bottom: 1px solid #99999938;\"><td style=\"width: 23%;\">" + lst[j].INSERT_TIME_STRING + "</td><td style=\"width: 77%;\">" + lst[j].DESC + "</td></tr>";
+                        }
+                    }
+                }
+                else {
+                    str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td colspan=\"2\" style=\"text-align: center; font-style: italic;\">"+data.Title+"</td></tr>";
+                }
+                $('#listTrackAndTrace tbody').append(str);
+                $('#title').html('@Html.Raw(Booking.mavandon) ' + MaBPBK)
+                $('#TRACK_AND_TRACE').modal('show')
+            }
+        });
+    }
+
+    function Xoa_BPBK(MA_BPBK, SL_BILL, PO) {
+        if (parseInt(SL_BILL)>1) {
+            Swal.fire({
+                title: '<strong> @Html.Raw(Booking.Donhang) ' + PO + ' @Html.Raw(Booking.gom) '+ SL_BILL +' @Html.Raw(Booking.maBPBK).</strong>',
+                html: '@Html.Raw(Booking.msgXoaDonHang)',
+                icon: 'question',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonColor: '#d33',
+                denyButtonColor: '#3085d6',
+                confirmButtonText: '@Html.Raw(Booking.xoadonhang)',
+                denyButtonText: '@Html.Raw(Booking.xoaphieule)'
+            })
+            .then(function (willDelete) {
+                if (willDelete.isConfirmed) {
+                    XoaDonHang(PO);
+                }
+                else if (willDelete.isDenied) {
+                    XoaMABPBK(MA_BPBK);
+                }
+            });
+
+            return;
+        }
+
+        XoaMABPBK(MA_BPBK);
+    }
+
+    function XoaMABPBK(MA_BPBK) {
+        Swal.fire({
+            title: '@Html.Raw(Booking.chacchanxoa) ' + MA_BPBK + ' ?',
+            text: "",
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'No',
+            confirmButtonText: 'Yes'
+        })
+        .then(function (result) {
+                if (result.value) {
+                    $.ajax({
+                        url: "/Booking/XOABPBK",
+                        type: "POST",
+                        data: {
+                            MA_BPBK: MA_BPBK,
+                            isPO: false
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.Error) {
+                                Swal.fire(
+                                    '',
+                                    data.Title,
+                                    'error')
+                                return;
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: '@Html.Raw(Booking.xoathanhcong)',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                                LoadData();
+                            }
+                        }
+                    });
+                }
+            });
+    }
+
+    function XoaDonHang(PO) {
+        Swal.fire({
+            title: '@Html.Raw(Booking.msgXoaDH) ' + PO + ' ?',
+            text: "",
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'No',
+            confirmButtonText: 'Yes'
+        })
+        .then(function (result) {
+            if (result.value) {
+                $.ajax({
+                    url: "/Booking/XOABPBK",
+                    type: "POST",
+                    data: {
+                        MA_BPBK: PO,
+                        isPO: true
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.Error) {
+                            Swal.fire(
+                                '',
+                                data.Title,
+                                'error')
+                            return;
+                        }
+                        Swal.fire({
+                            icon: 'success',
+                            title: '@Html.Raw(Booking.xoathanhcong)',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        LoadData();
+                    }
+                });
+            }
+        });
+    }
+
+
+    function Print_PO(MA_BPBK, isPO, PO) {
+        if (isPO=="True") {
+            Swal.fire({
+                title: '@Html.Raw(Booking.chacchanIn) ' + PO + ' ?',
+                html: '',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: '@Html.Raw(Booking.intheophieugui)',
+                cancelButtonText: '@Html.Raw(Booking.inbpbk)'
+            })
+            .then(function (willDelete) {
+                if (willDelete.value) {
+                    $('#modal1 .modal-body iframe').attr("src", "/Booking/PhieuGui?PO=" + PO);
+                    $('#modal1').modal({ backdrop: "static" });
+                }
+                else if(willDelete.dismiss== "cancel"){
+                    $('#modal1 .modal-body iframe').attr("src", "/Booking/PhieuGui_MaBPBK?MA_BPBK=" + MA_BPBK);
+                    $('#modal1').modal({ backdrop: "static" });
+                }
+            });
+            return;
+        }
+
+        Swal.fire({
+            title: '@Html.Raw(Booking.chacchanInBPBK) ' + MA_BPBK + ' ?',
+            html: '',
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'No',
+            confirmButtonText: 'Yes'
+        })
+        .then(function (willDelete) {
+            if (willDelete.value) {
+                $('#modal1 .modal-body iframe').attr("src", "/Booking/PhieuGui_MaBPBK?MA_BPBK=" + MA_BPBK);
+                $('#modal1').modal({ backdrop: "static" });
+            }
+        });
+    }
+
+    function Print_PhieuGiaoHang(PO) {
+        Swal.fire({
+            title: '@Html.Raw(Booking.chacchanInphieugiaohang) ' + PO + ' ?',
+            text: "",
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'No',
+            confirmButtonText: 'Yes'
+        })
+        .then(function (willDelete) {
+            if (willDelete.value) {
+                $('#modal1 .modal-body iframe').attr("src", "/Booking/InPhieuGiaoHang?PO=" + PO);
+                $('#modal1').modal({ backdrop: "static" });
+            }
+        });
+    }
+
+    function ShowAnhLienVang(idmongo, URLImage, idAnhPOD) {
+        $('#idAnhPOD').val(idAnhPOD);
+
+        if ((idmongo == null || idmongo == "") && (URLImage.indexOf(".tif") == -1)) {
+            $('#modal-anhlienvang .modal-footer').show();
+        }
+        else {
+            $('#modal-anhlienvang .modal-footer').hide();
+        }
+        $.ajax({
+            url: "/Home/GetImageFromServer",
+            type: "POST",
+            data: {
+                idmongo: idmongo,
+                UrlImage: URLImage
+            },
+            dataType: 'json',
+            success: function (data) {
+                iv1.iviewer('loadImage', data.Title);
+                setTimeout(function () {
+                    iv1.iviewer('set_zoom', 100);
+                },5);
+                $('.pre-image').addClass('d-none');
+                $("#viewer").show();
+            }
+        });
+        $("#viewer").hide();
+        $('.pre-image').removeClass('d-none');
+        $('#modal-anhlienvang').modal('show');
+    }
+
+    function baocaosaipham() {
+        if ($('#txtNote').val() == undefined || $('#txtNote').val() == "") {
+            Swal.fire(
+                '',
+                '@Html.Raw(Resource.vadnoidung)',
+                'error')
+            return;
+        }
+        $.ajax({
+            url: "/Home/BaoCaoSaiPham",
+            type: "POST",
+            data: {
+                sdt:$('#txtsdtlienhe').val(),
+                note: $('#txtNote').val(),
+                idAnhPOD: $('#idAnhPOD').val()
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (!data.Error) {
+                    Swal.fire(
+                        '',
+                        '@Html.Raw(Resource.baocaosaiphamthanhcong)',
+                        'success');
+                    $('#modal-baocaosaipham').modal('hide');
+                    $('#txtNote-baocaosaipham').val('');
+                }
+                else {
+                    Swal.fire(data.Title,
+                        '',
+                        'error')
+                    return;
+                }
+            }
+        });
+    }
+
+    $('#modal-baocaosaipham').on('shown.bs.modal', function () {
+        $('#txtsdtlienhe').trigger('focus')
+    })
+
+    function chuyenmakhachhang() {
+         if ($('#txtLstBPBK').val() == undefined || $('#txtLstBPBK').val() == "") {
+            Swal.fire(
+                '',
+                '@Html.Raw(Booking.msgbotrongBPBK)',
+                'error')
+            return;
+        }
+        if (cbKhachHang.GetValue() == null) {
+            Swal.fire(
+                '',
+                '@Html.Raw(Booking.msgbotrongmakh)',
+                'error')
+            return;
+        }
+         $.ajax({
+            url: "/Booking/ChuyenMaKhachHang",
+            type: "POST",
+            data: {
+                lstBPBK:$('#txtLstBPBK').val(),
+                maKH: cbKhachHang.GetValue()
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (!data.Error) {
+                    Swal.fire(
+                        '',
+                        '@Html.Raw(Booking.chuyenmathanhcong)',
+                        'success');
+                    $('#modal-chuyenMaKH').modal('hide');
+                    $('#txtLstBPBK').val('');
+                    cbKhachHang.SetSelectedIndex(-1);
+                    setTimeout(function () {
+                        LoadData();
+                    }, 10);
+                }
+                else {
+                    Swal.fire(
+                        '',
+                        data.Title,
+                        'error')
+                    return;
+                }
+            }
+        });
+    }
+
+    function khoiphucBPBK() {
+         if ($('#txtLstBPBKkp').val() == undefined || $('#txtLstBPBKkp').val() == "") {
+            Swal.fire(
+                '',
+                '@Html.Raw(Booking.msgbotrongBPBK)',
+                'error')
+            return;
+        }
+         $.ajax({
+            url: "/Booking/KhoiPhucBPBK",
+            type: "POST",
+            data: {
+                lstBPBK:$('#txtLstBPBKkp').val()
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (!data.Error) {
+                    Swal.fire(
+                        '',
+                        data.Title,
+                        'success');
+                    $('#modal-khoiphucBPBK').modal('hide');
+                    $('#txtLstBPBK').val('');
+                    setTimeout(function () {
+                        LoadData();
+                    }, 10);
+                }
+                else {
+                    Swal.fire(
+                        '',
+                        data.Title,
+                        'error')
+                    return;
+                }
+            }
+        });
+    }
+
+    var errorMess = @Html.Raw(Json.Encode(TempData["AddError"]));
+    if(errorMess!=null)
+        {
+            Swal.fire(
+                 errorMess,
+                '',
+                'error');
+    }
+</script>
+
+@*@if (user.CUSTOMER_CODE.Equals("0131858") || user.CUSTOMER_CODE.Equals("0191NB"))
+    {
+        <script>
+            var lstSelected = [];
+            function OnGridViewSelectionChanged(s, e) {
+                s.GetSelectedFieldValues("MA_BPBK", function (values) {
+                    lstSelected = [];
+                    for (var i = 0; i < values.length; i++) {
+                        lstSelected.push(values[i]);
+                    }
+
+                });
+            }
+
+            function OnContextMenuItemClick(s, e) {
+                var item = e.elementIndex;
+                if (e.item.name == "Print") {
+                    if (lstSelected.length == 0) {
+                        Swal.fire('',
+                                '@Html.Raw("Mời tích chọn ít nhất một mã đơn hàng để in")',
+                                'warning')
+                        return;
+                    }
+
+                    $('#modal1 .modal-body iframe').attr("src", "/Booking/MultiInPhieuGiaoHang?lstMA_BPBK=" + lstSelected.join(","));
+                    $('#modal1').modal({ backdrop: "static" });
+                }
+            }
+
+            //reload
+            //setInterval(function () {
+            //    $.ajax({
+            //        type: "post",
+            //        url: "/Booking/CheckTime",
+            //        success: function (data) {
+            //            if (!data.error) {
+            //                LoadData();
+            //            }
+            //        }
+            //    });
+            //}, 300000);
+        </script>
+    }*@  

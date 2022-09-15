@@ -1,0 +1,263 @@
+/* Left Panel */
+.filters-navbar .item,
+.filters-navbar ul.dxnb-content
+{
+    border-right: none;
+}
+
+.filters-navbar .item
+{
+    padding-left: 24px !important;
+}
+
+/* GridView borders */
+.grid-view:focus
+{
+    outline: none;
+}
+
+.grid-view .dxgvCSD,
+.grid-view .pager
+{
+    border-left: none;
+    border-right: none;
+}
+.grid-view .dxgvLVR > td.dxgv
+{
+    border-bottom: none !important;
+}
+
+/* GridView Custom Styles */
+.grid-view .votes-column
+{
+    display: inline-block;
+    min-width: 1em;
+    min-height: 1em;
+    font-size: 11px;
+    line-height: .99;
+    border-radius: 2em;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 3px 5px 2px;
+    text-align: center;
+}
+
+.grid-view .status-column
+{
+    display: inline-block;
+    min-width: 1em;
+    min-height: 1em;
+    font-size: 11px;
+    text-transform: uppercase;
+    line-height: .99;
+    border-radius: 3px;
+    border: solid 1px #ccc;
+    padding: 2px 5px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.grid-view .focused .status-column
+{
+    border: solid 1px #fff;
+}
+
+.grid-view .status-column.active
+{
+    font-weight: bold;
+}
+
+.grid-view .status-column.active::after
+{
+    content: "active";
+}
+
+.grid-view .status-column.closed::after
+{
+    content: "closed";
+}
+
+.grid-view .column-image
+{
+    width: 12px;
+    height: 12px;
+}
+
+.grid-view .priority1
+{
+    background-image: url('Images/priority1.svg');
+}
+
+.grid-view .priority2
+{
+    background-image: url('Images/priority2.svg');
+}
+
+.grid-view .priority3
+{
+    background-image: url('Images/priority3.svg');
+}
+
+.grid-view .focused .priority1
+{
+    background-image: url('Images/priority1-white.svg');
+}
+
+.grid-view .focused .priority2
+{
+    background-image: url('Images/priority2-white.svg');
+}
+
+.grid-view .focused .priority3
+{
+    background-image: url('Images/priority3-white.svg');
+}
+
+.grid-view .kind1
+{
+    background-image: url('Images/kind1.svg');
+}
+
+.grid-view .kind2
+{
+    background-image: url('Images/kind2.svg');
+}
+
+.grid-view .focused .kind1
+{
+    background-image: url('Images/kind1-white.svg');
+}
+
+.grid-view .focused .kind2
+{
+    background-image: url('Images/kind2-white.svg');
+}
+
+/* GridView filter panel */
+.filter-panel
+{
+    padding: 16px;
+    padding-left: 18px;
+}
+.dxgvControl_Office365 .dxgvTable_Office365 .dxgvFocusedRow_Office365, .dxgvControl_Office365 .dxgvTable_Office365 .dxgvFocusedRow_Office365.dxgvDataRowHover_Office365 {
+    background-color: #D2E1E9 !important;
+}
+
+.dxgvControl_Office365 a, .dxgvControl_Office365 .dxgvTable_Office365 .dxgvFocusedRow_Office365 a, .dxgvControl_Office365 .dxgvTable_Office365 .dxgvFocusedGroupRow_Office365 a {
+    color: #4796CE !important;
+}
+
+    .dxgvControl_Office365 .dxgvTable_Office365 .dxgvFocusedRow_Office365, .dxgvControl_Office365 .dxgvTable_Office365 .dxgvFocusedRow_Office365.dxgvDataRowHover_Office365 {
+        color: black !important;
+    }
+
+.dxeTextBox_Office365 td.dxic, .dxeButtonEdit_Office365 td.dxic, .dxeButtonEdit_Office365[cellspacing="0"] td.dxic {
+    padding: 3px 3px 2px 3px !important;
+}
+
+.dxgvHeader_Office365 {
+    padding: 5px 7px 5px !important;
+}
+.dxgvFocusedCell_Office365 {
+    box-shadow:none !important;
+}
+#gridView .dxgvEditFormDisplayRow_Office365 td.dxgv, #gridView .dxgvDetailCell_Office365 td.dxgv, #gridView .dxgvDataRow_Office365 td.dxgv, #gridView .dxgvDetailRow_Office365.dxgvADR td.dxgvAIC {
+    padding: 5px !important;
+    /*white-space: pre-line !important;*/
+}
+
+.dxgvFilterRow_Office365 td.dxgv {
+    padding: 3px 5px !important;
+}
+
+.dxgvPagerTopPanel_Office365, .dxgvPagerBottomPanel_Office365 {
+    margin: 0 !important;
+}
+
+.dxgvFilterRow_Office365 td.dxgv {
+    padding: 2px 5px !important;
+}
+
+.dxpLite_Office365 .dxp-current {
+    border-radius: 5px !important;
+}
+
+.dxgvControl_Office365, .dxgvDisabled_Office365 {
+    color: black !important;
+}
+
+.dxgvTable_Office365 td.dxgvHeader_Office365 {
+    font-weight: 600;
+    text-align: center;
+    font-size: 12px !important;
+}
+.dxICheckBox_Office365, .dxWeb_edtCheckBoxUnchecked_Office365 {
+    outline: 1px solid blue !important;
+}
+.dxWeb_edtCheckBoxChecked_Office365 {
+    background-color: black !important;
+}
+
+.dxgv {
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.21) !important;
+}
+#modal .dxgvFocusedCell_Office365 {
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+#modal .dxgvStatusBar_Office365 {
+    display: none !important;
+}
+.dxgvControl_Office365 .dxgvTable_Office365 .dxgvSelectedRow_Office365, .dxgvControl_Office365 .dxgvTable_Office365 .dxgvSelectedRow_Office365.dxgvDataRowHover_Office365 {
+    background-color: #D2E1E9 !important;
+}
+table.grid-view, table.dxgvControl_Office365 , table.dxgvTable_Office365 {
+    border-bottom: 0px !important;
+}
+.dxpLite_Office365 .dxp-current, .dxpLite_Office365:not(.dxpLiteDisabled_Office365) .dxp-current.dxp-num:hover, .dxpLite_Office365 .dxp-button:not(.dxp-disabledButton):hover {
+    background-color: #428bca !important;
+}
+.dxgvFooter_Office365 .dxgv {
+    border-bottom: 0 !important;
+}
+.dxgvFooter_Office365 .row {
+    margin: 0;
+    border-bottom: 1px solid lightgray;
+}
+    .dxgvFooter_Office365 .row .col-md-11 {
+        -ms-flex: 0 0 89.2%;
+        flex: 0 0 89.2%;
+        max-width: 89.2%;
+        border-right: 1px solid lightgray;
+    }
+    .dxgvFooter_Office365 .row .col-md-1 {
+        -ms-flex: 0 0 10.8%;
+        flex: 0 0 10.8%;
+        max-width: 10.8%;
+    }
+    .dxgvFooter_Office365 .row h6 {
+        font-size: .8rem;
+        margin: 0;
+        color: black;
+        padding: 2px;
+        text-align:right;
+    }
+.dxpLite_Office365 .dxp-summary, .dxpLite_Office365 .dxp-ellip {
+    padding: 9px 0px 6px !important;
+}
+.dxpLite_Office365 .dxp-num {
+    padding: 0.5em 0.5em !important;
+}
+.dxpLite_Office365 .dxp-button.dxp-bi {
+    padding: 0.5em 0.3em;
+}
+.dxgvDataRow_Office365 td.dxgv, .dxgvDataRow_Office365 td.dxgv p {
+    font-size: 12px !important;
+}
+
+/*--- Combobox---*/
+ .dxeListBox_Office365 td.dxeFTM.dxeLTM {
+    white-space: normal !important;
+}
+.dxpcDropDown_Office365{
+    top:30px !important;
+}

@@ -1,0 +1,685 @@
+﻿@using WebSite.Language
+@{
+    ViewBag.Title = Resource.quytrinhsudung;
+}
+<style>
+        div.section {
+            margin-bottom: 2em;
+        }
+
+        h2.hdTxt02 span {
+            font-size: 20px;
+        }
+
+        h2.hdTxt02 {
+            position: relative;
+            margin-top: 0;
+            margin-bottom: 1em;
+            padding: 0 9px;
+            border-top: 2px solid #ccc;
+            border-bottom: 1px dotted #ccc;
+            font-size: 114%;
+            line-height: 1.35;
+            width: 100%;
+            box-shadow: none !important;
+            font-family: Poppins-Regular;
+        }
+
+            h2.hdTxt02:after {
+                position: absolute;
+                top: -2px;
+                left: 0px;
+                content: "";
+                display: block;
+                width: 220px;
+                border-top: 2px solid #3b499f;
+            }
+
+        .sectionInner ul li {
+            list-style: circle;
+            padding: 6px;
+            font-size: 17px;
+            margin-left: 1em;
+            font-family: Poppins-Regular;
+            line-height: 1.3;
+        }
+
+        .entry-content p {
+            text-align: left;
+        }
+    h3.hdTxt03 {
+        margin: 0 0 1em !important;
+        padding: 0 0 0 7px;
+        font-size: 114%;
+        border-left: 3px solid #3b499f;
+        font-family: Poppins-Regular;
+    }
+</style>
+<!--<div class="page-container">
+    <div class="container">
+        <div class="row">
+            <div id="post-48" class="post-48 page type-page status-publish hentry">
+                <div class="title title2 about">
+                    <h4><span> @Resource.quytrinhsudung </span></h4>
+                </div>
+                <div class="entry-content">
+                    @{
+                        if (Request.Cookies["language"].Value == "vi")
+                        {
+
+                            <div class="section pageLead">-->
+                                @*<h1 class="hdTxt01"><span>Website Policy</span></h1>*@
+                                <!--<div class="sectionInner" style="padding-bottom: 25px;">
+                                    <p>Khi truy cập trang web này của Công ty SG Sagawa Viet Nam・Sagawa Express Việt Nam (‘Trang web”) vui lòng đọc và tuân thủ với các  điều kiện sau: </p>
+                                    <!-- /.sectionInner -->
+                                <!--</div>
+
+                                <div class="section">
+                                    <h2 class="hdTxt02"><span>Bản quyền</span></h2>
+                                    <div class="sectionInner">
+                                        <p>
+                                            Tất cả các nội dung trong trang web này là bản quyền của Công ty SG Sagawa Viet Nam・Sagawa Express Việt Nam (“SGV・SEV” hoặc “chúng tôi”). <br>
+                                            SGV cho phép sao chép, in & lưu các dữ liệu từ trang web này cho mục đích cá nhân hoặc phi thương mại (chẳng hạn như để sử dụng cho các tài liệu nội bộ của công ty).<br />
+                                            Ngoại trừ các trường hợp trên, việc sử dụng các nội dung trong trang Web này, ngoài phạm vi của Luật bản quyền, mà không có sự đồng ý của SGV・SEV đều bị nghiêm cấm
+                                        </p>-->
+                                        <!-- /.sectionInner -->
+                                    <!--</div>-->
+                                    <!-- /.sectionH2 -->
+                                <!--</div>
+
+                                <div class="section">
+                                    <h2 class="hdTxt02"><span>Thương hiệu</span></h2>
+                                    <div class="sectionInner">
+                                        <p>
+                                            Tất cả các thương hiệu (logo công ty, logo dịch vụ, tên dịch vụ…) được đăng trên trang web này thuộc về SGV・SEV hoặc đơn vị được cấp phép bản quyền.<br />
+                                            Việc sử dụng & thao túng thương hiệu mà không sự đồng ý của chủ sở hữu đều bị nghiêm cấm
+                                        </p>-->
+                                        <!-- /.sectionInner -->
+                                    <!--</div>-->
+                                    <!-- /.sectionH2 -->
+                                <!--</div>
+
+                                <div class="section">
+                                    <h2 class="hdTxt02"><span>Liên kết đến trang Web</span></h2>
+                                    <div class="sectionInner" style="margin-bottom: 25px;">
+                                        <p>Không cần liên hệ với chúng tôi về đường liên kết dẫn đến trang web từ bất kỳ trang web thương mai, hoặc phi thương mại, hoặc mạng nội bộ nào. Tuy nhiên phải tuân thủ “Hướng dẫn liên kết” trước khi kết nối vào trang web này</p>-->
+                                        <!-- /.sectionInner -->
+                                    <!--</div>
+
+                                    <div class="section">
+                                        <h3 class="hdTxt03"><span>Hướng dẫn liên kết</span></h3>
+                                        <div class="sectionInner">
+                                            <ul style="list-style-type:disc">
+                                                <li>SGV・SEV không chịu trách nhiệm cho bất cứ rắc rối hoặc thiệt hại nào do đường liên kết dẫn đến trang web này. </li>
+                                                <li>URL của bất kỳ trang web nào ngoai trừ trang chủ hoặc nội dung thay đổi mà không cần phải thông báo trước.  </li>
+                                                <li>Trang web này không được hiển thị những điều gây hiểu nhầm đây là trang web của SGV・SEV, ví dụ hiển thị những nội dung trong một khung. </li>
+                                                <li>
+                                                    Đường dẫn từ các trang web sau có thể bị từ chối và mọi liên kết hoạt động sẽ bị xóa khi được yêu cầu
+                                                    <ul>
+                                                        <li>Những  trang web nói xấu hoặc phỉ bang SGV・SEV, các công ty thành viên, các dịch vụ hoặc cá nhân có liên quan</li>
+                                                        <li>Những trang web tạo ấn tượng xấu về mối quan hệ hợp tác hoặc quan hệ đối tác với SGV・SEV</li>
+                                                        <li>Các trang web mang lại ấn tượng sai lệch mà SGV・SEV nhận thức hoặc hỗ trợ trang web</li>
+                                                        <li>Trang web cung cấp thông tin bất hợp pháp hoặc có thể là bất hợp pháp</li>
+                                                        <li>Trang web cung cấp thông tin tục tĩu hoặc vô đạo đức</li>
+                                                        <li>Bất kỳ trang web nào khác được coi là không phù hợp</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>-->
+                                            <!-- /.sectionInner -->
+                                        <!--</div>-->
+                                        <!-- /.sectionH3 -->
+                                    <!--</div>-->
+                                    <!-- /.sectionH2 -->
+                                <!--</div>
+
+
+                                <div class="section">
+                                    <h2 class="hdTxt02"><span>Môi trường đề nghị để truy cập website</span></h2>
+                                    <div class="sectionInner" style="margin-bottom: 25px;">
+                                        <p>Chúng tôi khuyến nghị xem trang web của chúng tôi trong các môi trường sau đây.</p>-->
+                                        <!-- /.sectionInner -->
+                                    <!--</div>
+
+                                    <div class="section">
+                                        <h3 class="hdTxt03"><span>Trình duyệt được đề xuất</span></h3>
+                                        <div class="sectionInner">
+                                            <p>Những trình duyệt khác có thể dẫn đến hiển thị nội dung không chính xác hoặc hoạt động sai.</p>
+
+                                            <ul class="listmark note">
+                                                <li>
+                                                    ※ Hãy lấy phiên bản mới nhất của bất kỳ trình duyệt nào cho trang IR. Nó có thể không được hiển thị chính xác ngay cả với Internet Explorer 8.
+                                                </li>
+                                            </ul>
+
+                                            <table cellspacing="0" class="dataTable01">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Trình duyệt</th>
+                                                        <th>Hệ điều hành</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Windows</td>
+                                                        <td>
+                                                            Internet Explorer 8.0 trở lên<br />
+                                                            Google Chrome phiên bản mới nhất<br />
+                                                            Mozilla Firefox phiên bản mới nhất
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Mac OSX</td>
+                                                        <td>
+                                                            Safari phiên bản mới nhất<br />
+                                                            Mozilla Firefox phiên bản mới nhất
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>-->
+                                            <!-- /.sectionInner -->
+                                        <!--</div>-->
+                                        <!-- /.sectionH3 -->
+                                    <!--</div>
+
+                                    <div class="section">
+                                        <h3 class="hdTxt03"><span>Công cụ hỗ trợ</span></h3>
+                                        <div class="sectionInner">
+                                            <p>Trang web của chúng tôi áp dụng các công cụ hỗ trợ và ứng dụng sau. Vui lòng tải xuống và cài đặt phiên bản mới nhất của công cụ hỗ trợ và ứng dụng từ trang web của mỗi nhà cung cấp.</p>
+                                            <ul class="linkList01" style="list-style:none;">
+                                                <li style="float: left;width: 50%;list-style:none;">
+                                                    <span class="vsHidden">（Opens in new window）</span><a href="http://www.adobe.com/go/getflashplayer" target="_blank">Adobe Flash Player</a><br>
+                                                    <a href="http://www.adobe.com/go/getflashplayer" target="_blank"><img src="~/lib/images/bnr_adobe_flashplayer.jpg" width="158" height="39" alt="Get ADOBE FLASH PLAYER"></a>
+                                                </li>
+                                                <li style="list-style:none;">
+                                                    <span class="vsHidden">（Opens in new window）</span><a href="http://get.adobe.com/reader/" target="_blank">Adobe Reader</a><br>
+                                                    <a href="http://get.adobe.com/reader/" target="_blank"><img src="~/lib/images/bnr_adobe_reader.jpg" width="158" height="39" alt="Get ADOBE READER"></a>
+                                                </li>
+                                            </ul>-->
+                                            <!-- /.sectionInner -->
+                                        <!--</div>-->
+                                        <!-- /.sectionH3 -->
+                                    <!--</div>
+
+                                    <div class="section">
+                                        <h3 class="hdTxt03"><span>Các thiết lập khác</span></h3>
+                                        <div class="sectionInner">
+                                            <ul>
+                                                <li>
+                                                    JavaScript<br>
+                                                    Trang web này sử dụng JavaScript.<br>
+                                                    Nếu bạn tắt JavaScript trong cài đặt trình duyệt, một số nội dung có thể không được hiển thị đúng hoặc một số chức năng có thể không hoạt động chính xác.<br>
+                                                    Để có trải nghiệm tốt, vui lòng bật JavaScript trong cài đặt trình duyệt của bạn.
+                                                </li>
+                                                <li>
+                                                    CSS<br>
+                                                    Trang web này sử dụng CSS (Cascading Style Sheets).<br>
+                                                    Nếu bạn tắt CSS trong cài đặt trình duyệt, một số nội dung có thể không được hiển thị đúng.<br>
+                                                    Để có trải nghiệm tốt, vui lòng bật CSS.
+                                                </li>
+                                            </ul>-->
+                                            <!-- /.sectionInner -->
+                                        <!--</div>-->
+                                        <!-- /.sectionH3 -->
+                                    <!--</div>
+
+                                    <div class="section">
+                                        <h3 class="hdTxt03"><span>Dành cho người dùng sử dụng Windows Vista</span></h3>
+                                        <div class="sectionInner">
+                                            <p>Một số ký tự Nhật Bản có thể không hiển thị.</p>-->
+                                            <!-- /.sectionInner -->
+                                        <!--</div>-->
+
+
+                                        <!-- /.sectionH3 -->
+                                    <!--</div>-->
+                                    <!-- /.sectionH2 -->
+                                <!--</div>
+                                <div class="section">
+                                    <h2 class="hdTxt02"><span>In ấn</span></h2>
+                                    <div class="sectionInner">
+                                        <p>
+                                            Trang web kiểm soát đầu ra để in sao cho phần không mong muốn như phần điều hướng không được in.<br />
+                                            Nếu bạn muốn in thông tin trên màn hình như cách nó thể hiện, vui lòng sao chép màn hình trình duyệt và in ra.<br />
+                                            Hình nền được in nếu bạn cài đặt trình duyệt thành "in nền".<br />
+                                        </p>-->
+
+                                        <!-- /.sectionInner -->
+                                    <!--</div>-->
+
+
+                                    <!-- /.sectionH2 -->
+                                <!--</div>-->
+                                <!-- /.sectionH1 -->
+                            <!--</div>
+
+                        }
+                        else if (Request.Cookies["language"].Value == "en")
+                        {
+                            <div class="section pageLead">-->
+                                @*<h1 class="hdTxt01"><span>Website Policy</span></h1>*@
+                                <div class="sectionInner" style="padding-bottom: 25px;">
+                                    <p>When accessing this website of SG Sagawa Vietnam Co. LTD・Sagawa Express Vietnam Co. LTD. ("the Website"), please read and consent to the following conditions. </p>-->
+                                    <!-- /.sectionInner -->
+                                <!--</div>
+
+                                <div class="section">
+                                    <h2 class="hdTxt02"><span>Copyright</span></h2>
+                                    <div class="sectionInner">
+                                        <p>
+                                            All contents of this Website are copyright of SG Sagawa Vietnam Co. LTD・Sagawa Express Vietnam Co. LTD. ("SGV・SEV" or "we"). <br>
+                                            SGV・SEV permits data from this Website to be printed, copied or saved, for personal or non-commercial reasons (such as for use in internal company materials).<br>
+                                            Except as set forth above, manipulation of any contents of this Website, beyond the scope of the Copyright Act, without the prior consent of SGV・SEV, is prohibited.
+                                        </p>-->
+                                        <!-- /.sectionInner -->
+                                    <!--</div>-->
+                                    <!-- /.sectionH2 -->
+                                <!--</div>
+
+                                <div class="section">
+                                    <h2 class="hdTxt02"><span>Trademarks</span></h2>
+                                    <div class="sectionInner">
+                                        <p>
+                                            All trademarks (company logos, service logos, service names, etc.) posted on this Website belong to SGV・SEV or licensed right holders. <br>
+                                            Use or manipulation of trademarks without consent of the rights holders is prohibited.
+                                        </p>-->
+                                        <!-- /.sectionInner -->
+                                    <!--</div>-->
+                                    <!-- /.sectionH2 -->
+                                <!--</div>
+
+                                <div class="section">
+                                    <h2 class="hdTxt02"><span>Linking to the Website</span></h2>
+                                    <div class="sectionInner" style="margin-bottom: 25px;">
+                                        <p>SGV・SEV does not need to be contacted about linking to the Website from any commercial or non-commercial websites or intranet.<br>However, please first consent to the following "Linking guideline" before linking to this Website.  </p>-->
+                                        <!-- /.sectionInner -->
+                                    <!--</div>
+
+                                    <div class="section">
+                                        <h3 class="hdTxt03"><span>Linking guidelines</span></h3>
+                                        <div class="sectionInner">
+                                            <ul style="list-style-type:disc">
+                                                <li>SGV・SEV takes no responsibility for any troubles or damages caused by linking to this Website. </li>
+                                                <li>The URL of any webpages except the home page or the contents may be changed without notice. </li>
+                                                <li>This Website should not be displayed which makes it unclear that it is the SGV・SEV website, for example by displaying the contents within a frame. </li>
+                                                <li>
+                                                    Links from the following websites may be refused and any active links should be removed when requested.
+                                                    <ul>
+                                                        <li>Websites which slanders or defame SGV・SEV, group companies, relevant services or individuals</li>
+                                                        <li>Websites which give the false impression of a cooperative or partner relationship with SGV・SEV</li>
+                                                        <li>Websites which give the false impression that SGV・SEV acknowledges or supports the website</li>
+                                                        <li>Websites which provide illegal or possibly illegal information</li>
+                                                        <li>Websites which provide obscene or immoral information </li>
+                                                        <li>Any other websites which are deemed inappropriate</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>-->
+                                            <!-- /.sectionInner -->
+                                        <!--</div>-->
+                                        <!-- /.sectionH3 -->
+                                    <!--</div>-->
+                                    <!-- /.sectionH2 -->
+                                <!--</div>
+
+
+                                <div class="section">
+                                    <h2 class="hdTxt02"><span>Recommended Web Browser Environment</span></h2>
+                                    <div class="sectionInner" style="margin-bottom: 25px;">
+                                        <p>We recommend the following environment to view our website.</p>-->
+                                        <!-- /.sectionInner -->
+                                    <!--</div>
+
+                                    <div class="section">
+                                        <h3 class="hdTxt03"><span>Recommended Browser</span></h3>
+                                        <div class="sectionInner">
+                                            <p>Other environment may result in incorrect display of the contents or misoperation.</p>
+
+                                            <ul class="listmark note">
+                                                <li>
+                                                    ※Please obtain the latest version of any browser for IR site. It may not be displayed correctly even with Internet Explorer 8.
+                                                </li>
+                                            </ul>
+
+                                            <table cellspacing="0" class="dataTable01">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>OS</th>
+                                                        <th>Browser</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Windows</td>
+                                                        <td>
+                                                            Internet Explorer 8.0 or higher<br>
+                                                            Google Chrome latest version<br>
+                                                            Mozilla Firefox latest version
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Mac OSX</td>
+                                                        <td>
+                                                            Safari latest version<br>
+                                                            Mozilla Firefox latest version
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>-->
+                                            <!-- /.sectionInner -->
+                                        <!--</div>-->
+                                        <!-- /.sectionH3 -->
+                                    <!--</div>
+
+                                    <div class="section">
+                                        <h3 class="hdTxt03"><span>Plug-ins</span></h3>
+                                        <div class="sectionInner">
+                                            <p>Our website adopts the following plug-ins and applications. Please download and install the latest version of plug-ins and application from the website of each provider.</p>
+                                            <ul class="linkList01" style="list-style:none;">
+                                                <li style="float: left;width: 50%;list-style:none;">
+                                                    <span class="vsHidden">（Opens in new window）</span><a href="http://www.adobe.com/go/getflashplayer" target="_blank">Adobe Flash Player</a><br>
+                                                    <a href="http://www.adobe.com/go/getflashplayer" target="_blank"><img src="~/lib/images/bnr_adobe_flashplayer.jpg" width="158" height="39" alt="Get ADOBE FLASH PLAYER"></a>
+                                                </li>
+                                                <li style="list-style:none;">
+                                                    <span class="vsHidden">（Opens in new window）</span><a href="http://get.adobe.com/reader/" target="_blank">Adobe Reader</a><br>
+                                                    <a href="http://get.adobe.com/reader/" target="_blank"><img src="~/lib/images/bnr_adobe_reader.jpg" width="158" height="39" alt="Get ADOBE READER"></a>
+                                                </li>
+                                            </ul>-->
+                                            <!-- /.sectionInner -->
+                                        <!--</div>-->
+                                        <!-- /.sectionH3 -->
+                                    <!--</div>
+
+                                    <div class="section">
+                                        <h3 class="hdTxt03"><span>Other settings</span></h3>
+                                        <div class="sectionInner">
+                                            <ul>
+                                                <li>
+                                                    JavaScript<br>
+                                                    This Website uses JavaScript. <br>
+                                                    If you have JavaScript turned off in your browser settings, some contents may not be displayed properly or some functions may not operate correctly.<br>
+                                                    For a more enjoyable experience, please have JavaScript turned on in your browser settings.
+                                                </li>
+                                                <li>
+                                                    CSS<br>
+                                                    This Website uses CSS (Cascading Style Sheets). <br>
+                                                    If you have CSS turned off in your browser settings, some contents may not be displayed properly.<br>
+                                                    For more enjoyable experience, please have CSS turned on.
+                                                </li>
+                                            </ul>-->
+                                            <!-- /.sectionInner -->
+                                        <!--</div>-->
+                                        <!-- /.sectionH3 -->
+                                    <!--</div>
+
+                                    <div class="section">
+                                        <h3 class="hdTxt03"><span>For users using Windows Vista</span></h3>
+                                        <div class="sectionInner">
+                                            <p>Some Japanese environment dependent characters may not display.</p>-->
+                                            <!-- /.sectionInner -->
+                                        <!--</div>-->
+
+
+                                        <!-- /.sectionH3 -->
+                                    <!--</div>-->
+                                    <!-- /.sectionH2 -->
+                                <!--</div>
+                                <div class="section">
+                                    <h2 class="hdTxt02"><span>Printing</span></h2>
+                                    <div class="sectionInner">
+                                        <p>
+                                            The Websites controls the output for printing so that the unwanted part such as navigation part is not printed. <br>
+                                            If you want to print information on the display as it looks, please copy the browser screen and print it out. <br>
+                                            The background image is printed if you set the browser to "print background".
+                                        </p>-->
+
+                                        <!-- /.sectionInner -->
+                                    <!--</div>-->
+
+
+                                    <!-- /.sectionH2 -->
+                                <!--</div>-->
+                                <!-- /.sectionH1 -->
+                            <!--</div>
+                        }
+                        else
+                        {
+                            <div class="section pageLead">
+                                <div class="sectionInner" style="padding-bottom: 25px;">
+                                    <p>SG佐川ベトナム株式会社・佐川急便ベトナム株式会社 ウェブサイト（以下、本サイト）のご利用にあたっては以下をお読みいただき、ご同意の上ご利用いただきますよう、お願い申し上げます。</p>-->
+                                    <!-- /.sectionInner -->
+                                <!--</div>
+
+                                <div class="section">
+                                    <h2 class="hdTxt02"><span>著作権について</span></h2>
+                                    <div class="sectionInner">
+                                        <p>
+                                            本サイトに掲載されているコンテンツの著作権は、SG佐川ベトナム株式会社・佐川急便ベトナム株式会社 株式会社（以下、当社）に帰属しています。個人利用もしくは貴社内の資料等、非営利目的で利用する場合は本サイトの印刷・ハードコピー・お客さまのパソコンへのデータ保存が可能です。<br>
+                                            上記を除き、本サイトに掲載しているコンテンツを著作権法の範囲を超えて無断で使用・加工することはできません。
+                                        </p>-->
+                                        <!-- /.sectionInner -->
+                                    <!--</div>-->
+                                    <!-- /.sectionH2 -->
+                                <!--</div>
+
+                                <div class="section">
+                                    <h2 class="hdTxt02"><span>商標について</span></h2>
+                                    <div class="sectionInner">
+                                        <p>
+                                            本サイトに掲載されている商標（企業ロゴ・サービスロゴ・サービス名　等）は、当社、または使用を許可した権利者にその権利が帰属します。<br>
+                                            権利者に無断で商標を使用・加工することはできません。
+                                        </p>-->
+                                        <!-- /.sectionInner -->
+                                    <!--</div>-->
+                                    <!-- /.sectionH2 -->
+                                <!--</div>
+
+                                <div class="section">
+                                    <h2 class="hdTxt02"><span>リンクについて</span></h2>
+                                    <div class="sectionInner" style="margin-bottom: 25px;">
+                                        <p>本サイトへのリンクは営利・非営利・イントラネットを問わず、リンクに際しての連絡は不要です。以下の「リンクガイドライン」に同意いただいた上で掲載いただきますようお願いいたします。</p>-->
+                                        <!-- /.sectionInner -->
+                                    <!--</div>
+
+                                    <div class="section">
+                                        <h3 class="hdTxt03"><span>リンクガイドライン</span></h3>
+                                        <div class="sectionInner">
+                                            <ul style="list-style-type:disc">
+                                                <li>本サイトへのリンクによって発生したトラブルや損害賠償問題につきましては当社は一切その責を負いません。</li>
+                                                <li>本サイトのトップページ以外のURLや掲載情報は予告なしに変更される場合があります。</li>
+                                                <li>本サイトをフレーム内で表示させる等、当社のウェブサイトであることが不明確となる表示は行わないでください。</li>
+                                                <li>
+                                                    以下に該当するウェブサイトからのリンクはお断りいたします。
+                                                    いずれかに該当することが判明し、当社がリンク削除の申し入れをした場合は従っていただくものとします。
+                                                    <ul>
+                                                        <li>当社またはグループ企業、それらに属するサービスや個人を誹謗・中傷するサイト</li>
+                                                        <li>当社と何らかの協力または提携関係にあると誤認を生じさせるサイト</li>
+                                                        <li>当社がリンク元のサイトを認知もしくは支持していると誤認を生じさせるサイト</li>
+                                                        <li>違法、または違法である可能性のある情報を提供するサイト</li>
+                                                        <li>卑猥・社会的倫理に反する情報を提供するサイト</li>
+                                                        <li>その他当社が不適切と判断するサイト</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>-->
+                                            <!-- /.sectionInner -->
+                                        <!--</div>-->
+                                        <!-- /.sectionH3 -->
+                                    <!--</div>-->
+                                    <!-- /.sectionH2 -->
+                                <!--</div>
+
+
+                                <div class="section">
+                                    <h2 class="hdTxt02"><span>閲覧推奨環境について</span></h2>
+                                    <div class="sectionInner">
+                                        <p>本サイトを快適にご利用いただくために、以下の環境でご覧いただくことを推奨いたします。</p>-->
+                                        <!-- /.sectionInner -->
+                                    <!--</div>
+
+                                    <div class="section">
+                                        <h3 class="hdTxt03"><span>推奨ブラウザ</span></h3>
+                                        <div class="sectionInner" style="margin-bottom: 25px;">
+                                            <p>下記以外の環境では異なった表示をしてしまうことがあり、また動作の保証もできませんので、下記の環境でご覧いただく方がより快適にご利用いただけます。</p>
+
+                                            <ul class="listmark note">
+                                                <li>
+                                                    ※株主・投資家情報コンテンツのみ、Internet Explorer 8ではページが正常に表示されない可能性がございます。<br>恐れ入りますが、最新バージョンのブラウザにてご覧いただけますようお願いいたします。
+                                                </li>
+                                            </ul>
+
+                                            <table cellspacing="0" class="dataTable01">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>OS</th>
+                                                        <th>ブラウザ</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Windows</td>
+                                                        <td>
+                                                            Internet Explorer 8以上<br>
+                                                            Google Chrome 最新バージョン<br>
+                                                            Mozilla Firefox 最新バージョン
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Mac OSX</td>
+                                                        <td>
+                                                            Safari 最新バージョン<br>
+                                                            Mozilla Firefox 最新バージョン
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>-->
+                                            <!-- /.sectionInner -->
+                                        <!--</div>-->
+                                        <!-- /.sectionH3 -->
+                                    <!--</div>
+
+                                    <div class="section">
+                                        <h3 class="hdTxt03"><span>プラグイン</span></h3>
+                                        <div class="sectionInner">
+                                            <p>
+                                                本サイトでは下記のプラグイン、アプリケーションを利用しております。<br>
+                                                各社のサイトより最新のバージョンをダウンロード、インストールしてください。
+                                            </p>
+                                            <ul class="linkList01" style="list-style:none;">
+                                                <li style="float: left;width: 50%;">
+                                                    <span class="vsHidden">（新しいウィンドウが開きます）</span><a href="http://www.adobe.com/go/getflashplayer" target="_blank">Adobe Flash Player　最新版</a><br>
+                                                    <a href="http://www.adobe.com/go/getflashplayer" target="_blank"><img src="~/lib/images/bnr_adobe_flashplayer.jpg" width="158" height="39" alt="Get ADOBE FLASH PLAYER"></a>
+                                                </li>
+                                                <li>
+                                                    <span class="vsHidden">（新しいウィンドウが開きます）</span><a href="http://www.adobe.com/jp/products/acrobat/readstep2.html" target="_blank">Adobe Reader　最新版</a><br>
+                                                    <a href="http://www.adobe.com/jp/products/acrobat/readstep2.html" target="_blank"><img src="~/lib/images/bnr_adobe_reader.jpg" width="158" height="39" alt="Get ADOBE READER"></a>
+                                                </li>
+                                            </ul>-->
+                                            <!-- /.sectionInner -->
+                                        <!--</div>-->
+                                        <!-- /.sectionH3 -->
+                                    <!--</div>
+
+                                    <div class="section">
+                                        <h3 class="hdTxt03"><span>その他の設定</span></h3>
+                                        <div class="sectionInner">
+                                            <ul>
+                                                <li>
+                                                    JavaScriptについて<br>
+                                                    本サイトでは、JavaScriptを使用しております。<br>
+                                                    ブラウザの設定でJavaScriptを無効にされていますと、一部のレイアウトが正しく表示されなかったり、機能が正しく動作しないことがございます。より快適な閲覧のために、ブラウザの設定でJavaScriptを有効にしてご覧ください。
+                                                </li>
+                                                <li>
+                                                    CSSについて<br>
+                                                    本サイトでは、CSS（Cascading Style Sheets）を使用しております。<br>
+                                                    ブラウザの設定でCSSを無効にされていますと、レイアウトが正しく表示されないことがございます。より快適な閲覧のために、ブラウザの設定でCSSを有効にしてご覧ください。
+                                                </li>
+                                            </ul>-->
+                                            <!-- /.sectionInner -->
+                                        <!--</div>-->
+                                        <!-- /.sectionH3 -->
+                                    <!--</div>
+
+                                    <div class="section">
+                                        <h3 class="hdTxt03"><span>Windows Vistaをご利用のお客さまへ</span></h3>
+                                        <div class="sectionInner">
+                                            <p>
+                                                Windows Vistaでは、日本語入力で変換できる文字が追加され、これまでのWindowsと比べお客さまの使用できる文字が増えました（追加された文字を「環境依存文字」と呼びます）。<br>
+                                                本サイト内の入力フォームにおいて環境依存文字を使用されますと、文字化け（記号や数字の羅列表示）が起こるなど、文字を正しく取り扱えない場合があります。
+                                            </p>
+                                            <p>文字変換時の選択候補内に「環境依存文字（unicode）」（右画面イメージ参照）と表示される文字は使用されないようにお願いいたします。</p>-->
+                                            <!-- /.sectionInner -->
+                                        <!--</div>
+
+                                        <div class="pct1cl">
+                                            <dl class="box" style="width: 380px;">
+                                                <dt><img src="/help/images/pct_vista.gif" alt="" width="380" height="136"></dt>
+                                                <dd>※ Windows Vistaで「おうがい」を日本語入力し、変換した場合の画面イメージ</dd>
+                                            </dl>-->
+                                            <!-- /.pct1cl -->
+                                        <!--</div>-->
+                                        <!-- /.sectionH3 -->
+                                    <!--</div>-->
+                                    <!-- /.sectionH2 -->
+                                <!--</div>
+
+
+                                <div class="section">
+                                    <h2 class="hdTxt02"><span>RSSについて</span></h2>
+                                    <div class="sectionInner">
+                                        <p>
+                                            本サイトでは、ニュースリリースの最新情報をRSSを使って配信しています。<br>
+                                            下記リンク先をRSSリーダーに登録することで、新着ニュースを取得できます。
+                                        </p>
+                                        <ul class="linkList01 inline">
+                                            <li class="rss"><a href="http://www.sg-hldgs.co.jp/rss/sagawa_sgh.rdf">ニュースリリース<br>http://www.sg-hldgs.co.jp/rss/sagawa_sgh.rdf</a></li>
+                                        </ul>-->
+                                        <!-- /.sectionInner -->
+                                    <!--</div>
+
+                                    <div class="section">
+                                        <h3 class="hdTxt03"><span>RSSとは？</span></h3>
+                                        <div class="sectionInner">
+                                            <p>
+                                                RSSとは、ウェブサイトの更新情報などを手軽にチェックできるものです。<br>
+                                                RSSをご利用いただくには、「RSSリーダー」と呼ばれるソフトや、RSSに対応したブラウザが必要となります。
+                                            </p>-->
+                                            <!-- /.sectionInner -->
+                                        <!--</div>-->
+                                        <!-- /.sectionH3 -->
+                                    <!--</div>
+
+                                    <div class="section">
+                                        <h3 class="hdTxt03"><span>ご利用上の注意</span></h3>
+                                        <div class="sectionInner">
+                                            <ul>
+                                                <li>本サイトで配信しているRSSは、非営利目的でのご使用に限り、ご自由にご利用いただけます。</li>
+                                                <li>システムメンテナンスなどのため、予告なくRSSの配信を停止・中止することがございます。</li>
+                                                <li>RSSリーダー等、第三者が提供するソフトウェアやサービスについてのご質問・お問い合わせにはお答えできませんので、ご了承ください。</li>
+                                            </ul>-->
+                                            <!-- /.sectionInner -->
+                                        <!--</div>-->
+                                        <!-- /.sectionH3 -->
+                                    <!--</div>-->
+                                    <!-- /.sectionH2 -->
+                                <!--</div>
+
+
+                                <div class="section">
+                                    <h2 class="hdTxt02"><span>印刷について</span></h2>
+                                    <div class="sectionInner">
+                                        <p>
+                                            本サイトでは、印刷時にはナビゲーションなどの不要な部分が出力されないよう、出力内容を制御しております。ディスプレイ上の見た目そのままで印刷したい場合は、ブラウザ画面をハードコピーし、そちらを印刷していただけますようお願いします。<br>
+                                            また、背景画像は、ブラウザの設定を「背景を印刷する」にしていただくと印刷されます。
+                                        </p>-->
+                                        <!-- /.sectionInner -->
+                                    <!--</div>-->
+
+
+                                    <!-- /.sectionH2 -->
+                                <!--</div>-->
+                                <!-- /.sectionH1 -->
+                            <!--</div>
+                        }
+                    }
+                </div>--><!-- .entry-content -->
+
+
+            <!--</div>
+        </div>
+    </div>
+
+</div>-->
+

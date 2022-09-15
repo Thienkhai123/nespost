@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Bảng giá";
+}
+
+<section class="bang_gia_cuoc_chuyen_phat_nhanh">
+    <div class="container">
+        @if (ViewData["name"] != null && ViewData["name"].ToString() == "ha_noi")
+        {
+            <h2 class="section_header">BẢNG GIÁ HÀ NỘI</h2>
+            <iframe src="https://docs.google.com/viewer?url=http://demo.netpost.vn:9999/Image/banggia/hanoi.pdf&embedded=true" width="880" height="800" style="border: none;"></iframe>
+        }
+        else if (ViewData["name"] != null && ViewData["name"].ToString() == "ho_chi_minh")
+        {
+            <h2 class="section_header">BẢNG GIÁ HỒ CHÍ MINH</h2>
+            <iframe src="https://docs.google.com/viewer?url=http://demo.netpost.vn:9999/Image/banggia/hcm.pdf&amp;embedded=true" width="880" height="800" style="border: none;"></iframe>
+        }
+        else if (ViewData["name"] != null && ViewData["name"].ToString() == "da_nang")
+        {
+            <h2 class="section_header">BẢNG GIÁ ĐÀ NẴNG</h2>
+            <iframe src="https://docs.google.com/viewer?url=http://demo.netpost.vn:9999/Image/banggia/danang.pdf&amp;embedded=true" width="880" height="800" style="border: none;"></iframe>
+        }
+    </div>
+</section>
+

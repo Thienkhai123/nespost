@@ -1,0 +1,55 @@
+﻿@using WebSite.Language;
+@{
+    ViewBag.Title = Resource.sodoweb;
+}
+<style>
+    .entry-content .col-md-6 {
+        display: flex;
+        justify-content: center;
+        padding-bottom: 25px;
+    }
+
+</style>
+
+<div class="container page-container">
+    <div class="row">
+        <div id="post-398" class="post-398 page type-page status-publish hentry">
+            <div class="title title2 about">
+                <h4><span> @Resource.sodoweb </span></h4>
+            </div>
+            <div class="entry-content">
+                <ul id="tree1" class="tree">
+                    <li>
+                        <a href="javascript:void(0)">WebSite</a>
+                        <ul>
+                            <li><a href="@Url.Action("Index","Home")">@Resource.trangchu</a></li>
+                            <li>
+                                <a href="javascript:void(0)">@Resource.dichvu</a>
+                                <ul>
+                                    <li> <a href="@Url.Action("chuyen_phat_nhanh","Dich_Vu")">@Resource.vtaiHK</a></li>
+                                    <li><a href="@Url.Action("phat_hoa_toc","Dich_Vu")">@Resource.vtaiBien</a> </li>
+                                    <li><a href="@Url.Action("sgx","Dich_Vu")">@Resource.Sgx</a></li>
+                                    <li> <a href="@Url.Action("gia_tri_cao","Dich_Vu")">@Resource.thutuchaiquan</a> </li>
+                                    <li><a href="@Url.Action("trucking","Dich_Vu")">@Resource.vtaiBo</a></li>
+                                    <li> <a href="@Url.Action("tiet_kiem","Dich_Vu")">@Resource.khobai</a></li>
+                                    <li><a href="@Url.Action("gia_tang","Dich_Vu")">@Resource.kiemkim</a></li>
+                                    <li><a href="@Url.Action("removal","Dich_Vu")">@Resource.donchuyen</a></li>
+                                    <li><a href="@Url.Action("project_cargo","Dich_Vu")">@Resource.trienkhaihangduan</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="@Url.Action("Index","Tin_Tuc")">@Resource.tintuc</a></li>
+                            <li><a href="@Url.Action("Index","Tuyen_Dung")">@Resource.tuyendung</a></li>
+                            <li><a href="@Url.Action("Index","Thong_Tin_Cong_Ty")">@Resource.ttcty</a></li>
+                            <li><a href="@Url.Action("Index","Lien_He")">@Resource.lienhe</a></li>
+                            <li><a href="@Url.Action("about_using_website", "Home")">@Resource.quytrinhsudung</a></li>
+                            <li><a href="@Url.Action("privacy_policy","Home")">@Resource.chinhsachbaomat</a></li>
+                            <li><a href="@Url.Action("sitemap","Home")">@Resource.sodoweb</a></li>
+                        </ul>
+                    </li>                    
+                </ul>
+            </div><!-- .entry-content -->
+        </div>
+    </div>
+</div>
+
+

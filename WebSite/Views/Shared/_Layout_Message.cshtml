@@ -1,0 +1,754 @@
+﻿@{WebSite.Models.CSS_CRM_NGUOI_DUNGDTO user = (WebSite.Models.CSS_CRM_NGUOI_DUNGDTO)Session["UserAdmin"];}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="icon" href="~/lib/images/logo/favicon.png" type="image/x-icon">
+    <!--title-->
+    <title>MessagePage - Sagawa </title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/lib/vendor/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/lib/vendor/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="~/lib/vendor/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/lib/vendor/font-awesome/css/font-awesome.min.css" />
+    <!--Datepicker-->
+    <link href="~/lib/bootstrap/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    <!--sweetalert-->
+    <link href="~/lib/css/sweetalert2.min.css" rel="stylesheet" />
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="~/lib/css/style-booking.css?vr=1.1" />
+    <!-- End layout styles -->
+    <link href="~/lib/css/templatemo_style.css?vr=1.1" rel="stylesheet" />
+    <link href="~/lib/css/ChatStyle.css?vr=1.1" rel="stylesheet" />
+    <link href="~/favicon.ico" />
+
+    <!--devexpress-->
+    @Html.DevExpress().GetStyleSheets(
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Editors }
+    )
+
+    @Html.DevExpress().GetScripts(
+        new Script { ExtensionSuite = ExtensionSuite.Editors }
+    )
+    <script type="text/javascript" src="@Url.Content("~/Content/GridView.js")"></script>
+
+    <!--signalR-->
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+    <script type="text/javascript">
+        var chatHub;
+        var tab = "ListUser";
+
+        if (window.Notification && Notification.permission !== "granted") {
+            Notification.requestPermission(function (status) {
+                if (Notification.permission !== status) {
+                    Notification.permission = status;
+                }
+            });
+        }
+
+        $(function () {
+            // Declare a proxy to reference the hub.
+            chatHub = $.connection.chatHubOnline;
+
+            SearchMess();
+
+            registerClientMethods(chatHub);
+
+            // Start Hub
+            $.connection.hub.start({ waitForPageLoad: false }).done(function () {
+                chatHub.server.connect('@Html.Raw(user.USER_NAME)', '@Html.Raw(user.NAME)', '@Html.Raw(user.LOAI_USER)', '@Html.Raw(user.COMPANY_CODE)');
+            });
+
+            registerEvents(chatHub);
+        });
+
+        function registerEvents(chatHub) {
+            $("#txtMessage").keypress(function (e) {
+                if (e.which == 13) {
+                    $('#btnSendMsg').click();
+                }
+            });
+
+            $("#btnSendMsg").click(function () {
+                var touserId = $('#touserName').val();
+                var msg = $("#txtMessage").val();
+                if (msg.length > 0) {
+                    chatHub.server.sendPrivateMessage(touserId, $('#txtTenKhachHang').val(), msg);
+                    $("#txtMessage").val('');
+                }
+            });
+
+            $('#btnPhanTuyen').click(function () {
+                var touserId = $('#touserName').val();
+
+                if (touserId == "") {
+                    Swal.fire(
+                        '',
+                        "Phải chọn 1 khách hàng để phân tuyến",
+                        'error');
+                    return;
+                }
+
+                if (cbListCS.GetValue() == null) {
+                    Swal.fire(
+                        '',
+                        "Vui lòng chọn 1 nhân viên để phân tuyến",
+                        'error');
+                    return;
+                }
+
+                chatHub.server.phanTuyenCS(touserId, $('#txtTenKhachHang').val(), cbListCS.GetValue());
+            });
+
+            setInterval(function () {
+                $.ajax({
+                url: "/MessagePage/CheckCSOnOff",
+                type: "POST",
+                dataType: 'json',
+                success: function (data) {
+                    if (!data.Error) {
+                        chatHub.server.checkCSOnOff();
+                    }
+                    }
+                });
+            }, 120000);
+        }
+
+        function registerClientMethods(chatHub) {
+            // Calls when user successfully logged in
+            chatHub.client.onConnected = function (UserID, lstKH, listCS) {
+
+                //$('.chat-message-loading').addClass('d-none');
+
+                // Add All CS
+
+                for (var i in listCS) {
+                    var touserName = listCS[i].UserID;
+                    var toName = listCS[i].FullName;
+
+                    var check = $("ul#ListCS").find("#" + touserName);
+                    if (check.length > 0) {
+                        continue;
+                    }
+                    var code = $('<li class="sidebar-dropdown" id="' + touserName + '"><a class="cs online" ><i class="fa fa-user"></i><span>' + toName + '</span></a></li>');
+                    $("ul#ListCS").append(code);
+                }
+
+                for (var i in lstKH) {
+                    var check = $("ul#ListUser").find("#" + lstKH[i].UserID);
+                    if (check.length > 0) {
+                        $(check).removeClass("offline").addClass("online");
+                    }
+                }
+
+            }
+
+            // On New CS Connected
+            chatHub.client.onNewCSConnected = function (UserID, Name) {
+                var check = $("ul#ListCS").find("#" + UserID);
+                if (check.length > 0) {
+                    var id = check[0].id;
+                    $("#" + id).find("a").removeClass("offline").addClass("online");
+                }
+                else {
+                    var code = $('<li class="sidebar-dropdown" id="' + UserID + '"><a class="cs online" ><i class="fa fa-user"></i><span>' + Name + '</span></a></li>');
+                    $("ul#ListCS").append(code);
+                }
+            }
+
+            // on cs offline
+            chatHub.client.onCSOffline = function (CS) {
+                 var check = $("ul#ListCS").find("#" + CS.UserCode);
+                if (check.length > 0) {
+                    $("ul#ListCS #" + CS.UserCode).remove();
+                }
+            }
+
+            // On User ReConnected
+            chatHub.client.onUserConnected = function (UserID) {
+                var check = $("ul#ListUser").find("#" + UserID);
+                if (check.length > 0) {
+                    var id = check[0].id;
+                    $("#" + id).removeClass("offline").addClass("online");
+                }
+            }
+
+            // On User offline
+            chatHub.client.onUserOffline = function (User) {
+                if (User.Role == "KHACH") {
+                    var check = $("ul#ListUser").find("#" + User.UserID);
+                    if (check.length > 0) {
+                        $("ul#ListUser #" + User.UserID).removeClass("online").addClass("offline");
+                    }
+                }
+            }
+
+            chatHub.client.onUserDisconnected = function (User) {
+                var check = $("ul#ListUser").find("#" + User.UserID);
+                if (check.length > 0) {
+                    $("ul#ListUser #" + User.UserID).remove();
+                }
+            }
+
+            // Phân tuyến cho CS
+            chatHub.client.phanTuyenCS = function (error, UserID, title) {
+                if (error) {
+                    Swal.fire(
+                        '',
+                        title,
+                        'error');
+                }
+                else {
+                    $("ul#ListUser #" + UserID).remove();
+                    $('#divChat .content').find('.chatWindow').remove();
+                    $('#UserNameKhach').html('');
+                    Swal.fire(
+                        '',
+                        title,
+                        'success');
+                    $('.messageBar').addClass('d-none');
+                    $('#modal-PhanTuyenCS').modal('hide');
+                    SearchAllMess();
+                }
+            }
+
+            // On New User Connected
+            chatHub.client.onNewUserConnected = function (User) {
+                var check = $("ul#ListUser").find("#" + User.UserID);
+                if (check.length > 0) {
+                    return;
+                }
+
+                var code = "";
+                var Name = "Khách vãng lai " + User.FullName.substring(0, 5);
+
+                if (User.lstMess[0].Message.length > 25) {
+                    User.lstMess[0].Message = User.lstMess[0].Message.substring(0, 25) + "...";
+                }
+
+                if (window.Notification && Notification.permission === "granted") {
+                    var notification = new Notification(Name, {
+                        icon: "/lib/images/logo/logo.png",
+                        body: User.lstMess[0].Message,
+                    });
+
+                    notification.onclick = function () {
+                        window.focus();
+                        this.close();
+                    };
+                    setTimeout(function () {
+                        notification.close();
+                    }, 5000);
+                }
+                else {
+                    Notification.requestPermission();
+                }
+
+                var str = '';
+                if (User.Online)
+                    str += '<li class="sidebar-dropdown user online" id="' + User.UserID + '"  title="' + Name + '">';
+                else
+                    str += '<li class="sidebar-dropdown user offline" id="' + User.UserID + '"  title="' + Name + '">';
+
+                if (User.UnRead > 0)
+                    str += '<p><i class="fa fa-user" style="float:left"></i><span class="badge badge-pill badge-danger" >' + User.UnRead + ' </span>';
+                else
+                    str += '<p><i class="fa fa-user" style="float:left"></i><span class="badge badge-pill badge-danger"></span>';
+
+                str += '<span class="Name">' + Name + '</p><p class="mess-content"> <span class="mess">' + User.lstMess[0].Message + '</span><span class="timeshet">' + User.lstMess[0].Time_String + ' </span></p></li>';
+
+                code = $(str);
+
+                $(code).click(function () {
+                    var idKH = $(this);
+                    chatHub.server.updateCsCare(idKH[0].id, false);
+                });
+
+                $("#ListUser").prepend(code);
+            }
+
+            chatHub.client.csCare = function (UserKH, checkconn, isJustView) {
+                $("ul#" + tab).find('li').removeClass('active');
+                $("ul#"+tab).find('#'+UserKH.UserID).find('.badge').html('');
+                $("ul#"+tab).find('#'+UserKH.UserID).addClass('active');
+
+                $('#touserName').val(UserKH.UserID);
+                $('#txtTenKhachHang').val("Khách vãng lai " + UserKH.FullName.substring(0, 5));
+                $('#divContainer').removeClass('d-none');
+
+                if (checkconn == true) {
+                    $('.messageBar').removeClass('d-none');
+                    $('#UserNameKhach').html('<i class="fa fa-user"></i>  ' + "Khách vãng lai " + UserKH.FullName.substring(0, 5));
+                    OpenPrivateChatWindow(UserKH, true);
+                }
+                else {
+                    $('.messageBar').addClass('d-none');
+                    if (UserKH.CsNameCare != null && UserKH.CsNameCare != "")
+                        $('#UserNameKhach').html('<i class="fa fa-user"></i>  ' + "Khách vãng lai " + UserKH.FullName.substring(0, 5) + " đang chat cùng CS " + UserKH.CsNameCare);
+                    else {
+                        $('#UserNameKhach').html('<i class="fa fa-user"></i>  ' + "Khách vãng lai " + UserKH.FullName.substring(0, 5));
+                    }
+                    OpenPrivateChatWindow(UserKH, false);
+                }
+            }
+
+            //
+            chatHub.client.sendPrivateMessage = function (dtoMess, UserNameSend, NameSend) {
+                var mess = dtoMess.Message;
+                if (mess.length > 35) {
+                    mess = dtoMess.Message.substring(0, 35) + "...";
+                }
+
+                if (dtoMess.Fr_UserRole == "KHACH_ONL") {
+                    //notification
+                    if (window.Notification && Notification.permission === "granted") {
+                        var notification = new Notification(dtoMess.Fr_UserName, {
+                            icon: "/lib/images/logo/logo.png",
+                            body: dtoMess.Message,
+                        });
+
+                        notification.onclick = function () {
+                            window.focus();
+                            this.close();
+                        };
+                        setTimeout(function () {
+                            notification.close();
+                        }, 5000);
+                    }
+                    else {
+                        Notification.requestPermission();
+                    }
+
+                    if ($("ul#ListUser").find('#' + dtoMess.Fr_UserID).length == 0) {
+                        ConnAddUser(dtoMess, true);
+                    }
+                    else {
+                        var ctrId = "private_" + dtoMess.Fr_UserID;
+
+                        var windowNe = $('#' + dtoMess.Fr_UserID);
+                        $('#' + dtoMess.Fr_UserID).remove();
+                        $(windowNe).click(function () {
+                            var idKH = $(this);
+                            chatHub.server.updateCsCare(idKH[0].id, false);
+                        });
+
+                        $("ul#ListUser").prepend(windowNe);
+
+                        $('#' + dtoMess.Fr_UserID).find('p').find(".mess").html(mess);
+                        $('#' + dtoMess.Fr_UserID).find('p').find(".timeshet").html(dtoMess.Time_String);
+                        $('#' + dtoMess.Fr_UserID).removeClass("offline").addClass("online");
+                        if ($('#' + ctrId).css("display") == null || $('#' + ctrId).css("display") == "none") {
+                            var dem = parseInt($('#' + dtoMess.Fr_UserID).find('p').find(".badge").html() == "" ? "0" : $('#' + dtoMess.Fr_UserID).find('a').find('p').find(".badge").html()) + 1;
+                            $('#' + dtoMess.Fr_UserID).find('p').find(".badge").html(dem);
+                        }
+                        else {
+                            var ctrId = "private_" + dtoMess.Fr_UserID;
+                            //<strong>' + dtoMess.Fr_UserName + '</strong> <br/>
+                            $('#' + ctrId).append('<div class="col-md-12"><div class="chat-message-text pull-left bg-white"><p>' + dtoMess.Message + ' </p><p class="time-log"><small>'+dtoMess.Time_String+'</small></p></div></div>');
+                            chatHub.server.updateReadMess(dtoMess.Fr_UserID, "CS");
+                            // set scrollbar
+                            var height = $('.chatWindow')[0].scrollHeight;
+                            $('.chatWindow').scrollTop(height);
+                        }
+                    }
+                }
+                else {
+                    var ctrId = "private_" + UserNameSend;
+                    $('#' + UserNameSend).find('a').find('p').find(".mess").html(mess);
+                    $('#' + UserNameSend).find('a').find('p').find(".timeshet").html(dtoMess.Time_String);
+                    $('#' + ctrId).append('<div class="col-md-12"><div class="chat-message-text pull-right"><p> ' + dtoMess.Message + ' </p></div></div>');
+                    // set scrollbar
+                    if ($('.chatWindow').length > 0) {
+                        var height = $('.chatWindow')[0].scrollHeight;
+                        $('.chatWindow').scrollTop(height);
+                    }
+                }
+            }
+
+            chatHub.client.checkErorr = function (Mess) {
+                console.log(Mess);
+            }
+        }
+
+        function ConnAddUser(User, isOnline) {
+            var code = "";
+
+            var Name = "Khách vãng lai " + User.Fr_UserName.substring(0, 5);
+
+            if (User.Message.length > 25) {
+                User.Message = User.Message.substring(0, 25) + "...";
+            }
+
+            var str = '';
+
+            if (isOnline) {
+                str += '<li class="sidebar-dropdown user online" id="' + User.Fr_UserID + '"  title="' + Name + '">';
+            }
+            else {
+                str += '<li class="sidebar-dropdown user offline" id="' + User.Fr_UserID + '"  title="' + Name + '">';
+            }
+
+            if (User.UnRead > 0)
+                str += '<p><i class="fa fa-user"></i><span class="badge badge-pill badge-danger" >' + User.UnRead + ' </span>';
+            else
+                str += '<p><i class="fa fa-user"></i><span class="badge badge-pill badge-danger"></span>';
+
+            str += '<span class="Name">' + Name + '</span></p><p class="mess-content"> <span class="mess">' + User.Message + '</span><span class="timeshet">' + User.Time_String + ' </span></p></a></li>';
+
+            code = $(str);
+
+            $(code).click(function () {
+                var idKH = $(this);
+                chatHub.server.updateCsCare(idKH[0].id, false);
+            });
+
+            if (isOnline) {
+                $("ul#ListUser").prepend(code);
+            }
+            else {
+                 $("ul#ListUser").append(code);
+            }
+        }
+
+        function OpenPrivateChatWindow(UserKH, checkConn) {
+            var ctrIdKH = 'private_' + UserKH.UserID;
+
+            var div = ' <div id="' + ctrIdKH + '" class="chatWindow row">';
+            var data = UserKH.lstMess;
+
+            for (var i in data) {
+                if (data[i].Fr_UserID == UserKH.UserID) {
+                    if (checkConn) {
+                        div = div + '<div class="col-md-12"><div class="chat-message-text pull-left bg-white"><p>' + data[i].Message + ' </p><p class="time-log"><small>' + data[i].Time_String + '</small></p></div></div>';
+                    }
+                    else {
+                        div = div + '<div class="col-md-12"><div class="chat-message-text pull-left bg-white"><p><strong>' + "Khách vãng lai " + data[i].Fr_UserName.substring(0, 5) + '</strong> <br/>' + data[i].Message + ' </p><p class="time-log"><small>' + data[i].Time_String + '</small></p></div></div>';
+                    }
+                }
+                else {
+                    if (checkConn == true) {
+                        div = div + '<div class="col-md-12"><div class="chat-message-text pull-right"><p>' + data[i].Message + ' </p></div></div>';
+                    }
+                    else {
+                        div = div + '<div class="col-md-12"><div class="chat-message-text pull-right"><p> <strong>' + data[i].Fr_UserName + '</strong> <br/>' + data[i].Message + ' </p></div></div>';
+                    }
+                }
+            }
+
+            div = div + '</div>';
+            var $div = $(div);
+            $('#divChat .content').find('.chatWindow').remove();
+            $('#divChat .content').prepend($div);
+            var height = $('.chatWindow')[0].scrollHeight;
+            $('.chatWindow').scrollTop(height);
+        }
+
+        function SearchMess() {
+            $.ajax({
+                url: "/MessagePage/SEARCH_MESS",
+                type: "POST",
+                dataType: 'json',
+                success: function (data) {
+                    $('.chat-message-loading').addClass('d-none');
+
+                    if (!data.Erorr) {
+                        for (var i in data.Object) {
+                            var User = data.Object[i];
+                            ConnAddUser(User, true);
+                        }
+                    }
+                }
+            });
+        }
+
+        function phanTuyen() {
+            $('#modal-PhanTuyenCS .combobox-body').load('/MessagePage/_lstCS');
+            $('#modal-PhanTuyenCS').modal({backdrop:'static'});
+        }
+
+        var re = /^[A-Za-z0-9]{4,}$/;
+
+        function changeText(obj) {
+            if ($(obj).val() !== '') {
+                $(obj).attr('type', 'password');
+            } else {
+                $(obj).attr('type', 'text');
+            }
+        }
+
+        function Reset() {
+            var pass = $('#pswold').val();
+            var newpsw = $('#psw').val();
+            var repsw = $('#repsw').val();
+            if (newpsw == "") {
+                $('#message').html('Password mới không được bỏ trống');
+                $('#message').removeClass("d-none");
+                return;
+            }
+            if (!re.test(newpsw)) {
+                $('#message').html('Password không được chứa kí tự đặc biệt và có 4 kí tự trở lên');
+                $('#message').removeClass("d-none");
+                return;
+            }
+            if (repsw == "") {
+                $('#message').html('Nhập lại password không được bỏ trống');
+                $('#message').removeClass("d-none");
+                return;
+            }
+            if (newpsw != repsw) {
+                $('#message').html('Nhập lại password không đúng.');
+                $('#message').removeClass("d-none");
+                return;
+            }
+
+            $.ajax({
+                url: "/MessagePage/ResetPass",
+                type: "POST",
+                data: {
+                    pass: pass,
+                    newpsw: newpsw
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (!data.Error) {
+                        Swal.fire({
+                            title: 'Thay đổi mật khẩu thành công!',
+                            icon: 'info',
+                            showCancelButton: false,
+                            cancelButtonText: 'No',
+                            confirmButtonText: 'OK'
+                        })
+                            .then(function (willDelete) {
+                                if (willDelete.value) {
+                                    window.location.reload();
+                                }
+                            });
+                    }
+                    else {
+                        $('#message').html(data.Title);
+                        $('#message').removeClass("d-none");
+                    }
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+    <div class="container-scroller">
+        <!-- partial:partials/_horizontal-navbar.html -->
+        <div class="horizontal-menu">
+            <nav class="navbar top-navbar col-lg-12 col-12 p-0">
+                <div class="container">
+                    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                        <a class="navbar-brand brand-logo">
+                            <img src="~/lib/images/logo/logo.png" alt="logo" />
+                        </a>
+                        <a class="navbar-brand brand-logo-mini"><img src="~/lib/images/logo/logo.png" alt="logo" /></a>
+                    </div>
+                    <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                        <ul class="navbar-nav mr-lg-2 note-user">
+                            <li class="nav-item nav-search d-none d-lg-block">
+                                <p>
+                                    <span>@user.USER_NAME - @user.NAME</span>
+                                </p>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav navbar-nav-right">
+                            <li class="nav-item nav-profile dropdown">
+                                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                                    <div class="nav-profile-img">
+                                        @*<img src="~/lib/images/logo/sagawa.png" alt="logo" />*@
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
+                            <span class="mdi mdi-menu"></span>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+
+            <nav class="bottom-navbar">
+                <div class="container">
+                    <ul class="nav page-navigation navbar-left">
+                        <li class="nav-item">
+                            <a class="nav-link" id="itemCmt" href="/MessagePage/Index">
+                                <i class="mdi mdi-comment-text menu-icon"></i>
+                                <span class="menu-title">Tin nhắn đến</span>
+                            </a>
+                        </li>
+                        @if (user.LOAI_USER == "CS_ADMIN")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" id="btn-commenting" href="@Url.Action("DanhSachTinNhan","MessagePage")">
+                                    <i class="mdi mdi-monitor-dashboard menu-icon"></i>
+                                    <span class="menu-title">Danh sách tin nhắn</span>
+                                </a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link" id="btn-contact" href="@Url.Action("DanhSachTinLienHe","MessagePage")">
+                                <i class="mdi mdi-comment-account menu-icon"></i>
+                                <span class="menu-title">Danh sách tin liên hệ</span>
+                            </a>
+                        </li>
+                        @if (user.LOAI_USER == "CS_ADMIN")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" id="btn-contact" href="@Url.Action("QuanLyTaiKhoan", "MessagePage")">
+                                    <i class="mdi mdi-comment-account menu-icon"></i>
+                                    <span class="menu-title">Quản lý tài khoản</span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                    <ul class="nav page-navigation navbar-right">
+                        <li class="nav-item">
+                            <div class="nav-link d-flex">
+                                <div class="nav-item dropdown">
+                                    <a class="nav-link count-indicator dropdown-toggle text-white font-weight-semibold py-1" id="notificationDropdown" href="javascript:;" data-toggle="dropdown">
+                                        <i class="fa fa-user-circle-o" style="font-size:25px;"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                                        @if (string.IsNullOrWhiteSpace(user.LOAI_TK) || user.LOAI_TK != "H2")
+                                        {
+                                            <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#ModalResetPass" data-backdrop="static">
+                                                <i class="mdi mdi-key"> </i> Đổi mật khẩu
+                                            </a>
+                                        }
+                                        <a class="dropdown-item" href="@Url.Action("Logout","MessagePage")"><i class="mdi mdi-logout"> </i> Đăng xuất</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <div class="main-panel">
+                <div class="form-row m-0">
+                    @RenderBody()
+                </div>
+            </div>
+            <!-- main-panel ends -->
+            <footer class="footer">
+                <div class="container">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 <a href="http://sagawa.vn/" target="_blank">SG Sagawa Vietnam</a></span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Made by <a href="javascript:;">SGV System development</a></span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <div id="modal-PhanTuyenCS" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                        <h4>
+                            <span>Phân tuyến cho CS</span>
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <i class="fa fa-times-circle"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="padding: 10px;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label-sm">Khách hàng</label>
+                                    <textarea type="text" class="form-control" id="txtTenKhachHang" rows="3" readonly></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label-sm"> Danh sách CS <strong style="color:red">*</strong></label>
+                                    <div class="combobox-body position-relative">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="text-align:center">
+                                <button class="btn btn-primary" id="btnPhanTuyen"><i class="fa fa-save"></i> Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="ModalResetPass" class="modal fade" role="dialog" style="overflow:auto">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                        <h3 id="title"><span>Đổi mật khẩu</span> </h3>
+                        <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
+                    </div>
+                    <div class="modal-body" style="padding: 10px;">
+                        <div class="row m-0">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label"> Mật khẩu cũ</label>
+                                    <input class="form-control custom-password" id="pswold" name="pswold" type="text" autocomplete="off" oninput="changeText(this)" onfocus="$('.mess-reset').addClass('d-none');" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"> Mật khẩu mới</label>
+                                    <input class="form-control custom-password" id="psw" name="psw" type="text" autocomplete="off" oninput="changeText(this)" onfocus="$('.mess-reset').addClass('d-none');" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"> Nhập lại mật khẩu</label>
+                                    <input class="form-control custom-password" id="repsw" name="repsw" type="text" autocomplete="off" oninput="changeText(this)" onfocus="$('.mess-reset').addClass('d-none');" />
+                                </div>
+                                <div class="form-group" style="text-align: right;">
+                                    <button class="btn btn-primary" onclick="Reset()" style="width:100%"><i class="" id="refresh1"> </i>  Lưu</button>
+                                </div>
+                                <div class="form-group" style="height:50px;">
+                                    <div class="alert alert-danger d-none mess-reset" role="alert" id="message"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- page-body-wrapper ends -->
+        <img src="~/lib/images/loading.gif" class="pre-image d-none" style="width: 55px;position: fixed;left: 48%;top: 45%;z-index:1051" />
+    </div>
+
+    <!-- plugins:js -->
+    <script src="~/lib/vendor/js/vendor.bundle.base.js"></script>
+    <script src="~/lib/js/moment-with-locales.min.js"></script>
+    <script src="~/lib/bootstrap/bootstrap-datepicker.min.js"></script>
+
+    <script src="~/lib/js/off-canvas.js"></script>
+    <script src="~/lib/js/hoverable-collapse.js"></script>
+    <script src="~/lib/js/misc.js"></script>
+    <script src="~/lib/js/settings.js"></script>
+    <script src="~/lib/js/todolist.js"></script>
+    <script src="~/lib/js/sweetalert2@10.js"></script>
+    <!-- endinject -->
+
+    @if (Request.Browser.Browser == "IE" || Request.Browser.Browser == "InternetExplorer")
+    {
+        <script src="~/lib/js/core-2.4.1.js"></script>
+        <script src="~/lib/js/promise-polyfill@8.js"></script>
+    }
+</body>
+</html>

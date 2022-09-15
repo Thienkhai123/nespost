@@ -1,0 +1,209 @@
+﻿@{
+    ViewBag.Title = "Danh sách tin liên hệ";
+    Layout = "~/Views/Shared/_Layout_Message.cshtml";
+}
+<div id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar">
+        <div class="lstContact sidebar-content">
+            <div class="sidebar-brand">
+                <div class="form-row">
+                    <a class="sidebar-title">DANH SÁCH TIN NHẮN</a>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-12 form-group">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Tìm kiếm khách hàng" id="txtSearch" onkeyup="filterContactItem()" autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Từ ngày</label>
+                        <input type="date" id="TuNgay" class="form-control" value="@DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd")" onchange="SearchContactMess()" />
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Đến ngày</label>
+                        <input type="date" id="DenNgay" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" onchange="SearchContactMess()" />
+                    </div>
+                </div>
+            </div>
+            <hr class="mx-2 my-1" />
+            <div class="sidebar-menu">
+                <ul id="ListContactUser"></ul>
+            </div>
+        </div>
+
+        <img class="chat-message-loading" src="~/lib/images/loading.gif" />
+        <!-- sidebar-menu  -->
+    </div>
+    <!-- sidebar-content  -->
+</div>
+
+<div class="page-content">
+    <div id="divContainer" class="align-content-start d-none">
+        <div class="under-header">
+            <div class="row">
+                <div class="col-md-9">
+                    <p class="py-2 text-left">
+                        <span id="UserNameKhach"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <hr class="mx-2 my-1" />
+        <div id="divChat" class="chatRoom row">
+            <div class="content col-md-12">
+
+
+            </div>
+            <div class="messageBar col-md-12 d-none">
+                <div class="input-group px-2">
+                    <input class="textbox form-control" type="text" id="txtMessage" />
+                    <div class="input-group-append">
+                        <button id="btnSendMsg" class="btn btn-primary">Send</button>
+                    </div>
+                </div>
+                <input id="touserName" type="hidden" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="sidebar-wrapper" class="sidebar-wrapper">
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <div class="form-row">
+                <a class="sidebar-title">THÀNH VIÊN</a>
+            </div>
+        </div>
+        <hr class="mx-2 my-1" />
+        <div class="sidebar-menu">
+            <img class="chat-message-loading" src="~/lib/images/loading.gif" />
+            <ul id="ListCS">
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(window).on('load', function () {
+        //Load dữ liệu
+        SearchContactMess();
+    });
+
+    function SearchContactMess() {
+        $("ul#ListContactUser").empty();
+        $.ajax({
+            url: "/MessagePage/SEARCH_CONTACT_MESS",
+            type: "POST",
+            data: { fromDate: $('#TuNgay').val(), toDate: $('#DenNgay').val() },
+            dataType: 'json',
+            success: function (data) {
+                if (!data.Erorr) {
+                    for (var i in data.Object) {
+                        var User = data.Object[i];
+                        ConnAddContactUser(User);
+                    }
+                }
+            },
+            complete: function () {
+                $('#sidebar .chat-message-loading').addClass('d-none');
+            }
+        });
+    }
+
+    function ConnAddContactUser(User) {
+        var code = "";
+
+        var Name = "Khách vãng lai " + User.Fr_UserName.substring(0, 5);
+
+        if (User.Message.length > 25) {
+            User.Message = User.Message.substring(0, 25) + "...";
+        }
+
+        var str = '<li class="sidebar-dropdown" id="' + User.Fr_UserID + '"  title="' + Name + '"><a class="user offline">';
+
+        if (User.UnRead > 0)
+            str += '<p><i class="fa fa-user"></i><span class="badge badge-pill badge-danger" >' + User.UnRead + ' </span>';
+        else
+            str += '<p><i class="fa fa-user"></i><span class="badge badge-pill badge-danger"></span>';
+
+        str += '<span class="Name">' + Name + '</span></p><p class="mess-content"> <span class="mess">' + User.Message + '</span><span class="timeshet">' + User.Time_String + ' </span></p></a></li>';
+
+        code = $(str);
+
+        $(code).click(function () {
+            OpenContactMessage(User.PHIEN_LAM_VIEC);
+        });
+
+        $("ul#ListContactUser").append(code);
+    }
+
+    function OpenContactMessage(phienlamviec) {
+        $.ajax({
+            url: "/MessagePage/OpenContactMessage",
+            type: "POST",
+            data: { phienlamviec: phienlamviec },
+            dataType: 'json',
+            success: function (data) {
+
+                if (data.Erorr) {
+                    Swal.fire(data.Title,
+                        '',
+                        'error')
+                    return;
+                }
+
+                var data = data.Object;
+
+                var ctrIdKH = 'private_' + phienlamviec;
+
+                var div = ' <div id="' + ctrIdKH + '" class="chatWindow row">';
+
+                for (var i in data) {
+                    if (data[i].Fr_UserID == phienlamviec) {
+                        div = div + '<div class="col-md-12"><div class="chat-message-text pull-left bg-white"><p><strong>' + data[i].Fr_UserName + '</strong> <br/>' + data[i].Message + ' </p><p class="time-log"><small>' + data[i].Time_String + '</small></p></div></div>';
+                    }
+                    else {
+                        div = div + '<div class="col-md-12"><div class="chat-message-text pull-right"><p> <strong>' + data[i].Fr_UserName + '</strong> <br/>' + data[i].Message + ' </p></div></div>';
+                    }
+                }
+
+                div = div + '</div>';
+                var $div = $(div);
+
+
+                $('#UserNameKhach').html(data[data.length - 1].Fr_UserName);
+
+                $('#divChat .content').find('.chatWindow').remove();
+                $('#divChat .content').prepend($div);
+                var height = $('.chatWindow')[0].scrollHeight;
+                $('.chatWindow').scrollTop(height);
+
+                $('#divContainer').removeClass('d-none');
+            }
+        });
+
+        $("ul#ListContactUser").find('li').removeClass('active');
+        $("ul#ListContactUser").find('#' + phienlamviec).find('.badge').html('');
+        $("ul#ListContactUser").find('#' + phienlamviec).addClass('active');
+    }
+
+    function filterContactItem() {
+        var input, filter, ul, li, a, txtValue;
+        input = document.getElementById("txtSearch");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("ListContactUser");
+        li = ul.getElementsByTagName("li");
+        for (var i = 0; i < li.length; i++) {
+            a = li[i].getElementsByClassName("Name");
+
+            txtValue = a[0].textContent || a[0].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            }
+            else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+</script>
+

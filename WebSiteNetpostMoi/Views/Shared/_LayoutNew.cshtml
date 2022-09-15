@@ -1,0 +1,222 @@
+﻿@using WebSite.Language
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+    <meta name="robots" content="noindex,nofollow">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <title>@ViewBag.Title | CÔNG TY CỔ PHẦN CHUYỂN PHÁT NHANH NETPOST VIỆT NAM</title>
+
+    <!-- Favicons -->
+    <link href="~/lib/images/logo/favicon.png" rel="icon">
+    <link href="~/lib/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700&amp;subset=vietnamese" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <!-- Vendor CSS Files -->
+    <link href="~/lib/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="~/lib/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/lib/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/lib/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/lib/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/lib/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="~/lib/assets/css/style.css?cdv=1.2" rel="stylesheet">
+    <link href="~/lib/css/slick.css" rel="stylesheet" />
+    <link href="~/lib/assets/css/styleCustom.css" rel="stylesheet" />
+    <link href="~/lib/dist/jquery.iviewer.css" rel="stylesheet" />
+    <link href="~/lib/assets/css/custom_style.css" rel="stylesheet">
+    <!--devexpress-->
+    @Html.DevExpress().GetStyleSheets(
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Editors }
+    )
+
+    <!--Jquery-->
+    <script type="text/javascript" src="~/lib/js/jquery.min.js"></script>
+    <!--devexpress-->
+    @Html.DevExpress().GetScripts(
+        new Script { ExtensionSuite = ExtensionSuite.Editors }
+    )
+
+    <script type="text/javascript" src="~/lib/dist/jqueryui.js"></script>
+    <script type="text/javascript" src="~/lib/dist/jquery.mousewheel.min.js"></script>
+    <script type="text/javascript" src="~/lib/dist/jquery.iviewer.js"></script>
+    <script src="~/lib/js/slick.js" type="text/javascript"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/GridView.js")"></script>
+    <script src="~/lib/js/sweetalert2@10.js" type="text/javascript"></script>
+</head>
+<body>
+    <!-- ======= Top Bar ======= -->
+    <section id="topbar" class="d-flex align-items-center">
+        <div class="container d-flex justify-content-center justify-content-md-between">
+            <div class="contact-info d-flex align-items-center">
+                <span>Giờ làm việc: <b>T2-T7: 8:00 - 18:00 (CN 8:00 - 17:00)</b></span>
+            </div>
+            <div class="social-links d-none d-md-flex align-items-center">
+                @*@using (Html.BeginForm("Tim_Kiem", "Tin_Tuc", FormMethod.Get, new { @id = "searchform", @class = "searchform form-inline d-flex" }))
+        {
+            <input type="text" placeholder="Search " name="SearchNew" id="SearchNew" class="form-control form-control-sm" required autocomplete="off">
+            <button class="btn"><i class="fa fa-search" style="font-size:12px"></i></button>
+        }*@
+                @*<a href="@Url.Action("Login","Booking")">Tạo vận đơn / Đăng nhập</a>*@
+                <div class="mdi-contact-phone">
+                    <a href='tel: +19003351' class="fw-bold d-flex align-items-center"><i class="fa-solid fa-phone me-1"></i><span> 1900 3351</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="d-flex align-items-center">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="logo">
+                <h1>
+                    <a href="https://netpost.vn">
+                        <img src="~/lib/images/logo/logo.png" width="260" />
+                    </a>
+                </h1>
+            </div>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    @*<li class="o_trang_chu"><a class="active" href="/Home/Index">Trang chủ</a></li>*@
+                    <li class="dropdown o_dich_vu NavbarTitle">
+                        <a href="javascript:;"><span>Dịch vụ</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="@Url.Action("chuyen_phat_nhanh", "Dich_Vu")">@Resource.vtaiHK</a></li>
+                            <li><a href="@Url.Action("phat_hoa_toc", "Dich_Vu")">@Resource.vtaiBien</a></li>
+                            <li><a href="@Url.Action("gia_tri_cao", "Dich_Vu")">@Resource.thutuchaiquan</a></li>
+                            <li><a href="@Url.Action("trucking", "Dich_Vu")">@Resource.vtaiBo</a></li>
+                            <li><a href="@Url.Action("tiet_kiem", "Dich_Vu")">@Resource.khobai</a></li>
+                            <li><a href="@Url.Action("gia_tang", "Dich_Vu")">@Resource.kiemkim</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown o_van_don NavbarTitle">
+                        <a href="javascript:;"><span>Vận đơn</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="@Url.Action("Login", "Booking")">Tạo vận đơn</a></li>
+                            <li><a href="@Url.Action("tra_cuu_van_don", "Home")">Tra cứu vận đơn</a></li>
+                            <li><a href="@Url.Action("tra_cuu_cuoc_phi", "Home")">Tra cứu cước phí</a></li>
+                        </ul>
+                    </li>
+                    @*<li class="o_gioi_thieu"><a href="@Url.Action("Index", "Thong_Tin_Cong_Ty")">Giới thiệu</a></li>*@
+                    <li class="dropdown o_bang_gia NavbarTitle">
+                        <a href="javascript:;"><span>Hỗ trợ</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="/">Giới thiệu</a></li>
+                            <li><a href="/">Đăng ký KH mới</a></li>
+                            <li><a href="/">Quy định - chính sách gửi hàng</a></li>
+                            <li><a href="/">Câu hỏi thường gặp</a></li>
+                            <li><a href="/">Thông tin liên hệ</a></li>
+                        </ul>
+                    </li>
+                    <li class="o_lien_he NavbarTitle"><a href="/">Góc chill</a></li>
+                    <li class="o_lien_he"><a href="/"><img style="width: 2.5rem" src="~/lib/assets/img/VIETNAM.png"/></a></li>
+                    <li class="o_lien_he"><a style="padding-left: 5px" href="/"><img style="width: 2.5rem" src="~/lib/assets/img/USA.png"/></a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+            <div class="GadientRGB">
+                <a class="fw-bold d-flex align-items-center" href="@Url.Action("Login","Booking")">Đăng nhập</a>
+            </div>
+            
+            
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="page-container" style="position: relative">
+            @RenderBody()
+        </div>
+    </main>
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        @*<h2 id="hotline">Hotline: 1900 3351</h2>
+                        <p>Giá không đổi - Phát siêu tốc - Nội thành lấy sáng phát chiều</p>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 footer-info">
+                        <h1>
+                            <a href="/Home/Index">
+                                <img src="~/lib/images/logo/logo.png" width="260" />
+                            </a>
+                        </h1>
+                        <p>
+                            <strong>Hỗ trợ khách hàng</strong>
+                            <br>Hotline: 1900 3351
+                            <br>Giờ làm việc: T2-T7: 8h - 18h (CN: 8h - 17h)
+                        </p>
+                        <div class="social-links mt-3">
+                            <a href="https://www.facebook.com/netpost.vn" target="_blank" class="facebook"><i class="bx bxl-facebook"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Miền Bắc</h4>
+                        <ul>
+                            <li><i class="fa fa-home"></i>Số 12B Lô A10 KĐT Nam Trung Yên, P. Yên Hòa, Quận Cầu Giấy, TP. Hà Nội</li>
+                            <li><i class="fa fa-phone"></i>024.396.12345</li>
+                            <li><i class="fa fa-envelope"></i> <a href="mailto:dvkh.hn@netpost.vn">dvkh.hn@netpost.vn</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Miền Nam</h4>
+                        <ul>
+                            <li><i class="fa fa-home"></i>Số 403 Đường Lý Thường Kiệt, Phường 8, Quận Tân Bình, TP. Hồ Chí Minh</li>
+                            <li><i class="fa fa-phone"></i>028.3948.3333</li>
+                            <li><i class="fa fa-envelope"></i><a href="mailto:dvkh.hcm@netpost.vn">dvkh.hcm@netpost.vn</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Miền Trung</h4>
+                        <ul>
+                            <li><i class="fa fa-home"></i>Số 34/H7/15 Thi Sách, Phường Hoà Thuận Tây, Quận Hải Châu, TP. Đà Nẵng</li>
+                            <li><i class="fa fa-phone"></i> <a href="#">023.63.789.448</a></li>
+                            <li><i class="fa fa-envelope"></i><a href="mailto:dvkh.dn@netpost.vn">dvkh.dn@netpost.vn</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        @*<div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Eterna</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+        </div>*@
+    </footer>
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="~/lib/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="~/lib/assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="~/lib/assets/js/main.js"></script>
+</body>
+
+</html>

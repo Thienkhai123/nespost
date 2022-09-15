@@ -1,0 +1,93 @@
+﻿@model PagedList.IPagedList<WebSite.Models.TINTUCDTO>
+@using PagedList;
+@using PagedList.Mvc;
+@using WebSite.Language
+@{
+    ViewBag.Title = Resource.search;
+}
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<style>
+    #title {
+        flex: 1;
+        width: 100%;
+        padding-left: 60px;
+        position: relative;
+        margin-top: 15px;
+    }
+        #title:before {
+            content: '';
+            background: #2fcaf9;
+            width: 7px;
+            height: 160px;
+            position: absolute;
+            left: 10px;
+            top: 0;
+            /* opacity: 0.8; */
+        }
+
+    .portlet {
+        padding: 5px 20px;
+        border: 1px solid lightgray;
+        border-radius: 10px;
+        /*box-shadow: 0 0 5px 0 rgba(0,0,0,0.3);*/
+    }
+    .portlet h5{
+       text-align:left !important;
+    }
+    .entry-content p {
+        margin-bottom: 0;
+        width: 100%;
+        padding-left: 20px;
+    }
+
+    .entry-content ul li a {
+        line-height: 20px;
+    }
+
+    .pagination-container {
+        float: right;
+    }
+</style>
+<div class=" page-container">
+    <div class="container">
+        <div class="row">
+            <div class="post">
+                <div class="title title2 about">
+                    <h4><span>Search Result for:</span><span style="text-transform:initial !important">@ViewBag.Search </span>
+                    </h4>
+                </div>
+            </div>
+            <div class="entry-content indexcontent" style="width:100%;padding-top: 15px;">
+                <div class="row">
+                    @if (Model != null && Model.Count() > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class="portlet row">
+                                    <h5 style="color:black;font-weight: bold;" class="col-md-12">@item.TIEU_DE</h5>
+                                    <div class="row">
+                                        <p style="padding:0">@item.MO_TA</p>
+                                        <p style="padding:0;text-align:right"><a href="@Url.Action("Detail", "Tin_Tuc", new { id = item.ID })" style="text-decoration:underline;">@Resource.detail</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="row" style="justify-content:flex-end">
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-8">
+                        @if (Model.Count > 9)
+                        {
+                            @Html.PagedListPager(Model, page => Url.Action("Tim_Kiem", new { page }))
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

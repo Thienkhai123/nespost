@@ -1,0 +1,519 @@
+﻿@{
+    Layout = null;
+}
+@{WebSite.Models.CSS_CRM_NGUOI_DUNGDTO user = (WebSite.Models.CSS_CRM_NGUOI_DUNGDTO)Session["User"];}
+<!DOCTYPE html>
+<html class="no-js" style="height:100%">
+<head>
+    <meta charset="utf-8">
+    <title>Tra cước online</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+     <link href="~/lib/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/lib/css/testimonails-slider.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />   
+    <link href="~/lib/DataTables_2/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/lib/js/jquery.min.js" type="text/javascript"></script>
+    <link href="~/lib/css/sweetalert2.css" rel="stylesheet" />
+    <link href="~/lib/css/sweetalert2.min.css" rel="stylesheet" />
+    <script src="~/lib/js/sweetalert2.all.min.js"></script>
+    <script src="~/lib/js/sweetalert2.js"></script>
+    <style>
+        .dataTables_wrapper .dataTables_processing {
+            margin-top: 15px !important;
+            padding-top: 5px !important;
+        }
+
+        .table > thead > tr > th {
+            vertical-align: middle;
+        }
+
+        .dataTables_wrapper .dataTables_processing {
+            top: 70%;
+        }
+    </style>
+</head>
+<body style="margin:0;
+   padding:0;
+   height:100%;">
+    <div class="container" style="width: 100%;min-height: 100%;position: relative;background-color: #f1f9f8;">
+        <div class="header">
+            <div id="main-header" style="background: white;">
+
+                <div class="row" style="margin:0">
+                    <div class="col-md-3">
+                        <div class="logo">
+                           @* <a><img src="~/lib/images/logoSGH.png" title="Sagawa" alt="Sagawa WebSite" style="height:60px"></a>*@
+                        </div>
+                    </div>
+                    <div class="col-md-9 pull-right">
+                        <div class="cart-info pull-right" style="padding-top: 40px;">
+                            <a href="#" style="padding-right: 10px; border-right: 1px solid;">@user.CUSTOMER_CODE - @user.NAME</a>
+                            @if (user.login == "0")
+                            {
+                                <a href="/Home/Logout" title="Đăng xuất"><i class="glyphicon glyphicon-log-out"> </i> Đăng xuất</a>
+                            }
+                            else
+                            {
+                                <a href="/Booking/DangXuat" title="Đăng xuất"><i class="glyphicon glyphicon-log-out"> </i> Đăng xuất</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="top-header" style="height:45px;background: #428bca;color:white">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="main-menu">
+
+                            <h3 style="text-align:center;"> BẢNG KÊ CƯỚC ONLINE</h3>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="content" style="padding-bottom:60px">
+            <div class="container">
+
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-md-2">
+                        <label> Ngày nhận từ</label>
+                        <div class='input-group date' id='datetimepicker3'>
+                            <input type='text' class="form-control" name="FromDate" id="FromDate" value="@ViewBag.FromDate" />
+                            <span class="input-group-addon">
+                                <fa class="fa fa-calendar"></fa>
+                            </span>
+                        </div>
+                        <script type="text/javascript">
+                            var date1 = new Date();
+                            var year1 = date1.getFullYear();
+                            var month1 = date1.getMonth()-1;
+                            var day1 = date1.getDate();
+
+                            // $('#FromDate').val(day1 + '/' + month1 + '/' + year1)
+                            $(function () {
+                                $("#FromDate").datetimepicker({ format: 'DD/MM/YYYY', minDate: '01/01/2019' });
+                            });
+                        </script>
+                    </div>
+                    <div class="col-md-2">
+                        <label> Đến ngày</label>
+                        <div class='input-group date' id='datetimepicker2'>
+                            <input type='text' class="form-control" name="ToDate" id="ToDate" value="@ViewBag.ToDate" />
+                            <span class="input-group-addon">
+                                <fa class="fa fa-calendar"></fa>
+                            </span>
+                        </div>
+                        <script type="text/javascript">
+                            var date = new Date();
+                            var year = date.getFullYear();
+                            var month = date.getMonth();
+                            var day = date.getDate();
+                            // $('#ToDate').val(day + '/' + month + '/' + year)
+                            $(function () {
+                                $('#ToDate').datetimepicker({
+                                    useCurrent: false,
+                                    format: 'DD/MM/YYYY'
+                                });
+                                //$('#datetimepicker2').datetimepicker('setStartDate', '2018-12-31');
+                            })
+                        </script>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Mã BPBK </label>
+                        <div class='input-group date'>
+                            <input type='text' class="form-control" id="Ma_BPBK" placeholder="Mã bill" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-1">
+                        <button type="submit" class="btn btn-primary" style="margin-top:26px" onclick="Search()"><i id="Search" class="fa fa-search"></i> Tìm kiếm</button>
+                    </div>
+                    <div class="col-md-5">
+                        <a class="btn btn-danger pull-right" style="margin-top:26px" onclick="ExportExcel()"> Export Excel</a>
+                    </div>
+
+
+                </div>
+                <div class="col-md-12 " style="padding:15px 0 20px;">
+                    <table id="demoGrid" class="table table-striped table-hover table-checkable order-column nowrap" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">STT</th>
+                                <th rowspan="2">Ngày nhận</th>
+                                <th rowspan="2">Mã bill</th>
+                                <th rowspan="2">Từ tỉnh</th>
+                                <th rowspan="2">Đến tỉnh</th>
+
+                                <th rowspan="2">Trọng lượng</th>
+                                <th rowspan="2">Cước chính </th>
+                                <th colspan="9" style="text-align:center">Phụ phí</th>
+                                <th rowspan="2">Tổng tiền</th>
+                                <th rowspan="2">Ngày phát</th>
+                                <th rowspan="2">Người nhận</th>
+                            </tr>
+                            <tr>
+                                <th>Xăng dầu</th>
+                                <th>Phát tận tay</th>
+                                <th>Phát trong ngày</th>
+                                <th>Phát vùng sâu, vùng xa</th>
+                                <th>Đóng thùng</th>
+                                <th>Báo phát</th>
+                                <th>Đồng kiểm</th>
+                                <th>Khác</th>
+                                <th>Chuyển hoàn</th>
+
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="footer" style="background:#9999997d;position: absolute;bottom: 0;width: 100%;">
+            <div class="container">
+                <div class="bottom-footer" style="padding:0px;text-align: center;">
+                    <p style="margin-bottom:5px !important">
+                        <span>
+                            Copyright © @DateTime.Now.Year <a>Netpost</a>
+                            | Design by <span class="blue">Netpost Software Department</span>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="ThongBao" class="modal fade">
+        <div class="modal-dialog modal-xl" style="">
+            <!-- Modal content-->
+            <div class="modal-content">
+
+                <div class="modal-body" style="padding-bottom: 0px;">
+                    <div class="col-md-12">
+                        <p id="msg">
+
+                            <img src="~/PhoTo/a.jpg" style="width:100%;height:100%" />
+
+
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer" style="border:none; padding-top: 10px">
+                    @* <button type="button" class="btn btn-default" data-dismiss="modal" id="close"> Đóng </button>*@
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="TRACK_AND_TRACE" class="modal fade" role="dialog" style="overflow:auto">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding-bottom: 0;border: none;">
+                    @* <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>*@
+                    <h5 id="title" style="color:red"> </h5>
+                </div>
+                <div class="modal-body" style="padding-top: 0;padding-bottom:0">
+                    <table id="listTrackAndTrace" class="table table-hover" style="width:100%">
+                        <thead>
+                            <tr style="border-bottom: 1px solid #99999938;">
+                                <th style="width:125px;text-align:center">
+                                    Thời gian
+                                </th>
+                                <th style="text-align:center">
+                                    Chi tiết
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="modal-footer" style="padding:5px">
+                    <a onclick="$('#TRACK_AND_TRACE').modal('hide');" class="btn btn-primary">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/js/moment-with-locales.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/lib/DataTables_2/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>    
+    <script src="~/lib/js/currency.js"></script>
+    @if (Request.Browser.Browser == "IE" || Request.Browser.Browser == "InternetExplorer")
+    {
+        <script src="~/lib/js/core-2.4.1.js"></script>
+        <script src="~/lib/js/promise.min.js"></script>
+    }
+    <script>
+        var page = 7;
+        if(screen.height>=800 && screen.height<900){
+            page = 10;
+        }
+        if(screen.height>=900 && screen.height<1000){
+            
+            page = 12;
+        }
+        if(screen.height>=1000){
+            
+            page = 15;
+        }
+        var table;
+        $(document).ready(function () {
+
+            table = $("#demoGrid").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": false,// this is for disable filter (search box)
+                "orderMulti": true, // for disable multiple column at once
+                "pageLength": page,
+                "scrollX": true,
+                "destroy": true,
+                "orderCellsTop": true,
+                "fixedHeader": true,
+                "sort":false,
+                "lengthChange": false,
+
+                "initComplete": function( settings, json ) {
+
+                },
+
+                "ajax": {
+                    "url": "/TraCuocOnline/LoadData",
+                    "type": "POST",
+                    "data": function (d) {
+                        d.TrangThai = $('#ListTrangThai').val();
+                        d.fromDate = $('#FromDate').val();
+                        d.toDate = $('#ToDate').val();
+                        d.Ma_BPBK = $('#Ma_BPBK').val();
+                    },
+                    "datatype": "json",
+
+                    "complete": function(){
+                        $("#Search").removeClass("fa fa-spinner fa-spin");
+                        $("#Search").addClass("fa fa-search");
+                    }
+                },
+                "columnDefs": true,
+                "columns": [
+                      { "data": "STT", "name": "STT", "autoWidth": true },
+                      { "data": "NGAY_NHAN", "name": "Ngày nhận", "autoWidth": true },
+                      {
+                          "render": function (data, type, full, meta) {
+                              return "<a href=\"\" onclick=\"TRACK_AND_TRACE('"+full.MA_BILL+"')\" data-toggle=\"modal\" data-target=\"#TRACK_AND_TRACE\">" +full.MA_BILL+"</a>";
+                          }
+                      },
+                      { "data": "TINH_NHAN", "name": "TRONG_LUONG", "autoWidth": true },
+                      { "data": "DICH_DEN", "name": "TRONG_LUONG", "autoWidth": true },
+                      { "data": "TRONG_LUONG", "name": "TRONG_LUONG", "autoWidth": true },
+                      {
+                          "render": function (data, type, full, meta) {
+                              return full.CUOC_CHINH.toLocaleString({style : 'currency', currency : 'VND'}).replace(".",",");
+                          }
+                      },
+                      {
+                          "render": function (data, type, full, meta) {
+                              if(full.PP_XANG_DAU == 0){
+                              return full.PP_XANG_DAU;
+
+                              }
+                      else{
+                                  return full.PP_XANG_DAU.toLocaleString({style : 'currency', currency : 'VND'}).replace(".",",");
+
+                        }
+                          }
+                      },
+                      {
+                          "render": function (data, type, full, meta) {
+                              if( full.PP_PHAT_TAN_TAY == 0){
+                                  return full.PP_PHAT_TAN_TAY;
+                              }
+                              else{
+                                  return full.PP_PHAT_TAN_TAY.toLocaleString({style : 'currency', currency : 'VND'}).replace(".",",");
+                              }
+                          }
+                      },
+                      {
+                          "render": function (data, type, full, meta) {
+                              if(full.PP_PHAT_TRONG_NGAY == 0){
+                                  return full.PP_PHAT_TRONG_NGAY;
+
+                              }
+                      else{
+                                  return full.PP_PHAT_TRONG_NGAY.toLocaleString({style : 'currency', currency : 'VND'}).replace(".",",");
+                }
+                          }
+                      },
+                    {
+                        "render": function (data, type, full, meta) {
+                            if( full.PP_PHAT_VUNG_SAU_XA == 0){
+                                return full.PP_PHAT_VUNG_SAU_XA;
+                            }
+                            else{
+                                return full.PP_PHAT_VUNG_SAU_XA.toLocaleString({style : 'currency', currency : 'VND'}).replace(".",",");
+                            }
+                        }
+                    },
+                      {
+                          "render": function (data, type, full, meta) {
+                              if( full.PP_DONG_THUNG == 0){
+                                  return full.PP_DONG_THUNG;
+                              }
+                              else{
+                                  return full.PP_DONG_THUNG.toLocaleString({style : 'currency', currency : 'VND'}).replace(".",",");
+                              }
+                          }
+                      },
+                      {
+                          "render": function (data, type, full, meta) {
+                              if( full.PP_BAO_PHAT == 0){
+                                  return full.PP_BAO_PHAT;
+                              }
+                              else{
+                                  return full.PP_BAO_PHAT.toLocaleString({style : 'currency', currency : 'VND'}).replace(".",",");
+                              }
+                          }
+                      },
+                      {
+                          "render": function (data, type, full, meta) {
+                              if( full.PP_DONG_KIEM == 0){
+                                  return full.PP_DONG_KIEM;
+                              }
+                              else{
+                                  return full.PP_DONG_KIEM.toLocaleString({style : 'currency', currency : 'VND'}).replace(".",",");
+                              }
+                          }
+                      },
+                      {
+                          "render": function (data, type, full, meta) {
+                              if( full.PP_KHAC == 0){
+                                  return full.PP_KHAC;
+                              }
+                              else{
+                                  return full.PP_KHAC.toLocaleString({style : 'currency', currency : 'VND'}).replace(".",",");
+                              }
+                          }
+                      },
+                      {
+                          "render": function (data, type, full, meta) {
+                              if( full.PP_CHUYEN_HOAN == 0){
+                                  return full.PP_CHUYEN_HOAN;
+                              }
+                              else{
+                                  return full.PP_CHUYEN_HOAN.toLocaleString({style : 'currency', currency : 'VND'}).replace(".",",");
+                              }
+                          }
+                      },
+                    {
+                        "render": function (data, type, full, meta) {
+                            return full.TONG_TIEN.toLocaleString({style : 'currency', currency : 'VND'}).replace(".",",");
+                        }
+                    },
+                      { "data": "NGAY_CHECK_IN_STRING", "name": "Người nhận", "autoWidth": true },
+                      { "data": "NGUOI_NHAN", "name": "TRONG_LUONG", "autoWidth": true }
+                ]
+            });
+        });
+        function Search() {
+
+            $("#Search").removeClass("fa fa-search");
+            $("#Search").addClass("fa fa-spinner fa-spin");
+            $.ajax({
+                url: "/TraCuocOnline/CheckVadidate",
+                type: "POST",
+                data: {fromDate: $('#FromDate').val(),
+                    toDate : $('#ToDate').val()},
+                dataType: 'json',
+                success: function (data) {
+                    if(data.Error){
+                        swal(data.Title,
+                          '',
+                          'warning');
+
+                        $("#Search").removeClass("fa fa-spinner fa-spin");
+                        $("#Search").addClass("fa fa-search");
+                        return;
+                    }
+                    else{
+                        var table = $('#demoGrid').DataTable();
+                        table.ajax.reload();
+
+                    }
+                }
+            });
+
+            //muốn giữ lại trang hiện tại khi reload table thì: table.ajax.reload(null, false)
+            // table.page(0).draw('page');
+        }
+        function ExportExcel() {
+            var table = $('#demoGrid').DataTable();
+            if(table.rows().data().toArray()==0){
+                swal('Không có dữ liệu để export excel',
+                  '',
+                  'warning')
+                return;
+            }
+            window.location.href = '/TraCuocOnline/ExportToExcel?tuNgay=' + @ViewBag.FromDate + '&denNgay='+ @ViewBag.ToDate;
+        }
+        function ShowPic(MA_BILL){
+
+            $.ajax({
+                url: "/TraCuu/ImageToBase64",
+                type: "POST",
+                data: {MA_BILL:MA_BILL},
+                dataType: 'json',
+                success: function (data) {
+                    if(data.Error){
+
+                    }
+                    else{
+                        // $('#msg').append('<img src ="'+data.Title+'" style="width:100%"/>');
+                        $('#ThongBao').modal('show');
+
+                    }
+                }
+            });
+            //setTimeout(function(){
+            //    $('#ThongBao').modal('show');
+            //}, 500);
+        }
+
+        function TRACK_AND_TRACE(MaBPBK) {
+            $('#title').html("");
+            $('#listTrackAndTrace tbody').empty();
+
+            $.ajax({
+                url: "/Booking/ListTrackAndTrace",
+                type: "POST",
+                data: {
+                    MaBPBK: MaBPBK
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.Title == "Get list success!") {
+
+                        for (var i in data.Object) {
+                            $('#title').html("Mã vận đơn: " + data.Object[i].HAWB_NO)
+                            var list = "<tr style= \"border-bottom: 1px solid #99999938;\"><td>" + data.Object[i].INSERT_TIME_STRING + "</td><td>" + data.Object[i].DESC + "</td></tr>";
+
+                            $('#listTrackAndTrace tbody').append(list);
+                        }
+                    }
+                }
+            });
+            //$('#TRACK_AND_TRACE').css("display", "block");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+﻿@model List<WebSite.Models.CSS_OP_COMMUNEDTO>
+@using WebSite.Language
+@Html.DevExpress().ComboBox(settings =>
+{
+    settings.Name = "cbXa";
+    settings.Properties.DropDownStyle = DropDownStyle.DropDownList;
+    settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+    settings.CallbackRouteValues = new { Controller = "Warehouse", Action = "GLUXa" };
+    settings.Properties.TextField = "NAME";
+    settings.Properties.ValueField = "CODE";
+    settings.Properties.NullText = @Booking.WH_chonXa;
+    settings.ControlStyle.CssClass = "form-control col-md-6";
+    settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+    settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+    settings.SelectedIndex = -1;
+}).BindList(Session["XA"] as List<WebSite.Models.CSS_OP_COMMUNEDTO>).GetHtml()
+

@@ -1,0 +1,1314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="chacchanIn" xml:space="preserve">
+    <value>注 文 を 印 刷 し て よ ろ し い で す か</value>
+  </data>
+  <data name="chacchanxoa" xml:space="preserve">
+    <value>区 画 を 削 除 し ま す か</value>
+  </data>
+  <data name="chitiet" xml:space="preserve">
+    <value>詳 細</value>
+  </data>
+  <data name="chitietdonhang" xml:space="preserve">
+    <value>注 文 詳 細</value>
+  </data>
+  <data name="chontep" xml:space="preserve">
+    <value>ファイルを選択</value>
+  </data>
+  <data name="copynoidung" xml:space="preserve">
+    <value>区 画 の 内 容 を コ ピ ー す る</value>
+  </data>
+  <data name="dangxuat" xml:space="preserve">
+    <value>ロ グ ア ウ ト</value>
+  </data>
+  <data name="danhsachdonhang" xml:space="preserve">
+    <value>注文管理</value>
+  </data>
+  <data name="dathang" xml:space="preserve">
+    <value>オ ー ダ ー</value>
+  </data>
+  <data name="denngay" xml:space="preserve">
+    <value>現 在 ま で</value>
+  </data>
+  <data name="diachi" xml:space="preserve">
+    <value>住 所</value>
+  </data>
+  <data name="diachinhan" xml:space="preserve">
+    <value>受 取 人 の 住 所</value>
+  </data>
+  <data name="dichinguoigui" xml:space="preserve">
+    <value>送信者 の 住所</value>
+  </data>
+  <data name="dichvu" xml:space="preserve">
+    <value>サービス</value>
+  </data>
+  <data name="doipass" xml:space="preserve">
+    <value>パスワード の 変 更</value>
+  </data>
+  <data name="dondathang" xml:space="preserve">
+    <value>新 規 注 文</value>
+  </data>
+  <data name="Donhang" xml:space="preserve">
+    <value>注 文 コード</value>
+  </data>
+  <data name="filemau" xml:space="preserve">
+    <value>サンプルファイル</value>
+  </data>
+  <data name="huongdang" xml:space="preserve">
+    <value>ユーザーマニュアル</value>
+  </data>
+  <data name="huyennhan" xml:space="preserve">
+    <value>受 取 地 区</value>
+  </data>
+  <data name="importexcel" xml:space="preserve">
+    <value>Excel か ら の 注 文 の イン ポ ート</value>
+  </data>
+  <data name="inphieugui" xml:space="preserve">
+    <value>注 文 を 印 刷 す る</value>
+  </data>
+  <data name="j" xml:space="preserve">
+    <value>重 さ（kg）</value>
+  </data>
+  <data name="loithaydoipass" xml:space="preserve">
+    <value>エ ラーが 発 生 し ま し た。 ペー ジ を 更 新 し て く だ さ い。</value>
+  </data>
+  <data name="luu" xml:space="preserve">
+    <value>救 う</value>
+  </data>
+  <data name="luudonhang" xml:space="preserve">
+    <value>注 文 を 保 存</value>
+  </data>
+  <data name="maBPBK" xml:space="preserve">
+    <value>小包コード</value>
+  </data>
+  <data name="madonhang" xml:space="preserve">
+    <value>注 文 コード / 小包コード</value>
+  </data>
+  <data name="mavandon" xml:space="preserve">
+    <value>小包コード</value>
+  </data>
+  <data name="messDiachinhan" xml:space="preserve">
+    <value>受 信 者 の ア ド レ ス を 空 白 に す る こ と は で き ま せ ん</value>
+  </data>
+  <data name="messpasscu" xml:space="preserve">
+    <value>古 い パ ス ワ ー ド を 入 力 し てく だ さ い。</value>
+  </data>
+  <data name="messSDTnhan" xml:space="preserve">
+    <value>受 信 者 の 電 話 番 号 を 空 白 に し な い で く だ さ い</value>
+  </data>
+  <data name="msgddlDistrict" xml:space="preserve">
+    <value>受 取 人 の 地 区 が 誤っ て 選 択 し 直 す</value>
+  </data>
+  <data name="msgddlProvince" xml:space="preserve">
+    <value>受 取 人 の 都 道 府 県 が 誤 っ て 選 択 さ れ た</value>
+  </data>
+  <data name="msgDIA_CHI1" xml:space="preserve">
+    <value>受 取 人 の 住 所 に は、文 字 と し て 少 な く とも 5 文 字 が 必 要 で す。</value>
+  </data>
+  <data name="msgDICH_VU" xml:space="preserve">
+    <value>サービ ス を 空 白 に し な い で く だ さ い</value>
+  </data>
+  <data name="msgTRONG_LUONG" xml:space="preserve">
+    <value>重 量 を 空 白 に し な い で く だ さ い</value>
+  </data>
+  <data name="msspasscu" xml:space="preserve">
+    <value>古 い パ スワード が 間 違 っ てい ま す。 再 入 力 し て く だ さ い。</value>
+  </data>
+  <data name="ngaytao" xml:space="preserve">
+    <value>日 付 を 作 成</value>
+  </data>
+  <data name="nguoinhan" xml:space="preserve">
+    <value>受 信 機 / 受 信 者 の 電 話</value>
+  </data>
+  <data name="nhaplaipass" xml:space="preserve">
+    <value>新しいパスワードを間違って再入力してください。</value>
+  </data>
+  <data name="nhaplaipassmoi" xml:space="preserve">
+    <value>再入力パスワード</value>
+  </data>
+  <data name="noidung" xml:space="preserve">
+    <value>内 容</value>
+  </data>
+  <data name="noidunghh" xml:space="preserve">
+    <value>商 品 の 内 容</value>
+  </data>
+  <data name="passcu" xml:space="preserve">
+    <value>以 前 の パ ス ワー ド</value>
+  </data>
+  <data name="passmoi" xml:space="preserve">
+    <value>新 し いパ ス ワード</value>
+  </data>
+  <data name="passmoitrung" xml:space="preserve">
+    <value>新 しいパスワード を 古 いパスワードと 同 じ に す る こ と は で き ま せ ん。</value>
+  </data>
+  <data name="quanhuyen" xml:space="preserve">
+    <value>受 取 地 区</value>
+  </data>
+  <data name="sdt" xml:space="preserve">
+    <value>電 話</value>
+  </data>
+  <data name="tacvu" xml:space="preserve">
+    <value>作 用</value>
+  </data>
+  <data name="tennguoigui" xml:space="preserve">
+    <value>送 信 者</value>
+  </data>
+  <data name="tennguoinhan" xml:space="preserve">
+    <value>受 信 機</value>
+  </data>
+  <data name="tensheet" xml:space="preserve">
+    <value>シート番号</value>
+  </data>
+  <data name="thaydoipass" xml:space="preserve">
+    <value>パ ス ワー ド を 変 更 し て く だ さ い。</value>
+  </data>
+  <data name="themhang" xml:space="preserve">
+    <value>追 加 す る</value>
+  </data>
+  <data name="time" xml:space="preserve">
+    <value>時 間</value>
+  </data>
+  <data name="timkiem" xml:space="preserve">
+    <value>サーチ</value>
+  </data>
+  <data name="tinhnhan" xml:space="preserve">
+    <value>受 取 人 の 州</value>
+  </data>
+  <data name="tinhTP" xml:space="preserve">
+    <value>受け手の県</value>
+  </data>
+  <data name="trangthai" xml:space="preserve">
+    <value>状 態</value>
+  </data>
+  <data name="trangthaidonhang" xml:space="preserve">
+    <value>最 新 の 状 況</value>
+  </data>
+  <data name="trongluong" xml:space="preserve">
+    <value>重 量</value>
+  </data>
+  <data name="tungay" xml:space="preserve">
+    <value>開 始 日</value>
+  </data>
+  <data name="vadidatepasssmoi" xml:space="preserve">
+    <value>新しいパスワードは、特殊文字を除いて4〜8文字である必要があります</value>
+  </data>
+  <data name="xoaBPBK" xml:space="preserve">
+    <value>区 画 を 削 除 す る</value>
+  </data>
+  <data name="xoathanhcong" xml:space="preserve">
+    <value>削 除 します</value>
+  </data>
+  <data name="chondv" xml:space="preserve">
+    <value>サービスを選択</value>
+  </data>
+  <data name="chonhuyen" xml:space="preserve">
+    <value>受信機の地区を選択</value>
+  </data>
+  <data name="chonngonngu" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chontinh" xml:space="preserve">
+    <value>受 信 者 の 都 道 府 県 を 選 択</value>
+  </data>
+  <data name="CPN" xml:space="preserve">
+    <value>クーリエ</value>
+  </data>
+  <data name="CPT" xml:space="preserve">
+    <value>通 常 配 達</value>
+  </data>
+  <data name="PHT" xml:space="preserve">
+    <value>エクスプレスサービス</value>
+  </data>
+  <data name="xoa" xml:space="preserve">
+    <value>削 除</value>
+  </data>
+  <data name="DIA_CHI" xml:space="preserve">
+    <value>受 信 者 のアドレスを 空 白にすることはできません</value>
+  </data>
+  <data name="DICH_VU" xml:space="preserve">
+    <value>サービスタイプ は 空 白 にしないでください</value>
+  </data>
+  <data name="NGUOI_NHAN" xml:space="preserve">
+    <value>受 信 者 の 名 前 を 空 白にすることはできません</value>
+  </data>
+  <data name="SDT_NHAN" xml:space="preserve">
+    <value>受 信 者 の 携 帯 電 話 は、ブランクにすることはできません</value>
+  </data>
+  <data name="chuyentrang" xml:space="preserve">
+    <value>ホームページに移動</value>
+  </data>
+  <data name="doipassdelogin" xml:space="preserve">
+    <value>ロ グ イン す る た め の パ スワー ド を 変 更 してく だ さ い。</value>
+  </data>
+  <data name="chon" xml:space="preserve">
+    <value>選 ぶ</value>
+  </data>
+  <data name="chonchinhanh" xml:space="preserve">
+    <value>枝 を 選 ぶ</value>
+  </data>
+  <data name="danhsachchinhanh" xml:space="preserve">
+    <value>支 店 リス ト</value>
+  </data>
+  <data name="dathangvoimaKH" xml:space="preserve">
+    <value>顧客を選ぶ</value>
+  </data>
+  <data name="makhachhang" xml:space="preserve">
+    <value>顧 客 コード / 名 前</value>
+  </data>
+  <data name="sokien" xml:space="preserve">
+    <value>小包の量</value>
+  </data>
+  <data name="cuocchinh" xml:space="preserve">
+    <value>量</value>
+  </data>
+  <data name="cuockytruoc" xml:space="preserve">
+    <value>前 期</value>
+  </data>
+  <data name="cuocnong" xml:space="preserve">
+    <value>当 期</value>
+  </data>
+  <data name="khachhang" xml:space="preserve">
+    <value>顧 客 コード</value>
+  </data>
+  <data name="Ngay" xml:space="preserve">
+    <value>日 付</value>
+  </data>
+  <data name="phikhac" xml:space="preserve">
+    <value>手 数 料 額</value>
+  </data>
+  <data name="STT" xml:space="preserve">
+    <value>注 文 番 号</value>
+  </data>
+  <data name="tenkhachhang" xml:space="preserve">
+    <value>顧 客 名</value>
+  </data>
+  <data name="tongtien" xml:space="preserve">
+    <value>合 計</value>
+  </data>
+  <data name="total" xml:space="preserve">
+    <value>合計</value>
+  </data>
+  <data name="totalamount" xml:space="preserve">
+    <value>財とサービスの 総 額</value>
+  </data>
+  <data name="totalVAT" xml:space="preserve">
+    <value>付 加 価 値 税(VAT)</value>
+  </data>
+  <data name="tracuoconline" xml:space="preserve">
+    <value>オンラインで費用をチェ</value>
+  </data>
+  <data name="taikhoan" xml:space="preserve">
+    <value>Booking Online Account</value>
+  </data>
+  <data name="sothamchieu" xml:space="preserve">
+    <value>参照コード</value>
+  </data>
+  <data name="ghichu" xml:space="preserve">
+    <value>注意</value>
+  </data>
+  <data name="mashipment" xml:space="preserve">
+    <value>出荷コード</value>
+  </data>
+  <data name="thoigiangui" xml:space="preserve">
+    <value>納期</value>
+  </data>
+  <data name="TLquydoi" xml:space="preserve">
+    <value>変換重量</value>
+  </data>
+  <data name="inphieugiaohang" xml:space="preserve">
+    <value>納品書を印刷</value>
+  </data>
+  <data name="chacchanInphieugiaohang" xml:space="preserve">
+    <value>本当に納品書を印刷しますか</value>
+  </data>
+  <data name="capnhatemail" xml:space="preserve">
+    <value>更新メール</value>
+  </data>
+  <data name="newEmail" xml:space="preserve">
+    <value>新しいメール</value>
+  </data>
+  <data name="oldEmail" xml:space="preserve">
+    <value>古いメール</value>
+  </data>
+  <data name="addNew" xml:space="preserve">
+    <value>追加</value>
+  </data>
+  <data name="makhachhang_noibo" xml:space="preserve">
+    <value>顧客コード/内部コード</value>
+  </data>
+  <data name="taoaccount" xml:space="preserve">
+    <value>オンライン予約アカウントを作成</value>
+  </data>
+  <data name="vadidateEmail" xml:space="preserve">
+    <value>メールアドレスを1つ入力してください</value>
+  </data>
+  <data name="sdtnguoigui" xml:space="preserve">
+    <value>送信者の電話</value>
+  </data>
+  <data name="mauIn" xml:space="preserve">
+    <value>印画</value>
+  </data>
+  <data name="thongBao" xml:space="preserve">
+    <value>通知!</value>
+  </data>
+  <data name="thongBaoMail" xml:space="preserve">
+    <value>注文確認を容易にするためにメールアドレスを更新してください</value>
+  </data>
+  <data name="WH_banCoMuonChuyenNVC" xml:space="preserve">
+    <value>運送業者の倉庫に配送しますか</value>
+  </data>
+  <data name="WH_banCoMuonHuyNK" xml:space="preserve">
+    <value>倉庫保管をキャンセルしますか？</value>
+  </data>
+  <data name="WH_banCoMuonHuyXK" xml:space="preserve">
+    <value>配送をキャンセルしますか</value>
+  </data>
+  <data name="WH_banCoMuonXacNhanNK" xml:space="preserve">
+    <value>倉庫保管を確認しますか？</value>
+  </data>
+  <data name="WH_banCoMuonXacNhanXK" xml:space="preserve">
+    <value>配達を確認しますか</value>
+  </data>
+  <data name="WH_banCoMuonXoaChiTiet" xml:space="preserve">
+    <value>詳細を削除しますか？</value>
+  </data>
+  <data name="WH_baoCaoXuatNhapTon" xml:space="preserve">
+    <value>既存のレポートをインポートする</value>
+  </data>
+  <data name="WH_batBuocXK" xml:space="preserve">
+    <value>有効期限付きの強制配送</value>
+  </data>
+  <data name="WH_chiDuocThaoTacYCMoiLap" xml:space="preserve">
+    <value>新しいリクエストセットでのみ操作する</value>
+  </data>
+  <data name="WH_chiTietXK" xml:space="preserve">
+    <value>倉庫の詳細</value>
+  </data>
+  <data name="WH_chonAnh" xml:space="preserve">
+    <value>写真を選択</value>
+  </data>
+  <data name="WH_chonHuyen" xml:space="preserve">
+    <value>地区を選択</value>
+  </data>
+  <data name="WH_chonNhomSanPham" xml:space="preserve">
+    <value>製品グループを選択</value>
+  </data>
+  <data name="WH_chonTinh" xml:space="preserve">
+    <value>都道府県を選択してください</value>
+  </data>
+  <data name="WH_chonXa" xml:space="preserve">
+    <value>コミューンを選択</value>
+  </data>
+  <data name="WH_chuyenNhaVanChuyen" xml:space="preserve">
+    <value>引越し業者</value>
+  </data>
+  <data name="WH_co" xml:space="preserve">
+    <value>同意する</value>
+  </data>
+  <data name="WH_coLoiXayRa" xml:space="preserve">
+    <value>エラーが発生しました</value>
+  </data>
+  <data name="WH_coSerial" xml:space="preserve">
+    <value>シリアルあり</value>
+  </data>
+  <data name="WH_danhSachKhachHang" xml:space="preserve">
+    <value>顧客リスト</value>
+  </data>
+  <data name="WH_diaChiSoNha" xml:space="preserve">
+    <value>住所</value>
+  </data>
+  <data name="WH_dongCua" xml:space="preserve">
+    <value>ドアを閉める</value>
+  </data>
+  <data name="WH_donGia" xml:space="preserve">
+    <value>単価</value>
+  </data>
+  <data name="WH_donViTinh" xml:space="preserve">
+    <value>単位</value>
+  </data>
+  <data name="WH_fileBeHon2MB" xml:space="preserve">
+    <value>ファイルのサイズは2 MB未満である必要があります</value>
+  </data>
+  <data name="WH_hoatDong" xml:space="preserve">
+    <value>作業</value>
+  </data>
+  <data name="WH_huy" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="WH_huyen" xml:space="preserve">
+    <value>地区</value>
+  </data>
+  <data name="WH_huyThanhCong" xml:space="preserve">
+    <value>キャンセルしました！</value>
+  </data>
+  <data name="WH_khong" xml:space="preserve">
+    <value>そう思わない</value>
+  </data>
+  <data name="WH_khongCoChiTietNhapKho" xml:space="preserve">
+    <value>詳細はありません</value>
+  </data>
+  <data name="WH_khongNhapMaHangNSX" xml:space="preserve">
+    <value>製品コードとメーカー製品コードの両方を入力しないでください</value>
+  </data>
+  <data name="WH_khongTimDuocSP" xml:space="preserve">
+    <value>製品が見つかりません</value>
+  </data>
+  <data name="WH_khongTonTaiMaHang" xml:space="preserve">
+    <value>このアイテムは存在しません</value>
+  </data>
+  <data name="WH_luu" xml:space="preserve">
+    <value>保存する</value>
+  </data>
+  <data name="WH_maHang" xml:space="preserve">
+    <value>PLU</value>
+  </data>
+  <data name="WH_maKhoHang" xml:space="preserve">
+    <value>倉庫コード</value>
+  </data>
+  <data name="WH_maKhoKH" xml:space="preserve">
+    <value>顧客株式コード</value>
+  </data>
+  <data name="WH_maNhomSP" xml:space="preserve">
+    <value>製品グループコード</value>
+  </data>
+  <data name="WH_maNK" xml:space="preserve">
+    <value>倉庫コード</value>
+  </data>
+  <data name="WH_maNuoc" xml:space="preserve">
+    <value>国コード</value>
+  </data>
+  <data name="WH_maSP" xml:space="preserve">
+    <value>製品コード</value>
+  </data>
+  <data name="WH_maSPOwner" xml:space="preserve">
+    <value>製品コード所有者</value>
+  </data>
+  <data name="WH_maThamChieu" xml:space="preserve">
+    <value>参照コード</value>
+  </data>
+  <data name="WH_maXK" xml:space="preserve">
+    <value>倉庫コード</value>
+  </data>
+  <data name="WH_maXKKhongDuocBoTrong" xml:space="preserve">
+    <value>配達コードは空白にできません</value>
+  </data>
+  <data name="WH_maYCNK" xml:space="preserve">
+    <value>コードには倉庫が必要</value>
+  </data>
+  <data name="WH_maYCXK" xml:space="preserve">
+    <value>倉庫を離れるのに必要なコード</value>
+  </data>
+  <data name="WH_moiChonDVT" xml:space="preserve">
+    <value>計算単位を選択してください</value>
+  </data>
+  <data name="WH_moiChonKH" xml:space="preserve">
+    <value>顧客を選択してください</value>
+  </data>
+  <data name="WH_moiChonNhomKhoHang" xml:space="preserve">
+    <value>倉庫グループを選択してください</value>
+  </data>
+  <data name="WH_moiChonNhomSP" xml:space="preserve">
+    <value>製品グループを選択してください</value>
+  </data>
+  <data name="WH_moiChonSP" xml:space="preserve">
+    <value>製品をお選びください</value>
+  </data>
+  <data name="WH_moiChonTrangThai" xml:space="preserve">
+    <value>ステータスを選択してください</value>
+  </data>
+  <data name="WH_moiNhapMaNhomKho" xml:space="preserve">
+    <value>倉庫グループコードを入力してください</value>
+  </data>
+  <data name="WH_moiNhapMaNhomSP" xml:space="preserve">
+    <value>製品グループコードを入力してください</value>
+  </data>
+  <data name="WH_moiNhapMaSP" xml:space="preserve">
+    <value>製品コードを入力してください</value>
+  </data>
+  <data name="WH_moiNhapMaSPOwner" xml:space="preserve">
+    <value>製品所有者コードを入力してください</value>
+  </data>
+  <data name="WH_moiNhapSDT" xml:space="preserve">
+    <value>電話番号を入力してください</value>
+  </data>
+  <data name="WH_moiNhapTenKhoHang" xml:space="preserve">
+    <value>倉庫名を入力してください</value>
+  </data>
+  <data name="WH_moiNhapTenNhomSP" xml:space="preserve">
+    <value>製品グループ名を入力してください</value>
+  </data>
+  <data name="WH_moiNhapTenSP" xml:space="preserve">
+    <value>製品名を入力してください</value>
+  </data>
+  <data name="WH_moiNhapTenSPTimKiem" xml:space="preserve">
+    <value>検索製品の名前を入力してください</value>
+  </data>
+  <data name="WH_moiNhapTrongLuong" xml:space="preserve">
+    <value>重量を入力してください</value>
+  </data>
+  <data name="WH_moTa" xml:space="preserve">
+    <value>説明</value>
+  </data>
+  <data name="WH_ngayGioNhap" xml:space="preserve">
+    <value>インポートの日時</value>
+  </data>
+  <data name="WH_ngayHetHan" xml:space="preserve">
+    <value>賞味期限</value>
+  </data>
+  <data name="WH_ngayHHLonHonNgaySX" xml:space="preserve">
+    <value>有効期限は製造日より後でなければなりません</value>
+  </data>
+  <data name="WH_ngaySanXuat" xml:space="preserve">
+    <value>製造日</value>
+  </data>
+  <data name="WH_nhanVienCapNhat" xml:space="preserve">
+    <value>スタッフの更新</value>
+  </data>
+  <data name="WH_nhanVienTao" xml:space="preserve">
+    <value>創作スタッフ</value>
+  </data>
+  <data name="WH_nhapKhoChiTiet" xml:space="preserve">
+    <value>倉庫の詳細</value>
+  </data>
+  <data name="WH_nhapTheoMaSP" xml:space="preserve">
+    <value>製品コードで入力</value>
+  </data>
+  <data name="WH_nhomKhoHang" xml:space="preserve">
+    <value>倉庫グループ</value>
+  </data>
+  <data name="WH_nhomSP" xml:space="preserve">
+    <value>製品グループ</value>
+  </data>
+  <data name="WH_nvXacNhan" xml:space="preserve">
+    <value>確認スタッフ</value>
+  </data>
+  <data name="WH_phatSinhTrongKy" xml:space="preserve">
+    <value>期間中に発生</value>
+  </data>
+  <data name="WH_quanLyDanhMucNhomSP" xml:space="preserve">
+    <value>製品グループカタログの管理</value>
+  </data>
+  <data name="WH_quanLyDanhMucSP" xml:space="preserve">
+    <value>製品ポートフォリオ管理</value>
+  </data>
+  <data name="WH_quanLyDanhSachKhachHang" xml:space="preserve">
+    <value>顧客リスト管理</value>
+  </data>
+  <data name="WH_quanLyKho" xml:space="preserve">
+    <value>倉庫管理</value>
+  </data>
+  <data name="WH_quanLyNhapKho" xml:space="preserve">
+    <value>倉庫管理 (In)</value>
+  </data>
+  <data name="WH_quanLyTaoKhoHangMoi" xml:space="preserve">
+    <value>新しい倉庫の作成を管理する</value>
+  </data>
+  <data name="WH_quanLyXuatKho" xml:space="preserve">
+    <value>倉庫管理 (Out)</value>
+  </data>
+  <data name="WH_sanPham" xml:space="preserve">
+    <value>製品</value>
+  </data>
+  <data name="WH_slTon" xml:space="preserve">
+    <value>存在する数量</value>
+  </data>
+  <data name="WH_soDienThoai" xml:space="preserve">
+    <value>電話番号</value>
+  </data>
+  <data name="WH_soLuong" xml:space="preserve">
+    <value>量</value>
+  </data>
+  <data name="WH_soLuongKhongDuocTrong" xml:space="preserve">
+    <value>数値は空白にできず、0より大きい必要があります</value>
+  </data>
+  <data name="WH_soLuongNhap" xml:space="preserve">
+    <value>輸入数</value>
+  </data>
+  <data name="WH_soLuongTonKhongDu" xml:space="preserve">
+    <value>数量が足りません</value>
+  </data>
+  <data name="WH_soLuongXuat" xml:space="preserve">
+    <value>輸出数量</value>
+  </data>
+  <data name="WH_SPKhongConTrongKho" xml:space="preserve">
+    <value>この商品の在庫はなくなりました</value>
+  </data>
+  <data name="WH_SPKhongDuocTrong" xml:space="preserve">
+    <value>製品を入力してください</value>
+  </data>
+  <data name="WH_sua" xml:space="preserve">
+    <value>修復</value>
+  </data>
+  <data name="WH_suaThanhCong" xml:space="preserve">
+    <value>編集に成功しました！</value>
+  </data>
+  <data name="WH_tamNgung" xml:space="preserve">
+    <value>一時停止</value>
+  </data>
+  <data name="WH_tenKhachHang" xml:space="preserve">
+    <value>顧客名</value>
+  </data>
+  <data name="WH_tenKhoHang" xml:space="preserve">
+    <value>倉庫名</value>
+  </data>
+  <data name="WH_tenNhomKho" xml:space="preserve">
+    <value>倉庫グループの名前</value>
+  </data>
+  <data name="WH_tenNhomSP" xml:space="preserve">
+    <value>製品グループ名</value>
+  </data>
+  <data name="WH_tenSP" xml:space="preserve">
+    <value>商品名</value>
+  </data>
+  <data name="WH_them" xml:space="preserve">
+    <value>もっと</value>
+  </data>
+  <data name="WH_themDanhMucNhomSP" xml:space="preserve">
+    <value>商品グループのカテゴリを追加</value>
+  </data>
+  <data name="WH_themDanhMucSP" xml:space="preserve">
+    <value>製品カタログを追加</value>
+  </data>
+  <data name="WH_themThanhCong" xml:space="preserve">
+    <value>成功に追加！</value>
+  </data>
+  <data name="WH_thoiGianCapNhat" xml:space="preserve">
+    <value>更新する時間</value>
+  </data>
+  <data name="WH_thoiGianTao" xml:space="preserve">
+    <value>作成時間</value>
+  </data>
+  <data name="WH_thoiGianXacNhan" xml:space="preserve">
+    <value>確認時間</value>
+  </data>
+  <data name="WH_thongTinKhachHang" xml:space="preserve">
+    <value>顧客情報</value>
+  </data>
+  <data name="WH_timKiem" xml:space="preserve">
+    <value>探す</value>
+  </data>
+  <data name="WH_tinh" xml:space="preserve">
+    <value>地方</value>
+  </data>
+  <data name="WH_tonCuoiKy" xml:space="preserve">
+    <value>期末在庫</value>
+  </data>
+  <data name="WH_tonDauKy" xml:space="preserve">
+    <value>既存の期間</value>
+  </data>
+  <data name="WH_tongSo" xml:space="preserve">
+    <value>合計</value>
+  </data>
+  <data name="WH_tonThucTe" xml:space="preserve">
+    <value>実際の在庫</value>
+  </data>
+  <data name="WH_trangThai" xml:space="preserve">
+    <value>状態</value>
+  </data>
+  <data name="WH_vuiLongChonDongThaoTac" xml:space="preserve">
+    <value>操作したい回線を選択してください</value>
+  </data>
+  <data name="WH_xa" xml:space="preserve">
+    <value>コミューン</value>
+  </data>
+  <data name="WH_xacNhan" xml:space="preserve">
+    <value>確認</value>
+  </data>
+  <data name="WH_xacNhanThanhCong" xml:space="preserve">
+    <value>成功の確認！</value>
+  </data>
+  <data name="WH_ycDaDuocHuy" xml:space="preserve">
+    <value>リクエストはキャンセルされました</value>
+  </data>
+  <data name="WH_ycNKChiTiet" xml:space="preserve">
+    <value>倉庫の詳細をリクエストする</value>
+  </data>
+  <data name="WH_ycXKChiTiet" xml:space="preserve">
+    <value>倉庫の詳細をリクエストする</value>
+  </data>
+  <data name="chuyenmaKH" xml:space="preserve">
+    <value>顧客コード変換</value>
+  </data>
+  <data name="chuyenmathanhcong" xml:space="preserve">
+    <value>変換に成功しました！</value>
+  </data>
+  <data name="khoiphucBPBK" xml:space="preserve">
+    <value>追跡番号を復元</value>
+  </data>
+  <data name="khoiphucBPBKthanhcong" xml:space="preserve">
+    <value>成功した法案を復元します！</value>
+  </data>
+  <data name="msgbotrongBPBK" xml:space="preserve">
+    <value>トラック番号を入力してください</value>
+  </data>
+  <data name="msgbotrongmakh" xml:space="preserve">
+    <value>顧客コードは空白にできません</value>
+  </data>
+  <data name="WH_coMuonInPhieuNK" xml:space="preserve">
+    <value>領収書を印刷しますか</value>
+  </data>
+  <data name="WH_trangThaiKhongDuoc" xml:space="preserve">
+    <value>キャンセルされたステータスは印刷されません</value>
+  </data>
+  <data name="WH_coMuonInPhieuXK" xml:space="preserve">
+    <value>リリーススリップを印刷しますか</value>
+  </data>
+  <data name="quytrinhbooking" xml:space="preserve">
+    <value>予約オンラインチュートリアル</value>
+  </data>
+  <data name="tailieuhuongdan" xml:space="preserve">
+    <value>説明書</value>
+  </data>
+  <data name="videohuongdan" xml:space="preserve">
+    <value>ビデオチュートリアル</value>
+  </data>
+  <data name="back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="dacotaikhoan" xml:space="preserve">
+    <value>Do you already have an account?</value>
+  </data>
+  <data name="dangky" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="dangkybookingonline" xml:space="preserve">
+    <value>Register booking online</value>
+  </data>
+  <data name="dangkythanhcong" xml:space="preserve">
+    <value>Account registration is successful. </value>
+  </data>
+  <data name="dcemail" xml:space="preserve">
+    <value>Email address</value>
+  </data>
+  <data name="diachilayhang" xml:space="preserve">
+    <value>Address pickup</value>
+  </data>
+  <data name="forgotpass" xml:space="preserve">
+    <value>Forgot password ?</value>
+  </data>
+  <data name="hotrokt" xml:space="preserve">
+    <value>Technical support</value>
+  </data>
+  <data name="khoiphuc" xml:space="preserve">
+    <value>Send email</value>
+  </data>
+  <data name="lienhetheosdt" xml:space="preserve">
+    <value>Please contact 0961.107.816 for assistance in changing the password</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="noteforgotpas" xml:space="preserve">
+    <value>Please enter the email address used to register on the system.</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="phonenumber" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="quanlayhang" xml:space="preserve">
+    <value>地区ピックアップ</value>
+  </data>
+  <data name="tenkh" xml:space="preserve">
+    <value>Customer name</value>
+  </data>
+  <data name="tinhlayhang" xml:space="preserve">
+    <value>地方ピックアップ</value>
+  </data>
+  <data name="username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="vaddcemail" xml:space="preserve">
+    <value>Email must not be blank</value>
+  </data>
+  <data name="vaddcemail1" xml:space="preserve">
+    <value>Email address is incorrect</value>
+  </data>
+  <data name="vaddclayhang" xml:space="preserve">
+    <value>Address pickup must not be blank</value>
+  </data>
+  <data name="vadpass" xml:space="preserve">
+    <value>Password must not be blank</value>
+  </data>
+  <data name="vadquanlayhang" xml:space="preserve">
+    <value>County/district pickup must not be blank</value>
+  </data>
+  <data name="vadsdt" xml:space="preserve">
+    <value>Phone number must not be blank</value>
+  </data>
+  <data name="vadtendangnhap" xml:space="preserve">
+    <value>Username must not be blank</value>
+  </data>
+  <data name="vadtenkh" xml:space="preserve">
+    <value>Customer name must not be blank</value>
+  </data>
+  <data name="vadtinhlayhang" xml:space="preserve">
+    <value>Province pickup must not be blank</value>
+  </data>
+  <data name="chonchinhanhdetaodonhang" xml:space="preserve">
+    <value>順番に会社を選択</value>
+  </data>
+  <data name="chondonvi" xml:space="preserve">
+    <value>局コードを選択します。</value>
+  </data>
+  <data name="msgChonChiNhanh" xml:space="preserve">
+    <value>会社の支店を選択してください</value>
+  </data>
+  <data name="msgLoi" xml:space="preserve">
+    <value>エラー。 ページを更新してください</value>
+  </data>
+  <data name="msgMadonvi" xml:space="preserve">
+    <value>駅コードを入力してください</value>
+  </data>
+  <data name="msgMaKhachHang" xml:space="preserve">
+    <value>顧客コードを入力してください</value>
+  </data>
+  <data name="ngayyclayhang" xml:space="preserve">
+    <value>集荷依頼日</value>
+  </data>
+  <data name="notedangnhapthanhcong" xml:space="preserve">
+    <value>ログインに成功しました。 駅コードを選択してください。会社はオンライン予約が必要です。</value>
+  </data>
+  <data name="bangtracuoc" xml:space="preserve">
+    <value>納 入 実 績</value>
+  </data>
+  <data name="den" xml:space="preserve">
+    <value>に</value>
+  </data>
+  <data name="tratungay" xml:space="preserve">
+    <value>開 始 日</value>
+  </data>
+  <data name="makh" xml:space="preserve">
+    <value>顧客コード</value>
+  </data>
+  <data name="maxacnhan" xml:space="preserve">
+    <value>Verification code</value>
+  </data>
+  <data name="msgmaxn" xml:space="preserve">
+    <value>Verification code cannot be left blank</value>
+  </data>
+  <data name="myprofile" xml:space="preserve">
+    <value>私のプロフィール</value>
+  </data>
+  <data name="notexacnhanemail" xml:space="preserve">
+    <value>Please verify your account to register Booking Online</value>
+  </data>
+  <data name="Xacminhtaikhoan" xml:space="preserve">
+    <value>Account Verification successful</value>
+  </data>
+  <data name="xacnhan" xml:space="preserve">
+    <value>Verify</value>
+  </data>
+  <data name="dukientinhgia" xml:space="preserve">
+    <value>予想価格計算</value>
+  </data>
+  <data name="ketqua" xml:space="preserve">
+    <value>結果</value>
+  </data>
+  <data name="msgdichvutinhgia" xml:space="preserve">
+    <value>サービスタイプは空にできません</value>
+  </data>
+  <data name="msgsokientinhgia" xml:space="preserve">
+    <value>パッケージ数量は空であってはならず、0より大きくなければなりません</value>
+  </data>
+  <data name="msgtinhdentinhgia" xml:space="preserve">
+    <value>目的地の州は空にできません</value>
+  </data>
+  <data name="msgtinhgiathanhcong" xml:space="preserve">
+    <value>計算済み！</value>
+  </data>
+  <data name="msgtrongluongtinhgia" xml:space="preserve">
+    <value>重みは空であってはならず、0より大きくなければなりません</value>
+  </data>
+  <data name="phidichvu" xml:space="preserve">
+    <value>サービス料</value>
+  </data>
+  <data name="phixangdau" xml:space="preserve">
+    <value>燃料チャージ</value>
+  </data>
+  <data name="thanhtien" xml:space="preserve">
+    <value>お金に</value>
+  </data>
+  <data name="thongtin" xml:space="preserve">
+    <value>情報</value>
+  </data>
+  <data name="tinhgia" xml:space="preserve">
+    <value>計算する</value>
+  </data>
+  <data name="vungsauvungxa" xml:space="preserve">
+    <value>遠隔地</value>
+  </data>
+  <data name="sodt" xml:space="preserve">
+    <value>電話</value>
+  </data>
+  <data name="hoadon" xml:space="preserve">
+    <value>請求書</value>
+  </data>
+  <data name="kthang" xml:space="preserve">
+    <value>商品サイズ</value>
+  </data>
+  <data name="sohoadon" xml:space="preserve">
+    <value>請求書番号</value>
+  </data>
+  <data name="vadkthang" xml:space="preserve">
+    <value>Goods size must not be blank</value>
+  </data>
+  <data name="vadsohoadon" xml:space="preserve">
+    <value>Invoice number must not be blank</value>
+  </data>
+  <data name="tthanghoa" xml:space="preserve">
+    <value>サービス情報</value>
+  </data>
+  <data name="ttnguoigui" xml:space="preserve">
+    <value>送信者と製品情報</value>
+  </data>
+  <data name="ttnguoinhan" xml:space="preserve">
+    <value>受信者情報</value>
+  </data>
+  <data name="vadhuyennhan" xml:space="preserve">
+    <value>受信者の地区を空にすることはできません</value>
+  </data>
+  <data name="vadtinhnhan" xml:space="preserve">
+    <value>受信者の州を空にすることはできません</value>
+  </data>
+  <data name="msg_ket_thuc_phien_lam_viec" xml:space="preserve">
+    <value>The session has ended, please login again</value>
+  </data>
+  <data name="msg_role_using_action" xml:space="preserve">
+    <value>You don't have permission to use this action</value>
+  </data>
+  <data name="msg_role_reset_pass" xml:space="preserve">
+    <value>Sub-codes do not have permission to change passwords. Please contact the original code to change the password.</value>
+  </data>
+  <data name="quanlymaphu" xml:space="preserve">
+    <value>サブコード管理</value>
+  </data>
+  <data name="danhsach_ma_phu" xml:space="preserve">
+    <value>サブコードリスト</value>
+  </data>
+  <data name="hoat_dong" xml:space="preserve">
+    <value>アクティブ</value>
+  </data>
+  <data name="khoa" xml:space="preserve">
+    <value>無効</value>
+  </data>
+  <data name="msg_khoa_ma_phu" xml:space="preserve">
+    <value>Are you sure you lock sub-code</value>
+  </data>
+  <data name="msg_luu_thanh_cong" xml:space="preserve">
+    <value>Save successfully!</value>
+  </data>
+  <data name="msg_pass" xml:space="preserve">
+    <value>Password cannot be empty</value>
+  </data>
+  <data name="msg_repass" xml:space="preserve">
+    <value>Re-enter password cannot be empty</value>
+  </data>
+  <data name="msg_ten_maphu" xml:space="preserve">
+    <value>Sub-code name cannot be empty</value>
+  </data>
+  <data name="msg_username" xml:space="preserve">
+    <value>Username can not be empty</value>
+  </data>
+  <data name="tao_ma_phu" xml:space="preserve">
+    <value>サブコードを作成する</value>
+  </data>
+  <data name="tao_moi" xml:space="preserve">
+    <value>作る</value>
+  </data>
+  <data name="ten_ma_phu" xml:space="preserve">
+    <value>サブコード名</value>
+  </data>
+  <data name="update_infor" xml:space="preserve">
+    <value>更新情報</value>
+  </data>
+  <data name="msg_dia_chi_nguoi_gui" xml:space="preserve">
+    <value>Address's sender can't be empty</value>
+  </data>
+  <data name="doanhthu" xml:space="preserve">
+    <value>料金（VAT含みます）</value>
+  </data>
+  <data name="chacchanInBPBK" xml:space="preserve">
+    <value>Do you want to print bill number</value>
+  </data>
+  <data name="inbpbk" xml:space="preserve">
+    <value>Print with bill code</value>
+  </data>
+  <data name="intheophieugui" xml:space="preserve">
+    <value>Print with order code</value>
+  </data>
+  <data name="msg_huyen_lh" xml:space="preserve">
+    <value>The district pickup incorrect. Please choose again.</value>
+  </data>
+  <data name="msg_huyen_nhan" xml:space="preserve">
+    <value>The district' receiver incorrect. Please choose again.</value>
+  </data>
+  <data name="gtdonhang" xml:space="preserve">
+    <value>領収書</value>
+  </data>
+  <data name="hangdongkiem" xml:space="preserve">
+    <value>Co-check goods</value>
+  </data>
+  <data name="hoanBBBG" xml:space="preserve">
+    <value>引き継ぎ記録の返金</value>
+  </data>
+  <data name="ngayhenphat" xml:space="preserve">
+    <value>配達予定</value>
+  </data>
+  <data name="phatsieuthi" xml:space="preserve">
+    <value>Supermarket delivery</value>
+  </data>
+  <data name="dongkiem" xml:space="preserve">
+    <value>Co-checking</value>
+  </data>
+  <data name="dsNguoiNhan" xml:space="preserve">
+    <value>受信者のリスト</value>
+  </data>
+  <data name="errChonDH" xml:space="preserve">
+    <value>Please tick the order you want to request</value>
+  </data>
+  <data name="errHoanBienBanBB" xml:space="preserve">
+    <value>Refund of handover records cannot empty.</value>
+  </data>
+  <data name="errKhongCoDH" xml:space="preserve">
+    <value>No orders, please add an order before saving</value>
+  </data>
+  <data name="errNgayHenPhatST" xml:space="preserve">
+    <value>Supermarket delivery date cannot empty.</value>
+  </data>
+  <data name="luudontam" xml:space="preserve">
+    <value>一時的な受注を保存</value>
+  </data>
+  <data name="nhapttnguoinhan" xml:space="preserve">
+    <value>受信者の情報を入力します</value>
+  </data>
+  <data name="quanlydonhangtam" xml:space="preserve">
+    <value>一時的な注文管理</value>
+  </data>
+  <data name="qusChacChanLuuDonTam" xml:space="preserve">
+    <value>Are you sure to save temporary orders?</value>
+  </data>
+  <data name="errBBBGkokitudacbiet" xml:space="preserve">
+    <value>Delivery records may not enter special characters: } or {</value>
+  </data>
+  <data name="errChiTimKiemTrong1Thang" xml:space="preserve">
+    <value>Search only for 1 month!</value>
+  </data>
+  <data name="errChiTimKiemTrong3Thang" xml:space="preserve">
+    <value>Search only for 90 days!</value>
+  </data>
+  <data name="errChiUp1000dong" xml:space="preserve">
+    <value>Only upload up to 1000 parcels!</value>
+  </data>
+  <data name="errDiaChiNguoiNhan" xml:space="preserve">
+    <value>The recipient address can only enter up to 300 characters</value>
+  </data>
+  <data name="errGTDHSaiDinhDang" xml:space="preserve">
+    <value>Receipt amount in wrong format</value>
+  </data>
+  <data name="errKhongTimThayBPBK" xml:space="preserve">
+    <value>Not found bill number in database.</value>
+  </data>
+  <data name="errKhongTimThayFile" xml:space="preserve">
+    <value>Not found the file upload</value>
+  </data>
+  <data name="errKhongTimThayKH" xml:space="preserve">
+    <value>Not found this customer</value>
+  </data>
+  <data name="errKhongTimThayTenSheet" xml:space="preserve">
+    <value>Not found sheet name</value>
+  </data>
+  <data name="erroNgayPhatSTLonHonNgayHT" xml:space="preserve">
+    <value>Supermarket delivery date must greater than the current date</value>
+  </data>
+  <data name="erroNgayYCLonHonNgayHT" xml:space="preserve">
+    <value>Pickup request date must be greater than or equal to current date</value>
+  </data>
+  <data name="errSDTgui" xml:space="preserve">
+    <value>Sender's phone can't be blank</value>
+  </data>
+  <data name="errSoHDkokitudacbiet" xml:space="preserve">
+    <value>Invoice number must not enter special characters: } or {</value>
+  </data>
+  <data name="errTGHenSaiDinhDang" xml:space="preserve">
+    <value>Supermarket delivery date in the wrong format 'dd/MM/yyyy HH:mm' (Example: 11/10/2020 16:30)</value>
+  </data>
+  <data name="msgCapNhatEmail" xml:space="preserve">
+    <value>Update email address success</value>
+  </data>
+  <data name="errTenNguoiGui" xml:space="preserve">
+    <value>The sender's name cannot empty</value>
+  </data>
+  <data name="msgYCLayHangThanhCong" xml:space="preserve">
+    <value>Your order has been requested to pick up, please go to the Manage Orders tab for tracking</value>
+  </data>
+  <data name="yeucaulayhang" xml:space="preserve">
+    <value>Request pickup</value>
+  </data>
+  <data name="ttlayhang" xml:space="preserve">
+    <value>ピックアップ情報</value>
+  </data>
+  <data name="chieucaokien" xml:space="preserve">
+    <value>パッケージの高さ</value>
+  </data>
+  <data name="chieudaikien" xml:space="preserve">
+    <value>パッケージの長さ</value>
+  </data>
+  <data name="chieurongkien" xml:space="preserve">
+    <value>パッケージ幅</value>
+  </data>
+  <data name="huyenden" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tlhangcongkenh" xml:space="preserve">
+    <value>かさばる商品、変換後の重量</value>
+  </data>
+  <data name="tl_kien" xml:space="preserve">
+    <value>パッケージ質量</value>
+  </data>
+  <data name="denhuyenxa" xml:space="preserve">
+    <value>地区/コミューンへ</value>
+  </data>
+  <data name="denquantp" xml:space="preserve">
+    <value>地区/市へ</value>
+  </data>
+  <data name="errkhongtimthaymadh" xml:space="preserve">
+    <value>オーダーコードは、システムには見られません。</value>
+  </data>
+  <data name="gom" xml:space="preserve">
+    <value>含む</value>
+  </data>
+  <data name="msgXoaDH" xml:space="preserve">
+    <value>注文コードを削除してもよろしいですか</value>
+  </data>
+  <data name="msgXoaDonHang" xml:space="preserve">
+    <value>この注文を削除してもよろしいですか？</value>
+  </data>
+  <data name="xoadonhang" xml:space="preserve">
+    <value>削除順序</value>
+  </data>
+  <data name="xoaphieule" xml:space="preserve">
+    <value>削除小包</value>
+  </data>
+  <data name="msgChonQuanTP" xml:space="preserve">
+    <value>Please select "To District/City" or "To District/Commune</value>
+  </data>
+</root>

@@ -1,0 +1,247 @@
+﻿@using WebSite.Language
+@{
+    ViewBag.Title = Resource.lienhe;
+}
+<style>
+    .form-check.form-check-inline {
+        padding-top: 15px;
+    }
+</style>
+
+<section>
+    <div class="container">
+        <div class="contactInner clearfix row">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="contactItem">
+                    <div class="section-title">
+                        <h2>Liên hệ</h2>
+                    </div>
+                    <h3 style="margin-bottom: 15px;font-size: 20px; font-weight:600;">MIỀN BẮC:</h3>
+                    <p><i class="fa fa-home"></i> SỐ 12B LÔ A10 KĐT NAM TRUNG YÊN, PHƯỜNG YÊN HÒA, QUẬN CẦU GIẤY, TP. HÀ NỘI</p>
+                    <p><i class="fa fa-phone"></i> 024.396.12345</p>
+                    <p><i class="fa fa-envelope"></i> dvkh.hn@netpost.vn</p>
+                    <h3 style="margin-bottom: 15px;margin-top: 30px;font-size: 20px;; font-weight:600;">MIỀN NAM:</h3>
+                    <p><i class="fa fa-home"></i> SỐ 403 ĐƯỜNG LÝ THƯỜNG KIỆT, PHƯỜNG 8, QUẬN TÂN BÌNH, TP. HỒ CHÍ MINH</p>
+                    <p><i class="fa fa-phone"></i> 028.3948.3333</p>
+                    <p><i class="fa fa-envelope"></i> dvkh.hcm@netpost.vn</p>
+                    <h3 style="margin-bottom: 15px;margin-top: 30px;font-size: 20px; font-weight:600;">MIỀN TRUNG:</h3>
+                    <p><i class="fa fa-home"></i> Số 34/H7/15 Thi Sách, P.Hoà Thuận Tây, Q.Hải Châu, TP.ĐÀ NẴNG</p>
+                    <p><i class="fa fa-phone"></i> 023.63.789.448</p>
+                    <p><i class="fa fa-envelope"></i> dvkh.dn@netpost.vn</p>
+                </div>
+            </div>
+            <div id="post-19" class="col-sm-6 col-md-6 col-lg-6">
+                <div class="section-title">
+                    <h2>Điền vào liên hệ</h2>
+                </div>
+
+                <p style="margin-bottom: 15px;">
+                    Liên hệ với chúng tôi nếu bạn có bất kỳ câu hỏi nào và chúng tôi sẽ liên hệ lại với bạn càng sớm càng tốt. Vui lòng điền vào đầy đủ thông tin bên dưới.
+                </p>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group-sm">
+                            <label class="label">@Resource.loaihinhdichvu (*)</label>
+                            <div class="position-relative">
+                                @Html.DevExpress().ComboBox(settings =>
+                                {
+                                    settings.Name = "cbDichVu";
+                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                    settings.SelectedIndex = -1;
+                                    settings.ControlStyle.CssClass = "form-control";
+                                    settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                                    settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                                    settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                                    settings.Properties.ValueType = typeof(string);
+                                    settings.Properties.ValueField = "Value";
+                                    settings.Properties.TextField = "Text";
+                                }).BindList(ViewData["lstDichVu"] as List<SelectListItem>).GetHtml()
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group-sm">
+                            <label class="label">@Resource.yourname (*)</label>
+                            <input class="form-control" type="text" id="name" name="name" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label class="label">@Booking.sdt (*)</label>
+                            <input class="form-control" type="text" id="phone" name="phone" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group-sm">
+                            <label class="label">@Resource.youremail (*)</label>
+                            <input class="form-control" type="text" id="email" name="email" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group-sm">
+                            <label class="label">@Resource.tieude (*)</label>
+                            <input class="form-control" type="text" id="subject" name="subject" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group-sm">
+                            <label class="label">@Resource.thongdiep (*)</label>
+                            <textarea class="form-control" id="mess" name="message" rows="4" autocomplete="off"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group-sm wrap-input2 border-bottom-0">
+                            <label class="label">@Resource.chinhanhlienhe (*)</label>
+                            <div class="input-group">
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="branch" value="02">
+                                        @Resource.HCMbranch
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="branch" value="03">
+                                        @Resource.DNbranch
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="branch" value="01">
+                                        @Resource.HNbranch
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <button class="btn btn-danger contact2-form-btn" onclick="Contact(this)">
+                            <i class="fa fa-paper-plane" id="plane"></i> &nbsp; @Resource.gui
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function () {
+        $('html, body').animate({
+            scrollTop: 100
+        }, 600);
+    });
+
+    function Contact(obj) {
+        $(obj).attr("disabled", true);
+        $('#plane').removeClass("fa-paper-plane").addClass("fa fa-spinner fa-spin");
+
+        var name = $('#name').val();
+        var phone = $("#phone").val();
+        var email = $('#email').val();
+        var subject = $('#subject').val();
+        var message = $('#mess').val();
+        var company = $('input[name="branch"]:checked').val();
+        var dichvu = cbDichVu.GetValue();
+        company = company == undefined ? "" : company;
+        if (dichvu == "" || dichvu == null) {
+            cbDichVu.Focus();
+            $(obj).removeAttr('disabled');
+            $('#plane').removeClass("fa-spinner fa-spin").addClass("fa-paper-plane");
+            Swal.fire(
+                        '',
+                        '@Html.Raw(Booking.msgDICH_VU)',
+                        'error');
+                    return;
+        }
+        if (name == "" || name.trim() == "") {
+            $('.wrap-contact2 input[name="name"]').focus();
+            $(obj).removeAttr('disabled');
+            $('#plane').removeClass("fa-spinner fa-spin").addClass("fa-paper-plane");
+            Swal.fire(
+                        '',
+                        '@Html.Raw(Resource.msgHoten)',
+                        'error');
+                    return;
+        }
+        if (phone == "" || phone.trim() == "") {
+            $('.wrap-contact2 input[name="phone"]').focus();
+            $(obj).removeAttr('disabled');
+            $('#plane').removeClass("fa-spinner fa-spin").addClass("fa-paper-plane");
+            Swal.fire(
+                        '',
+                        '@Html.Raw(Resource.msgPhone)',
+                        'error');
+                    return;
+        }
+        if (email == "" || email.trim() == "") {
+            $('.wrap-contact2 input[name="email"]').focus();
+            $(obj).removeAttr('disabled');
+            $('#plane').removeClass("fa-spinner fa-spin").addClass("fa-paper-plane");
+            Swal.fire(
+                        '',
+                        '@Html.Raw(Resource.msgEmail)',
+                        'error');
+                    return;
+        }
+        if (subject == "" || subject.trim() == "") {
+            $('.wrap-contact2 input[name="subject"]').focus();
+            $(obj).removeAttr('disabled');
+            $('#plane').removeClass("fa-spinner fa-spin").addClass("fa-paper-plane");
+            Swal.fire(
+                        '',
+                        '@Html.Raw(Resource.msgSubject)',
+                        'error');
+                    return;
+        }
+        if (message == "" || message.trim() == "") {
+            $('.wrap-contact2 input[name="message"]').focus();
+            $(obj).removeAttr('disabled');
+            $('#plane').removeClass("fa-spinner fa-spin").addClass("fa-paper-plane");
+            Swal.fire(
+                '',
+                '@Html.Raw(Resource.msgMess)',
+                'error');
+            return;
+        }
+
+        $.ajax({
+            url: "/Lien_He/Contact",
+            type: "POST",
+            data: {
+                name: name,
+                phone: phone,
+                email: email,
+                subject: subject,
+                message: message,
+                company: company,
+                dichvu: dichvu
+            },
+            dataType: 'json',
+            success: function (data) {
+                $('#plane').removeClass("fa-spinner fa-spin").addClass("fa-paper-plane");
+                $(obj).removeAttr('disabled');
+                if (data.ID == 1) {
+                    Swal.fire({
+                        title: 'Send success!',
+                        text: "",
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonText: 'Yes'
+                    })
+                        .then(function (result) {
+                            if (result.value) {
+                                window.location.reload();
+                            }
+                        });
+                }
+                else {
+                    Swal.fire(
+                        '',
+                        data.Title,
+                        'error');
+                    return;
+                }
+            }
+        });
+    }
+</script>

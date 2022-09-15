@@ -1,0 +1,887 @@
+﻿@using WebSite.Filter;
+@{WebSite.Models.CSS_CRM_NGUOI_DUNGDTO user = (WebSite.Models.CSS_CRM_NGUOI_DUNGDTO)Session["User"];}
+@using WebSite.Language;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="robots" content="noindex,nofollow">
+    <!--title-->
+    <title>@ViewBag.Title</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/lib/vendor/mdi/css/materialdesignicons.min.css">
+    @*<link href="~/lib/css/stylelist.css" rel="stylesheet" />*@
+    <link rel="stylesheet" href="~/lib/vendor/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="~/lib/vendor/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/lib/vendor/font-awesome/css/font-awesome.min.css" />
+    <!--Datepicker-->
+    <link href="~/lib/bootstrap/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    <!--sweetalert-->
+    <link href="~/lib/css/sweetalert2.min.css" rel="stylesheet" />
+    <!-- Select2 theme -->
+    <link href="~/lib/css/select.css" rel="stylesheet" />
+    <link href="~/lib/dist/jquery.iviewer.css" rel="stylesheet" />
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="~/lib/css/style-booking.css?vr=1.1" />
+    <!-- End layout styles -->
+    <link href="~/lib/css/templatemo_style.css?vr=1.1" rel="stylesheet" />
+    <link href="~/favicon.ico" />
+    <link rel="icon" href="~/lib/images/logo/favicon.png" type="image/x-icon">
+
+    <!--devexpress-->
+    @Html.DevExpress().GetStyleSheets(
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Report },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.GridView }
+    )
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/GridView.css")" />
+
+    <!--devexpress-->
+    @Html.DevExpress().GetScripts(
+        new Script { ExtensionSuite = ExtensionSuite.Editors },
+        new Script { ExtensionSuite = ExtensionSuite.Report },
+        new Script { ExtensionSuite = ExtensionSuite.GridView }
+    )
+
+    <!--ANGULAR-->
+    <script src="~/lib/js/angular.js"></script>
+    <script src="~/lib/js/angular-sanitize.js"></script>
+    <script src="~/lib/js/select.js"></script>
+
+    <!--iviewer-->
+    <script type="text/javascript" src="~/lib/dist/jqueryui.js"></script>
+    <script type="text/javascript" src="~/lib/dist/jquery.mousewheel.min.js"></script>
+    <script type="text/javascript" src="~/lib/dist/jquery.iviewer.js"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/Content/Script.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/GridView.js")"></script>
+</head>
+<body>
+    <div class="container-scroller">
+        <!-- partial:partials/_horizontal-navbar.html -->
+        <div class="horizontal-menu">
+            <nav class="navbar top-navbar col-lg-12 col-12 p-0">
+                <div class="container">
+                    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                        <a class="navbar-brand brand-logo">
+                            <img src="~/lib/images/logo/logo.png" alt="logo" />
+                        </a>
+                        <a class="navbar-brand brand-logo-mini"><img src="~/lib/images/logo/logo.png" alt="logo" /></a>
+                    </div>
+                    <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                        <ul class="navbar-nav mr-lg-2 note-user">
+                            @if (user.LOAI_USER.StartsWith("KH") && string.IsNullOrWhiteSpace(user.EMAIL) && string.IsNullOrWhiteSpace(user.PARENT_USER_NAME))
+                            {
+                                <li class="nav-item nav-search d-none d-lg-block">
+                                    <div class="alert alert-warning">
+                                        <a href="#" class="close ml-5" data-dismiss="alert" aria-label="close" title="close">×</a>
+                                        <a href="javascript:;" data-toggle="modal" data-target="#ModalEmail" data-backdrop="static" title="@Booking.capnhatemail" style="color: #8a6d3b;">
+                                            <i class="fa fa-warning"></i>  <strong>@Booking.thongBao</strong>  @Booking.thongBaoMail
+                                        </a>
+                                    </div>
+                                </li>
+                            }
+                            <li class="nav-item nav-search d-none d-lg-block">
+                                <p>
+                                    <span id="tenKhachHang">@user.FULL_NAME</span>
+                                </p>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav navbar-nav-right">
+                            <li class="nav-item nav-profile dropdown">
+                                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                                    <div class="nav-profile-img">
+                                        @*<img src="~/lib/images/logo/sagawa.png" alt="logo" />*@
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
+                            <span class="mdi mdi-menu"></span>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+            <nav class="bottom-navbar">
+                <div class="container">
+                    <ul class="nav page-navigation navbar-left">
+                        @*<li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("DanhSachDonHang","Booking")">
+                                    <i class="mdi mdi-compass-outline menu-icon"></i>
+                                    <span class="menu-title">Quản lý kho</span>
+                                </a>
+                            </li>*@
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("DanhSachDonHang","Booking")">
+                                <i class="mdi mdi-compass-outline menu-icon"></i>
+                                <span class="menu-title">@Booking.danhsachdonhang</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("DonHangMoiTuSinh","Booking")">
+                                <i class="mdi mdi-monitor-dashboard menu-icon"></i>
+                                <span class="menu-title">@Booking.dondathang</span>
+                            </a>
+                        </li>
+
+                        @*<li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("QuanLyDonHangTam","Booking")">
+                                    <i class="mdi mdi-cart menu-icon"></i>
+                                    <span class="menu-title">@Booking.quanlydonhangtam</span>
+                                </a>
+                            </li>*@
+
+                        @if (user.LOAI_USER.StartsWith("KH") && string.IsNullOrWhiteSpace(user.PARENT_USER_NAME))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("TraCuocOnline","Booking")">
+                                    <i class="mdi mdi-clipboard-text menu-icon"></i>
+                                    <span class="menu-title">Công nợ tạm tính</span>
+                                </a>
+                            </li>
+                        }
+
+                        @if (user.LOAI_USER.StartsWith("KH") && string.IsNullOrWhiteSpace(user.PARENT_USER_NAME) && !user.CUSTOMER_CODE.Contains("NB"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("QuanLyMaPhu","Booking")">
+                                    <i class="mdi mdi-contacts menu-icon"></i>
+                                    <span class="menu-title">@Booking.quanlymaphu</span>
+                                </a>
+                            </li>
+                        }
+
+                        <li class="nav-item">
+                            <div class="nav-link d-flex">
+                                <div class="nav-item dropdown">
+                                    @{
+                                        var kieuin = user.getKieuIn();
+                                        if (kieuin == "A4_3") { kieuin = "A4 3 liên"; }
+                                        else if (kieuin == "A4") { kieuin = "A4 2 liên"; }
+                                        else if (kieuin == "A5") { kieuin = "A5 1 liên"; }
+                                    }
+                                    <a class="nav-link count-indicator dropdown-toggle text-white font-weight-semibold" id="PrintedDropdown" href="javascript:;" data-toggle="dropdown">
+                                        <i class="mdi mdi-printer"></i> <strong style="color:white;">@kieuin</strong>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="PrintedDropdown">
+                                        <a class="dropdown-item" href="javascript:;" onclick="chonkieuin('A5')">
+                                            <i class="fa fa-file-pdf-o"></i> &nbsp;&nbsp; <strong style="color: #da251d "> A5 1 liên</strong>
+                                        </a>
+                                        <a class="dropdown-item" href="javascript:;" onclick="chonkieuin('A4')">
+                                            <i class="fa fa-file-pdf-o"></i> &nbsp;&nbsp; <strong style="color: #da251d"> A4 2 liên</strong>
+                                        </a>
+                                        @*<a class="dropdown-item" href="javascript:;" onclick="chonkieuin('A4_3')">
+                                                <i class="fa fa-file-pdf-o"></i> &nbsp;&nbsp; <strong style="color:red"> A4 3 liên</strong>
+                                            </a>*@
+                                    </div>
+                                </div>
+                                @*<div class="nav-item dropdown">
+                                        <a class="nav-link count-indicator dropdown-toggle text-white font-weight-semibold" id="LanguageDropdown" href="javascript:;" data-toggle="dropdown">
+                                            <span>
+                                                @if (ClientSession.getLanguage().Equals("vi"))
+                                                {
+                                                    <img src="~/lib/images/vi.png" />
+                                                }
+                                                else if (ClientSession.getLanguage().Equals("en"))
+                                                {
+                                                    <img src="~/lib/images/en.png" />
+                                                }
+                                                else
+                                                {
+                                                    <img src="~/lib/images/ja.png" />
+                                                }
+                                            </span>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="LanguageDropdown">
+                                            <a class="dropdown-item" href="javascript:;" onclick="clickme('ja')">
+                                                <span><img src="/lib/images/ja.png"> 日本語</span>
+                                            </a>
+                                            <a class="dropdown-item" href="javascript:;" onclick="clickme('en')">
+                                                <span><img src="/lib/images/en.png"> English</span>
+                                            </a>
+                                            <a class="dropdown-item" href="javascript:;" onclick="clickme('vi')">
+                                                <span><img src="/lib/images/vi.png"> Tiếng Việt</span>
+                                            </a>
+                                        </div>
+                                    </div>*@
+                                <div class="nav-item dropdown">
+                                    <a class="nav-link count-indicator dropdown-toggle text-white font-weight-semibold py-1" id="notificationDropdown" href="javascript:;" data-toggle="dropdown">
+                                        <i class="fa fa-user-circle-o" style="font-size:25px;"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                                        <p style="text-align:center;padding:5px 5px;background: #eaedf2;font-weight: 600;color: indianred;">
+                                            @user.USER_NAME
+                                            <br /> @user.NAME
+                                        </p>
+                                        <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#ModalAccount" data-backdrop="static">
+                                            <i class="mdi mdi-account-box-outline"> </i> @Booking.myprofile
+                                        </a>
+                                        <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#ModalResetPass" data-backdrop="static" title="@Booking.doipass">
+                                            <i class="mdi mdi-key"> </i> @Booking.doipass
+                                        </a>
+                                        @if (user.LOAI_USER.StartsWith("KH") && string.IsNullOrWhiteSpace(user.PARENT_USER_NAME))
+                                        {
+                                            <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#ModalEmail" data-backdrop="static">
+                                                <i class="mdi mdi-at"> </i> @Booking.capnhatemail
+                                            </a>
+                                        }
+                                        @if (user.LOAI_USER.StartsWith("CS"))
+                                        {
+                                            <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#modal-chondonvi" data-backdrop="static">
+                                                <i class="mdi mdi-check-outline"> </i> @Booking.dathangvoimaKH
+                                            </a>
+                                        }
+                                        @if (user.GHI_CHU.Equals("TAO_TK_BOOKING"))
+                                        {
+                                            <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#ModalTaoTaiKhoan" data-backdrop="static">
+                                                <i class="mdi mdi-check-all"></i>  @Booking.taoaccount
+                                            </a>
+                                        }
+
+                                        @if (user.login == "0")
+                                        {
+                                            <a class="dropdown-item" href="/Home/Logout" title="@Booking.dangxuat"><i class="mdi mdi-logout"> </i> @Booking.dangxuat</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="dropdown-item" href="/Booking/DangXuat" title="@Booking.dangxuat"><i class="mdi mdi-logout"> </i> @Booking.dangxuat</a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <div class="main-panel">
+                <div class="content-wrapper pt-1">
+                    @RenderBody()
+                </div>
+                <!-- content-wrapper ends -->
+            </div>
+            <!-- main-panel ends -->
+            <!-- partial:partials/_footer.html -->
+            <footer class="footer">
+                <div class="container">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 <a href="@Url.Action("Index","Home")" target="_blank">Netpost</a></span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Made by <a href="javascript:;">Netpost System development</a></span>
+                    </div>
+                </div>
+            </footer>
+            <!-- partial -->
+        </div>
+        <!-- page-body-wrapper ends -->
+        <img src="~/lib/images/loading.gif" class="pre-image d-none" style="width: 55px;position: fixed;left: 48%;top: 45%;z-index:1051" />
+    </div>
+
+    <div id="live-chat" class="live-chat d-none">
+        <div class="header">
+            <a href="javascript:;" class="chat-close"><i class="fa fa-plus"></i></a>
+            <h4>@Resource.support </h4>
+            <span class="badge badge-pill badge-danger chat-message-counter"></span>
+        </div>
+        <div class="chat d-none">
+
+        </div>
+    </div>
+
+    <!-- container-scroller -->
+    <div id="ModalAccount" class="modal fade" role="dialog" style="overflow:auto">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h3>
+                        <span>@Booking.myprofile</span>
+                    </h3>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 class="text-center">@user.NAME</h5>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <strong><i class="mdi mdi-account-circle"></i> @Booking.makh: </strong>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <strong class="text-danger"> @user.CUSTOMER_CODE </strong>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <strong><i class="mdi mdi-account"></i>Username: </strong>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <strong class="text-danger">@user.USER_NAME </strong>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label style="padding-left: 20px;">
+                                <input type="checkbox" onchange="SuDungMaDoiSoat()" class="form-check-input" id="SU_DUNG_MA_DOI_SOAT_THANH_MA_BILL">
+                                Sử dụng mã đối soát là mã bill
+                            </label>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label style="padding-left: 20px;">
+                                <input type="checkbox" onchange="InNgayLayHang()" class="form-check-input" id="IN_NGAY_LAY_HANG">
+                                In ngày lấy hàng
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ModalResetPass" class="modal fade" role="dialog" style="overflow:auto">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h3 id="title"><span>@Booking.doipass</span> </h3>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
+                </div>
+                <div class="modal-body" style="padding: 10px;">
+                    <div class="row m-0">
+                        <div class="col-md-12">
+                            <input type="text" placeholder="Username" id="cuss" hidden value="@user.USER_NAME">
+                            <input type="text" placeholder="oldPass" id="oldPass" hidden value="@user.PASSWORD">
+                            <div class="form-group">
+                                <label class="control-label"> @Booking.passcu</label>
+                                <input class="form-control custom-password" id="pswold" name="pswold" type="text" autocomplete="off" onfocus="$('.mess-reset').addClass('d-none');" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"> @Booking.passmoi</label>
+                                <input class="form-control custom-password" id="psw" name="psw" type="text" autocomplete="off" oninput="checkvadidate1(this)" onfocus="$('.mess-reset').addClass('d-none');" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"> @Booking.nhaplaipassmoi</label>
+                                <input class="form-control custom-password" id="repsw" name="repsw" type="text" autocomplete="off" oninput="checkpass1()" onfocus="$('.mess-reset').addClass('d-none');" />
+                            </div>
+                            <div class="form-group" style="text-align: right;">
+                                <button class="btn btn-primary" onclick="Reset()" style="width:100%"><i class="" id="refresh1"> </i>  @Booking.luu</button>
+                            </div>
+                            <div class="form-group" style="height:50px;">
+                                <div class="alert alert-danger d-none mess-reset" role="alert" id="message"></div>
+                                <div class="alert alert-danger d-none mess-reset" role="alert" id="message1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ModalTaoTaiKhoan" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h5 id="title"> <span>@Booking.taoaccount</span></h5>
+                </div>
+                <div class="modal-body" style="min-height: 130px;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label">@Booking.makhachhang_noibo</label>
+                                <input type="text" id="idMaKhachhang" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <a href="javascript:;" onclick="CheckUser()" class="btn btn-primary"><i class="fa fa-check"></i> Check</a>
+                                <a href="javascript:;" onclick="$('#ModalTaoTaiKhoan').modal('hide');$('#idMaKhachhang').val('');$('#idUser').val('');$('#idPass').val('');$('#idEmail').val('')" class="btn btn-primary"><i class="fa fa-times"></i> Close</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ModalEmail" class="modal fade" role="dialog" style="overflow:auto">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h4 id="title"><span> @Booking.capnhatemail</span></h4>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row lstEmail">
+                        <div class="col-md-12">
+                            @if (string.IsNullOrWhiteSpace(user.EMAIL))
+                            {
+                                <div class="form-group">
+                                    <label class="control-label"> Email</label>
+                                    <input class="form-control" id="newEmail" name="newEmail" type="text" autocomplete="off" />
+                                </div>
+                            }
+                            else
+                            {
+                                var lstEmail = user.EMAIL.Split(';');
+                                foreach (var item in lstEmail)
+                                {
+                                    <div class="form-group">
+                                        <label class="control-label">Email</label>
+                                        <input class="form-control" name="newEmail" type="text" autocomplete="off" value="@item" />
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-md-12">
+                        <div class="form-group" style="text-align: right;">
+                            <button class="btn btn-primary" onclick="AddNew()"><i class="fa fa-plus"></i> @Booking.addNew</button>
+                            <button class="btn btn-danger" onclick="CapNhatEmail()"><i class="fa fa-save"></i> @Booking.luu</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (user.LOAI_USER.StartsWith("CS"))
+    {
+        <div id="modal-chondonvi" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                        <h4 id="title"><span>@Booking.makhachhang</span> </h4>
+                        <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
+                    </div>
+                    <div class="modal-body" style="min-height: 130px;">
+                        <div id="chondonvi-content" class="row">
+                            <div class="col-md-12 form-group">
+                                <label class="control-label">@Booking.makhachhang <strong style="color:red">*</strong></label>
+                                <div class="combobox-body position-relative">
+                                    @Html.DevExpress().ComboBox(settings =>
+                                   {
+                                       settings.Name = "cbChonKhachHang";
+                                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                       settings.SelectedIndex = -1;
+                                       settings.ControlStyle.CssClass = "form-control";
+                                       settings.Properties.DropDownWidth = System.Web.UI.WebControls.Unit.Pixel(500);
+                                       settings.Properties.DropDownHeight = System.Web.UI.WebControls.Unit.Pixel(300);
+                                       settings.Properties.DropDownStyle = DropDownStyle.DropDownList;
+                                       settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                                       settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                                       settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                                       settings.Properties.ValueType = typeof(string);
+                                       settings.Properties.TextFormatString = "{0}";
+                                       settings.Properties.ValueField = "CUSTOMER_CODE";
+                                       settings.Properties.Columns.Add("FULL_NAME", @Booking.tenkhachhang, 500);
+                                       settings.Properties.SelectInputTextOnClick = true;
+                                   }).BindList(ClientSession.getFullInForCustomer()).GetHtml()
+                                </div>
+                            </div>
+                            <div class="col-md-12 form-group text-center">
+                                <button class="btn btn-primary" onclick="ChonDonVi()"><i class="mdi mdi-content-save"></i> @Booking.luu </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- plugins:js -->
+    <script src="~/lib/vendor/js/vendor.bundle.base.js"></script>
+    <script src="~/lib/vendor/moment/moment.min.js"></script>
+    <script src="~/lib/js/moment-with-locales.min.js"></script>
+
+    <script src="~/lib/bootstrap/bootstrap-datepicker.min.js"></script>
+
+    <script src="~/lib/js/off-canvas.js"></script>
+    <script src="~/lib/js/hoverable-collapse.js"></script>
+    <script src="~/lib/js/misc.js"></script>
+    <script src="~/lib/js/settings.js"></script>
+    <script src="~/lib/js/todolist.js"></script>
+    <script src="~/lib/js/sweetalert2@10.js"></script>
+    <!-- endinject -->
+
+    @if (Request.Browser.Browser == "IE" || Request.Browser.Browser == "InternetExplorer")
+    {
+        <script src="~/lib/js/core-2.4.1.js"></script>
+        <script src="~/lib/js/promise-polyfill@8.js"></script>
+    }
+
+    @*@if (Request.Browser.Browser != "IE" && Request.Browser.Browser != "InternetExplorer")
+        {
+            <script>
+                $(document).ready(function () {
+                    var url = "https://chat.sagawa.vn/";
+                    //var url = "localhost:50687/";
+                    $.post(url+"Home/GetMessage?UserName=" +"@user.USER_NAME", function( data ) {
+                        $('span.chat-message-counter').html(data.Object);
+                    });
+
+                    $('#live-chat').click(function () {
+                        $('span.chat-message-counter').html('');
+                        var href = url+'Home/ChatPage?Username=' +'@WebSite.Models.CommonData.encrypt(user.USER_NAME)'+'&Password=' +'@WebSite.Models.CommonData.encrypt(user.PASSWORD)'+'&FullName=' +'@Html.Raw(user.NAME)'+'&CompanyCode=' +'@user.COMPANY_CODE';
+                        window.open(href);
+                    });
+                });
+            </script>
+        }*@
+
+    @*@if (user.DUOC_CHAT && Request.Browser.Browser != "IE" && Request.Browser.Browser != "InternetExplorer")
+        {
+            <script>
+                $('#live-chat').removeClass('d-none');
+            </script>
+        }*@
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#SU_DUNG_MA_DOI_SOAT_THANH_MA_BILL').prop('checked',  @user.isSudungMDS);
+            $('#IN_NGAY_LAY_HANG').prop('checked',  @user.isInNgayLayHang);
+
+        });
+        var re = /^[A-Za-z0-9]{4,8}$/;
+
+        function changeText(obj) {
+            if ($(obj).val() !== '') {
+                $(obj).attr('type', 'password');
+            } else {
+                $(obj).attr('type', 'text');
+            }
+        }
+
+        $('.custom-password').on('input', function () {
+            changeText(this);
+        });
+
+        function ResetPassword() {
+            var code = @Html.Raw(Json.Encode(user.PARENT_USER_NAME));
+            if (code == null ||code == "")
+                $('#ModalResetPass').modal({ backdrop: 'static' });
+            else {
+                Swal.fire(
+                    '',
+                    "@Html.Raw(Booking.msg_role_reset_pass)",
+                    'info');
+            }
+        }
+
+        function Reset() {
+            $('#refresh1').addClass("fa fa-spinner fa-spin");
+            var Username = $('#cuss').val();
+            var RePass = $('#psw').val();
+            var repass = $('#repsw').val();
+            var OldPass = $('#oldPass').val();
+            var reOldPass = $('#pswold').val();
+            if (reOldPass == "") {
+                $('#message1').html('@Html.Raw(@Booking.messpasscu)');
+                $('#message1').removeClass("d-none");
+                $('#refresh1').removeClass("fa fa-spinner fa-spin");
+                return;
+            }
+            if (OldPass != reOldPass) {
+                $('#message1').html('@Html.Raw(@Booking.msspasscu)');
+                $('#message1').removeClass("d-none");
+                $('#refresh1').removeClass("fa fa-spinner fa-spin");
+                return;
+            }
+            if (re.test(RePass) == false) {
+                $('#message').html('@Html.Raw(@Booking.vadidatepasssmoi)');
+                $('#message').removeClass("d-none");
+                $('#refresh1').removeClass("fa fa-spinner fa-spin");
+                return;
+            }
+            if (repass != RePass) {
+                $('#message').html('@Html.Raw(@Booking.nhaplaipass)');
+                $('#message').removeClass("d-none");
+                $('#refresh1').removeClass("fa fa-spinner fa-spin");
+                return;
+            }
+            if (RePass == reOldPass) {
+                $('#message').html('@Html.Raw(@Booking.passmoitrung)');
+                $('#message').removeClass("d-none");
+                $('#refresh1').removeClass("fa fa-spinner fa-spin");
+                return;
+            }
+            if (Username != null && Username != "" && RePass != null && RePass != "") {
+                $.ajax({
+                    url: "/Booking/ResetPass",
+                    type: "POST",
+                    data: {
+                        Username: Username,
+                        Password: RePass
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (!data.Error) {
+                            Swal.fire({
+                                title: '@Html.Raw(Booking.thaydoipass)',
+                                icon: 'info',
+                                showCancelButton: false,
+                                cancelButtonText: 'No',
+                                confirmButtonText: 'OK'
+                            })
+                                .then(function (willDelete) {
+                                    if (willDelete.value) {
+                                        window.location.reload();
+                                    }
+                                });
+                        }
+                        else {
+                            $('#message').html(data.Title);
+                            $('#message').removeClass("d-none");
+                            $('#refresh1').removeClass("fa fa-spinner fa-spin");
+                        }
+                    }
+                })
+            }
+            else {
+                $('#message').html('@Html.Raw(Booking.loithaydoipass)');
+                $('#message').removeClass("d-none");
+                $('#refresh1').removeClass("fa fa-spinner fa-spin");
+            }
+        }
+
+        function checkpass1() {
+            var pass = $('#psw').val();
+            var repass = $('#repsw').val();
+            if (repass != pass) {
+                $('#message').html('@Html.Raw(Booking.nhaplaipass)');
+                $('#message').removeClass("d-none");
+            }
+            else {
+                $('#message').addClass("d-none");
+            }
+        }
+
+        function checkvadidate1(obj) {
+            if (re.test(obj.value) == false) {
+                $('#message').html('@Html.Raw(Booking.vadidatepasssmoi)');
+               $('#message').removeClass("d-none");
+                return true;
+            }
+            else {
+                $('#message').addClass("d-none");
+            }
+        }
+
+        //Email
+        function CapNhatEmail() {
+            var lst = [];
+            var lstEmail = $('#ModalEmail .lstEmail').find('input');
+
+            for (var i = 0; i < lstEmail.length; i++) {
+                var a = lstEmail[i].value;
+                if (a != "") {
+                    lst.push(a);
+                }
+            }
+            if (lst.length == 0) {
+                Swal.fire(
+                    '',
+                    '@Html.Raw(Booking.vadidateEmail)',
+                    'error')
+                return;
+            }
+            $.ajax({
+                url: "/Booking/CapNhatEmail",
+                type: "POST",
+                data: {
+                    lstEmail: lst
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (!data.Error) {
+                        Swal.fire(
+                            '',
+                            data.Title,
+                            'success')
+                        $('#ModalEmail').modal('hide');
+                    }
+                    else {
+                        Swal.fire(
+                            '',
+                            data.Title,
+                            'error')
+                        return;
+                    }
+                }
+            });
+        }
+
+        function AddNew() {
+            var str = '<div class="form-group"> <label> @Html.Raw("Email")</label> <input class="form-control" name="newEmail" type="text" autocomplete="off" /></div>';
+            $('#ModalEmail .lstEmail .col-md-12').append(str);
+        }
+
+        //Chọn khách hàng CS
+        function ChonDonVi() {
+            var makhachhang = cbChonKhachHang.GetValue();
+            var tenkh = cbChonKhachHang.GetText();
+            if (makhachhang == null) {
+                 Swal.fire(
+                     '',
+                     '@Html.Raw(Booking.msgMaKhachHang)',
+                    'error')
+                return;
+            }
+            $.ajax({
+                url: "/Booking/ChonDonVi",
+                type: "POST",
+                data: {
+                    makhachhang: makhachhang,
+                    getAdress:true
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (!data.Error) {
+                        Toast.fire({
+                            icon: 'success',
+                            title: data.Title
+                        });
+                        if(window.location.pathname == "/Booking/DonHangMoiTuSinh"){
+                            $('#NGUOI_NHAN').val('');
+                            $('#SDT_NHAN').val('');
+                            $('#Tinh').val('');
+                            $('#Huyen').val('');
+                            $('#TINH_NHAN').val('');
+                            $('#HUYEN_NHAN').val('');
+                            $('#DIA_CHI').val('');
+                            $('#TRONG_LUONG').val('');
+                            $('#NOI_DUNG').val('');
+                            $('#TT_BO_SUNG').val('')
+                            $('#maKH').val(data.Title);
+                            $('#NGUOI_GUI').val(data.Object.TEN_NGUOI_GUI);
+                            $('#DIA_CHI_NGUOI_GUI').val(data.Object.DIA_CHI_NGUOI_GUI);
+                            $('#SDT_GUI').val(data.Object.SDT_GUI);
+                            cbDichVu.SetSelectedIndex(-1);
+                        }
+                        $('#tenKhachHang').html(tenkh );
+                        $('#modal-chondonvi').modal('hide')
+                    }
+                    else {
+                        Swal.fire(
+                            '',
+                            data.Title,
+                            'error')
+                        return;
+                    }
+                }
+            });
+        }
+
+
+        //
+        function clickme(string) {
+            $.ajax({
+                url: "/Home/ChangeLanguage",
+                type: "POST",
+                data: {
+                    culture: string
+                },
+                dataType: 'json',
+                success: function (data) {
+                    window.location.reload();
+                }
+            });
+        }
+        function SuDungMaDoiSoat() {
+            var ischeck = document.getElementById('SU_DUNG_MA_DOI_SOAT_THANH_MA_BILL').checked;
+            $.ajax({
+                url: "/Booking/SuDungMaDoiSoatThayMaBill",
+                type: "POST",
+                data: {
+                    ischeck: ischeck
+                },
+                dataType: 'json',
+                success: function (data) {
+                    window.location.reload();
+                }
+            });
+
+        }
+        function InNgayLayHang() {
+            var ischeck = document.getElementById('IN_NGAY_LAY_HANG').checked;
+            $.ajax({
+                url: "/Booking/InNgayLayHang",
+                type: "POST",
+                data: {
+                    ischeck: ischeck
+                },
+                dataType: 'json',
+                success: function (data) {
+                    window.location.reload();
+                }
+            });
+
+    }
+
+
+        function chonkieuin(string) {
+            $.ajax({
+                url: "/Home/ChonKieuIn",
+                type: "POST",
+                data: {
+                    Print: string
+                },
+                dataType: 'json',
+                success: function (data) {
+                    window.location.reload();
+                }
+            });
+        }
+
+        function CheckUser() {
+            var makh = $('#idMaKhachhang').val();
+            if (makh=="") {
+                Swal.fire(
+                    '',
+                    '@Html.Raw(Booking.msgMaKhachHang)',
+                    'error')
+                return;
+            }
+            $.ajax({
+                url: "/Service/TaoTKOnline",
+                type: "POST",
+                data: {
+                    makh: makh
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.Error) {
+                            Swal.fire(
+                                '',
+                                data.Title,
+                                    'error')
+                            return;
+                    }
+                    else {
+                        $('#idUser').val(data.Object.USER_NAME);
+                        $('#idPass').val(data.Object.PASSWORD);
+                        Swal.fire({
+                            title: '@Html.Raw(Booking.taikhoan)',
+                            type: 'info',
+                            html:
+                            '<p style="color:red"><strong> Username: ' + data.Object.USER_NAME +'</strong> <br/>' +
+                            '<strong> Password: ' + data.Object.PASSWORD +
+                            '</strong></p>',
+                            showCancelButton: true,
+                            showCancelButton: false
+                        });
+                    }
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>

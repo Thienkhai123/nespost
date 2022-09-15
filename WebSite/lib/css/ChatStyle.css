@@ -1,0 +1,598 @@
+﻿
+@keyframes swing {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    10% {
+        transform: rotate(10deg);
+    }
+
+    30% {
+        transform: rotate(0deg);
+    }
+
+    40% {
+        transform: rotate(-10deg);
+    }
+
+    50% {
+        transform: rotate(0deg);
+    }
+
+    60% {
+        transform: rotate(5deg);
+    }
+
+    70% {
+        transform: rotate(0deg);
+    }
+
+    80% {
+        transform: rotate(-5deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes sonar {
+    0% {
+        transform: scale(0.9);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.horizontal-menu .bottom-navbar .page-navigation.navbar-left {
+    width: 80%;
+    justify-content: flex-start;
+    float: left;
+}
+.horizontal-menu .bottom-navbar .page-navigation.navbar-right {
+    width: 20%;
+    float: right;
+    justify-content: flex-end;
+}
+@media (min-width: 992px) {
+    .horizontal-menu .bottom-navbar .page-navigation.navbar-left > .nav-item {
+        width: 26%;
+    }
+        .horizontal-menu .bottom-navbar .page-navigation.navbar-left > .nav-item:first-child {
+            width: 22%;
+        }
+        .horizontal-menu .bottom-navbar .page-navigation.navbar-left > .nav-item:first-child > .nav-link {
+            justify-content: flex-start;
+        }
+        .horizontal-menu .bottom-navbar .page-navigation.navbar-left > .nav-item > .nav-link {
+            justify-content: center;
+        }
+    .horizontal-menu .bottom-navbar .page-navigation.navbar-left > .nav-item:last-child > .nav-link {
+        padding: 15px;
+    }
+}
+/*----------------sidebar-wrapper----------------*/
+.sidebar-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .sidebar-wrapper a {
+        text-decoration: none;
+    }
+.sidebar-wrapper .sidebar {
+    height: 100%;
+    width: 300px;
+    position: relative;
+}
+.sidebar .sidebar-content {
+    height: 100%;
+}
+/*--------------------sidebar-brand----------------------*/
+.sidebar-wrapper .sidebar-brand, .page-content .under-header, .sidebar-right .sidebar-header {
+    padding: 8px 10px;
+}
+.page-content .under-header, .sidebar-right .sidebar-header {
+    height: 55px;
+}
+    .sidebar-wrapper .sidebar-brand a.sidebar-title {
+        text-transform: uppercase;
+        font-weight: bold;
+        flex-grow: 1;
+        text-align: center;
+        text-decoration: none;
+        padding: 10px 0;
+    }
+
+        /*----------------------sidebar-menu-------------------------*/
+.sidebar-wrapper .sidebar-menu {
+    padding: 10px 0;
+    max-height: calc(100vh - 180px);
+    height: calc(100vh - 180px);
+    overflow-y: auto;
+}
+
+    .sidebar-wrapper .sidebar-menu .header-menu span {
+        font-weight: bold;
+        font-size: 14px;
+        padding: 15px 20px 5px 20px;
+        display: inline-block;
+    }
+
+    .sidebar-wrapper .sidebar-menu ul li {
+        border-bottom: 1px solid #cccccc;
+        cursor: pointer;
+        padding: 5px 8px;
+    }
+
+        .sidebar-wrapper .sidebar-menu ul li > p > i {
+            margin-right: 8px;
+            font-size: 27px;
+            line-height: 30px;
+            text-align: center;
+        }
+
+            .sidebar-wrapper .sidebar-menu ul li:hover > p > i::before {
+                display: inline-block;
+                animation: swing ease-in-out 0.5s 1 alternate;
+            }
+            
+
+
+    .sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu ul {
+        padding: 5px 0;
+    }
+
+    .sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li {
+        padding-left: 25px;
+        font-size: 13px;
+    }
+
+        .sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li a:before {
+            content: "\f111";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 400;
+            font-style: normal;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin-right: 10px;
+            font-size: 8px;
+        }
+
+
+.page-wrapper .sidebar-right {
+    border-left: 1px solid #adb5bd;
+    padding: 0;
+    height: 100%;
+    max-height: calc(100% - 85px);
+    width: 270px;
+    float: right;
+    position: relative;
+}
+.sidebar-right .sidebar-content {
+    height: calc(100% - 65px);
+}
+.sidebar-right .sidebar-brand {
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+}
+
+    .sidebar-right .sidebar-brand a {
+        text-align: center;
+        color: #212529;
+        text-transform: uppercase;
+        font-weight: bold;
+        flex-grow: 1;
+    }
+
+        .sidebar-right .sidebar-brand a:hover {
+            text-decoration: none;
+        }
+
+.sidebar-right ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-right .sidebar-menu ul li {
+    border-bottom: 1px solid #cccccc;
+}
+
+    .sidebar-right .sidebar-menu ul li a {
+        display: inline-block;
+        width: 100%;
+        text-decoration: none;
+        position: relative;
+        padding: 5px 8px 5px 8px;
+    }
+
+        .sidebar-right .sidebar-menu ul li a i {
+            margin-right: 10px;
+            font-size: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+.sidebar-right .sidebar-menu {
+    padding-bottom: 10px;
+    max-height: calc(100% - 65px);
+    height: calc(100% - 65px);
+    overflow-y: auto;
+}
+/*-----------------------------chiller-theme-------------------------------------------------*/
+
+.chatWindow .cs strong {
+    font-size: 12px;
+}
+
+.sidebar-wrapper .sidebar-menu ul li span.label,
+.sidebar-wrapper .sidebar-menu ul li span.badge {
+    float: right;
+    margin-left: 5px;
+}
+
+    .sidebar-wrapper .sidebar-menu ul li span.badge{
+        font-size:12px;
+    }
+
+    #txtMessage:focus {
+        background: white;
+    }
+
+.sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li .badge,
+.sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li .label {
+    float: right;
+    margin-top: 0px;
+}
+
+.sidebar-wrapper .sidebar-menu .sidebar-submenu {
+    display: none;
+}
+
+.sidebar-wrapper .sidebar-menu .sidebar-dropdown.active > a:after {
+    right: 17px;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+/*--------------------------footer------------------------------*/
+
+.badge-sonar {
+    display: inline-block;
+    background: #980303;
+    border-radius: 50%;
+    height: 8px;
+    width: 8px;
+    position: absolute;
+    top: 0;
+}
+
+    .badge-sonar:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        border: 2px solid #980303;
+        opacity: 0;
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        animation: sonar 1.5s infinite;
+    }
+
+/*--------------------------page-content-----------------------------*/
+
+.page-body-wrapper .page-content {
+    width: calc(100% - 600px);
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+}
+
+#divContainer {
+
+    height: 100%;
+}
+    #divContainer .chatRoom {
+        height: calc(100vh - 195px);
+    }
+
+    .chatRoom .title {
+        height: 40px;
+        border-bottom: 1px solid gray;
+    }
+
+.chatRoom .content {
+    max-height: calc(100% - 50px);
+    height: calc(100% - 50px);
+    padding-top: 10px;
+}
+
+.user {
+    min-height: 58px;
+}
+
+.chatRoom .content .chatWindow {
+    max-height: 100%;
+    height: 100%;
+    overflow-y: auto;
+    margin: 0;
+    align-content: start;
+}
+
+.chatWindow .khach {
+    float: left;
+}
+
+.chatWindow .cs {
+    float: right;
+}
+
+.chatRoom .content .chatWindow .message {
+    padding: 4px;
+}
+
+    .chatRoom .content .chatWindow .message .userName {
+        font-weight: bold;
+    }
+
+.chatRoom .content .users {
+    float: right;
+    width: 240px;
+    height: 300px;
+}
+
+    .chatRoom .content .users .user {
+        display: block;
+        cursor: pointer;
+        padding: 4px;
+        background-color: #f9f9f9;
+        border-bottom: solid 1px #5f9482;
+    }
+
+    .chatRoom .content .users .loginUser {
+        display: block;
+        padding: 4px;
+        color: gray;
+        border-bottom: solid 1px #5f9482;
+    }
+
+    .chatRoom .content .users .user:hover {
+        background-color: #e1e1e1;
+    }
+
+.chatWindow .khach strong {
+    font-size: 12px;
+}
+.sidebar-wrapper .sidebar .chat-message-loading {
+    width: 42px;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+}
+.sidebar-right .chat-message-loading {
+    width: 42px;
+    position: absolute;
+    top: 50%;
+    right: 40%;
+}
+
+.disconnect {
+    position: absolute;
+    /* margin: 10px; */
+    background-color: #ffcbcb;
+    padding: 4px;
+    border: solid 1px #e0a1a1;
+    left: 5%;
+    width: 90%;
+    border-radius: 5px;
+    font-style: italic;
+}
+
+
+.draggable {
+    position: absolute;
+    border: #5f9482 solid 1px !important;
+    width: 250px;
+}
+
+    .draggable .header {
+        cursor: move;
+        background-color: #d7e5e4;
+        border-bottom: #5f9482 solid 1px;
+        color: #1e4638;
+    }
+
+    .draggable .selText {
+        color: black;
+        padding: 4px;
+    }
+
+    .draggable .messageArea {
+        width: 250px;
+        overflow-y: scroll;
+        height: 200px;
+        border-bottom: #5f9482 solid 1px;
+    }
+
+        .draggable .messageArea .message {
+            padding: 4px;
+        }
+
+    .draggable .buttonBar {
+        width: 250px;
+        padding: 4px;
+    }
+
+        .draggable .buttonBar .msgText {
+            width: 172px;
+        }
+
+        .draggable .buttonBar .button {
+            margin-left: 4px;
+            width: 55px;
+        }
+
+.chat-message-text {
+    padding: 5px 10px;
+    background: #cde0e6;
+    border-radius: 5px;
+    max-width: 60%;
+    margin-bottom: 5px;
+}
+.chat-message-text p.time-log {
+    text-align: right;
+    padding-top: 10px;
+}
+.chatWindow .row {
+    margin-bottom: 5px !important;
+}
+
+.sidebar-dropdown p {
+    line-height: 1.2;
+}
+
+ul li > a > p > span> em {
+    font-weight: initial;
+}
+
+.icon-bar {
+    width: 50px;
+    float: left;
+    height: 100%;
+    background: #b9beda8c;
+}
+
+    .icon-bar a {
+        display: block;
+        text-align: center;
+        padding: 15px 5px;
+        line-height: 1.4;
+        cursor: pointer;
+        color: #374694 !important;
+        border: 1px solid #c5c8df59;
+    }
+
+        .icon-bar a i {
+            font-size: 30px;
+        }
+
+        .icon-bar a:hover {
+            background-color: #adb5bd;
+        }
+
+        .icon-bar a.active {
+            background-color: #adb5bd;
+        }
+
+
+.list-group {
+    margin: 0;
+    padding-top: 70px;
+}
+
+.list-group-item {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    padding-bottom: 35px;
+}
+.sidebar-right .sidebar-dropdown a span{
+    vertical-align:sub;
+}
+
+.sidebar-dropdown .online i {
+    color: #3680c7;
+    font-size: 27px;
+    padding-right: 8px;
+}
+
+.sidebar-dropdown .offline i {
+    color: gray;
+    font-size: 27px;
+    padding-right: 8px;
+}
+
+.sidebar-brand input[type=date] {
+    background-color: transparent;
+}
+
+.timeshet {
+    float: right;
+    font-weight: 400;
+    color: black;
+    font-size: 10px;
+    line-height: initial;
+}
+
+.mess   {
+    color: black;
+    font-weight: 400;
+}
+.Name {
+    font-weight: 700;
+}
+
+.mess-content{
+    padding-top:6px;
+}
+.under-header span {
+    font-weight: bold;
+}
+    .under-header span i{
+        font-size: 19px;
+    }
+
+    #lstSearch {
+        max-height: calc(100% - 50px);
+        height: calc(100% - 50px);
+    }
+
+.sidebar-wrapper .sidebar-menu ul li.active {
+    background: #b1b3ca;
+}
+/*--- Notify ----*/
+.notifications {
+    position: fixed;
+    z-index: 9999;
+}
+
+    .notifications.top-right {
+        right: 10px;
+        top: 25px;
+    }
+
+    .notifications.top-left {
+        left: 10px;
+        top: 25px;
+    }
+
+    .notifications.bottom-left {
+        left: 10px;
+        bottom: 25px;
+    }
+
+    .notifications.bottom-right {
+        right: 10px;
+        bottom: 25px;
+    }
+
+    .notifications > div {
+        position: relative;
+        margin: 5px 0;
+    }

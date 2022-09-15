@@ -1,0 +1,1251 @@
+﻿@using WebSite.Language
+<!DOCTYPE html>
+<html style="overflow-x: hidden;">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+    <meta name="robots" content="noindex,nofollow">
+    <title>@ViewBag.Title | CÔNG TY CỔ PHẦN CHUYỂN PHÁT NHANH NETPOST VIỆT NAM</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/lib/vendor/mdi/css/materialdesignicons.min.css">
+    <link rel="icon" href="~/lib/images/logo/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="~/lib/vendor/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="~/lib/vendor/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" />
+    <!-- Bootstrap CSS -->
+    <link href="~/lib/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/css/slick.css" rel="stylesheet" />
+    <link href="~/lib/dist/jquery.iviewer.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/css/style.css" type="text/css">
+    <link rel="stylesheet" href="~/lib/css/stylelist.css?cdv=1.1" type="text/css">
+    <link href="~/lib/css/main.css?cdv=1.1" rel="stylesheet" type="text/css" />
+    <!--devexpress-->
+    @Html.DevExpress().GetStyleSheets(
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Editors }
+    )
+    <!--Jquery-->
+    <script type="text/javascript" src="~/lib/js/jquery.min.js"></script>
+
+    <!--devexpress-->
+    @Html.DevExpress().GetScripts(
+        new Script { ExtensionSuite = ExtensionSuite.Editors }
+    )
+    <style>
+        .timtrangcu {
+            color: blue !important;
+            text-decoration: underline !important;
+        }
+    </style>
+    <script src="~/lib/js/popper.min.js"></script>
+    <script type="text/javascript" src="~/lib/dist/jqueryui.js"></script>
+    <script type="text/javascript" src="~/lib/dist/jquery.mousewheel.min.js"></script>
+    <script type="text/javascript" src="~/lib/dist/jquery.iviewer.js"></script>
+
+    <script src="~/lib/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/lib/js/slick.js" type="text/javascript"></script>
+    <script src="~/lib/js/sweetalert2@10.js" type="text/javascript"></script>
+    @*@if (Request.Browser.Browser == "IE" || Request.Browser.Browser == "InternetExplorer")
+        {
+            <script src="~/lib/js/core-2.4.1.js"></script>
+            <script src="~/lib/js/promise-polyfill@8.js"></script>
+        }*@
+
+    <script type="text/javascript" src="@Url.Content("~/Content/GridView.js")"></script>
+    <script src="~/lib/js/main.js" type="text/javascript"></script>
+
+    <!--SignalR-->
+    <!--<script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="~/signalr/hubs"></script>-->
+    @*@{
+            var user = Newtonsoft.Json.JsonConvert.DeserializeObject<WebSite.Models.CSS_CRM_NGUOI_DUNGDTO>(Request.Cookies["UserOnline"].Value.ToString());
+        }*@
+
+    @*<script type="text/javascript">
+
+            var chatHub;
+
+            $(function () {
+                chatHub = $.connection.chatHubOnline;
+
+                registerClientMethods(chatHub);
+
+                $.connection.hub.start({ waitForPageLoad: false }).done(function () {
+                    chatHub.server.checkBranchOnline();
+                    chatHub.server.connect("@user.USER_NAME", "@user.USER_NAME", "KHACH_ONL", "@user.COMPANY_CODE");
+                });
+            });
+
+            function sendMess_Click() {
+                var msg = $('#message').val();
+                chatHub.server.sendPrivateMessage("","", msg);
+                $('#message').val('');
+            }
+
+            function txtMess_KeyPress(e) {
+                if (e.which == 13) {
+                    $('#senmess').click();
+                }
+            }
+
+            function showpopupmessage() {
+                if ($('#cs-online').hasClass("d-none"))
+                {
+                    window.location.href = "/Lien_He/Index?cs=1";
+                    return;
+                }
+                if ("@user.COMPANY_CODE" != "")
+                {
+                    $('.support-box').addClass('d-none');
+                    $('.chat-message').removeClass('d-none');
+
+
+                }
+
+                $('#live-chat').removeClass('d-none');
+                var height = $('.chat-message-content')[0].scrollHeight;
+                $('.chat-message-content').scrollTop(height);
+            }
+
+            function clospopupmessage() {
+                $('#live-chat').addClass('d-none');
+            }
+
+            function rechooseBrach() {
+                $('.support-box').removeClass('d-none');
+                $('.chat-message').addClass('d-none');
+            }
+
+            function connectedChatHub(e) {
+                var id = e.currentTarget.id;
+
+                var CompanyCode = "";
+                if (id == "btnHNbranch") {
+                    if ($('#HNbranch')[0].innerText == "online") {
+                        CompanyCode = "01";
+                    }
+                }
+                else if (id == "btnHCMbranch") {
+                    if ($('#HCMbranch')[0].innerText == "online")
+                    {
+                        CompanyCode = "02";
+                    }
+                }
+                else {
+                    if ($('#DNbranch')[0].innerText == "online")
+                    {
+                        CompanyCode = "03";
+                    }
+                }
+
+                $.ajax({
+                    url: "/Service/ChooseBranch",
+                    type: "POST",
+                    data: {
+                        CompanyCode: CompanyCode
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (CompanyCode == "") {
+                            window.location.href = "/Lien_He/Index?cs=1";
+                        }
+                        else {
+                            chatHub.server.connectedChatHub(data.Object);
+                            $('.support-box').addClass('d-none');
+                            $('.chat-message').removeClass('d-none');
+                            $('#live-chat').removeClass('d-none');
+                        }
+                    }
+                });
+            }
+
+            function registerClientMethods(chatHub) {
+                chatHub.client.checkBranchOnline = function (isCSMB, isCSMN) {
+                    if (isCSMB || isCSMN) {
+                        $('#cs-online').removeClass("d-none");
+                        $('#cs-offline').addClass("d-none");
+                    }
+                    else {
+                        $('#cs-online').addClass("d-none");
+                        $('#cs-offline').removeClass("d-none");
+                    }
+
+                    if (isCSMB) {
+                        $('#HNbranch').html('<span style="color: green;"> online</span>');
+                    }
+                    else {
+                        $('#HNbranch').html('<span> offline</span>');
+                    }
+                    if (isCSMN) {
+                        $('#DNbranch').html('<span style="color: green;"> online</span>');
+                        $('#HCMbranch').html('<span style="color: green;"> online</span>');
+                    }
+                    else {
+                        $('#DNbranch').html('<span> offline</span>');
+                        $('#HCMbranch').html('<span> offline</span>');
+                    }
+                }
+
+                chatHub.client.onConnected = function (UserID, data, ChiNhanh) {
+                    $('.chat-mess-title p strong').html(ChiNhanh);
+                    $('.chat-message-content').empty();
+                    for (var i in data) {
+                        if (data[i].Fr_UserID !== UserID) {
+                            $('.chat-message-content').append('<div class="col-md-12"><div class="chat-message-text pull-left"><p><strong>' + data[i].Fr_UserName +'</strong><br/> ' + data[i].Message + '</p><p class="time-log"><small>'+data[i].Time_String+'</small></p></div></div>');
+                        }
+                        else {
+                            $('.chat-message-content').append('<div class="col-md-12"><div class="chat-message-text pull-right"><p> ' + data[i].Message + ' <p> </div></div>');
+                        }
+                    }
+                    $('.chat-message-loading').addClass(" d-none");
+                }
+
+                chatHub.client.sendPrivateMessage = function (dtoMess, UserNameSend, NameSend) {
+                    if (dtoMess.Fr_UserRole == "CS" || dtoMess.Fr_UserRole == "CS_ADMIN") {
+                        ua = navigator.userAgent;
+                        /* MSIE used to detect old browsers and Trident used to newer ones*/
+                        var is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
+
+                        if (is_ie == false) {
+                            //notification
+                            if (window.Notification && Notification.permission === "granted") {
+                                var notification = new Notification(dtoMess.Fr_UserName, {
+                                    icon: "/lib/images/logo/logo.png",
+                                    body: dtoMess.Message,
+                                });
+
+                                notification.onclick = function () {
+                                    window.focus();
+                                    this.close();
+                                };
+                                setTimeout(function () {
+                                    notification.close();
+                                }, 5000);
+                            } else {
+                                Notification.requestPermission();
+                            }
+                        }
+
+                        $('.chat-message-content').append('<div class="col-md-12"><div class="chat-message-text pull-left"><p><strong>' + dtoMess.Fr_UserName + '</strong><br/>' + dtoMess.Message + '</p><p class="time-log"><small>'+dtoMess.Time_String+'</small></p></div></div>');
+                        var height = $('.chat-message-content')[0].scrollHeight;
+                        $('.chat-message-content').scrollTop(height);
+                        if (!$('#live-chat').hasClass("d-none")) {
+                            chatHub.server.updateReadMess(dtoMess.To_UserID, "KHACH");
+                        }
+                        else {
+                            var dem = parseInt($("span.chat-message-counter").html() == "" ? "0" : $("span.chat-message-counter").html()) + 1;
+                            $('span.chat-message-counter').html(dem);
+                        }
+                    }
+                    else if (dtoMess.Fr_UserRole == "HT") {
+                        $('.chat-message-content').append('<div class="col-md-12"><em style="float:left">' + dtoMess.Message + '</em></div>');
+                        if (!$('#live-chat').hasClass("d-none")) {
+                            var height = $('.chat-message-content')[0].scrollHeight;
+                            $('.chat-message-content').scrollTop(height);
+                        }
+                        else {
+                            var dem = parseInt($("span.chat-message-counter").html() == "" ? "0" : $("span.chat-message-counter").html()) + 1;
+                            $('span.chat-message-counter').html(dem);
+                        }
+                    }
+                    else {
+                        $('.chat-message-content').append('<div class="col-md-12"><div class="chat-message-text pull-right"><p>' + dtoMess.Message + '</p></div></div>');
+                        var height = $('.chat-message-content')[0].scrollHeight;
+                        $('.chat-message-content').scrollTop(height);
+                    }
+                }
+
+                chatHub.client.sendErorr = function (title) {
+                    Swal.fire({
+                        title: title,
+                        icon: 'error',
+                        showCancelButton: false,
+                        cancelButtonText: 'No',
+                        confirmButtonText: 'OK'
+                    })
+                    .then(function (willDelete) {
+                        if (willDelete.value) {
+                            window.location.reload();
+                        }
+                    });
+                }
+
+                chatHub.client.onAllCSOffline = function (isOffline) {
+                    $('#cs-online').addClass("d-none");
+                    $('#cs-offline').removeClass("d-none");
+                }
+            }
+
+        </script>*@
+</head>
+<body class="home blog">
+    <div id="wrapper" class="hfeed">
+        <div id="header">
+            <div class="row infoma">
+                <div class="container">
+                    <div class="row justify-content-end">
+                        <div class="col-md-8 col-right col-sm-7" style="padding:0px">
+                            <ul class="breadcrumb">
+                                <li class="img-call">
+                                    <a id="call-icon" href='tel: +02439612345'>
+                                        <img src="~/lib/images/img-call1.png" />
+                                        <span class="click-me">
+                                            Hotline: 024.396.12345
+                                        </span>
+                                    </a>
+                                </li>
+                                <li id="bookingonl">
+                                    <a href="/Booking/Login" style="color: red" class="bookingonl">Tạo vận đơn  </a>
+                                </li>
+                                <li class="vandon">
+                                    <a href="javascript:;" id="tracuuvandon" style="color: #f00">@Resource.theodoidonhang</a>
+                                    <div class="dropdown-menu dr-tracuu">
+                                        <p onclick="$('.dr-tracuu').fadeOut()">
+                                            <a><span style="font-size: 17px;color:black !important"><i class="fa fa-close"></i></span></a>
+                                        </p>
+                                        <p style="font-size:15px;padding-left:10px;color: red;font-weight:bold">
+                                            <i class="fas fa-map-marker-alt" style="font-size: 22px;"></i> Quí khách nhập số vận đơn vào ô bên dưới
+                                        </p>
+                                        <p class="formTra">
+                                            <input type="text" class="form-control" placeholder="VD: 0123456789" name="kokunaiawb" id="billnoidia">
+                                            <button onclick="tracktrade()" id="searchnoidia" class="btn btn-danger"><i class="fa fa-search"></i></button>
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        @*<div class="col-md-1 col-sm-1">
+                                <div class="dropdown lag" style="cursor:pointer;text-align: center;">
+                                    @if (Request.Cookies["language"].Value == "vi")
+                                    {
+                                        <a class="dropdown-toggle" title="Tiếng Việt">
+                                            <span><img src="~/lib/images/vi.png" /></span>
+                                        </a>
+                                    }
+                                    else if (Request.Cookies["language"].Value == "en")
+                                    {
+                                        <a class="dropdown-toggle" title="English">
+                                            <span><img src="~/lib/images/en.png" /></span>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a class="dropdown-toggle" title="日本語">
+                                            <span><img src="~/lib/images/ja.png" /></span>
+                                        </a>
+                                    }
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li>
+                                            <a onclick="clickme('ja')" title="日本語">
+                                                <span><img src="~/lib/images/ja.png" /></span>
+                                            </a>
+                                        </li>
+                                        <li style="">
+                                            <a onclick="clickme('en')" title="English">
+                                                <span><img src="~/lib/images/en.png" /></span>
+                                            </a>
+                                        </li>
+                                        <li style="">
+                                            <a onclick="clickme('vi')" title="Tiếng Việt">
+                                                <span><img src="~/lib/images/vi.png" /></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>*@
+                        <div class="col-md-3 col-sm-4">
+                            @using (Html.BeginForm("Tim_Kiem", "Tin_Tuc", FormMethod.Get, new { @id = "searchform", @class = "searchform form-inline" }))
+                            {
+                                <input type="text" placeholder="Search " name="SearchNew" id="SearchNew" class="form-control" required autocomplete="off">
+                                <button class="btn"><i class="fa fa-search" style="font-size:12px"></i></button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row logo-header">
+                <div class="container">
+                    <div class="row form-inline">
+                        <div class="col-lg-3 col-md-3 col-sm-4">
+                            <a href="/Home/Index">
+                                <img src="~/lib/images/logo/logo.png" width="210" />
+                            </a>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-8">
+                            <h4 class="logo-header-ten-cong-ty">CÔNG TY CỔ PHẦN CHUYỂN PHÁT NHANH NETPOST VIỆT NAM</h4>
+                            <div class="row justify-content-end">
+                                <p class="clock col-lg-4 col-md-4 col-sm-6">
+                                    <img src="~/lib/images/svg/iconclock.png" />&nbsp;<strong>T2-T7: 8:00am - 6:00pm</strong>
+                                </p>
+                                <p class="mail clock col-lg-4 col-md-4 col-sm-6">
+                                    <strong>
+                                        <img src="~/lib/images/svg/iconmail.png">&nbsp;<a href="mailto:dvkh.hn@netpost.vn">dvkh.hn@netpost.vn</a>
+                                    </strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="access" role="navgation">
+                <div class="row menu-header">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <nav class="navbar navbar-expand-md px-0 pb-0">
+                                <button class="navbar-toggler ml-3 mb-2" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                                    <ul class="navbar-nav" id="menu-menu">
+                                        <li class="nav-item current-menu-item">
+                                            <a class="nav-link" href="/"><i class="fa fa-home"></i> Trang chủ</a>
+                                        </li>
+                                        <li class="nav-item dropdown dmenu">
+                                            <a class="nav-link" href="javascript:;" id="navbardrop">
+                                                @Resource.dichvu
+                                                <i class="fas fa-sort-down" id="sortdown"></i>
+                                            </a>
+                                            <div class="dropdown-menu lstdv">
+                                                <div class="row">
+                                                    <div class="col-xl-12 col-md-12 px-0">
+                                                        <a class="dropdown-item" href="@Url.Action("chuyen_phat_nhanh", "Dich_Vu")">@Resource.vtaiHK</a>
+                                                    </div>
+                                                    <div class="col-xl-12 col-md-12 px-0">
+                                                        <a class="dropdown-item" href="@Url.Action("phat_hoa_toc", "Dich_Vu")">@Resource.vtaiBien</a>
+                                                    </div>
+                                                    <div class="col-xl-12 col-md-12 px-0">
+                                                        <a class="dropdown-item" href="@Url.Action("gia_tri_cao", "Dich_Vu")">@Resource.thutuchaiquan</a>
+                                                    </div>
+                                                    <div class="col-xl-12 col-md-12 px-0">
+                                                        <a class="dropdown-item" href="@Url.Action("trucking", "Dich_Vu")">@Resource.vtaiBo</a>
+                                                    </div>
+                                                    <div class="col-xl-12 col-md-12 px-0">
+                                                        <a class="dropdown-item" href="@Url.Action("tiet_kiem", "Dich_Vu")">@Resource.khobai</a>
+                                                    </div>
+                                                    <div class="col-xl-12 col-md-12 px-0">
+                                                        <a class="dropdown-item" href="@Url.Action("gia_tang", "Dich_Vu")">@Resource.kiemkim</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="nav-item dropdown dmenu_bang_gia">
+                                            <a class="nav-link" href="javascript:;"> Bảng giá <i class="fas fa-sort-down" id="icon_sort_bang_gia"></i></a>
+                                            <div class="dropdown-menu lst_bang_gia">
+                                                <div class="row">
+                                                    <div class="col-xl-12 col-md-12 px-0">
+                                                        <a class="dropdown-item" href="@Url.Action("Bang_Gia", "Home", new { name = "ha_noi" })">Bảng giá Hà Nội</a>
+                                                    </div>
+                                                    <div class="col-xl-12 col-md-12 px-0">
+                                                        <a class="dropdown-item" href="@Url.Action("Bang_Gia", "Home", new { name = "ho_chi_minh" })">Bảng giá Hồ Chí Minh</a>
+                                                    </div>
+                                                    <div class="col-xl-12 col-md-12 px-0">
+                                                        <a class="dropdown-item" href="@Url.Action("Bang_Gia", "Home", new { name = "da_nang" })">Bảng giá Đà Nẵng</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="@Url.Action("Index", "Tin_Tuc")"> @Resource.tintuc </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="@Url.Action("Index", "Tuyen_Dung")">@Resource.tuyendung</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="@Url.Action("Index", "Thong_Tin_Cong_Ty")">@Resource.ttcty</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="@Url.Action("Index", "Lien_He")">@Resource.lienhe</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #access -->
+            @if (Request.Url.LocalPath == "/" || Request.Url.LocalPath.Contains("/Home/Index"))
+            {
+                <div id="banner" class="carousel slide">
+                    <div class="carousel-inner">
+                        <div class="carousel-item  item-img1">
+                        </div>
+                        <div class="carousel-item  item-img2">
+                        </div>
+                        <div class="carousel-item  item-img3">
+                        </div>
+                    </div>
+                    <div class="container-fluid tracuuOut">
+                        <div class="container h-100">
+                            <div class="row h-100 justify-content-end align-items-center">
+                                <div class="login">
+                                    <div class="boxTracuu">
+                                        <a class="boxTracuu-login" href="/Booking/Login" target="_blank">Tạo vận đơn / Đăng nhập</a>
+                                    </div>
+
+                                    <div class="boxTracuu">
+                                        <h3>Tra cứu vận đơn</h3>
+                                        <p>Quí khách nhập số vận đơn vào ô bên dưới</p>
+                                        <div class="formTra">
+                                            <input type="text" id="kamotsu1" onkeypress="TimKiem(event)" name="kokunaiawb" class="form-control" placeholder="VD: 0123456789" required="required">
+                                            <button onclick="gotrack()" id="searchnoidia" name="" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<div class="row menu-category">
+                            <div class="container">
+                                <div class="row topPanel">
+                                    <div class="row row-main1" style="border-bottom: 2px solid #394491;">
+                                        <div class="col-md-3 itemclick" id="chuyen_phat_nhanh" onclick="showtab(this)">
+                                            <p class="title">
+                                                <a href="javascript:void(0)">
+                                                    <span style="vertical-align: super;">
+                                                        <img src="~/lib/images/svg/icon-airport.png" />
+                                                    </span><span>@Resource.vtaiHK</span>
+                                                </a>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3 itemclick" id="phat_hoa_toc" onclick="showtab(this)">
+                                            <p class="title">
+                                                <a href="javascript:void(0)">
+                                                    <span style="vertical-align: super;">
+                                                        <img src="~/lib/images/svg/icon-ocean.png" />
+                                                    </span>
+                                                    <span>@Resource.vtaiBien</span>
+                                                </a>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3 itemclick" id="sgx" onclick="showtab(this)">
+                                            @if (Request.Cookies["language"].Value.Equals("en"))
+                                            {
+                                                <p class="title" style="line-height:1.3">
+                                                    <a href="javascript:void(0)" style="line-height:0">
+                                                        <span style="vertical-align: super;">
+                                                            <img src="~/lib/images/svg/icon-sgx.png" style="float:left;margin-top: 5px;" />
+                                                        </span>
+                                                        <span>@Resource.Sgx</span> <br />
+                                                        <span>@Resource.chuyenphat</span>
+                                                    </a>
+                                                </p>
+                                            }
+                                            else
+                                            {
+                                                <p class="title">
+                                                    <a href="javascript:void(0)">
+                                                        <span style="vertical-align: super;">
+                                                            <img src="~/lib/images/svg/icon-sgx.png" />
+                                                        </span>
+                                                        <span>@Resource.Sgx</span>
+                                                    </a>
+                                                </p>
+                                            }
+                                        </div>
+                                        <div class="col-md-3 itemclick" id="gia_tri_cao" onclick="showtab(this)">
+                                            <p class="title">
+                                                <a href="javascript:void(0)">
+                                                    <span style="vertical-align: super;">
+                                                        <img src="~/lib/images/svg/icon-customs.png" />
+                                                    </span>
+                                                    <span>@Resource.thutuchaiquan</span>
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row row-main2">
+                                        <p class="clearfix title itemclick" style="width: 22%;" id="trucking" onclick="showtab(this)">
+                                            <span style="vertical-align: super;">
+                                                <img src="~/lib/images/svg/icon-trucking.png" />
+                                            </span>
+                                            <span>@Resource.vtaiBo</span>
+                                        </p>
+                                        <p class="clearfix title itemclick" style="width: 18%;" id="tiet_kiem" onclick="showtab(this)">
+                                            <span style="vertical-align:super;">
+                                                <img src="~/lib/images/svg/icon-tiet_kiem.png" />
+                                            </span>
+                                            <span>@Resource.khobai</span>
+                                        </p>
+                                        <p class="clearfix title itemclick" id="gia_tang" onclick="showtab(this)">
+                                            <span style="vertical-align:super;">
+                                                <img src="~/lib/images/svg/icon-inspection.png" />
+                                            </span>
+                                            <span>@Resource.kiemkim</span>
+                                        </p>
+                                        <p class="clearfix title itemclick" style="width:18%;" id="removal" onclick="showtab(this)">
+                                            <span style="vertical-align:super;">
+                                                <img src="~/lib/images/svg/icon-removal.png" />
+                                            </span>
+                                            <span>
+                                                @Resource.donchuyen
+                                            </span>
+                                        </p>
+                                        <p class="clearfix title itemclick" style="width: 22%;" id="project_cargo" onclick="showtab(this)">
+                                            <span style="vertical-align:super;">
+                                                <img src="~/lib/images/svg/icon-projectcargo.png" />
+                                            </span>
+                                            <span>@Resource.trienkhaihangduan</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                </div>
+            }
+        </div>
+        <!-- #header -->
+        <div id="main">
+            <div id="content" role="main">
+                <div class="view-content-page">
+                    @RenderBody()
+                </div>
+
+                <!--track and trade-->
+                <section id="trackandtrade" role="main" hidden class="page">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="title title2 row">
+                                <h4><span> @Resource.tracuuBPBK </span></h4>
+                            </div>
+                            <div class="modal-body" style="min-height:300px;padding-top: 0.5rem;">
+                                <div class="row">
+                                    <h6 style="font-weight: bold; font-style: italic; margin-bottom: 5px; ">@Resource.timkiemvandon</h6>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="2" id="mavandon" placeholder="@Resource.nhapvandon"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-left col-right">
+                                        <div class="form-group">
+                                            <button class="btn btn-danger" style="padding:8px 12px !important" onclick="TRACK_AND_TRACE($('#mavandon').val())"><i class="fa fa-search"></i>  @Resource.search</button>
+                                        </div>
+                                        @*<div class="form-group">
+                                                <button class="btn btn-danger" style="padding:8px 12px !important" onclick="TrangCu()"><i></i>Tìm kiếm trong webside cũ</button>
+                                            </div>*@
+                                    </div>
+                                </div>
+                                <div class="row listTrackAndTrace" hidden>
+                                    <table id="listTrackAndTrace" class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="1" style="width:300px;text-align:center">
+                                                    @Resource.time
+                                                </th>
+                                                <th colspan="3" style="width:615px;text-align:center">
+                                                    @Resource.Status
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                                <div class="alert alert-danger" role="alert" id="mess_vandon" style="margin-top:10px;width:100%">@Resource.mess_vandon </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--track and trade-->
+            </div>
+            <section class="footer">
+                <div class="container-fluid">
+                    <div class="container_footer row justify-content-end">
+                        <div class="col-md-3">
+                            @*<p class="fLogo"><a href="#"><img src="~/lib/images/logo/facebook_icon_3654755.png" alt=""></a></p>*@
+                            <div class="fTxt">
+                                <strong>Hỗ trợ khách hàng</strong>
+                                <br>Hotline: 024.396.12345
+                                <br>Thời gian làm việc: 8h - 18h (T2 - T7)
+                            </div>
+                            <ul class="social clearfix">
+                                <li><a href="https://www.facebook.com/Netpost-Express-157958191812378/" target="_blank"><img src="~/lib/images/logo/facebook_icon_3654755.png" width="70" height="70" alt=""></a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 px-3">
+                            <div class="fLocation">
+                                <h3>MIỀN BẮC</h3>
+                                <p class="icoL">SỐ 12B LÔ A10 KĐT NAM TRUNG YÊN, PHƯỜNG YÊN HÒA, QUẬN CẦU GIẤY, TP. HÀ NỘI</p>
+                                <p class="icoP">024.396.12345</p>
+                                <p class="icoM"><a href="mailto:dvkh.hn@netpost.vn">dvkh.hn@netpost.vn</a></p>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3 px-3">
+                            <div class="fLocation">
+                                <h3>MIỀN NAM</h3>
+                                <p class="icoL">SỐ 403 ĐƯỜNG LÝ THƯỜNG KIỆT, PHƯỜNG 8, QUẬN TÂN BÌNH, TP. HỒ CHÍ MINH</p>
+                                <p class="icoP">028.3948.3333</p>
+                                <p class="icoM"><a href="mailto:dvkh.hcm@netpost.vn">dvkh.hcm@netpost.vn</a></p>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3 px-3">
+                            <div class="fLocation">
+                                <h3>MIỀN TRUNG</h3>
+                                <p class="icoL">Số 34/H7/15 Thi Sách, P.Hoà Thuận Tây, Q.Hải Châu, TP.ĐÀ NẴNG</p>
+                                <p class="icoP">023.63.789.448</p>
+                                <p class="icoM"><a href="mailto:dvkh.dn@netpost.vn">dvkh.dn@netpost.vn</a></p>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3 px-3">
+                            <p class="copyTxt"> © 2022 Bản quyền thuộc về NETPOST </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- #footer -->
+        </div>
+        <!-- #main -->    ﻿
+    </div>
+
+    @*@Html.Partial(Url.Content("~/Views/Shared/_ModalImage.cshtml"))*@
+
+    @*<div id="live-chat" class="d-none">
+            <header id="heat" onclick="clospopupmessage()">
+                <a href="#" class="chat-close"><i class="fa fa-minus"></i></a>
+                <h4>@Resource.support </h4>
+            </header>
+            <div class="chat">
+                <div class="chat-history">
+                    <div class="chat-message clearfix d-none" style="height: 100%;">
+                        <div class="row chat-mess-head">
+                            <div class="col-md-12 chat-mess-title">
+                                <p>
+                                    Chi nhánh phục vụ: <strong> </strong>. <a href="javascript:;" class="font-weight-bold" onclick="rechooseBrach()"> Chọn lại</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row chat-message-content clearfix">
+                            <div class="col-md-12">
+                                <p class="text-center"><img src="~/lib/images/chat.png" />  @Resource.nhantin </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-group" style="border-top: 1px solid lightgray;">
+                                <input type="text" style="border:0;" id="message" placeholder="Tin nhắn" autofocus autocomplete="off" class="form-control" onkeypress="txtMess_KeyPress(event)">
+                                <div class="input-group-append">
+                                    <button class="btn btn-default" id="senmess" style="height: 34px;width: 40px; color: #374694;" onclick="sendMess_Click()"><i class="fa fa-paper-plane"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="support-box">
+                        <div class="row support-box-head">
+                            <div class="col-md-12 py-3">
+                                <p>
+                                    <img class="pb-3" src="~/lib/images/map/icon-chat.jpg" width="50" />
+                                    <br />
+                                    @Resource.chonchinhanh
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row support-box-content clearfix">
+                            <div class="row">
+                                <div class="col-md-9 col-sm-9 col-9 col-right">
+                                    <p>
+                                        <button class="btn btn-light text-left branchbtn" style="width: 100%; border-radius: 18px;" id="btnHCMbranch" onclick="connectedChatHub(event)">
+                                            <img src="~/lib/images/svg/icon-map.png" style="vertical-align:text-bottom" /> @Resource.HCMbranch
+                                        </button>
+                                    </p>
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-3">
+                                    <p id="HCMbranch" style="padding-top: 20px;">
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-9 col-sm-9 col-9 col-right">
+                                    <p>
+                                        <button class="btn btn-light text-left branchbtn" style="width: 100%; border-radius: 18px;" id="btnDNbranch" onclick="connectedChatHub(event)">
+                                            <img src="~/lib/images/svg/icon-map.png" style="vertical-align:text-bottom" /> @Resource.DNbranch
+                                        </button>
+                                    </p>
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-3">
+                                    <p id="DNbranch" style="padding-top: 20px;">
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-9 col-sm-9 col-9 col-right">
+                                    <p>
+                                        <button class="btn btn-light text-left branchbtn" style="width: 100%; border-radius: 18px;" id="btnHNbranch" onclick="connectedChatHub(event)">
+                                            <img src="~/lib/images/svg/icon-map.png" style="vertical-align:text-bottom" /> @Resource.HNbranch
+                                        </button>
+                                    </p>
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-3">
+                                    <p style="padding-top: 20px;" id="HNbranch">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    <!-- end live-chat -->
+    @*<div class="img-chat" onclick="showpopupmessage()">
+            <p style="padding: 0;line-height: 0;">
+                <span class="badge badge-pill badge-danger chat-message-counter" style="position: absolute; top: -4px; left: -3px;font-size: small;"></span>
+                <img src="/lib/images/icon_chat.png" />
+                <span style="font-size: 13px;vertical-align: text-bottom;color: green;" id="cs-online" class="d-none">
+                    online
+                </span>
+                <span style="font-size: 13px;vertical-align: text-bottom;color: black;" id="cs-offline" class="d-none">
+                    offline
+                </span>
+            </p>
+        </div>*@
+
+    <a id="back-to-top" href="#" style="padding: 10px 12px !important" class="btn btn-danger back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left" hidden><i class="fa fa-chevron-up"></i></a>
+
+    <img src="~/lib/images/loading.gif" class="pre-image" hidden style="width: 55px;position: fixed;left: 48%;top: 45%;z-index:1051" />
+    <div id="modal-anhlienvang_nhieuanh" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 5px; border: 0;">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <i class="fa fa-times-circle"></i>
+                    </button>
+                </div>
+                <div class="modal-body" style="overflow: hidden;min-height:510px; padding: 10px 15px;">
+                    <div class="row">
+                        <img id="imgage1" onclick="ShowAnhLienVang_EX(this)" class="col-md-4" />
+                        <img id="imgage2" onclick="ShowAnhLienVang_EX(this)" class="col-md-4" />
+                        <img id="imgage3" onclick="ShowAnhLienVang_EX(this)" class="col-md-4" />
+                        <img id="imgage4" onclick="ShowAnhLienVang_EX(this)" class="col-md-4" />
+                        <img id="imgage5" onclick="ShowAnhLienVang_EX(this)" class="col-md-4" />
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding: 10px;">
+                    <div class="row">
+                        <div class="col-md-12" style="text-align:center">
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#modal-baocaosaipham"><i class="material-icons">&#xe160;</i> @Resource.baocaosaipham</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-anhlienvang" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 5px; border: 0;">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <i class="fa fa-times-circle"></i>
+                    </button>
+                </div>
+                <div class="modal-body" style="overflow: hidden;min-height:510px; padding: 10px 15px;">
+                    <div class="row">
+                        <input id="idAnhPOD" type="text" hidden />
+                        <div id="viewer" class="viewer"></div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding: 10px;">
+                    <div class="row">
+                        <div class="col-md-12" style="text-align:center">
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#modal-baocaosaipham"><i class="material-icons">&#xe160;</i> @Resource.baocaosaipham</button>
+                            <button class="btn btn-success" onclick="XemAnhGoc()">Xem ảnh gốc chất lượng cao</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="modal-baocaosaipham" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-xm">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 5px; border: 0;">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <i class="fa fa-times-circle"></i>
+                    </button>
+                </div>
+                <div class="modal-body" style="padding: 10px;">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label> @Resource.sdtlienhe</label>
+                            <input class="form-control" type="text" id="txtsdtlienhe" />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label> @Booking.noidung <strong style="color:red">*</strong></label>
+                            <textarea class="form-control" rows="10" id="txtNote"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="text-align:center">
+                        <button class="btn btn-danger" onclick="baocaosaipham()"><i class="fa fa-save"></i> @Booking.luu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        var iv1 = $("#viewer").iviewer({
+            fill_container: true,
+            src: "/lib/images/No_Image_Available.jpg",
+            initCallback: function () {
+                iviewer = this;
+            },
+        });
+
+        $(document).ready(function () {
+            $("#SearchNew")[0].oninvalid = function () {
+                this.setCustomValidity("@Html.Raw(Resource.presskey)");
+            };
+            $("#SearchNew")[0].oninput = function () {
+                this.setCustomValidity("");
+            };
+
+
+            @*$('.img-chat').tooltip({ title: "@Html.Raw(Resource.loinhan)", trigger: "hover", placement: "left" });
+            $('.bookingonl').tooltip({ title: "@Html.Raw(Resource.dichvuchuyenphat)", trigger: "hover", placement: "bottom" });
+            $('#tracuuvandon').tooltip({ title: "@Html.Raw(Resource.dichvuchuyenphat)", trigger: "hover", placement: "bottom" });*@
+        });
+
+        function TimKiem(event) {
+            if (event.keyCode == 13) {
+                gotrack();
+                var elem = document.getElementById('trackandtrade');
+                elem.scrollIntoView();
+                //var hawbNo = $('#kamotsu1').val();
+                //$('#mavandon').val(hawbNo);
+                //$('#searchnoidia').click();
+            }
+        }
+        function XemAnhGoc() {
+            var url = $('#viewer').find("img").attr('src');
+            window.open(url, '', "width=800,height=800");
+        }
+        function gotrack() {
+            $('#listTrackAndTrace tbody').empty();
+                $('.view-content-page').hide();
+                $('#mess_vandon').hide();
+                var hawbNo = $('#kamotsu1').val();
+                $('#mavandon').val(hawbNo);
+                if (hawbNo == "") {
+                    $('#mess_vandon').html("@Html.Raw(Resource.mess_vandon)");
+                    $('#mess_vandon').show();
+                    $('.listTrackAndTrace').hide();
+                }
+                else {
+                    $('.img-loading').show();
+                    $.ajax({
+                        url: "/Home/ListTrackAndTrace",
+                        type: "POST",
+                        data: {
+                            MaBPBK: hawbNo
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log(data.Title);
+                            if (!data.Error) {
+                                var str = "";
+                                for (var i in data.Object) {
+                                    var lst = data.Object[i];
+                                    if ((lst[0].ID_MONGO != null && lst[0].ID_MONGO != "") || (lst[0].URLImage != null && lst[0].URLImage != "")) {
+                                        if (lst[0].URLImage2 != "") {
+                                            str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td colspan=\"4\"> @Html.Raw(Resource.mavandon): " + i + " (<a href=\"javascript:;\" onclick = 'ShowNhieuAnh(\"" + lst[0].URLImage + "\",\"" + lst[0].URLImage2 + "\",\"" + lst[0].URLImage3 + "\", \""+ lst[0].URLImage4 + "\",\"" + lst[0].URLImage5 + "\")' > @Resource.chuky</a>)</td></tr>";
+                                        } else {
+                                            str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td colspan=\"4\"> @Html.Raw(Resource.mavandon): " + i + " (<a href=\"javascript:;\" onclick = 'ShowAnhLienVang(\"" + lst[0].ID_MONGO + "\",\"" + lst[0].URLImage + "\", \"" + lst[0].CONTENT_TYPE + "\")' > @Resource.chuky</a>)</td></tr>";
+                                        }
+                                        str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td  colspan=\"1\"> Dịch vụ: <a style= \"color:red;\">" + lst[0].DICH_VU +
+                                            "</a></td><td  colspan=\"1\">Nơi đến: <a style= \"color:red;\">" + lst[0].NOI_DEN + "</a></td>" +
+                                            "</td><td  colspan=\"1\">Trọng lượng: <a style= \"color:red;\">" + lst[0].TRONG_LUONG + " kg</a></td>"
+                                            + "<td  colspan=\"1\">Số kiện: <a style= \"color:red;\">" + lst[0].SO_KIEN + " </a></td>"
+                                            + "</tr> ";
+                                    }
+                                    else {
+                                        str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td  colspan=\"4\"> @Html.Raw(Resource.mavandon): " + i + "</td></tr>";
+                                        str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td  colspan=\"1\"> Dịch vụ: <a style= \"color:red;\">" + lst[0].DICH_VU +
+                                            "</a></td><td  colspan=\"1\">Nơi đến: <a style= \"color:red;\">" + lst[0].NOI_DEN + "</a></td>" +
+                                            "</td><td  colspan=\"1\">Trọng lượng: <a style= \"color:red;\">" + lst[0].TRONG_LUONG + " kg</a></td>"
+                                            + "<td  colspan=\"1\">Số kiện: <a style= \"color:red;\">" + lst[0].SO_KIEN + " </a></td>"
+                                            + "</tr> ";
+                                    }
+                                    for (var j in lst) {
+                                        str = str + "<tr style= \"border-bottom: 1px solid #99999938;\"><td colspan=\"1\">" + lst[j].INSERT_TIME_STRING + "</td><td colspan=\"3\">" + lst[j].DESC + "</td></tr>";
+                                    }
+                                }
+                                $('#listTrackAndTrace tbody').append(str);
+                                $('#mess_vandon').hide();
+                                $('.img-loading').hide();
+                                $('.listTrackAndTrace').show();
+                            }
+                            else {
+                                $('#mess_vandon').html("@Html.Raw(Resource.khongtimthayvandon)");
+                                $('#mess_vandon').show();
+                                $('.listTrackAndTrace').hide();
+                            }
+                        }
+                    });
+                }
+                $('#kamotsu1').val('');
+                $('#trackandtrade').show();
+                if (screen.width < 600) {
+                        $('html,body').animate({ scrollTop: 400 }, 300);
+            }
+            var elem = document.getElementById('trackandtrade');
+            elem.scrollIntoView();
+        }
+
+        //function TrangCu() {
+        //    window.open("http://old.netpost.vn/track.php?mode=sm", '_blank', 'location=yes,height=720,width=1280,scrollbars=yes,status=yes');
+        //}
+
+        function TRACK_AND_TRACE(MaBPBK) {
+            $('#listTrackAndTrace tbody').empty();
+            $('#mess_vandon').hide();
+            if (MaBPBK == "") {
+                $('#mess_vandon').html("@Html.Raw(Resource.mess_vandon)");
+                $('#mess_vandon').show();
+                $('.listTrackAndTrace').hide();
+            }
+            else {
+                $('.img-loading').show();
+                $('#listTrackAndTrace tbody').empty();
+                $.ajax({
+                    url: "/Home/ListTrackAndTrace",
+                    type: "POST",
+                    data: {
+                        MaBPBK: MaBPBK
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.Title == "Get list success!") {
+                            var str = "";
+                            for (var i in data.Object) {
+                                var lst = data.Object[i];
+                                if ((lst[0].ID_MONGO != null && lst[0].ID_MONGO != "") || (lst[0].URLImage != null && lst[0].URLImage != "")) {
+                                     if (lst[0].URLImage2 != "") {
+                                             str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td colspan=\"4\"> @Html.Raw(Resource.mavandon): " + i + " (<a href=\"javascript:;\" onclick = 'ShowNhieuAnh(\"" + lst[0].URLImage + "\",\"" + lst[0].URLImage2 + "\",\"" + lst[0].URLImage3 + "\", \""+ lst[0].URLImage4 + "\",\"" + lst[0].URLImage5 + "\")' > @Resource.chuky</a>)</td></tr>";
+                                        } else {
+                                            str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td colspan=\"4\"> @Html.Raw(Resource.mavandon): " + i + " (<a href=\"javascript:;\" onclick = 'ShowAnhLienVang(\"" + lst[0].ID_MONGO + "\",\"" + lst[0].URLImage + "\", \"" + lst[0].CONTENT_TYPE + "\")' > @Resource.chuky</a>)</td></tr>";
+                                        }
+                                        "</a></td><td  colspan=\"1\">Nơi đến: <a style= \"color:red;\">" + lst[0].NOI_DEN + "</a></td>" +
+                                        "</td><td  colspan=\"1\">Trọng lượng: <a style= \"color:red;\">" + lst[0].TRONG_LUONG + " kg</a></td>"
+                                        + "<td  colspan=\"1\">Số kiện: <a style= \"color:red;\">" + lst[0].SO_KIEN + " </a></td>"
+                                        + "</tr> ";
+                                }
+                                else {
+                                     str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td  colspan=\"4\"> @Html.Raw(Resource.mavandon): " + i + "</td></tr>";
+                                    str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td  colspan=\"1\"> Dịch vụ: <a style= \"color:red;\">" + lst[0].DICH_VU +
+                                        "</a></td><td  colspan=\"1\">Nơi đến: <a style= \"color:red;\">" + lst[0].NOI_DEN + "</a></td>" +
+                                        "</td><td  colspan=\"1\">Trọng lượng: <a style= \"color:red;\">" + lst[0].TRONG_LUONG + " kg</a></td>"
+                                        + "<td  colspan=\"1\">Số kiện: <a style= \"color:red;\">" + lst[0].SO_KIEN + " </a></td>"
+                                        + "</tr> ";
+                                }
+                                for (var j in lst) {
+                                    str = str + "<tr style= \"border-bottom: 1px solid #99999938;\"><td colspan=\"1\">" + lst[j].INSERT_TIME_STRING + "</td><td colspan=\"3\">" + lst[j].DESC + "</td></tr>";
+                                }
+                            }
+                            $('#listTrackAndTrace tbody').append(str);
+                            $('.listTrackAndTrace').show();
+                        }
+                        else {
+                            $('#mess_vandon').html("@Html.Raw(Resource.khongtimthayvandon)");
+                            $('#mess_vandon').show();
+                            $('.listTrackAndTrace').hide();
+                        }
+                    },
+                    complete: function () {
+                        $('.img-loading').hide();
+                    }
+                });
+            }
+        }
+
+        function tracktrade() {
+            $('#listTrackAndTrace tbody').empty();
+                $('.view-content-page').hide();
+                $('#mess_vandon').hide();
+                var hawbNo = $('#billnoidia').val();
+                $('#mavandon').val(hawbNo);
+                if (hawbNo == "") {
+                    $('#mess_vandon').html("@Html.Raw(Resource.mess_vandon)");
+                    $('#mess_vandon').show();
+                    $('.listTrackAndTrace').hide();
+                }
+                else {
+                    $('.img-loading').show();
+                    $.ajax({
+                        url: "/Home/ListTrackAndTrace",
+                        type: "POST",
+                        data: {
+                            MaBPBK: hawbNo
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log(data.Title);
+                            if (!data.Error) {
+                                var str = "";
+                                for (var i in data.Object) {
+                                    var lst = data.Object[i];
+                                    if ((lst[0].ID_MONGO != null && lst[0].ID_MONGO != "") || (lst[0].URLImage != null && lst[0].URLImage != "")) {
+                                        if (lst[0].URLImage2 != "") {
+                                            str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td colspan=\"4\"> @Html.Raw(Resource.mavandon): " + i + " (<a href=\"javascript:;\" onclick = 'ShowNhieuAnh(\"" + lst[0].URLImage + "\",\"" + lst[0].URLImage2 + "\",\"" + lst[0].URLImage3 + "\", \"" + lst[0].URLImage4 + "\",\"" + lst[0].URLImage5 + "\")' > @Resource.chuky</a>)</td></tr>";
+                                        } else {
+                                            str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td colspan=\"4\"> @Html.Raw(Resource.mavandon): " + i + " (<a href=\"javascript:;\" onclick = 'ShowAnhLienVang(\"" + lst[0].ID_MONGO + "\",\"" + lst[0].URLImage + "\", \"" + lst[0].CONTENT_TYPE + "\")' > @Resource.chuky</a>)</td></tr>";
+                                        }
+                                        str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td  colspan=\"1\"> Dịch vụ: <a style= \"color:red;\">" + lst[0].DICH_VU +
+                                            "</a></td><td  colspan=\"1\">Nơi đến: <a style= \"color:red;\">" + lst[0].NOI_DEN + "</a></td>" +
+                                            "</td><td  colspan=\"1\">Trọng lượng: <a style= \"color:red;\">" + lst[0].TRONG_LUONG + " kg</a></td>"
+                                            + "<td  colspan=\"1\">Số kiện: <a style= \"color:red;\">" + lst[0].SO_KIEN + "</a></td>"
+                                            + "</tr> ";
+                                    }
+                                    else {
+                                        str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td  colspan=\"4\"> @Html.Raw(Resource.mavandon): " + i + "</td></tr>";
+                                        str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td  colspan=\"1\"> Dịch vụ: <a style= \"color:red;\">" + lst[0].DICH_VU +
+                                            "</a></td><td  colspan=\"1\">Nơi đến: <a style= \"color:red;\">" + lst[0].NOI_DEN + "</a></td>" +
+                                            "</td><td  colspan=\"1\">Trọng lượng: <a style= \"color:red;\">" + lst[0].TRONG_LUONG + " kg</a></td>"
+                                            + "<td  colspan=\"1\">Số kiện: <a style= \"color:red;\">" + lst[0].SO_KIEN + "</a></td>"
+                                            + "</tr> ";
+                                    }
+                                    for (var j in lst) {
+                                        str = str + "<tr style= \"border-bottom: 1px solid #99999938;\"><td colspan=\"1\">" + lst[j].INSERT_TIME_STRING + "</td><td colspan=\"3\">" + lst[j].DESC + "</td></tr>";
+                                    }
+                                }
+                                $('#listTrackAndTrace tbody').append(str);
+                                $('#mess_vandon').hide();
+                                $('.img-loading').hide();
+                                $('.listTrackAndTrace').show();
+                            }
+
+
+                            else {
+                                $('#mess_vandon').html("@Html.Raw(Resource.khongtimthayvandon)");
+                                $('#mess_vandon').show();
+                                $('.listTrackAndTrace').hide();
+                            }
+                        }
+                    });
+            }
+
+                $('#trackandtrade').show();
+                $('#billnoidia').val('');
+                $('.dr-tracuu').fadeOut();
+                if ($('#banner').length > 0) {
+                    if (screen.width > 1024) {
+                        $('html,body').animate({ scrollTop: 500 }, 300);
+                    }
+                }
+        }
+
+
+        function ShowAnhLienVang(idmongo, URLImage, idAnhPOD) {
+            $("#viewer").hide();
+            $('#idAnhPOD').val(idAnhPOD);
+            iv1.iviewer('loadImage', URLImage);
+            iv1.iviewer('set_zoom', 100);
+            $('.pre-image').hide();
+            $("#viewer").show();
+            $('#modal-anhlienvang').modal('show');
+
+        }
+        function ShowAnhLienVang_EX(obj) {
+            $("#viewer").hide();
+            $('#idAnhPOD').val(idAnhPOD);
+            var src = obj.currentSrc;
+           
+            iv1.iviewer('loadImage', src);
+            setTimeout(function () {
+                iv1.iviewer('set_zoom', 100);
+            }, 5);
+            $('.pre-image').hide();
+            $("#viewer").show();
+            $('#modal-anhlienvang').modal('show');
+
+        }
+        function ShowNhieuAnh(url1, url2, url3, url4, url5) {
+            $("#imgage1").attr("src", url1);
+            $("#imgage2").attr("src", url2);
+            $("#imgage3").attr("src", url3);
+            $("#imgage4").attr("src", url4);
+            $("#imgage5").attr("src", url5);
+            $('#modal-anhlienvang_nhieuanh').modal('show');
+        }
+
+        function baocaosaipham() {
+            if ($('#txtNote').val() == undefined || $('#txtNote').val() == "") {
+                Swal.fire('@Html.Raw(Resource.vadnoidung)',
+                    '',
+                    'error')
+                return;
+            }
+            $.ajax({
+                url: "/Home/BaoCaoSaiPham",
+                type: "POST",
+                data: {
+                    sdt:$('#txtsdtlienhe').val(),
+                    note: $('#txtNote').val(),
+                    idAnhPOD: $('#idAnhPOD').val()
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (!data.Error) {
+                        Swal.fire('@Html.Raw(Resource.baocaosaiphamthanhcong)',
+                            '',
+                            'success');
+                        $('#modal-baocaosaipham').modal('hide');
+                        $('#txtNote').val('');
+                    }
+                    else {
+                        Swal.fire(data.Title,
+                            '',
+                            'error')
+                        return;
+                    }
+                }
+            });
+        }
+
+        $('#modal-baocaosaipham').on('shown.bs.modal', function () {
+            $('#txtsdtlienhe').trigger('focus')
+        })
+
+        //function clickme(string) {
+        //    $.ajax({
+        //        url: "/Home/ChangeLanguage",
+        //        type: "POST",
+        //        data: {
+        //            culture: string
+        //        },
+        //        dataType: 'json',
+        //        success: function (data) {
+        //            window.location.reload();
+        //        }
+        //    });
+        //}
+    </script>
+    @*<script>
+            window.fbAsyncInit = function () {
+                FB.init({
+                    appId: 'b6e12a919b681c3b21cdaea9dafefc8a',
+                    autoLogAppEvents: true,
+                    xfbml: true,
+                    version: 'v13.0'
+                });
+            };
+        </script>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>*@
+</body>
+</html>

@@ -1,0 +1,308 @@
+﻿@using WebSite.Language
+@model WebSite.Models.TINTUCDTO
+@{ViewBag.Title = "View Detail"; }
+<style>
+    #title {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+     .placehoder {
+        justify-content:center;
+    }
+    .placehoder img{
+        min-width: 512px;
+        max-height: 480px;
+        min-height: 320px;
+    }
+    p{
+        width:100%;
+
+         padding:0!important;
+    }
+    p img{
+        max-width:100%;
+        max-height:auto;
+    }
+     .job-detail-content .nav-tabs {
+        border: 0;
+        margin-bottom: 30px;
+    }
+     .job-detail-content .nav-tabs > li > a.active, .job-detail-content .nav-tabs > li > a:hover {
+        background-color: #dee2e6;
+        position: relative;
+        border-radius: 5px;
+    }
+     .job-detail-content .nav-tabs > li > a {
+        padding: 20px;
+        margin-right: 0;
+        border: 0;
+        border-radius: 0;
+        text-align: center;
+        color: #000;
+        font-weight: bold;
+        line-height: 34px;
+    }
+     .job-detail-content .nav-tabs >li >a >span{
+         font-size: 18px;
+     }
+     .job-detail-content .nav-tabs > li > a.active:before, .job-detail-content .nav-tabs > li > a:hover:after {
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-top: 19px solid #dee2e6;
+        position: absolute;
+        left: calc(50% - 15px);
+        bottom: -19px;
+    }
+     .job-detail-content{
+             min-height: 500px;
+             padding-top:20px;
+     }
+     #job-apply .form-group{
+         width:65%;    
+         margin: auto;
+         margin-bottom: 0.75rem;
+     }
+     .content_fck p{
+         font-size:18px;
+     }
+     #job-apply .form-group label{
+         margin-bottom:5px;
+     }
+</style>
+<div class="banner-career">
+
+</div>
+<div class="page-container career-detail">
+    <div class="container">
+        <div class="row">
+            @if (Model != null && !string.IsNullOrWhiteSpace(Model.TIEU_DE))
+            {
+                <div class="col-md-12">
+                    <div class="title about">
+                        <h4 class="title-page">
+                            <span> @Model.TIEU_DE</span>
+                        </h4>
+                    </div>
+
+                    <div class="col-md-12 mota" style="border-bottom:1px solid #efefef;padding: 20px;">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="accordion">
+                                    <p class="accordion_text" style="font-weight: bold;font-size: 18px;margin-bottom: 10px;">@Resource.emaillienlac</p>
+                                    <div class="clearall accordion_content">
+                                        <div class="content_fck" style="padding-bottom:15px">
+                                            <p>Linh: 0327054377 </p>
+                                            <p>Email: hr.tuyendung1234@gmail.com </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="actions-apply" style="margin-bottom:15px">
+                                    <p>
+                                        
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="border-left:1px solid #efefef">
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="accordion">
+                                    <p class="accordion_text" style="font-weight: bold;font-size:18px;margin-bottom: 10px;"> @Resource.ttTD</p>
+                                    <div class="clearall accordion_content">
+                                        <ul class="col-xs-12 job-quick-view">
+                                            <li class="col-xs-12" style="line-height: 1.7;"><i class="fa fa-sitemap fa-fw"></i><span> @Model.VI_TRI</span></li>
+                                            <li class="col-xs-12" style="line-height: 1.7;">
+                                                <i class="fa fa-usd fa-fw"></i>
+                                                <span>
+                                                    @Resource.thoathuan
+                                                </span>
+                                            </li>
+                                            <li class="col-xs-12" style="line-height: 1.7;"><i class="fa fa-map-marker fa-fw"></i><span> @Model.DIA_DIEM</span></li>
+                                            <li class="col-xs-12" style="line-height: 1.7;"><i class="fa fa-filter fa-fw"></i><span> @Model.KINH_NGHIEM @Resource.kinhnghiem</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="accordion">
+                                    <p class="accordion_text" style="font-weight: bold;font-size: 18px;">@Resource.hannop :   @Model.HAN_NOP_STRING </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <p>
+
+                        </p>
+                    </div>
+                    <div class="clearall tab-job job-detail-content">
+                        <ul class="nav nav-tabs" style="margin-left:0">
+                            <li class="nav-item col-md-4 col-left"><a class="nav-link menu_tab active" data-toggle="tab" href="#job-description"><img src="~/lib/images/job-detail-3.png" alt="" style="margin-right: 10px;"><span>   @Resource.motacv</span></a></li>
+                            <li class="nav-item col-md-4"><a class="nav-link menu_tab " data-toggle="tab" href="#job-apply"><img src="~/lib/images/job-detail-1.png" alt="" style="margin-right: 10px;"><span>   @Resource.ungtuyen</span></a></li>
+                        </ul>
+                        <div class="col-md-12 tab-content " style="padding: 20px 10px; border: 1px solid #efefef;border-radius: 5px;">
+                            <div id="job-description" class="tab-pane fade active show">
+                                <div class="content_fck">
+                                    @Html.Raw(@Model.NOI_DUNG)
+                                </div>
+                            </div>
+                            <div id="job-apply" class="tab-pane fade" style="height:500px">
+                                <div class="content_fck">
+                                    <div class="title about">
+                                        <h4 class="title-page">
+                                            <span> @Resource.nopdon</span>
+                                        </h4>
+                                    </div>                                   
+                                    <div class="row">                                        
+                                        <input type="text" id="ID" hidden value="@Model.ID" />
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <p style="padding:0;margin:0">@Resource.chucdanh: @Model.VI_TRI</p>
+                                                <p style="padding:0;margin:0">@Resource.diadiem: @Model.DIA_DIEM</p>
+                                                <p style="font-weight:bold"> @Resource.thongtinlienhe</p>                                           
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label>@Resource.hoten <strong style="color:red">(*) </strong></label>
+                                                <input type="text" class="form-control" id="HO_TEN" onfocus="$('#mess_apply').hide()" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label>Email <strong style="color:red">(*) </strong></label>
+                                                <input type="text" class="form-control" id="EMAIL" onfocus="$('#mess_apply').hide()" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label>@Resource.sdt <strong style="color:red">(*) </strong></label>
+                                                <input type="text" class="form-control" id="SDT" onfocus="$('#mess_apply').hide()" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label>@Resource.donUT <strong style="color:red">(*) </strong></label>
+                                                <div class="input-group">
+                                                    <label class="input-group-btn" style="height: 34px;" onfocus="$('#mess_apply').hide()">
+                                                        <span class="btn btn-primary" style="font-style:normal;padding: 12px !important;">
+                                                            @Booking.chontep <input id="FileDinhKem" type="file" style="display: none;" name="FileDinhKem" required accept=".doc,.docx, .xls, .xlsx, .pdf">
+                                                        </span>
+                                                    </label>
+                                                    <input class="form-control" readonly style="margin-left: 5px;" id="tentep">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group" style="text-align:center">
+                                                <button type="button" class="btn btn-primary" onclick="Save()" id="Save" style="padding: 14px !important; width: 100%;">@Resource.ungtuyen</button>
+                                                <div class="alert alert-danger" role="alert" id="mess_apply" style="margin-top:10px;width:100%" hidden></div>                                        
+                                             </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-12">
+                    <div class="alert alert-danger" role="alert" style="margin-top:10px;width:100%">@Resource.TDsupport</div>
+                </div>
+            }          
+        </div>
+    </div>
+
+</div>
+<script>
+    $('#FileDinhKem').on("change", function () {
+        if (this.files && this.files[0]) {
+            var str = "";
+            for (var i = 0; i < this.files.length; i++) {
+
+                if (Math.round(this.files[i].size / (1024 * 1024)) > 5) { // make it in MB so divide by 1024*1024
+                    $('#tentep').val('');
+                    Swal.fire('',
+                            'Chọn file ứng tuyển có dung lượng bé hơn 5 MB',
+                            'error')
+                    return;
+                }
+                str = this.files[i].name;
+            }
+            $('#tentep').val(str);
+        }
+    });
+    function Save() {
+        if ($('#HO_TEN').val() == "") {
+            $('#mess_apply').html("@Html.Raw(@Resource.msgHoten)");
+            $('#mess_apply').show();
+            return;
+        }
+        if ($('#EMAIL').val() == "") {
+            $('#mess_apply').html("@Html.Raw(@Resource.msgEmail)");
+            $('#mess_apply').show();
+            return;
+        }
+        if ($('#SDT').val() == "") {
+            $('#mess_apply').html("@Html.Raw(@Resource.msgPhone)");
+            $('#mess_apply').show();
+            return;
+        }
+        if ($('#tentep').val() == "") {
+            $('#mess_apply').html("@Html.Raw(@Resource.vadTep)");
+            $('#mess_apply').show();
+            return;
+        }
+        if (Math.round($("#FileDinhKem").prop("files")[0].size / (1024 * 1024)) > 2) { // make it in MB so divide by 1024*1024
+            $('#tentep').val('');
+            Swal.fire('',
+                    '@Html.Raw(@Resource.dungluongbe)',
+                    'error')
+            return;
+        }
+
+        var data = new FormData();
+        data.append("PARENT_ID", $('#ID').val());
+        data.append("HO_TEN", $('#HO_TEN').val());
+        data.append("EMAIL", $('#EMAIL').val());
+        data.append("SDT", $('#SDT').val());
+        $.each($("#FileDinhKem"), function (i, obj) {
+            $.each(obj.files, function (j, file) {
+                data.append("FileDinhKem", file); // is the var i against the var j, because the i is incremental the j is ever 0
+            });
+        });
+
+        $.ajax({
+            url: "/Admin/ApplyJob",
+            type: "POST",
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (data) {
+                if (!data.Error) {
+                    Swal.fire({
+                        icon: 'success',
+                        text: '@Html.Raw(@Resource.UTsucc)',
+                        confirmButtonText: 'Yes'
+                    }).then(function (willDelete) {
+                        if (willDelete.value) {
+                            window.location.reload();
+                        }
+                    });
+                }
+                else {
+                    Swal.fire(data.Title,
+                                    '',
+                                    'error')
+                    return;
+                }
+            }
+        });
+    }
+</script>

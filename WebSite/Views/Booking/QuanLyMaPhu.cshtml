@@ -1,0 +1,286 @@
+﻿@using WebSite.Language
+@using WebSite.Models
+@{
+    ViewBag.Title = Booking.quanlymaphu;
+    Layout = "~/Views/Shared/_Layout_Booking.cshtml";
+}
+<style>
+    .card .table td {
+        height: 43px;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 form-group text-right pt-2">
+            <button class="btn btn-danger" href="javascript:;" data-toggle="modal" data-target="#ModalTaoTKCon" data-backdrop="static"><i class="mdi mdi-plus"></i> @Booking.tao_moi </button>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body" style="min-height: calc(100vmin - 200px);">
+            <h4 class="card-title"><span>@Booking.danhsach_ma_phu</span></h4>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>@Booking.ten_ma_phu</th>
+                            <th>@Booking.trangthai</th>
+                            <th>@Booking.tacvu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            var lst = ViewData["lstMaPhu"] as List<CSS_CRM_NGUOI_DUNGDTO>;
+                            foreach (var item in lst)
+                            {
+                                <tr>
+                                    <td>@item.USER_NAME</td>
+                                    <td>@item.GHI_CHU</td>
+                                    @if (@item.IS_ACTIVE == 0)
+                                    {
+                                        <td class="text-success">
+                                            @Booking.hoat_dong
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="text-danger">
+                                            @Booking.khoa
+                                        </td>
+                                    }
+                                    <td>
+                                        <button class="btn btn-primary" onclick="ResetPass('@item.USER_NAME', '@item.GHI_CHU', @item.IS_ACTIVE)">@Booking.update_infor</button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalTaoTKCon" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h5 id="title"> <span> @Booking.tao_ma_phu</span></h5>
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
+            </div>
+            <div class="modal-body" style="min-height: 130px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        @*<div class="form-group">
+                                <label class="control-label">Username <strong style="color:red">*</strong></label>
+                                <input type="text" autocomplete="off" id="userName" class="form-control" readonly />
+                            </div>*@
+                        <div class="form-group">
+                            <label class="control-label">@Booking.ten_ma_phu <strong style="color:red">*</strong></label>
+                            <input type="text" autocomplete="off" id="tenKH" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Password <strong style="color:red">*</strong></label>
+                            <input type="text" autocomplete="off" id="passWord" class="form-control custom-password" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">@Booking.nhaplaipassmoi<strong style="color:red">*</strong></label>
+                            <input type="text" autocomplete="off" id="rePassWord" class="form-control custom-password" />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <a href="javascript:;" onclick="TaoKHCon()" class="btn btn-primary form-control"><i class="mdi mdi-content-save"></i> @Booking.luu</a>
+                        </div>
+                        <div class="alert alert-danger d-none mess-taoKHCon" role="alert"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalUpdateTKCon" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h5 id="title"> <span> @Booking.update_infor</span></h5>
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
+            </div>
+            <div class="modal-body" style="min-height: 130px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label">Username <strong style="color:red">*</strong></label>
+                            <input type="text" autocomplete="off" id="upUserName" class="form-control" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">@Booking.ten_ma_phu <strong style="color:red">*</strong></label>
+                            <input type="text" autocomplete="off" id="upTenKH" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">@Booking.passmoi</label>
+                            <input type="text" autocomplete="off" id="upPassWord" class="form-control custom-password hidetext" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">@Booking.nhaplaipassmoi</label>
+                            <input type="text" autocomplete="off" id="upRePassWord" class="form-control custom-password hidetext" />
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" value="KHOA"> @Booking.khoa
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <a href="javascript:;" onclick="UpdateInfo()" class="btn btn-primary form-control"><i class="mdi mdi-content-save"></i> @Booking.luu</a>
+                        </div>
+                        <div class="alert alert-danger d-none mess-updateInfo" role="alert"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function TaoKHCon() {
+        if ($('#tenKH').val() == "") {
+            $('.mess-taoKHCon').html('@Html.Raw(Booking.msg_ten_maphu)');
+            $('.mess-taoKHCon').removeClass('d-none');
+            return;
+        }
+        if ($('#passWord').val() == "") {
+            $('.mess-taoKHCon').html('@Html.Raw(Booking.msg_pass)');
+            $('.mess-taoKHCon').removeClass('d-none');
+            return;
+        }
+        if ($('#rePassWord').val() == "") {
+            $('.mess-taoKHCon').html('@Html.Raw(@Booking.msg_repass)');
+            $('.mess-taoKHCon').removeClass('d-none');
+            return;
+        }
+            if (re.test($('#passWord').val()) == false) {
+            $('.mess-taoKHCon').html('@Html.Raw(@Booking.vadidatepasssmoi)');
+            $('.mess-taoKHCon').removeClass('d-none');
+            return;
+        }
+        if ($('#passWord').val() != $('#rePassWord').val()) {
+            $('.mess-taoKHCon').html('@Html.Raw(@Booking.nhaplaipass)');
+            $('.mess-taoKHCon').removeClass('d-none');
+            return;
+        }
+        $.ajax({
+            url: "/Service/TaoMaKHCon",
+            type: "POST",
+            data: dto = {
+                USER_NAME: $('#userName').val(),
+                PASSWORD: $('#passWord').val(),
+                GHI_CHU:$('#tenKH').val()
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (!data.Error) {
+                    Swal.fire({
+                            title: '@Html.Raw(Booking.msg_luu_thanh_cong)',
+                            icon: 'success',
+                            html:
+                            '<p>@Html.Raw(Booking.taikhoan)</p>'+
+                            '<p style="color:red"> <strong> Username: ' + data.Object.USER_NAME +'</strong> <br/>' +
+                            '<strong> Password: ' + data.Object.PASSWORD +
+                            '</strong></p>',
+                            showCancelButton: false,
+                            cancelButtonText: 'No',
+                            confirmButtonText: 'OK'
+                        }).then(function (willDelete) {
+                            if (willDelete.value) {
+                                window.location.reload();
+                            }
+                        });
+                }
+                else {
+                    Swal.fire(
+                        '',
+                        data.Title,
+                        'error')
+                    return;
+                }
+            }
+        });
+    }
+
+    function ResetPass(userName,ten, isActive) {
+        $('#upUserName').val(userName);
+        $('#upTenKH').val(ten);
+        if (isActive == 1) {
+            $('input[value="KHOA"]').prop("checked", true);
+        }
+        $('#ModalUpdateTKCon').modal({ backdrop: 'static' });
+    }
+
+    function UpdateInfo() {
+        if ($('#upUserName').val() == "") {
+            $('.mess-updateInfo').html('@Html.Raw(Booking.msg_username)');
+            $('.mess-updateInfo').removeClass('d-none');
+            return;
+        }
+        if ($('#upTenKH').val() == "") {
+            $('.mess-updateInfo').html('@Html.Raw(Booking.msg_ten_maphu)');
+            $('.mess-updateInfo').removeClass('d-none');
+            return;
+        }
+        if ($('#upPassWord').val() != "" && re.test($('#upPassWord').val()) == false) {
+            $('.mess-updateInfo').html('@Html.Raw(@Booking.vadidatepasssmoi)');
+            $('.mess-updateInfo').removeClass('d-none');
+            return;
+        }
+        if ($('#upPassWord').val() != "" && $('#upRePassWord').val() == "") {
+            $('.mess-updateInfo').html('@Html.Raw(Booking.msg_repass)');
+            $('.mess-updateInfo').removeClass('d-none');
+            return;
+        }
+        if ($('#upPassWord').val() != "" && $('#upPassWord').val() != $('#upRePassWord').val()) {
+            $('.mess-updateInfo').html('@Html.Raw(Booking.nhaplaipass)');
+            $('.mess-updateInfo').removeClass('d-none');
+            return;
+        }
+        var IS_ACTIVE = $('input[value="KHOA"]').prop("checked") == true ? 1 : 0;
+
+        $.ajax({
+            url: "/Service/UpdateInfo",
+            type: "POST",
+            data: dto = {
+                    USER_NAME: $('#upUserName').val(),
+                    PASSWORD: $('#upPassWord').val(),
+                    GHI_CHU: $('#upTenKH').val(),
+                    IS_ACTIVE: IS_ACTIVE
+                },
+            dataType: 'json',
+            success: function (data) {
+                if (!data.Error) {
+                    Swal.fire({
+                        title: '@Html.Raw(Booking.msg_luu_thanh_cong)',
+                        icon: 'success',
+                        showCancelButton: false,
+                        cancelButtonText: 'No',
+                        confirmButtonText: 'OK'
+                    })
+                    .then(function (willDelete) {
+                        if (willDelete.value) {
+                            window.location.reload();
+                        }
+                    });
+                }
+                else {
+                    Swal.fire(
+                        '',
+                        data.Title,
+                        'error')
+                    return;
+                }
+            }
+        });
+    }
+</script>

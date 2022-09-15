@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "Bảng giá";
+}
+<section class="bang_gia_cuoc_chuyen_phat_nhanh">
+    <div class="container">
+        @if (ViewData["name"] != null && ViewData["name"].ToString() == "ha_noi")
+        {
+            <div class="section-title">
+                <h2>Bảng giá Hà Nội</h2>
+            </div>
+            <div class="row justify-content-between">
+                <iframe src="https://netpost.vn/Image/banggia/hanoi.pdf" embedded="true" width="880" height="800" style="border: none;"></iframe>
+            </div>
+        }
+        else if (ViewData["name"] != null && ViewData["name"].ToString() == "ho_chi_minh")
+        {
+            <div class="section-title">
+                <h2>Bảng giá Hồ Chí Minh</h2>
+            </div>
+            <div class="row justify-content-between">
+                <iframe src="https://netpost.vn/Image/banggia/hcm.pdf" embedded="true" width="880" height="800" style="border: none;"></iframe>
+            </div>
+        }
+        else if (ViewData["name"] != null && ViewData["name"].ToString() == "da_nang")
+        {
+            <div class="section-title">
+                <h2>Bảng giá Đà Nẵng</h2>
+            </div>
+            <div class="row justify-content-between">
+                <iframe src="https://netpost.vn/Image/banggia/danang.pdf" embedded="true" width="880" height="800" style="border: none;"></iframe>
+            </div>
+        }
+    </div>
+</section>

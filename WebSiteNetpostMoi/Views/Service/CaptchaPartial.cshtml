@@ -1,0 +1,10 @@
+﻿@Html.DevExpress().Captcha(settings =>
+{
+    settings.CallbackRouteValues = new { Controller = "Service", Action = "CaptchaPartial" };
+    settings.Name = "captcha";
+    settings.TextBox.Position = DevExpress.Web.Captcha.ControlPosition.Left;
+    settings.CodeLength = 6;
+    settings.CharacterSet = "abcdefhjklmnpqrstuvxyz1234567890";
+    settings.TextBox.Visible = false;
+}).GetHtml()
+

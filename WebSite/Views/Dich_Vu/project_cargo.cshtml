@@ -1,0 +1,40 @@
+﻿@using WebSite.Language;
+@{
+    ViewBag.Title = Resource.trienkhaihangduan;
+}
+<style>
+    .entry-content .col-md-4 {
+        display: flex;
+        justify-content: center;
+        padding-bottom: 25px;
+    }
+</style>
+<div class="container page-container">
+    <div class="row">
+        <div id="post-451" class="post-451 page type-page status-publish hentry">
+            <div class="title title2 about">
+                <h4><span> @Resource.trienkhaihangduan </span></h4>
+            </div>
+            <div class="entry-content">
+                <p>
+                    @Resource.ND_trienkhai
+                </p>
+                <div class="row item-content">
+                    <div class="col-md-4">
+                        <img onclick="currentSlide('project-cargo', 1)" class="size-full wp-image-332" title="" src="/lib/images/projectcargo1.jpg" alt="" width="300" height="170">
+                    </div>
+                    <div class="col-md-4">
+                        <img onclick="currentSlide('project-cargo', 2)" class="size-full wp-image-332" title="" src="/lib/images/projectcargo2.jpg" alt="" width="300" height="170">
+                    </div>
+                    <div class="col-md-4">
+                        <img onclick="currentSlide('project-cargo', 3)" class="size-full wp-image-332" title="" src="/lib/images/projectcargo3.jpg" alt="" width="300" height="170">
+                    </div>
+                </div>
+
+                <p style="text-align:right;padding-right: 25px;">
+                    <a href="/Lien_He/Index" style="padding: 0 5px; border-bottom: 1px solid;"><i class="fa fa-forward"></i>  @Resource.lienhe </a>
+                </p>
+            </div><!-- .entry-content -->
+        </div>
+    </div>
+</div>

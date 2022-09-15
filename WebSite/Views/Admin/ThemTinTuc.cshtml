@@ -1,0 +1,388 @@
+﻿@model WebSite.Models.TINTUCDTO
+@{
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+
+    string title = "Thêm mới tin tức";
+    if (Model.ID != 0)
+    {
+        title = "Xem và cập nhật tin tức";
+    }
+
+    ViewBag.Title = title;
+}
+
+<div class="container">
+    <ul class="breadcrumb">
+        <li><a href="/Admin/TinTuc">Quản trị tin tức</a></li>
+        <li><a>@title</a></li>
+    </ul>
+
+    <div class="row pb-5">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
+            <h4><span>Chọn ngôn ngữ</span></h4>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#tiengviet">Tiếng việt</a>
+                </li>
+                @*<li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tienganh">English</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tiengnhat">日本語</a>
+                </li>*@
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="tiengviet">
+                    <div class="form-group">
+                        <label class="control-label">Tiêu đề <strong style="color:red">(*)</strong></label>
+                        @Html.EditorFor(model => model.TIEU_DE, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Mô tả <strong style="color:red">(*)</strong></label>
+                        <textarea name="MO_TA" rows="3" class="form-control" id="MO_TA">@Model.MO_TA</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nội dung <strong style="color:red">(*)</strong></label>
+                        <textarea name="NOI_DUNG" id="ckeContent" rows="50">@Model.NOI_DUNG</textarea>
+                        <script type="text/javascript">
+                            var editor = CKEDITOR.replace("ckeContent");
+                            CKFinder.setupCKEditor(editor, "/ckfinder");
+                        </script>
+                    </div>
+                </div>
+                @*<div class="tab-pane fade" id="tienganh">
+                    <div class="form-group">
+                        <label class="control-label">Tiêu đề tiếng anh<strong style="color:red">(*)</strong></label>
+                        @Html.EditorFor(model => model.TIEU_DE_EN, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Mô tả tiếng anh<strong style="color:red">(*)</strong></label>
+                        <textarea name="MO_TA_EN" rows="3" class="form-control" id="MO_TA_EN">@Model.MO_TA_EN</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nội dung <strong style="color:red">(*)</strong></label>
+                        <textarea name="NOI_DUNG_EN" id="ckeContentEN">@Model.NOI_DUNG_EN</textarea>
+                        <script type="text/javascript">
+                            var editor1 = CKEDITOR.replace("ckeContentEN");
+                            CKFinder.setupCKEditor(editor1, "/ckfinder");
+                        </script>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tiengnhat">
+                    <div class="form-group">
+                        <label class="control-label">Tiêu đề tiếng nhật<strong style="color:red">(*)</strong></label>
+                        @Html.EditorFor(model => model.TIEU_DE_JA, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Mô tả tiếng nhật<strong style="color:red">(*)</strong></label>
+                        <textarea name="MO_TA_JA" rows="3" class="form-control" id="MO_TA_JA">@Model.MO_TA_JA</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nội dung <strong style="color:red">(*)</strong></label>
+                        <textarea name="NOI_DUNG_JA" id="ckeContentJA">@Model.NOI_DUNG_JA</textarea>
+                        <script type="text/javascript">
+                            var editor2 = CKEDITOR.replace("ckeContentJA");
+                            CKFinder.setupCKEditor(editor2, "/ckfinder");
+                        </script>
+                    </div>
+                </div>*@
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h4><span>Thông tin chung</span> </h4>
+                </div>
+                <div class="col-md-12 form-group">
+                    <label class="control-label">Tác giả </label>
+                    @Html.EditorFor(model => model.TAC_GIA, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-md-12 form-group">
+                    <label class="control-label">Chọn ảnh tiêu đề <strong style="color:red">(*)</strong></label>
+                    <div class="input-group form-group">
+                        <label class="input-group-btn">
+                            <span class="btn btn-primary" style="font-style:normal">
+                                Chọn ảnh <input type="file" style="display: none;" name="FileAnh" required accept="image/*" id="FileAnh" onchange="readInput(this)">
+                            </span>
+                        </label>
+                        <input type="text" class="form-control" readonly style="margin-left: 5px;" id="tenfile" required value="@Model.FILE_IMG">
+                    </div>
+                    @{
+                        var src = "";
+                        if (string.IsNullOrWhiteSpace(Model.FILE_IMG))
+                        {
+                            src = "/lib/images/No_Image_Available.jpg";
+                        }
+                        else
+                        {
+                            src = Model.FILE_IMG;
+                        }
+                    }
+                    <img id="blah" width="250" height="150" src="@src" style="margin-left: 100px;" />
+                </div>
+                <div class="col-md-12 form-group">
+                    <label class="control-label">Chọn file đính kèm </label>
+                    <div class="input-group">
+                        <label class="input-group-btn">
+                            <span class="btn btn-primary" style="font-style:normal">
+                                Chọn file <input id="FileDinhKem" type="file" style="display: none;" name="FileDinhKem" required accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain, application/pdf" multiple>
+                            </span>
+                        </label>
+                        <textarea rows="2" class="form-control" readonly style="margin-left: 5px;" id="tentep" required>@Model.FILE_DINH_KEM</textarea>
+                    </div>
+                </div>
+                <div class="form-group" hidden>
+                    <input type="text" value="@Model.ID" id="ID" />
+                </div>
+                <div class="col-md-12 form-group text-center pt-2">
+                    @if (Model.ID == 0)
+                    {
+                        <button style="width: 120px;" onclick="Save()" class="btn btn-primary">Lưu </button>
+                    }
+                    else
+                    {
+                        <button style="width: 120px;" onclick="Update()" class="btn btn-primary">Update</button>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1">
+        </div>
+    </div>
+</div>
+<script>
+    function readInput(input) {
+        var _URL = window.URL || window.webkitURL;
+        var file = input.files[0];
+        var img = new Image();
+        var imgwidth = 0;
+        var imgheight = 0;
+        var minwidth = 640;
+        var minheight = 500;
+
+        img.src = _URL.createObjectURL(file);
+        img.onload = function () {
+            imgwidth = this.width;
+            imgheight = this.height;
+            if (imgwidth <= minwidth && imgheight <= minheight) {
+                $('#tenfile').val('');
+                $('#blah').attr('src', '/lib/images/No_Image_Available.jpg');
+                Swal.fire('',
+                    'Ảnh có độ phân giải tối thiểu 640x500',
+                    'error')
+                return;
+            }
+            else {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#blah').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                    $('#tenfile').val(input.files[0].name);
+                }
+            }
+        }
+        if (Math.round(file.size / (1024 * 1024)) > 2) { // make it in MB so divide by 1024*1024
+            Swal.fire('',
+                'Chọn ảnh có dung lượng bé hơn 2 MB',
+                'error')
+            return;
+        }
+    }
+
+    $('#FileDinhKem').on("change", function () {
+        if (this.files && this.files[0]) {
+            var str = "";
+            for (var i = 0; i < this.files.length; i++) {
+                str = this.files[i].name + ";" + str;
+            }
+            $('#tentep').val(str);
+        }
+    });
+
+    function Save() {
+        var file = $("#FileAnh").prop("files")[0];
+
+        if ($('#TIEU_DE').val() == "") {
+            Swal.fire("Tiêu đề không được bỏ trống",
+                '',
+                'error')
+            return;
+        }
+        if ($('#VI_TRI').val() == "") {
+            Swal.fire("Vị trí tuyển dụng không được bỏ trống",
+                '',
+                'error')
+            return;
+        }
+
+        for (var instanceName in CKEDITOR.instances)
+            CKEDITOR.instances[instanceName].updateElement();
+
+        var model = new FormData();
+        model.append("TIEU_DE", $('#TIEU_DE').val());
+        model.append("TIEU_DE_EN", $('#TIEU_DE_EN').val());
+        model.append("TIEU_DE_JA", $('#TIEU_DE_JA').val());
+        model.append("NOI_DUNG", $('#ckeContent').val());
+        model.append("NOI_DUNG_EN", $('#ckeContentEN').val());
+        model.append("NOI_DUNG_JA", $('#ckeContentJA').val());
+        model.append("MO_TA", $('#MO_TA').val());
+        model.append("MO_TA_EN", $('#MO_TA_EN').val());
+        model.append("MO_TA_JA", $('#MO_TA_JA').val());
+        model.append("NHOM_TIN", "TIN_TUC");
+        model.append("TAC_GIA", $('#TAC_GIA').val());
+        $.each($("#FileDinhKem"), function (i, obj) {
+            $.each(obj.files, function (j, file) {
+                model.append("FileDinhKem", file); // is the var i against the var j, because the i is incremental the j is ever 0
+            });
+        });
+        $.each($("#FileAnh"), function (i, obj) {
+            $.each(obj.files, function (j, file) {
+                model.append("FileAnh", file); // is the var i against the var j, because the i is incremental the j is ever 0
+            });
+        });
+
+        if (file != null) {
+            var _URL = window.URL || window.webkitURL;
+            img = new Image();
+            var imgwidth = 0;
+            var imgheight = 0;
+            var minwidth = 640;
+            var minheight = 500;
+
+            img.src = _URL.createObjectURL(file);
+            img.onload = function () {
+                imgwidth = this.width;
+                imgheight = this.height;
+                if (imgwidth <= minwidth && imgheight <= minheight) {
+                    Swal.fire('',
+                        'Ảnh có độ phân giải tối thiểu 640x500',
+                        'error')
+                    return;
+                }
+                if (Math.round($("#FileAnh").prop("files")[0].size / (1024 * 1024)) > 2) { // make it in MB so divide by 1024*1024
+                    $('#tenfile').val('');
+                    $('#blah').attr('src', '/lib/images/No_Image_Available.jpg');
+                    Swal.fire('',
+                        'Chọn ảnh có dung lượng bé hơn 2 MB',
+                        'error')
+                    return;
+                }
+            }
+        }
+
+        $.ajax({
+            url: "/Admin/InsertNews",
+            type: "POST",
+            data: model,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                if (!data.Error) {
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'Thêm mới tin thành công!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    window.location.href = "/Admin/TinTuc";
+                }
+                else {
+                    Swal.fire(data.Title,
+                        '',
+                        'error')
+                    return;
+                }
+            }
+        });
+    }
+
+
+    function Update() {
+        for (var instanceName in CKEDITOR.instances)
+            CKEDITOR.instances[instanceName].updateElement();
+
+        var data = new FormData();
+        data.append("ID", $('#ID').val());
+        data.append("TIEU_DE", $('#TIEU_DE').val());
+        data.append("TIEU_DE_EN", $('#TIEU_DE_EN').val());
+        data.append("TIEU_DE_JA", $('#TIEU_DE_JA').val());
+        data.append("NOI_DUNG", $('#ckeContent').val());
+        data.append("NOI_DUNG_EN", $('#ckeContentEN').val());
+        data.append("NOI_DUNG_JA", $('#ckeContentJA').val());
+        data.append("MO_TA", $('#MO_TA').val());
+        data.append("MO_TA_EN", $('#MO_TA_EN').val());
+        data.append("MO_TA_JA", $('#MO_TA_JA').val());
+        data.append("NHOM_TIN", "TIN_TUC");
+        data.append("TAC_GIA", $('#TAC_GIA').val());
+        $.each($("#FileDinhKem"), function (i, obj) {
+            $.each(obj.files, function (j, file) {
+                data.append("FileDinhKem", file); // is the var i against the var j, because the i is incremental the j is ever 0
+            });
+        });
+        $.each($("#FileAnh"), function (i, obj) {
+            $.each(obj.files, function (j, file) {
+                data.append("FileAnh", file); // is the var i against the var j, because the i is incremental the j is ever 0
+            });
+        });
+
+        var file = $("#FileAnh").prop("files")[0];
+
+        if (file != null) {
+            var _URL = window.URL || window.webkitURL;
+            img = new Image();
+            var imgwidth = 0;
+            var imgheight = 0;
+            var minwidth = 640;
+            var minheight = 500;
+
+            img.src = _URL.createObjectURL(file);
+            img.onload = function () {
+                imgwidth = this.width;
+                imgheight = this.height;
+                if (imgwidth <= minwidth && imgheight <= minheight) {
+                    Swal.fire('',
+                        'Ảnh có độ phân giải tối thiểu 640x500',
+                        'error')
+                    return;
+                }
+                if (Math.round($("#FileAnh").prop("files")[0].size / (1024 * 1024)) > 2) { // make it in MB so divide by 1024*1024
+                    $('#tenfile').val('');
+                    $('#blah').attr('src', '/lib/images/No_Image_Available.jpg');
+                    Swal.fire('',
+                        'Chọn ảnh có dung lượng bé hơn 2 MB',
+                        'error')
+                    return;
+                }
+            }
+        }
+
+        $.ajax({
+            url: "/Admin/EditNew",
+            type: "POST",
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                if (!data.Error) {
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'Cập nhật tin thành công!',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                    window.location.href = "/Admin/TinTuc";
+                }
+                else {
+                    Swal.fire(data.Title,
+                        '',
+                        'error')
+                    return;
+                }
+            }
+        });
+    };
+
+</script>

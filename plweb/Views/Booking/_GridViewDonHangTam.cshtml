@@ -1,0 +1,193 @@
+﻿@using WebSite.Models;
+@using WebSite.Language;
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridView";
+        settings.KeyFieldName = "id";
+        settings.CallbackRouteValues = new { Controller = "Booking", Action = "_GridViewDonHangTam" };
+
+        settings.ControlStyle.CssClass = "grid-view gridView";
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        settings.Styles.Cell.Wrap = DefaultBoolean.True;
+        settings.Styles.PagerBottomPanel.CssClass = "pager";
+        settings.Styles.FocusedRow.CssClass = "focused";
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowSelectCheckbox = true;
+        settings.CommandColumn.ShowClearFilterButton = true;
+        settings.CommandColumn.SelectAllCheckboxMode = GridViewSelectAllCheckBoxMode.AllPages;
+
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Auto;
+        settings.Settings.VerticalScrollableHeight = 200;
+        settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+
+        settings.SettingsBehavior.AllowEllipsisInText = false;
+        settings.SettingsBehavior.AllowDragDrop = false;
+        settings.SettingsBehavior.AllowSort = false;
+        settings.SettingsBehavior.AllowFocusedRow = true;
+
+        settings.SettingsPager.FirstPageButton.Visible = true;
+        settings.SettingsPager.LastPageButton.Visible = true;
+        settings.SettingsPager.PageSize = 50;
+        settings.SettingsPager.Visible = true;
+
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowHeaderFilterButton = true;
+        settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Left;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.ngaytao;
+            column.FieldName = "UPDATE_TIME_STRING";
+            column.Width = 110;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.tennguoigui;
+            column.FieldName = "TEN_NGUOI_GUI";
+            column.Width = 130;
+            column.SetDataItemTemplateContent(container =>
+            {
+                if (Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_GUI")).Length > 30)
+                {
+                    ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_GUI")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_GUI")).Substring(0, 30) + "...");
+                }
+                else
+                    ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_GUI")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_GUI")));
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.sdtnguoigui;
+            column.FieldName = "SDT_GUI";
+            column.Width = 130;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.tennguoinhan;
+            column.FieldName = "TEN_NGUOI_NHAN";
+            column.SetDataItemTemplateContent(container =>
+            {
+                if (Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_NHAN")).Length > 30)
+                {
+                    ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_NHAN")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_NHAN")).Substring(0, 30) + "...");
+                }
+                else
+                    ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_NHAN")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_NHAN")));
+            });
+            column.Width = 150;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.sdt;
+            column.FieldName = "SDT_NHAN";
+            column.Width = 130;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.diachinhan;
+            column.FieldName = "DIA_CHI";
+            column.SetDataItemTemplateContent(container =>
+            {
+                string diachi = Convert.ToString(DataBinder.Eval(container.DataItem, "DIA_CHI"));
+                if (diachi.Length > 30)
+                {
+                    ViewContext.Writer.Write("<p title = \"" + diachi + "\"> " + diachi.Substring(0, 30) + "...");
+                }
+                else
+                    ViewContext.Writer.Write("<p title = \"" + diachi + "\"> " + diachi);
+            });
+            column.Width = 180;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.dichvu;
+            column.FieldName = "DICH_VU";
+            column.Width = 80;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.dongkiem;
+            column.FieldName = "isDONG_KIEM";
+            column.Width = 120;
+            column.ColumnType = MVCxGridViewColumnType.CheckBox;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.trongluong;
+            column.FieldName = "TRONG_LUONG";
+            column.Width = 110;
+            column.PropertiesEdit.DisplayFormatString = "f2";
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.sokien;
+            column.Width = 120;
+            column.FieldName = "SO_KIEN";
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.noidung;
+            column.Width = 180;
+            column.FieldName = "NOI_DUNG";
+            column.SetDataItemTemplateContent(container =>
+            {
+                if (Convert.ToString(DataBinder.Eval(container.DataItem, "NOI_DUNG")).Length > 30)
+                {
+                    ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "NOI_DUNG")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "NOI_DUNG")).Substring(0, 30) + "...");
+                }
+                else
+                    ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "NOI_DUNG")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "NOI_DUNG")));
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.sohoadon;
+            column.Width = 120;
+            column.FieldName = "SO_HOA_DON";
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.sothamchieu;
+            column.FieldName = "SO_THAM_CHIEU";
+            column.Width = 120;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.gtdonhang;
+            column.Width = 120;
+            column.FieldName = "GT_DON_HANG";
+            column.PropertiesEdit.DisplayFormatString = "N0";
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.hoanBBBG;
+            column.Width = 120;
+            column.FieldName = "HOAN_BBBG";
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.ngayhenphat;
+            column.Width = 120;
+            column.FieldName = "NGAY_HEN_PHAT_SIEU_THI";
+        });
+
+        settings.ClientSideEvents.SelectionChanged = "function(s,e){OnGridViewSelectionChanged(s,e)}";
+
+        settings.PreRender = (sender, e) =>
+        {
+            ((MVCxGridView)sender).ExpandAll();
+        };
+    });
+}
+@grid.Bind(Model).GetHtml()

@@ -1,0 +1,45 @@
+﻿@model List<WebSite.Models.Warehouse.WH_V3_KHACH_HANG_NHA_CUNG_CAPDTO>
+@{
+    var glu = Html.DevExpress().GridLookup(settings =>
+    {
+        settings.KeyFieldName = "ID";
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowSelectCheckbox = true;
+        settings.CommandColumn.Width = 50;
+
+        settings.Name = "gluDanhSachNCC";
+        settings.GridViewProperties.CallbackRouteValues = new { Controller = "Warehouse", Action = "GLUDanhSachNCCPartial" };
+        settings.Properties.SelectionMode = DevExpress.Web.GridLookupSelectionMode.Multiple;
+        settings.Properties.TextFormatString = "{0}";
+//settings.Properties.MultiTextSeparator = ",";
+
+settings.Columns.Add(column =>
+        {
+            column.Caption = "Đối tượng";
+            column.FieldName = "MA_DOI_TUONG";
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+            column.Width = 150;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Tên đối tượng";
+            column.FieldName = "TEN_DOI_TUONG";
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+            column.Width = 150;
+        });
+        settings.GridViewProperties.Settings.ShowFilterRow = true;
+        settings.GridViewProperties.Settings.ShowStatusBar = GridViewStatusBarMode.Visible;
+        settings.GridViewProperties.SettingsPager.Mode = GridViewPagerMode.ShowAllRecords;
+        settings.DataBound = (sender, e) =>
+        {
+            var gridLookup = (MVCxGridLookup)sender;
+            gridLookup.GridView.Width = 500;
+            gridLookup.GridView.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
+            gridLookup.GridView.Settings.VerticalScrollableHeight = 300;
+        };
+        settings.Width = 200;
+        settings.Height = 30;
+    });
+}
+@glu.BindList(Model).GetHtml()

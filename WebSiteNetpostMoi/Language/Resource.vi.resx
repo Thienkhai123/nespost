@@ -1,0 +1,796 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="bacninh" xml:space="preserve">
+    <value>Tỉnh Bắc Ninh ( Kho ngoại quan, kho thường )</value>
+  </data>
+  <data name="baogiaphatnoidia" xml:space="preserve">
+    <value>Báo giá chuyển phát nội địa</value>
+  </data>
+  <data name="baogiaphatquocte" xml:space="preserve">
+    <value>Báo giá chuyển phát quốc tế</value>
+  </data>
+  <data name="cacdieukhoan" xml:space="preserve">
+    <value>Quy định về bảo vệ dữ liệu chung</value>
+  </data>
+  <data name="chinhsachbaomat" xml:space="preserve">
+    <value>Chính sách bảo mật</value>
+  </data>
+  <data name="chitiet" xml:space="preserve">
+    <value>Chi tiết</value>
+  </data>
+  <data name="condition" xml:space="preserve">
+    <value>Trucking standard condition</value>
+  </data>
+  <data name="CPN_SGX" xml:space="preserve">
+    <value>Dịch vụ chuyển phát nhanh quốc tế</value>
+  </data>
+  <data name="dichvu" xml:space="preserve">
+    <value>Dịch vụ</value>
+  </data>
+  <data name="donchuyen" xml:space="preserve">
+    <value>Dịch vụ dọn chuyển</value>
+  </data>
+  <data name="donggoihh" xml:space="preserve">
+    <value>Quy định đối với việc đóng gói hàng hóa</value>
+  </data>
+  <data name="donnhavp" xml:space="preserve">
+    <value>Dịch vụ dọn nhà văn phòng (trong nước và quốc tế )</value>
+  </data>
+  <data name="download" xml:space="preserve">
+    <value>Tải file</value>
+  </data>
+  <data name="duongbien" xml:space="preserve">
+    <value>Dịch vụ vận chuyển đường biển (xuất khẩu, nhập khẩu )</value>
+  </data>
+  <data name="duongbo" xml:space="preserve">
+    <value>Dịch vụ vận chuyển đường bộ</value>
+  </data>
+  <data name="dvukhobai" xml:space="preserve">
+    <value>Dịch vụ phát tiết kiệm 48h</value>
+  </data>
+  <data name="gtgtnoidia" xml:space="preserve">
+    <value>Dịch vụ GTGT của hàng hóa vận chuyển</value>
+  </data>
+  <data name="haiquan" xml:space="preserve">
+    <value>Dịch vụ thủ tục hải quan</value>
+  </data>
+  <data name="hangkhong" xml:space="preserve">
+    <value>Dịch vụ vận chuyển đường hàng không ( xuất khẩu , nhập khẩu )</value>
+  </data>
+  <data name="hoadonchungtu" xml:space="preserve">
+    <value>Hóa đơn chứng từ gửi kèm hàng hóa </value>
+  </data>
+  <data name="hochiminh" xml:space="preserve">
+    <value>Hồ Chí Minh ( Linh Trung: Kho CFS, kho ngoại quan, kho thường )</value>
+  </data>
+  <data name="khobai" xml:space="preserve">
+    <value>Dịch vụ phát tiết kiệm 48h</value>
+  </data>
+  <data name="khoCFS" xml:space="preserve">
+    <value>Kho CFS</value>
+  </data>
+  <data name="khokiemkim" xml:space="preserve">
+    <value>Kiểm kim kiểm phẩm</value>
+  </data>
+  <data name="kholanh" xml:space="preserve">
+    <value>Kho lạnh</value>
+  </data>
+  <data name="khonguyhiem" xml:space="preserve">
+    <value>Kho chứa hàng hóa chất</value>
+  </data>
+  <data name="khothuong" xml:space="preserve">
+    <value>Kho thường</value>
+  </data>
+  <data name="kiemkim" xml:space="preserve">
+    <value>Dịch vụ gia tăng</value>
+  </data>
+  <data name="kiemkimkiempham" xml:space="preserve">
+    <value>Dịch vụ kiểm kim, kiểm phẩm</value>
+  </data>
+  <data name="kyso" xml:space="preserve">
+    <value>(10 hoặc 12 ký số)</value>
+  </data>
+  <data name="lienhe" xml:space="preserve">
+    <value>Liên hệ</value>
+  </data>
+  <data name="linhtrung" xml:space="preserve">
+    <value>Linh Trung Warehouse</value>
+  </data>
+  <data name="ND_donchuyen" xml:space="preserve">
+    <value>Chúng tôi cung cấp dịch vụ dọn chuyển đồ dùng một cách cẩn thận, an toàn và chính xác  cho các khách hàng có nhu cầu dọn chuyển nhà trong lãnh thổ Việt Nam, hoặc từ Việt Nam sang Nhật hay các quốc gia khác. Để hạn chế việc gây ra vấn đề khiến khách hàng bận tâm, những nhân viên vận chuyển được đào tạo bài bản và chuyên nghiệp sẽ lưu ý đến từng vật dụng nhỏ như 1 cái dĩa thức ăn, cho đến các vật dụng nội thất cồng kềnh. 
+Với phương châm " chất lượng là trên hết" , chúng tôi có cả đội ngũ nhân viên người Nhật tận tâm và giàu kinh nghiệm sẽ phân loại rõ ràng, đóng gói  phù hợp với từng đặc tính của mỗi vật dụng.</value>
+  </data>
+  <data name="ND_duongbo" xml:space="preserve">
+    <value>Với kiến thức  thu được từ Netpost, tại Netpost, chúng tôi cung cấp dịch vụ vận tải đường bộ  trong nước ( từ vận chuyển Bắc Nam đến vận chuyển nội thành), vận chuyển đường  bộ xuyên quốc gia ( Việt Nam ⇔ Thái Lan, Lào, Cambodia ).</value>
+  </data>
+  <data name="ND_haiquan" xml:space="preserve">
+    <value>Với một đất nước có thủ tục thông quan hàng hóa rắc rối như Việt Nam, chúng tôi - Netpost, với bề dày kinh nghiêm vốn có của mình, sẽ  thay mặt khách hàng tiến hành thủ tục thông quan hàng hóa xuất nhập khẩu  một cách nhanh gọn và chính xác.</value>
+  </data>
+  <data name="ND_khobai" xml:space="preserve">
+    <value>Netpost</value>
+  </data>
+  <data name="ND_kiemkim" xml:space="preserve">
+    <value>Netpost</value>
+  </data>
+  <data name="ND_trienkhai" xml:space="preserve">
+    <value>Netpost</value>
+  </data>
+  <data name="ngoaiquan" xml:space="preserve">
+    <value>Kho ngoại quan</value>
+  </data>
+  <data name="nhapsodonhang" xml:space="preserve">
+    <value>Nhập mã vận đơn</value>
+  </data>
+  <data name="nhontrach" xml:space="preserve">
+    <value>Kho Nhơn Trạch</value>
+  </data>
+  <data name="noidungBien" xml:space="preserve">
+    <value>Netpost</value>
+  </data>
+  <data name="noidungHK" xml:space="preserve">
+    <value>Netpost</value>
+  </data>
+  <data name="phatnoidia" xml:space="preserve">
+    <value>Dịch vụ chuyển phát nội địa</value>
+  </data>
+  <data name="phatquocte" xml:space="preserve">
+    <value>Dịch vụ chuyển phát quốc tế</value>
+  </data>
+  <data name="qtrphatquocte" xml:space="preserve">
+    <value>Quy trình chuyển phát quốc tế</value>
+  </data>
+  <data name="qtrphattrongnuoc" xml:space="preserve">
+    <value>Quy trình chuyển phát trong nước</value>
+  </data>
+  <data name="qtrtrachnhiem" xml:space="preserve">
+    <value>Quy định bồi thường &amp; giải quyết khiếu nại</value>
+  </data>
+  <data name="qtrvanchuyennoidia" xml:space="preserve">
+    <value>Quy định hàng hóa vận chuyển nội địa</value>
+  </data>
+  <data name="qtrvanchuyenquocte" xml:space="preserve">
+    <value>Quy định hàng hóa vận chuyển quốc tế</value>
+  </data>
+  <data name="qtrxulybpbk" xml:space="preserve">
+    <value>Quy trình xử lý bưu phẩm, bưu kiện</value>
+  </data>
+  <data name="quevo" xml:space="preserve">
+    <value>Kho Quế Võ</value>
+  </data>
+  <data name="quytrinhsudung" xml:space="preserve">
+    <value>Quy định sử dụng trang web</value>
+  </data>
+  <data name="Sgx" xml:space="preserve">
+    <value>Dịch vụ chuyển phát (Quốc tế &amp; Nội địa)</value>
+  </data>
+  <data name="SGXStandard" xml:space="preserve">
+    <value>SGX Standard Condition</value>
+  </data>
+  <data name="sodoweb" xml:space="preserve">
+    <value>Sơ đồ web</value>
+  </data>
+  <data name="Standard" xml:space="preserve">
+    <value>Forwarder Standard Terms and Conditions</value>
+  </data>
+  <data name="theodoidonhang" xml:space="preserve">
+    <value>Tra cứu vận đơn</value>
+  </data>
+  <data name="thutuchaiquan" xml:space="preserve">
+    <value>Dịch vụ hàng giá trị cao, express</value>
+  </data>
+  <data name="tieuchuanchatluong" xml:space="preserve">
+    <value>Quy định tiêu chuẩn chất lượng dịch vụ</value>
+  </data>
+  <data name="TimKiem" xml:space="preserve">
+    <value>Tìm</value>
+  </data>
+  <data name="timquocnoi" xml:space="preserve">
+    <value>Vận đơn trong nước</value>
+  </data>
+  <data name="timquocte" xml:space="preserve">
+    <value>Vận đơn quốc tế</value>
+  </data>
+  <data name="tinhdongnai" xml:space="preserve">
+    <value>Tỉnh Đồng Nai (Kho Nhơn Trạch: Kho ngoại quan, Kho lạnh, Kho thường, Kho hàng chứa hàng hóa chất)</value>
+  </data>
+  <data name="tintuc" xml:space="preserve">
+    <value>Tin tức</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>CÔNG TY CỔ PHẦN CHUYỂN PHÁT NHANH NETPOST VIỆT NAM</value>
+  </data>
+  <data name="trangchu" xml:space="preserve">
+    <value>Trang chủ</value>
+  </data>
+  <data name="trienkhaihangduan" xml:space="preserve">
+    <value>Triển khai hàng hoá theo dự án</value>
+  </data>
+  <data name="trienkhaihanghoa" xml:space="preserve">
+    <value>Dịch vụ triển khai hàng hoá theo dự án</value>
+  </data>
+  <data name="ttcty" xml:space="preserve">
+    <value>Thông tin công ty</value>
+  </data>
+  <data name="tuyendung" xml:space="preserve">
+    <value>Tuyển dụng</value>
+  </data>
+  <data name="vtaiBien" xml:space="preserve">
+    <value>Dịch vụ phát hỏa tốc, yêu cầu</value>
+  </data>
+  <data name="vtaiBo" xml:space="preserve">
+    <value>Dịch vụ chuyển phát thường</value>
+  </data>
+  <data name="vtaiHK" xml:space="preserve">
+    <value>Dịch vụ chuyển phát nhanh</value>
+  </data>
+  <data name="xemtiep" xml:space="preserve">
+    <value>Xem tiếp</value>
+  </data>
+  <data name="xulybp" xml:space="preserve">
+    <value>Xử lý bưu phẩm vô thừa nhận</value>
+  </data>
+  <data name="Cambodia" xml:space="preserve">
+    <value>Chi nhánh Campuchia</value>
+  </data>
+  <data name="chinhanhBacNinh" xml:space="preserve">
+    <value>Chi nhánh Bắc Ninh</value>
+  </data>
+  <data name="chinhanhDaNang" xml:space="preserve">
+    <value>Chi nhánh Đà Nẵng</value>
+  </data>
+  <data name="chinhanhDongNai" xml:space="preserve">
+    <value>Chi nhánh Đồng Nai</value>
+  </data>
+  <data name="chinhanhHCM" xml:space="preserve">
+    <value>Chi nhánh Hồ Chí Minh</value>
+  </data>
+  <data name="chinhanhHN" xml:space="preserve">
+    <value>Chi nhánh Hà Nội</value>
+  </data>
+  <data name="chinhanhHP" xml:space="preserve">
+    <value>Văn Phòng Hải Phòng</value>
+  </data>
+  <data name="dactrung" xml:space="preserve">
+    <value>Đặc trưng</value>
+  </data>
+  <data name="dactrung_detail" xml:space="preserve">
+    <value>Là một công ty duy nhất trong các công ty nước ngoài hàng đầu tại Việt Nam có giấy phép tổng hợp về các dịch vụ logistic: dịch vụ vận chuyển trong nước và quốc tế bằng đường hàng không, đường biển và đường bộ, dịch vụ kho bãi (kho ngoại quan, CFS, kho thường). Cung cấp một dịch vụ chất lượng cao mà khách hàng có thể tin tưởng sử dụng.</value>
+  </data>
+  <data name="danang" xml:space="preserve">
+    <value>CHI NHÁNH ĐÀ NẴNG</value>
+  </data>
+  <data name="danang_gom" xml:space="preserve">
+    <value>(Vận tải biển/hàng không, Vận chuyển Nội địa, Thủ tục Hải quan và Vận tải đường bộ)</value>
+  </data>
+  <data name="diachidanang" xml:space="preserve">
+    <value>Lô B1-10, B1-11, B1-12 Đường Nguyễn Phục, KCN dịch vụ thủy sản Đà Nẵng,</value>
+  </data>
+  <data name="diachidanang_tiep" xml:space="preserve">
+    <value>, Phường Thọ Quang, Quận Sơn Trà, TP. Đà Nẵng, Việt Nam</value>
+  </data>
+  <data name="diachidienbienphu" xml:space="preserve">
+    <value>169 Đường Điện Biên Phủ, Phường 15, Quận Bình Thạnh,Tp Hồ Chí Minh, Việt Nam</value>
+  </data>
+  <data name="diachiDN" xml:space="preserve">
+    <value>Lô B1-10, B1-11, B1-12 Đường Nguyễn Phục, KCN dịch vụ thủy sản Đà Nẵng, Phường Thọ Quang, Quận Sơn Trà, TP. Đà Nẵng, Việt Nam</value>
+  </data>
+  <data name="diachiDongNai1" xml:space="preserve">
+    <value>Đường số 6, Khu công nghiệp Nhơn Trạch 3 – Giai đoạn 2,</value>
+  </data>
+  <data name="diachiDongNai2" xml:space="preserve">
+    <value> Xã Long Thọ, Huyện Nhơn Trạch, Tỉnh Đồng Nai, Việt Nam</value>
+  </data>
+  <data name="diachihanoi" xml:space="preserve">
+    <value>Khu B(361) HVKTQS Đường Hoàng Quốc Việt, Phường Nghĩa Đô, Quận Cầu Giấy, TP. Hà Nội, Việt Nam</value>
+  </data>
+  <data name="diachiHP1" xml:space="preserve">
+    <value>Km 12 Quốc lộ 5, Khu Công Nghiệp Nomura,</value>
+  </data>
+  <data name="diachiHP2" xml:space="preserve">
+    <value>Hải Phòng,Việt Nam.</value>
+  </data>
+  <data name="diachiTuSon1" xml:space="preserve">
+    <value>Vị trí 1-2-3, Khu 19, Lô 66 VSIP, </value>
+  </data>
+  <data name="diachiTuSon2" xml:space="preserve">
+    <value>Xã Phù Chẩn, Thị xã Từ Sơn, Tỉnh Bắc Ninh</value>
+  </data>
+  <data name="diachiVPQueVo1" xml:space="preserve">
+    <value>Lô D, Khu Công Nghiệp Quế Võ,</value>
+  </data>
+  <data name="diachiVPQueVo2" xml:space="preserve">
+    <value>Huyện Quế Võ, Tỉnh Bắc Ninh, Việt Nam.</value>
+  </data>
+  <data name="diachi_DBP1" xml:space="preserve">
+    <value>169 Đường Điện Biên Phủ,Phường 15,</value>
+  </data>
+  <data name="diachi_DBP2" xml:space="preserve">
+    <value>Quận Bình Thạnh,TP. Hồ Chí Minh, Việt Nam.</value>
+  </data>
+  <data name="diachi_truongson" xml:space="preserve">
+    <value>87 Đường Trường Sơn, Phường 2, Quận Tân Bình, TP. Hồ Chí Minh, Việt Nam</value>
+  </data>
+  <data name="dvnhanvien" xml:space="preserve">
+    <value>nhân viên (05/2019)</value>
+  </data>
+  <data name="gui" xml:space="preserve">
+    <value>Gửi đi</value>
+  </data>
+  <data name="HaNoi" xml:space="preserve">
+    <value>CHI NHÁNH HÀ NỘI</value>
+  </data>
+  <data name="khoTuSon" xml:space="preserve">
+    <value>Kho Từ Sơn</value>
+  </data>
+  <data name="ngaylap" xml:space="preserve">
+    <value>Ngày thành lập</value>
+  </data>
+  <data name="phongbanDBP" xml:space="preserve">
+    <value>(Phòng ban: Hội đồng quản trị, Quản trị, Kế toán, Dọn chuyển, Thủ tục hải quản, Vận tải Đường biển, e-Global, Kinh Doanh)</value>
+  </data>
+  <data name="sev" xml:space="preserve">
+    <value>Netpost</value>
+  </data>
+  <data name="sevngaylap" xml:space="preserve">
+    <value>12/06/1997</value>
+  </data>
+  <data name="sgv" xml:space="preserve">
+    <value>Netpost</value>
+  </data>
+  <data name="sgvngaylap" xml:space="preserve">
+    <value>01/05/2015</value>
+  </data>
+  <data name="sochinh" xml:space="preserve">
+    <value>TRỤ SỞ CHÍNH</value>
+  </data>
+  <data name="sochinh_address" xml:space="preserve">
+    <value>Lô 117, Khu công nghiệp trong khu chế xuất Sài Gòn - Linh Trung, Phường Linh Trung, Quận Thủ Đức,  TP.HCM, Việt Nam</value>
+  </data>
+  <data name="soluongnv" xml:space="preserve">
+    <value>Số lượng nhân viên</value>
+  </data>
+  <data name="thongdiep" xml:space="preserve">
+    <value>Thông điệp</value>
+  </data>
+  <data name="tieude" xml:space="preserve">
+    <value>Tiêu đề</value>
+  </data>
+  <data name="trusochinh" xml:space="preserve">
+    <value>Trụ Sở Chính</value>
+  </data>
+  <data name="vpdienbienphu" xml:space="preserve">
+    <value>VĂN PHÒNG ĐIỆN BIÊN PHỦ</value>
+  </data>
+  <data name="VPQueVo" xml:space="preserve">
+    <value>Kho Quế Võ</value>
+  </data>
+  <data name="VPvtaiHK" xml:space="preserve">
+    <value>VĂN PHÒNG VẬN TẢI HÀNG KHÔNG</value>
+  </data>
+  <data name="VPvtaiHK_diachi" xml:space="preserve">
+    <value>87 Đường Trường Sơn, Phường 2, Quận Tân Bình, TP. Hồ Chí Minh, Việt Nam</value>
+  </data>
+  <data name="VPvtaiHK_ghichu" xml:space="preserve">
+    <value>(Gần Sân bay Quốc tế Tân Sơn Nhất)</value>
+  </data>
+  <data name="VP_DBP" xml:space="preserve">
+    <value>Văn phòng Điện Biên Phủ</value>
+  </data>
+  <data name="VP_TruongSon" xml:space="preserve">
+    <value>Văn phòng Trường Sơn</value>
+  </data>
+  <data name="Xoa" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="youremail" xml:space="preserve">
+    <value>Địa chỉ Email</value>
+  </data>
+  <data name="yourname" xml:space="preserve">
+    <value>Tên của bạn</value>
+  </data>
+  <data name="tracuu" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chuky" xml:space="preserve">
+    <value>Xem chữ ký người nhận</value>
+  </data>
+  <data name="dathangonline" xml:space="preserve">
+    <value>Đặt hàng Online</value>
+  </data>
+  <data name="detail" xml:space="preserve">
+    <value>Xem chi tiết</value>
+  </data>
+  <data name="khongtimthayvandon" xml:space="preserve">
+    <value>Không tìm thấy thông tin của mã vận đơn này.</value>
+  </data>
+  <data name="maKH" xml:space="preserve">
+    <value>Mã khách hàng</value>
+  </data>
+  <data name="mavandon" xml:space="preserve">
+    <value>Mã vận đơn</value>
+  </data>
+  <data name="mess_vandon" xml:space="preserve">
+    <value>Mã vận đơn không được bỏ trống. Mời nhập lại mã vận đơn</value>
+  </data>
+  <data name="msgPass" xml:space="preserve">
+    <value>Mời nhập Password</value>
+  </data>
+  <data name="msgUser" xml:space="preserve">
+    <value>Mời nhập Username</value>
+  </data>
+  <data name="nhapvandon" xml:space="preserve">
+    <value>Nhập số vận đơn</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>Tìm kiếm</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Chi tiết</value>
+  </data>
+  <data name="tenKH" xml:space="preserve">
+    <value>Tên khách hàng</value>
+  </data>
+  <data name="tepdinhkem" xml:space="preserve">
+    <value>Tệp đính kèm</value>
+  </data>
+  <data name="time" xml:space="preserve">
+    <value>Thời gian</value>
+  </data>
+  <data name="tracuoconline" xml:space="preserve">
+    <value>Tra cước Online</value>
+  </data>
+  <data name="tracuuBPBK" xml:space="preserve">
+    <value>Tra cứu vận đơn</value>
+  </data>
+  <data name="timkiemvandon" xml:space="preserve">
+    <value>Tìm kiếm mã vận đơn:</value>
+  </data>
+  <data name="cuocphatsinh" xml:space="preserve">
+    <value>Kỳ này không phát sinh cước phí.</value>
+  </data>
+  <data name="cuoctamtinh" xml:space="preserve">
+    <value>Cước chuyển phát trên là cước tạm tính.</value>
+  </data>
+  <data name="lienhecuoc" xml:space="preserve">
+    <value>Mọi thắc mắc của Khách hàng xin vui lòng liên hệ với phòng tính cước số điện thoại</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>Đăng nhập</value>
+  </data>
+  <data name="chucdanh" xml:space="preserve">
+    <value>Chức danh</value>
+  </data>
+  <data name="cus" xml:space="preserve">
+    <value>Hỗ trợ</value>
+  </data>
+  <data name="danhgia" xml:space="preserve">
+    <value>Đánh giá &amp;</value>
+  </data>
+  <data name="diadiem" xml:space="preserve">
+    <value>Địa điểm</value>
+  </data>
+  <data name="hannop" xml:space="preserve">
+    <value>Ngày hết hạn</value>
+  </data>
+  <data name="hotro" xml:space="preserve">
+    <value>Khách hàng</value>
+  </data>
+  <data name="khieunai" xml:space="preserve">
+    <value>Khiếu nại</value>
+  </data>
+  <data name="luong" xml:space="preserve">
+    <value>Mức lương</value>
+  </data>
+  <data name="supp" xml:space="preserve">
+    <value>Trực tuyến</value>
+  </data>
+  <data name="thoathuan" xml:space="preserve">
+    <value>Thỏa thuận</value>
+  </data>
+  <data name="tukhoa" xml:space="preserve">
+    <value>Từ khóa</value>
+  </data>
+  <data name="vitri" xml:space="preserve">
+    <value>Vị trí</value>
+  </data>
+  <data name="cachthuc" xml:space="preserve">
+    <value>Cách thức ứng tuyển</value>
+  </data>
+  <data name="donUT" xml:space="preserve">
+    <value>Đơn ứng tuyển</value>
+  </data>
+  <data name="dungluongbe" xml:space="preserve">
+    <value>File upload có dung lượng bé hơn 2 MB</value>
+  </data>
+  <data name="emaillienlac" xml:space="preserve">
+    <value>Email Liên Lạc</value>
+  </data>
+  <data name="HDtuyendung" xml:space="preserve">
+    <value>Ứng viên quan tâm vui lòng click vào nút "Ứng tuyển" để gửi hồ sơ về cho phòng Nhân sự.</value>
+  </data>
+  <data name="hoten" xml:space="preserve">
+    <value>Họ tên</value>
+  </data>
+  <data name="motacv" xml:space="preserve">
+    <value>Mô tả công việc</value>
+  </data>
+  <data name="msgEmail" xml:space="preserve">
+    <value>Địa chỉ email không được bỏ trống</value>
+  </data>
+  <data name="msgHoten" xml:space="preserve">
+    <value>Họ tên không được bỏ trống</value>
+  </data>
+  <data name="msgPhone" xml:space="preserve">
+    <value>Số điện thoại liên hệ không được bỏ trống</value>
+  </data>
+  <data name="nopdon" xml:space="preserve">
+    <value>Nộp đơn ứng tuyển</value>
+  </data>
+  <data name="sdt" xml:space="preserve">
+    <value>Số điện thoại</value>
+  </data>
+  <data name="TDsupport" xml:space="preserve">
+    <value>Tin tuyển dụng này chỉ hỗ trợ tiếng việt</value>
+  </data>
+  <data name="thongtinlienhe" xml:space="preserve">
+    <value>Thông tin liên hệ và đơn ứng tuyển</value>
+  </data>
+  <data name="ttTD" xml:space="preserve">
+    <value>Thông tin tuyển dụng</value>
+  </data>
+  <data name="ungtuyen" xml:space="preserve">
+    <value>Ứng tuyển</value>
+  </data>
+  <data name="UTsucc" xml:space="preserve">
+    <value>Ứng tuyển thành công!</value>
+  </data>
+  <data name="vadTep" xml:space="preserve">
+    <value>Mời chọn tệp upload</value>
+  </data>
+  <data name="DNbranch" xml:space="preserve">
+    <value>Chi nhánh Miền Trung</value>
+  </data>
+  <data name="HCMbranch" xml:space="preserve">
+    <value>Chi nhánh Miền Nam</value>
+  </data>
+  <data name="HNbranch" xml:space="preserve">
+    <value>Chi nhánh Miền Bắc</value>
+  </data>
+  <data name="noidia" xml:space="preserve">
+    <value>Hotline chuyển phát nội địa</value>
+  </data>
+  <data name="support" xml:space="preserve">
+    <value>Tư vấn trực tuyến</value>
+  </data>
+  <data name="CSbusy" xml:space="preserve">
+    <value>Hiện tổng đài đang bận, quý khách vui lòng để lại lời nhắn!</value>
+  </data>
+  <data name="khongcotinTD" xml:space="preserve">
+    <value>Hiện tại không có thông tin việc làm, vui lòng quay lại sau.</value>
+  </data>
+  <data name="tinhden" xml:space="preserve">
+    <value>Đến tỉnh</value>
+  </data>
+  <data name="tinhdi" xml:space="preserve">
+    <value>Từ tỉnh</value>
+  </data>
+  <data name="loinhan" xml:space="preserve">
+    <value>Để lại lời nhắn cho chúng tôi!</value>
+  </data>
+  <data name="ndSGX" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ourservices" xml:space="preserve">
+    <value>Dịch vụ của chúng tôi</value>
+  </data>
+  <data name="quydinhchuyenphat" xml:space="preserve">
+    <value>Các quy định chung</value>
+  </data>
+  <data name="dong" xml:space="preserve">
+    <value>Đóng</value>
+  </data>
+  <data name="vpBacNinh" xml:space="preserve">
+    <value>Chi nhánh Bắc Ninh</value>
+  </data>
+  <data name="vpHaiPhong" xml:space="preserve">
+    <value>Văn phòng Hải Phòng</value>
+  </data>
+  <data name="presskey" xml:space="preserve">
+    <value>Vui lòng nhập từ khóa tìm kiếm</value>
+  </data>
+  <data name="kinhnghiem" xml:space="preserve">
+    <value>kinh nghiệm</value>
+  </data>
+  <data name="DongNai" xml:space="preserve">
+    <value>CHI NHÁNH ĐỒNG NAI</value>
+  </data>
+  <data name="tuson" xml:space="preserve">
+    <value>Kho Từ Sơn</value>
+  </data>
+  <data name="haiphong" xml:space="preserve">
+    <value>VĂN PHÒNG HẢI PHÒNG</value>
+  </data>
+  <data name="chinhsachKH" xml:space="preserve">
+    <value>Chính sách bán hàng</value>
+  </data>
+  <data name="hoancuoc" xml:space="preserve">
+    <value>Hoàn trả cước cho khách hàng</value>
+  </data>
+  <data name="ttIndex" xml:space="preserve">
+    <value>Quý khách vui lòng đăng nhập hệ thống bằng mã khách hàng và mật khẩu để tra cước nóng, tra cước các kỳ trước và các tiện ích khác. Quý khách chưa có Mã khách hàng vui lòng liên hệ Tổng đài 1900 54 55 38 (máy lẻ 4008) để được hướng dẫn và tạo lập Mã khách hàng.</value>
+  </data>
+  <data name="chuyenphat" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chonchinhanh" xml:space="preserve">
+    <value>Vui lòng chọn một chi nhánh để được tư vấn viên  hỗ trợ</value>
+  </data>
+  <data name="nhantin" xml:space="preserve">
+    <value>Nhắn tin để bắt đầu cuộc trò chuyện.</value>
+  </data>
+  <data name="donchuyentiep" xml:space="preserve">
+    <value>quốc tế - nội địa</value>
+  </data>
+  <data name="quydinhvtbien" xml:space="preserve">
+    <value>Quy định về dịch vụ vận tải đường biển</value>
+  </data>
+  <data name="xemthem" xml:space="preserve">
+    <value>Xem thêm</value>
+  </data>
+  <data name="msgMess" xml:space="preserve">
+    <value>Nội dung không được bỏ trống</value>
+  </data>
+  <data name="msgSubject" xml:space="preserve">
+    <value>Tiêu đề không được bỏ trống</value>
+  </data>
+  <data name="chinhanhlienhe" xml:space="preserve">
+    <value>Chi nhánh liên hệ</value>
+  </data>
+  <data name="msgCompany" xml:space="preserve">
+    <value>Vui lòng chọn chi nhánh cần liên hệ</value>
+  </data>
+  <data name="dichvuchuyenphat" xml:space="preserve">
+    <value>Dịch vụ chuyển phát</value>
+  </data>
+  <data name="baocaosaipham" xml:space="preserve">
+    <value>Báo cáo sai phạm</value>
+  </data>
+  <data name="baocaosaiphamthanhcong" xml:space="preserve">
+    <value>Lưu thành công. Cám ơn đã phản hồi tới công ty.</value>
+  </data>
+  <data name="vadnoidung" xml:space="preserve">
+    <value>Vui lòng nhập nội dung</value>
+  </data>
+  <data name="sdtlienhe" xml:space="preserve">
+    <value>Số điện thoại liên hệ</value>
+  </data>
+  <data name="motachinhsachbh" xml:space="preserve">
+    <value>Chi nhánh công ty Netpost tại Hà Nội là doanh nghiệp Nhật Bản hoạt động uy tín, luôn tiên phong trong lĩnh vực chuyển phát nhanh trong nước và quốc tế và luôn đặt lợi ích của khách hàng lên hàng đầu cùng với tiêu chí ‘AN TOÀN – HIỆU QUẢ - TIN CẬY’.</value>
+  </data>
+  <data name="taovandon" xml:space="preserve">
+    <value>TẠO VẬN ĐƠN (BOOKING)</value>
+  </data>
+  <data name="errchonCNdehotro" xml:space="preserve">
+    <value>Vui lòng chọn một chi nhánh để được tư vấn viên  hỗ trợ</value>
+  </data>
+  <data name="loaihinhdichvu" xml:space="preserve">
+    <value>Loại hình dịch vụ</value>
+  </data>
+</root>

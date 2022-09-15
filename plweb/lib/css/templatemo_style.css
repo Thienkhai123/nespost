@@ -1,0 +1,582 @@
+﻿.horizontal-menu .bottom-navbar .page-navigation > .nav-item > .nav-link > .nav-item.button {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.horizontal-menu .bottom-navbar .page-navigation > .nav-item > .nav-link > .nav-item.dropdown > .nav-link > span > img {
+    width: 39px;
+}
+
+.dropdown .dropdown-menu .dropdown-item > span > img {
+    width: 40px;
+}
+
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu[aria-labelledby="notificationDropdown"] {
+    min-width: 13rem;
+}
+
+/* ---------- LIVE-CHAT ---------- */
+
+#live-chat {
+    bottom: 0px;
+    font-size: 12px;
+    right: 15px;
+    position: fixed;
+    width: 300px;
+    z-index: 100;
+}
+
+    #live-chat .header {
+        background: #374694;
+        border-radius: 5px 5px 0 0;
+        color: #fff;
+        cursor: pointer;
+        padding: 7px 15px;
+    }
+
+    #live-chat h4 {
+        font-size: 15px;
+        margin: 0;
+    }
+
+    #live-chat h5 {
+        font-size: 10px;
+    }
+    #live-chat .header span.chat-message-counter {
+        position: absolute;
+        top: -5px;
+        left: -15px;
+    }
+
+    .chat-close {
+        border-radius: 50%;
+        color: #fff;
+        display: block;
+        float: right;
+        font-size: 18px;
+        height: 18px;
+        line-height: 13px;
+        margin: 2px 0 0 0;
+        text-align: center;
+    }
+
+.chat {
+    background: #fff;
+    height: 400px;
+}
+
+.chat-history {
+    height: 100%;
+    border: 1px solid #adb5bd;
+}
+
+.chat-message {
+    margin: 5px 0;
+    height:100%;
+}
+
+    .chat-message img {
+        vertical-align: text-bottom
+    }
+
+.chat-mess-head p {
+    font-size: 14px;
+    text-align: center;
+    box-shadow: 0px 3px 8px -3px #a0a0a0;
+    padding: 5px 0;
+    font-weight: 600;
+}
+
+.chat-message-content {
+    height: calc(100% - 83px);
+    overflow-y: auto;
+}
+
+    .chat-message-content .chat-message-text {
+        padding: 5px 10px;
+        background: #e5f2ff;
+        border-radius: 5px;
+        max-width: 70%;
+        margin: 0;
+        font-size: 13px;
+    }
+
+        .chat-message-content .chat-message-text strong {
+            font-size: 12px;
+        }
+        .chat-message-content .chat-message-text p.time-log {
+            text-align: right;
+            padding-top:10px;
+        }
+        .chat-message .chat-message-loading {
+            width: 25px;
+            position: absolute;
+            top: 50%;
+            left: 48%;
+        }
+    .chat-message-content {
+        margin: 0 !important;
+    }
+
+    .chat-message-content .col-md-12 {
+        margin-bottom: 5px;
+    }
+
+button#senmess:hover {
+    border: 1px solid lightgray;
+    border-right: 0;
+    background: lightgrey;
+    color: #374694;
+}
+
+/*----------*/
+/*----------*/
+/*----------*/
+
+.btn-primary-group {
+    padding-top: 18px;
+}
+
+    .btn-primary-group .btn {
+        font-size: 11px;
+    }
+
+.footer {
+    font-size: 12px;
+    padding: 2px;
+}
+
+#myform .btn.add-order {
+    width: 100%;
+    padding: 6px 6px;
+}
+
+#myform .save-order {
+    position: absolute;
+    width: 94%;
+    bottom: 0;
+}
+
+#myform .form-row-1 {
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+#myform .btn i {
+    font-size: 18px;
+}
+
+#myform strong {
+    color: red;
+}
+
+#myform h5 {
+    font-size: 15px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+    #myform h5 span {
+        color: #3e4fa7;
+        font-style: inherit;
+        padding: 0 5px;
+        border-bottom: 1px solid;
+    }
+.chonMaKhachhang {
+    box-shadow: 0px 4px 6px 0px #bbbbbb;
+    margin-bottom: 8px;
+}
+
+    .chonMaKhachhang label {
+        text-align: right;
+        color: red;
+    }
+
+.viewer {
+    width: 766px;
+    height: 500px;
+    position: relative;
+    margin: auto;
+}
+
+ul.breadcrumb {
+    padding: 10px 16px;
+    list-style: none;
+    background-color: #eee;
+}
+
+    ul.breadcrumb li {
+        display: inline;
+        font-size: 15px;
+    }
+
+        ul.breadcrumb li + li:before {
+            padding: 8px;
+            color: black;
+            content: "/\00a0";
+        }
+
+        ul.breadcrumb li a {
+            color: #0275d8;
+            text-decoration: none;
+        }
+
+            ul.breadcrumb li a:hover {
+                color: #01447e;
+                text-decoration: underline;
+            }
+
+h4.title {
+    text-align: center;
+    padding: 8px 0 5px;
+    font-weight: 600;
+    margin-bottom:0;
+}
+
+    h4.title span {
+        border-bottom:2px solid;
+        color: #3b499f;
+        text-transform: capitalize;
+    }
+
+.note-user .nav-search p {
+    padding: 5px 5px;
+    background: #eaedf2;
+    font-weight: 600;
+    color: indianred;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    min-width: 250px;
+    max-width: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 55px;
+    text-align: center;
+}
+.note-user .nav-search .alert {
+    width: 400px;
+    line-height: 1.4;
+}
+
+.hidetext {
+    text-security: disc;
+    -webkit-text-security: disc; /* Default */
+}
+
+#myform .form-control {
+    font-size: 0.72rem;
+}
+
+.save-order-temp {
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
+    left: 50%;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    height: 32px;
+}
+/* Latest compiled and minified CSS included as External Resource*/
+/* Optional theme */
+/*@import url('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css');*/
+.stepwizard-step p {
+    color: #374694;
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    line-height: 1.2;
+    border-radius: 15px;
+}
+
+.list-info-filter {
+    height: 400px;
+    overflow-y: auto;
+}
+
+    .list-info-filter li {
+        border-bottom: 1px solid lightgray;
+        padding: 5px;
+        color: black;
+        line-height: 1.4;
+        cursor: pointer;
+    }
+        .list-info-filter li p {
+            font-weight: 600;
+        }
+        .list-info-filter li small {
+            font-size: 12px;
+        }
+        .list-info-filter li:hover {
+            background: #e6e6e6;
+        }
+
+.error-title {
+    font-size: 15px;
+    font-weight: 600;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    white-space:pre-line;
+}
+
+.swal2-popup.swal2-toast {
+    max-width: 26em;
+}
+.kqtinhgia-content {
+    padding: 6px 0;
+    border-bottom: 1px solid darkgray;
+    border-bottom-style: dashed;
+    margin: 0;
+}
+
+.kqtinhgia .hangcongkenh {
+    font-style: italic;
+    color: rebeccapurple;
+    white-space: nowrap;
+    padding: 0;
+}
+.kqtinhgia h6.title{
+    margin-bottom:0.3rem;
+    text-align:left;
+}
+.kqtinhgia .all-service h6.title{
+    text-align:center;
+}
+.kqtinhgia h6.title span {
+    color: black;
+    text-transform: uppercase;
+}
+
+.col-form-label-custom {
+    padding-bottom: 5px;
+    font-size: 12px;
+}
+.form-check .form-check-label{
+    font-size:11px;
+}
+
+.ngaydukienlayhang{
+    cursor:pointer;
+}
+
+.gridView .dxgvCSD {
+    height: calc(100vmin - 300px) !important;
+}
+
+#GridView_Detail .dxgvCSD {
+    height: calc(100vmin - 245px) !important;
+}
+
+.gridBooking .dxgvCSD {
+    height: calc(40vmin - 70px) !important;
+}
+
+#GridView_TraCuoc .dxgvCSD {
+    height: calc(50vmin - 90px) !important;
+}
+
+@media screen and (max-width: 1100px) {
+    .stepwizard-step p {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    label {
+        font-size: 12px;
+    }
+
+    .btn-primary-group button:nth-child(2) {
+        display: none;
+    }
+
+    .btn-primary-group .btn {
+        font-size: 9px;
+    }
+
+    #myform .stretch-card {
+        padding: 0;
+    }
+
+    .noidung-huongdan iframe {
+        width: 100%;
+        height: auto;
+    }
+
+    .danhsachchitiet .print, #tracuocOnline .export-excel {
+        display: none;
+    }
+
+    .stepwizard-step p {
+        font-size: 13px;
+    }
+
+    #myform .save-order {
+        position: relative;
+        width: 100%;
+    }
+
+    .viewer {
+        width: 480px;
+    }
+
+    #GridView_TraCuoc .dxgvCSD {
+        height: calc(90vmin - 90px) !important;
+    }
+}
+
+@media screen and (max-width: 786px) {
+    .ui-select-container .ui-select-toggle {
+        padding: 5px 5px;
+    }
+
+    .chonMaKhachhang label {
+        text-align: left;
+    }
+
+    .btn-primary-group button {
+        display: none;
+    }
+
+        .btn-primary-group button:first-child {
+            display: block;
+        }
+
+    .timkiemdonhang .NGUOI_NHAN {
+        display: none;
+    }
+
+    .stepwizard-step p {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .gridView .dxgvCSD {
+        height: calc(100vmin) !important;
+    }
+
+    #GridView_Detail .dxgvCSD {
+        height: calc(100vmin) !important;
+    }
+
+    .nav-link {
+        padding: 0.5rem 1rem;
+    }
+
+    .btn-primary-group button {
+        display: none;
+    }
+
+        .btn-primary-group button:first-child {
+            display: block;
+        }
+    #tracuocOnline .timkiem {
+        padding-top:18px;
+    }
+
+    .stepwizard-step p {
+        text-align: center;
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .viewer {
+        width: 310px;
+    }
+}
+
+@media (min-width: 992px) {
+    #myform .save-content {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 13%;
+        flex: 0 0 13%;
+        max-width: 13%;
+    }
+    #myform .info-content {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 87%;
+        flex: 0 0 87%;
+        max-width: 87%;
+    }
+
+    #myform .info-one, #myform .info-second {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 36.33333%;
+        flex: 0 0 36.33333%;
+        max-width: 36.33333%;
+    }
+
+    #myform .info-third {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 27.33333%;
+        flex: 0 0 27.33333%;
+        max-width: 27.33333%;
+    }
+}
+
+@media (min-width: 1367px) {
+    #myform {
+        max-width: 1400px;
+        margin:auto !important;
+    }
+    #GridView_TraCuoc .dxgvCSD {
+        height: calc(60vmin - 100px) !important;
+    }
+}
+
+/*@media screen and (min-height: 576px) {
+
+    #GridView_TraCuoc .dxgvCSD {
+        height: 205px !important;
+    }
+}
+
+@media screen and (min-height: 657px) {
+    #GridView_TraCuoc .dxgvCSD {
+        height: 255px !important;
+    }
+}
+
+@media screen and (min-height: 700px) {
+    #GridView_TraCuoc .dxgvCSD {
+        height: 465px !important;
+    }
+}
+
+@media screen and (min-height: 800px) {
+    #GridView_TraCuoc .dxgvCSD {
+        height: 375px !important;
+    }
+}
+
+@media screen and (min-height: 850px) {
+    #GridView_TraCuoc .dxgvCSD {
+        height: 460px !important;
+    }
+}
+
+@media screen and (min-height: 900px) {
+    #GridView_TraCuoc .dxgvCSD {
+        height: 560px !important;
+    }
+}
+
+@media screen and (min-height: 1000px) {
+    #GridView_TraCuoc .dxgvCSD {
+        height: 840px !important;
+    }
+}*/
+

@@ -1,0 +1,98 @@
+﻿@using WebSite.Models;
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GrvDetail";
+
+        settings.CallbackRouteValues = new { Controller = "Admin", Action = "ApplicationPartial" };
+        settings.KeyFieldName = "ID";
+
+        settings.ControlStyle.CssClass = "grid-view griddetail";
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        settings.Styles.Cell.Wrap = DefaultBoolean.True;
+        settings.Styles.PagerBottomPanel.CssClass = "pager";
+        settings.Styles.FocusedRow.CssClass = "focused";
+
+        settings.SettingsBehavior.AllowFocusedRow = false;
+        settings.SettingsBehavior.AllowEllipsisInText = false;
+        settings.SettingsBehavior.AllowDragDrop = false;
+
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Auto;
+        settings.Settings.VerticalScrollableHeight = 340;
+        settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+
+        
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowHeaderFilterButton = true;
+       
+        settings.SettingsPager.Visible = false;
+        settings.SettingsPager.Mode = GridViewPagerMode.EndlessPaging;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Left;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+        settings.Columns.Add(column =>
+        {
+            column.Width = 130;
+            column.Caption = "Họ tên";
+            column.FieldName = "HO_TEN";
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Width = 270;
+            column.Caption = "Email";
+            column.FieldName = "EMAIL";
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Width = 130;
+            column.Caption = "Số điện thoại";
+            column.FieldName = "SDT";
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Width = 100;
+            column.Caption = "Ngày nộp";
+            column.FieldName = "NGAY_APPLY";
+            column.PropertiesEdit.DisplayFormatString = "dd/MM/yyyy";
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Đơn ứng tuyển";
+            column.Width = 200;
+            column.FieldName = "CV";
+            column.SetDataItemTemplateContent(container =>
+            {
+                ViewContext.Writer.Write("<a href=\"/ckfinder/News/CV/" + Convert.ToString(DataBinder.Eval(container.DataItem, "CV")) + "\" title=\"Tải xuống\">" + Convert.ToString(DataBinder.Eval(container.DataItem, "CV")) + "</a>");
+            });
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Trạng thái";
+            column.Width = 250;
+            column.CellStyle.HorizontalAlign = System.Web.UI.WebControls.HorizontalAlign.Center;
+            column.FieldName = "TRANG_THAI";
+            column.SetDataItemTemplateContent(container =>
+            {
+
+                var str = "<p class='update-trangthai'><span id=\"span" + Convert.ToString(DataBinder.Eval(container.DataItem, "ID")) + "\" >" + Convert.ToString(DataBinder.Eval(container.DataItem, "TRANG_THAI")) + "</span><a class=\"btn btn-info\" href='javascript:;' title=\"Duyệt hồ sơ\" onclick=\"UpdateStatus('" + Convert.ToString(DataBinder.Eval(container.DataItem, "ID")) + "','DA_DUYET')\"><i class=\"mdi mdi-check\"></i> </a><a class=\"btn btn-danger\" href='javascript:;' title=\"Từ chối\" onclick=\"UpdateStatus('" + Convert.ToString(DataBinder.Eval(container.DataItem, "ID")) + "','TU_CHOI')\"><i class=\"mdi mdi-close\"></i></a></p>";
+
+                ViewContext.Writer.Write(str);
+            });
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+    });
+}
+@grid.Bind(Model).GetHtml()
+
+
+
+

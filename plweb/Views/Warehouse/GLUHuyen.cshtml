@@ -1,0 +1,19 @@
+﻿@model List<WebSite.Models.CSS_OP_DISTRICTDTO>
+@using WebSite.Language
+@Html.DevExpress().ComboBox(settings =>
+{
+    settings.Name = "cbHuyen";
+    settings.Properties.DropDownStyle = DropDownStyle.DropDownList;
+    settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+    settings.CallbackRouteValues = new { Controller = "Warehouse", Action = "GLUHuyen" };
+    settings.Properties.TextField = "DISTRICT_NAME";
+    settings.Properties.ValueField = "DISTRICT_CODE";
+    settings.Properties.NullText = @Booking.WH_chonHuyen;
+    settings.ControlStyle.CssClass = "form-control col-md-6";
+    settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+    settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+    settings.Properties.ClientSideEvents.ValueChanged = "function (s,e){changeHuyen()}";
+    settings.SelectedIndex = -1;
+}).BindList(Session["HUYEN"] as List<WebSite.Models.CSS_OP_DISTRICTDTO>).GetHtml()
+

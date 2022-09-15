@@ -1,0 +1,53 @@
+﻿@using WebSite.Models
+@{
+    var a = "false";
+    if (ViewData["timkiem"].ToString() != "")
+    {
+        a = "true";
+    }
+    <ul class="list-unstyled components">
+        @foreach (var item in Model)
+        {
+            <li>
+                <a href="@item.Url" class="itemhref" id="@item.Code">
+                    <img src="~/lib/images/folder-invoices.png" />
+                    @item.Name
+                </a>
+            </li>
+            @*<li class="">
+                <a href="#@item.Code" data-toggle="collapse" aria-expanded="@a" class="dropdown-toggle">
+                    <img src="~/lib/images/folder-icon.png" style="vertical-align: text-bottom;margin-right: 10px;" />
+                    @item.Name
+                </a>
+                @if (a != "true")
+                {
+                    <ul class="collapse list-unstyled collapse" id="@item.Code" aria-expanded="@a">
+                        @foreach (var i in item.Children)
+                        {
+                            <li>
+                                <a href="@i.Url" class="itemhref" id="@i.Code">
+                                    <img src="~/lib/images/folder-invoices.png" />
+                                    @i.Name
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <ul class="collapse list-unstyled collapse in" id="@item.Code" aria-expanded="@a">
+                        @foreach (var i in item.Children)
+                        {
+                            <li>
+                                <a href="@i.Url" class="itemhref" id="@i.Code">
+                                    <img src="~/lib/images/folder-invoices.png" />
+                                    @i.Name
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                }
+            </li>*@
+        }
+    </ul>
+}

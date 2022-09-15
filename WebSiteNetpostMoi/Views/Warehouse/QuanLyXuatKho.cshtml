@@ -1,0 +1,410 @@
+﻿@model WebSite.Models.Warehouse.WH_V3_XUAT_KHODTO
+@using WebSite.Language
+@{
+    ViewBag.Title = Booking.WH_quanLyXuatKho;
+    Layout = "~/Views/Shared/_Layout_Warehouse.cshtml";
+}
+<style>
+    .row-margin-top {
+        margin-top: 5px
+    }
+
+    #myform .btn-primary {
+        background-color: #337ab7;
+        text-align: center;
+    }
+</style>
+<div class="row">
+    @using (Html.BeginForm("QuanLyXuatKho", "Warehouse", FormMethod.Post, new { encType = "multipart/form-data", id = "myform", name = "myform" }))
+    {
+        <div class="col-md-2 form-group">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.TU_NGAY, Booking.tungay, htmlAttributes: new { @class = "control-label" })
+                @Html.DevExpress().DateEditFor(u => u.TU_NGAY, settings =>
+           {
+               settings.Name = "detTuNgay";
+               settings.Properties.EditFormat = EditFormat.Custom;
+               settings.Properties.UseMaskBehavior = true;
+               settings.Properties.EditFormatString = "dd/MM/yyyy";
+               settings.ControlStyle.CssClass = "form-control col-md-12";
+               settings.Date = DateTime.Now;
+               settings.Properties.CalendarProperties.FastNavProperties.DisplayMode = FastNavigationDisplayMode.Inline;
+           }).GetHtml()
+            </div>
+        </div>
+        <div class="col-md-2 form-group">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.DEN_NGAY, Booking.denngay, htmlAttributes: new { @class = "control-label" })
+                @Html.DevExpress().DateEditFor(u => u.DEN_NGAY, settings =>
+           {
+               settings.Name = "detDenNgay";
+               settings.Properties.EditFormat = EditFormat.Custom;
+               settings.Properties.UseMaskBehavior = true;
+               settings.Properties.EditFormatString = "dd/MM/yyyy";
+               settings.ControlStyle.CssClass = "form-control col-md-12";
+               settings.Date = DateTime.Now;
+               settings.Properties.CalendarProperties.FastNavProperties.DisplayMode = FastNavigationDisplayMode.Inline;
+           }).GetHtml()
+            </div>
+        </div>
+        <div class="col-sm-1" style="margin-top:18px">
+            <input type="submit" class="form-control btn-primary" id="btnTimKiem" value="@Booking.WH_timKiem" />
+        </div>
+        <div class="col-sm-1" style="margin-top:18px">
+            <input type="button" class="form-control btn-success" id="btnXacNhan" value="@Booking.WH_xacNhan" />
+        </div>
+        <div class="col-sm-1" style="margin-top:18px">
+            <input type="button" class="form-control btn-danger" id="btnHuyXK" value="@Booking.WH_huy" />
+        </div>
+        <div class="col-sm-1 pull-right" style="margin-top:18px">
+            <input type="button" class="form-control btn-success" id="btnThemMoi" value="@Booking.WH_them" onclick="location.href='@Url.Action("YeuCauXuatKhoChiTiet", "Warehouse")'" />
+        </div>
+        <div class="col-sm-2 pull-right" style="margin-top:18px">
+            <input type="button" class="form-control btn-info" id="btnTaoDon" value="@Booking.WH_chuyenNhaVanChuyen" />
+        </div>
+    }
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@Booking.WH_banCoMuonHuyXK</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="modal-btn-si">@Booking.WH_co</button>
+                <button type="button" class="btn btn-primary" id="modal-btn-no">@Booking.WH_khong</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel1">Bạn có muốn hủy xuất kho?</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="modal-btn-si1">@Booking.WH_co</button>
+                <button type="button" class="btn btn-primary" id="modal-btn-no1">@Booking.WH_khong</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal3">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel3">Bạn có muốn hủy xuất kho?</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="modal-btn-si2">@Booking.WH_co</button>
+                <button type="button" class="btn btn-primary" id="modal-btn-no2">@Booking.WH_khong</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top:10px">
+    @using (Html.BeginForm())
+    {
+        @Html.Action("grvQuanLyXuatKho")
+    }
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal2">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel2">Xuất kho chi tiết</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.Action("xuatKhoDetail")
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal3" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 5px; border: 0;">
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 0px 15px 10px;">
+                <iframe src="" height="550" style="width:100%">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var maXK = '';
+    function UpdateDetailGrid(s, e) {
+        var a = s.focusedRowIndex;
+        maXK = s.GetRowKey(a);
+        var data = {
+            maXK: maXK
+        }
+        $.ajax({
+            type: "post",
+            url: "/Warehouse/ShowDetailXuatKho",
+            data: data,
+            dataType: "json",
+            success: function (data) {
+                if (data.isError) {
+                    Swal.fire(data.Mess,
+                        '',
+                        'error')
+                    return;
+                }
+                else {
+                    gridViewDetailXK.Refresh();
+                }
+            },
+            complete: function () {
+                $('.img-loading').hide();
+            }
+
+        });
+    }
+    //Modal
+    var modalConfirm = function (callback) {
+        $("#btnHuyXK").on("click", function () {
+            document.getElementById('myModalLabel').innerHTML = '@Html.Raw(Booking.WH_banCoMuonHuyXK) ' + maXK + '?';
+            $("#mi-modal").modal('show');
+        });
+
+        $("#modal-btn-si").on("click", function () {
+            callback(true);
+            $("#mi-modal").modal('hide');
+        });
+
+        $("#modal-btn-no").on("click", function () {
+            callback(false);
+            $("#mi-modal").modal('hide');
+        });
+    };
+    modalConfirm(function (confirm) {
+        if (confirm) {
+            HuyXuatKho();
+        }
+    });
+
+    function HuyXuatKho() {
+        if (maXK == "" || maXK == undefined) {
+            Swal.fire("@Html.Raw(@Booking.WH_vuiLongChonDongThaoTac)",
+                '',
+                'error')
+            return;
+        }
+        var data = {
+            maXK: maXK
+        }
+        $.ajax({
+            type: "post",
+            url: "/Warehouse/HuyXuatKho",
+            data: data,
+            dataType: "json",
+            success: function (data) {
+                if (data.isError) {
+                    Swal.fire(data.Mess,
+                        '',
+                        'error')
+                    return;
+                }
+                else {
+                    Swal.fire(
+                        '',
+                        '@Html.Raw(@Booking.WH_huyThanhCong)',
+                        'success'
+                    )
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                document.getElementById('btnTimKiem').click();
+                            }
+                        });
+                }
+            },
+            complete: function () {
+                $('.img-loading').hide();
+            }
+
+        });
+    }
+
+    //Tạo đơn
+    var modalConfirm1 = function (callback) {
+        $("#btnTaoDon").on("click", function () {
+            document.getElementById('myModalLabel1').innerHTML = '@Html.Raw(Booking.WH_banCoMuonChuyenNVC) ' + maXK + '?';
+            $("#mi-modal1").modal('show');
+        });
+
+        $("#modal-btn-si1").on("click", function () {
+            callback(true);
+            $("#mi-modal1").modal('hide');
+        });
+
+        $("#modal-btn-no1").on("click", function () {
+            callback(false);
+            $("#mi-modal1").modal('hide');
+        });
+    };
+    modalConfirm1(function (confirm) {
+        if (confirm) {
+            TaoDon();
+        }
+    });
+
+    function TaoDon() {
+        var data = {
+            maXK: maXK
+        }
+        $.ajax({
+            type: "post",
+            url: "/Warehouse/TaoDon",
+            data: data,
+            dataType: "json",
+            success: function (data) {
+                if (data.Error) {
+                    Swal.fire(data.Title,
+                        '',
+                        'error')
+                    return;
+                }
+                else {
+                    Swal.fire(data.Title,
+                        '',
+                        'success')
+                }
+            },
+            complete: function () {
+                $('.img-loading').hide();
+            }
+
+        });
+    }
+
+    //Xác nhận xuất
+    var modalConfirm2 = function (callback) {
+        $("#btnXacNhan").on("click", function () {
+            document.getElementById('myModalLabel3').innerHTML = '@Html.Raw(Booking.WH_banCoMuonXacNhanXK) ' + maXK + '?';
+            $("#mi-modal3").modal('show');
+        });
+
+        $("#modal-btn-si2").on("click", function () {
+            callback(true);
+            $("#mi-modal3").modal('hide');
+        });
+
+        $("#modal-btn-no2").on("click", function () {
+            callback(false);
+            $("#mi-modal3").modal('hide');
+        });
+    };
+    modalConfirm2(function (confirm) {
+        if (confirm) {
+            XacNhanXuatKho();
+        }
+    });
+
+    function XacNhanXuatKho() {
+        if (maXK == "" || maXK == undefined) {
+            Swal.fire("@Html.Raw(@Booking.WH_vuiLongChonDongThaoTac)",
+                '',
+                'error')
+            return;
+        }
+        var data = {
+            maXK: maXK
+        }
+        $.ajax({
+            type: "post",
+            url: "/Warehouse/XacNhanXuatKho",
+            data: data,
+            dataType: "json",
+            success: function (data) {
+                if (data.isError) {
+                    Swal.fire(data.Mess,
+                        '',
+                        'error')
+                    return;
+                }
+                else {
+                    Swal.fire(
+                        '',
+                        '@Html.Raw(@Booking.WH_xacNhanThanhCong)',
+                        'success'
+                    )
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                document.getElementById('btnTimKiem').click();
+                            }
+                        });
+                }
+            },
+            complete: function () {
+                $('.img-loading').hide();
+            }
+
+        });
+    }
+
+    //Chi tiết xuất kho
+    function XemChiTiet(maXuatKho) {
+        var data = {
+            maXK: maXuatKho
+        }
+        $.ajax({
+            type: "post",
+            url: "/Warehouse/ShowDetailXuatKho",
+            data: data,
+            dataType: "json",
+            success: function (data) {
+                if (data.isError) {
+                    Swal.fire(data.Mess,
+                        '',
+                        'error')
+                    return;
+                }
+                else {
+                    gridViewDetail.Refresh();
+                    $("#mi-modal2").modal('show');
+                }
+            },
+            complete: function () {
+                $('.img-loading').hide();
+            }
+
+        });
+    }
+
+    //In Xuất kho
+    function InPhieuXK(maXK, trangThai) {
+        if (trangThai == "DA_HUY") {
+            Swal.fire("@Html.Raw(@Booking.WH_trangThaiKhongDuoc)",
+                '',
+                'error')
+            return;
+        }
+        Swal.fire({
+            title: '@Html.Raw(Booking.WH_coMuonInPhieuXK) ' + maXK + ' ?',
+            text: "",
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'No',
+            confirmButtonText: 'Yes'
+        })
+        .then(function (willDelete) {
+            if (willDelete.value) {
+                $('#modal3 .modal-body iframe').attr("src", "/Warehouse/InPhieuXK?maXK=" + maXK);
+                $('#modal3').modal({ backdrop: "static" });
+            }
+        });
+    }
+</script>

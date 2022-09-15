@@ -1,0 +1,49 @@
+﻿@model List<WebSite.Models.Warehouse.WH_V3_EXPIRY_MANAGEMENTDTO>
+@using WebSite.Language
+@{
+    var glu = Html.DevExpress().GridLookup(settings =>
+    {
+        settings.KeyFieldName = "ID";
+
+        settings.Name = "gluNgaySX";
+        settings.ControlStyle.CssClass = "form-control";
+        settings.GridViewProperties.CallbackRouteValues = new { Controller = "Warehouse", Action = "GLUNgaySXPartial" };
+        settings.Properties.TextFormatString = "{0:dd/MM/yyyy}";
+//settings.Properties.MultiTextSeparator = ",";
+
+settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.WH_ngaySanXuat;
+            column.FieldName = "NGAY_SAN_XUAT";
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+            column.Width = 50;
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var dateEdit = (DateEditProperties)column.PropertiesEdit;
+            dateEdit.DisplayFormatString = "dd/MM/yyyy";
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.WH_ngayHetHan;
+            column.FieldName = "NGAY_HET_HAN";
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+            column.Width = 50;
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var dateEdit = (DateEditProperties)column.PropertiesEdit;
+            dateEdit.DisplayFormatString = "dd/MM/yyyy";
+        });
+        settings.GridViewProperties.Settings.ShowFilterRow = true;
+        settings.GridViewProperties.Settings.ShowStatusBar = GridViewStatusBarMode.Visible;
+        settings.DataBound = (sender, e) =>
+        {
+            var gridLookup = (MVCxGridLookup)sender;
+            gridLookup.GridView.Width = 350;
+            gridLookup.GridView.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
+            gridLookup.GridView.Settings.VerticalScrollableHeight = 300;
+        };
+        settings.Width = 130;
+        settings.Height = 30;
+        settings.Properties.ClientSideEvents.ValueChanged = "function(s,e){change(s,e)}";
+    });
+}
+@glu.BindList(Model).GetHtml()
+

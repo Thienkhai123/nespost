@@ -1,0 +1,156 @@
+﻿@{
+    ViewBag.Title = @Resource.tracuuBPBK;
+}
+@using WebSite.Language
+@using WebSite.Models
+<style>
+    .listTrackAndTrace .table td, .listTrackAndTrace .table th {
+        padding: 3px;
+    }
+</style>
+<div class="container page-container">
+    <div class="row">
+        <h1 class="title-page" style="width:100%">
+            <span>@Resource.tracuuBPBK</span>
+        </h1>
+        <div class="row modal-body" style="padding-top: 0.5rem;">
+            <div class="row">
+                <h6 style="font-weight:bold;font-style: italic; border: 0; box-shadow: none;">@Resource.timkiemvandon</h6>
+            </div>
+            <div class="row" style="border-bottom: 1px solid #adb5bd;padding-bottom: 10px !important;">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <textarea class="form-control" style="width:100%" rows="2" name="vandon" id="vandon" placeholder="@Resource.nhapvandon">@ViewBag.mavandon</textarea>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" style="padding:8px 12px !important" onclick="TraCuuVanDon($('#vandon').val())"><i class="fa fa-search"></i>  @Resource.search</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row listTrackAndTrace" >
+                <table class="table table-hover" style="margin-top:10px;width:100%" hidden>
+                    <thead>
+                        <tr style="border-bottom: 1px solid #99999938;">
+                            <th style="width: 24%;text-align:center">
+                                @Resource.time
+                            </th>
+                            <th style="text-align:center">
+                                @Resource.Status
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Count > 0)
+                        {
+                            <script>
+                                $('.listTrackAndTrace table').show();
+                                $('#messVanDon').hide();
+                            </script>
+                            foreach (var key in Model.Keys)
+                            {
+                                List<CSS_TRACK_AND_TRACE> lst = Model[key] as List<CSS_TRACK_AND_TRACE>;
+                                if (!string.IsNullOrWhiteSpace(lst[0].URLImage) || !string.IsNullOrWhiteSpace(lst[0].ID_MONGO))
+                                {
+                                    var url = @lst[0].URLImage == null ? "" : @lst[0].URLImage.Replace("\\", "\\\\");
+                                    <tr style="border-bottom: 1px solid #99999938;">
+                                        <th colspan="2">
+                                            @Html.Raw(Resource.mavandon):  @lst[0].HAWB_NO
+                                            (<a href="javascript:;" onclick="ShowAnhLienVang('@lst[0].ID_MONGO','@url', '@lst[0].CONTENT_TYPE')"> @Html.Raw(Resource.chuky)</a>)
+                                        </th>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr style="border-bottom: 1px solid #99999938;">
+                                        <th colspan="2"> @Html.Raw(Resource.mavandon):  @lst[0].HAWB_NO </th>
+                                    </tr>
+                                }
+                                foreach (var item in lst)
+                                {
+                                    <tr style="border-bottom: 1px solid #99999938;">
+                                        <td style="width: 24%;">  @item.INSERT_TIME_STRING  </td>
+                                        <td style=""> @item.DESC</td>
+                                    </tr>
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            <script>
+                                $('.listTrackAndTrace table').hide();
+                                $('#messVanDon').show();
+                            </script>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="alert alert-danger" role="alert" id="messVanDon" style="margin-top:10px;width:100%" hidden></div>
+        </div>
+    </div>
+</div>
+<script>
+
+    if ($('#banner').length > 0) {
+        if (screen.width > 1024) {
+            $('html,body').animate({ scrollTop: 500 }, 300);
+        }
+        if (screen.width < 600) {
+            $('html,body').animate({ scrollTop: 400 }, 300);
+        }
+    }
+
+
+    function TraCuuVanDon(mavandon) {
+            $('.listTrackAndTrace table tbody').empty();
+            $('#messVanDon').hide();
+            if (mavandon == "") {
+                $('#messVanDon').html("@Html.Raw(Resource.mess_vandon)");
+                $('#messVanDon').show();
+                $('.listTrackAndTrace table').hide();
+            }
+            else {
+                $('.img-loading').show();
+                $('#listTrackAndTrace tbody').empty();
+                $.ajax({
+                    url: "/Home/ListTrackAndTrace",
+                    type: "POST",
+                    data: {
+                        MaBPBK: mavandon
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.Title == "Get list success!") {
+                            var str = "";
+                            for (var i in data.Object) {
+                                var lst = data.Object[i];
+                                if ((lst[0].ID_MONGO != null && lst[0].ID_MONGO != "") || (lst[0].URLImage != null && lst[0].URLImage != "")) {
+                                    var url = lst[0].URLImage == null ? "" : lst[0].URLImage.replace(/\\/g, "\\\\");
+                                    str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td colspan=\"2\"> @Html.Raw(Resource.mavandon): " + i + " (<a href=\"javascript:;\" onclick = 'ShowAnhLienVang(\"" + lst[0].ID_MONGO + "\",\"" + url + "\", \"" + lst[0].CONTENT_TYPE + "\")' > @Resource.chuky</a>)</td></tr>";
+                                }
+                                else {
+                                    str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td  colspan=\"2\"> @Html.Raw(Resource.mavandon): " + i + "</td></tr>";
+                                }
+                                for (var j in lst) {
+                                    str = str + "<tr style= \"border-bottom: 1px solid #99999938;\"><td style=\"width: 20%;\">" + lst[j].INSERT_TIME_STRING + "</td><td style=\"width: 80%;\">" + lst[j].DESC + "</td></tr>";
+                                }
+                            }
+                            $('.listTrackAndTrace table tbody').append(str);
+                            $('.listTrackAndTrace table').show();
+                        }
+                        else {
+                            $('#messVanDon').html("@Html.Raw(Resource.khongtimthayvandon)");
+                            $('#messVanDon').show();
+                            $('.listTrackAndTrace table').hide();
+                        }
+                    },
+                    complete: function () {
+                        $('.img-loading').hide();
+                    }
+                });
+            }
+    }
+</script>

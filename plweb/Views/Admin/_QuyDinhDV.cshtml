@@ -1,0 +1,77 @@
+﻿@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridView";
+        settings.CallbackRouteValues = new { Controller = "Admin", Action = "QuyDinhDV" };
+        settings.KeyFieldName = "ID";
+        settings.ControlStyle.CssClass = "grid-view griddata";
+        settings.SettingsPager.Visible = false;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowHeaderFilterButton = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        settings.Height = System.Web.UI.WebControls.Unit.Pixel(400);
+        settings.Settings.ShowHorizontalScrollBar = true;
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
+        settings.SettingsPager.Mode = GridViewPagerMode.ShowAllRecords;
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Tác vụ";
+            column.Width = 85;
+            column.SetDataItemTemplateContent(container =>
+            {
+                ViewContext.Writer.Write("<a style=\"font-size:20px;cursor: pointer;float: left;margin-left: 10px; \" onclick=\"Update_Tin('" + Convert.ToString(DataBinder.Eval(container.DataItem, "ID")) + "')\" title=\"Xem chi tiết\"><i class=\"fa fa-edit\"></i> </a>");
+                ViewContext.Writer.Write("<a onclick=\"Xoa_Tin('" + Convert.ToString(DataBinder.Eval(container.DataItem, "ID")) + "')\" style=\"font-size:20px;cursor: pointer;float: right;margin-right: 10px;\" title=\"Xóa tin\"><i class=\"fa fa-times-circle\"></i> </a>");
+            });
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "TEN_NHOM_TIN";
+            column.Caption = "Loại dịch vụ";
+            column.Width = 200;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "TIEU_DE";
+            column.Caption = "Tiêu đề";
+            column.Width = 230;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "TIEU_DE_EN";
+            column.Caption = "Tiêu đề tiếng anh";
+            column.Width = 230;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "TIEU_DE_JA";
+            column.Caption = "Tiêu đề tiếng nhật";
+            column.Width = 230;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "THOI_GIAN_STRING";
+            column.Caption = "Ngày tạo";
+            column.Width = 150;
+            column.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        });
+
+
+    });
+}
+@grid.Bind(Model).GetHtml()
+
+
+

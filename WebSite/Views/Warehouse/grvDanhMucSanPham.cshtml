@@ -1,0 +1,185 @@
+﻿@using System.Web.UI.WebControls;
+@using WebSite.Language
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridView";
+        settings.CallbackRouteValues = new { Controller = "Warehouse", Action = "grvDanhMucSanPham" };
+        settings.KeyFieldName = "ID";
+
+        settings.ControlStyle.CssClass = "grid-view griddata";
+        settings.Width = Unit.Percentage(100);
+        settings.Styles.Cell.Wrap = DefaultBoolean.True;
+        settings.Styles.PagerBottomPanel.CssClass = "pager";
+        settings.Styles.FocusedRow.CssClass = "focused";
+
+        settings.SettingsBehavior.AllowFocusedRow = true;
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsBehavior.AllowDragDrop = false;
+
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Auto;
+        settings.Settings.VerticalScrollableHeight = 235;
+        settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+
+        settings.SettingsPager.FirstPageButton.Visible = true;
+        settings.SettingsPager.LastPageButton.Visible = true;
+        settings.SettingsPager.PageSize = 20;
+        settings.SettingsPager.Visible = true;
+
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowGroupPanel = false;
+
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.SettingsExport.EnableClientSideExportAPI = true;
+        settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
+        settings.SettingsExport.FileName = Booking.WH_quanLyDanhMucSP;
+
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsExport.EnableClientSideExportAPI = true;
+        settings.ClientSideEvents.ContextMenuItemClick = "function(s, e) { OnContextMenuItemClick(s, e); }";
+        settings.FillContextMenuItems = (sender, e) =>
+        {
+            if (e.MenuType != GridViewContextMenuType.Rows) return;
+            e.Items.Remove(e.Items.FindByCommand(GridViewContextMenuCommand.NewRow));
+            e.Items.Remove(e.Items.FindByCommand(GridViewContextMenuCommand.EditRow));
+            e.Items.Remove(e.Items.FindByCommand(GridViewContextMenuCommand.DeleteRow));
+            e.Items.Add("Export Excel", "ExportToXLSX").Image.Url = @"~\lib\images\xlsx-512.png";
+        };
+
+        settings.KeyFieldName = "ID";
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.tacvu;
+            column.Width = 80;
+            column.SetDataItemTemplateContent(container =>
+            {
+                ViewContext.Writer.Write("<a onclick=\"suaSP('" + Convert.ToString(DataBinder.Eval(container.DataItem, "MA_SAN_PHAM")) + "')\" style=\"font-size:19px;cursor: pointer;text-align:center;\" title=\"\"><i class=\"fa fa-edit\"></i> </a>");
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.WH_maSP;
+            column.FieldName = "MA_SAN_PHAM";
+            column.Width = 150;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.WH_tenSP;
+            column.FieldName = "TEN_SAN_PHAM";
+            column.Width = 300;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.WH_maHang;
+            column.FieldName = "MA_SP_OWNER";
+            column.Width = 100;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.WH_donViTinh;
+            column.FieldName = "TEN_DON_VI_TINH";
+            column.Width = 120;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.WH_donGia;
+            column.FieldName = "DON_GIA";
+            column.PropertiesEdit.DisplayFormatString = "n0";
+            column.Width = 120;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.WH_trangThai;
+            column.FieldName = "TRANG_THAI";
+            column.Width = 100;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.WH_maNhomSP;
+            column.FieldName = "MA_NHOM_SAN_PHAM";
+            column.Width = 150;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.WH_tenNhomSP;
+            column.FieldName = "TEN_NHOM_SAN_PHAM";
+            column.Width = 150;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.WH_thoiGianTao;
+            column.FieldName = "INSERT_TIME";
+            column.Width = 180;
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var dateEdit = (DateEditProperties)column.PropertiesEdit;
+            dateEdit.DisplayFormatString = "dd/MM/yyyy HH:mm:ss";
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.WH_nhanVienTao;
+            column.FieldName = "INSERT_USER";
+            column.Width = 100;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.WH_thoiGianCapNhat;
+            column.FieldName = "UPDATE_TIME";
+            column.Width = 180;
+            column.ColumnType = MVCxGridViewColumnType.DateEdit;
+            var dateEdit = (DateEditProperties)column.PropertiesEdit;
+            dateEdit.DisplayFormatString = "dd/MM/yyyy HH:mm:ss";
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.WH_nhanVienCapNhat;
+            column.FieldName = "UPDATE_USER";
+            column.Width = 100;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.WH_moTa;
+            column.FieldName = "MO_TA";
+            column.Width = 300;
+        });
+        settings.PreRender = (sender, e) =>
+        {
+            MVCxGridView gr = (MVCxGridView)sender;
+            gr.ExpandAll();
+            var page = Session["page"];
+            if (page != null && page.ToString() != "0")
+            {
+                Session["page"] = null;
+                gr.PageIndex = gr.PageCount;
+            }
+        };
+        settings.BeforeGetCallbackResult = (sender, e) =>
+        {
+            MVCxGridView gr = (MVCxGridView)sender;
+            var page = Session["page"];
+            if (page != null && page.ToString() != "0")
+            {
+                Session["page"] = null;
+                gr.PageIndex = gr.PageCount;
+            }
+        };
+        settings.SettingsExport.RenderBrick = (sender, e) =>
+        {
+            if (e.RowType == GridViewRowType.Header)
+            {
+                e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(205, 211, 216);
+                e.BrickStyle.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            }
+        };
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

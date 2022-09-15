@@ -1,0 +1,246 @@
+﻿@model PagedList.IPagedList<WebSite.Models.TINTUCDTO>
+@using PagedList.Mvc;
+@using WebSite.Language
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@{
+    ViewBag.Title = @Resource.tintuc;
+}
+<style>
+    #title {
+        flex: 1;
+        width: 100%;
+        position: relative;
+        margin-top: 5px;
+        text-align: center;
+        min-height: 145px;
+    }
+
+    .portlet {
+        padding: 10px 5px;
+        border: 1px solid lightgray;
+        border-radius: 10px;
+        float: left;
+        min-height: 400px;
+    }
+        .portlet:hover {
+            box-shadow: 0 0 7px 0 #adb5bd;
+        }
+
+    #title p {
+        margin-bottom: 0;
+        text-align: justify;
+    }
+    #title span{
+        color:#374694;
+        font-weight: bold;
+        font-size: 17px;
+    }
+    .entry-content ul li a {
+        line-height: 20px;
+    }
+    .pagination-container {
+        float: right;
+    }
+    .content-footer {
+        position: absolute;
+        bottom: 0;
+        left: 21px;
+        right: 22px;
+        width: 90%;
+    }
+    small {
+        font-size: 12px;
+    }
+</style>
+<div class="banner-news">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center justify-content-end">
+            <div class="col-md-8">
+                <div class="customer-logos slider" style="padding: 6px;">
+                    @if (Model != null && Model.Count() > 0)
+                    {
+                        var dem = 0;
+                        foreach (var item in Model)
+                        {
+                            if (dem <= 5)
+                            {
+                                var mota = item.MO_TA.Length > 150 ? item.MO_TA.Substring(0, 150) + "..." : item.MO_TA;
+                                if (string.IsNullOrWhiteSpace(item.FILE_IMG))
+                                {
+                                    <div class="slide">
+                                        <div class="row">
+                                            <input type="text" value="@item.ID" hidden />
+                                            <div class="col-md-12">
+                                                <p title="@Resource.chitiet" style="color:#374694;font-size: 17px;">@item.TIEU_DE</p>
+                                                <p style="color:black;padding-bottom: 10px;">
+                                                    @mota (<a href="@Url.Action("Detail", "Tin_Tuc", new { id = item.ID })">@Resource.xemtiep</a>)
+                                                </p>
+                                                <span style="color:gray"><i class="fa fa-clock-o"></i> @item.THOI_GIAN.ToString("dd/MM/yyyy HH:mm")</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="slide">
+                                        <div class="row">
+                                            <input type="text" value="@item.ID" hidden />
+                                            <div class="col-md-5">
+                                                <p>
+                                                    <img src="@item.FILE_IMG" style="width:100%;" width="280" height="137">
+                                                </p>
+
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p title="@Resource.chitiet">@item.TIEU_DE</p>
+                                                <p style="color:black">
+                                                    @mota (<a href="@Url.Action("Detail", "Tin_Tuc", new { id = item.ID })">@Resource.xemtiep</a>)
+                                                </p>
+                                                <span style="color:gray"><i class="fa fa-clock-o"></i> @item.THOI_GIAN.ToString("dd/MM/yyyy HH:mm")</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            dem++;
+                        }
+                        if (Model.Count() == 1)
+                        {
+                            foreach (var item in Model)
+                            {
+                                var mota = item.MO_TA.Length > 150 ? item.MO_TA.Substring(0, 150) + "..." : item.MO_TA;
+                                if (string.IsNullOrWhiteSpace(item.FILE_IMG))
+                                {
+                                    <div class="slide">
+                                        <div class="row">
+                                            <input type="text" value="@item.ID" hidden />
+                                            <div class="col-md-12">
+                                                <p title="@Resource.chitiet" style="color: #374694;font-size: 17px;">@item.TIEU_DE</p>
+                                                <p style="color:black;padding-bottom: 10px;">
+                                                    @mota (<a href="@Url.Action("Detail", "Tin_Tuc", new { id = item.ID })">@Resource.xemtiep</a>)
+                                                </p>
+                                                <span style="color:gray"><i class="fa fa-clock-o"></i> @item.THOI_GIAN.ToString("dd/MM/yyyy HH:mm")</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="slide">
+                                        <div class="row">
+                                            <input type="text" value="@item.ID" hidden />
+                                            <div class="col-md-5">
+                                                <img src="@item.FILE_IMG" style="width:100%;" width="280" height="137">
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p title="@Resource.chitiet">@item.TIEU_DE</p>
+                                                <p style="color:black">
+                                                    @mota (<a href="@Url.Action("Detail", "Tin_Tuc", new { id = item.ID })">@Resource.xemtiep</a>)
+                                                </p>
+                                                <span style="color:gray"><i class="fa fa-clock-o"></i> @item.THOI_GIAN.ToString("dd/MM/yyyy HH:mm")</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-container">
+    <section>
+        <div class="container-fluid">
+            <div class="title about" hidden>
+                <h4 class="title-page" style="color:#3A4B9E;font-weight: bold;">
+                    <span> @Resource.tintuc</span>
+                </h4>
+            </div>
+            <div class="row lstTinTuc">
+                @if (Model != null && Model.Count() > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        var mota = item.MO_TA.Length > 120 ? item.MO_TA.Substring(0, 120) + "..." : item.MO_TA;
+                        <div class="col-md-4 px-3" style="margin-bottom:20px;">
+                            <div class="portlet row">
+                                @if (!string.IsNullOrWhiteSpace(item.FILE_IMG))
+                                {
+                                    <div class="col-md-12 image">
+                                        <a href="@Url.Action("Detail", "Tin_Tuc", new { id = item.ID })" title="@Resource.detail">
+                                            <img src="@item.FILE_IMG" style="width:100%;" width="328" height="173" />
+                                        </a>
+                                    </div>
+                                    <div id="title" class="col-md-12">
+                                        <p style="text-align:center;padding:0">
+                                            <a href="@Url.Action("Detail", "Tin_Tuc", new { id = item.ID })" title="@Resource.detail"><span>@item.TIEU_DE</span></a>
+                                        </p>
+                                        <p>@mota</p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div id="title" class="col-md-12">
+                                        <div class="row" style="min-height: 87px;text-align:center">
+                                            <a href="@Url.Action("Detail", "Tin_Tuc", new { id = item.ID })" title="@Resource.detail"><span>@item.TIEU_DE</span></a>
+                                        </div>
+                                        <p>@mota</p>
+                                    </div>
+                                }
+
+                                <div class="col-md-12 content-footer">
+                                    <p style="padding:10px"><small><i class="fa fa-clock-o"></i> @item.THOI_GIAN.ToString("dd/MM/yyyy HH:mm")</small><a href="@Url.Action("Detail", "Tin_Tuc", new { id = item.ID })" style="text-decoration:underline;float: right;">@Resource.detail</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="row" style="justify-content: flex-end;">
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-8">
+                    @if (Model.Count > 9)
+                    {
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                    }
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.customer-logos').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            arrows: false,
+            dots: false,
+            pauseOnHover: false,
+            responsive: [{
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1
+                }
+            }, {
+                breakpoint: 520,
+                settings: {
+                    slidesToShow: 1
+                }
+            }]
+        });
+    });
+    $('.slide .col-md-7 p:first-child').click(function () { 
+        var id = $('.slide').find('input').val();
+        window.location.href = "/Tin_Tuc/Detail/" + id;
+    });
+
+</script>

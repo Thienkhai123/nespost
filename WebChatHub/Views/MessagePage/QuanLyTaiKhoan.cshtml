@@ -1,0 +1,295 @@
+﻿@{
+    ViewBag.Title = "Quản lý tài khoản";
+    Layout = "~/Views/Shared/_Layout_Message.cshtml";
+}
+
+@using WebChatHub.Models
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 form-group text-right pt-2">
+            <button class="btn btn-danger" href="javascript:;" data-toggle="modal" data-target="#ModalTaoTaiKhoan" data-backdrop="static"><i class="mdi mdi-plus"></i> Tạo mới </button>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body" style="min-height: calc(100vmin - 200px);">
+            <h4 class="card-title"><span>Danh sách tài khoản</span></h4>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Họ tên</th>
+                            <th>Trạng thái</th>
+                            <th>Tác vụ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            var lst = ViewData["lstMaCon"] as List<CSS_CRM_NGUOI_DUNGDTO>;
+                            foreach (var item in lst)
+                            {
+                                <tr>
+                                    <td>@item.USER_NAME</td>
+                                    <td>@item.GHI_CHU</td>
+                                    @if (@item.IS_ACTIVE == 0)
+                                    {
+                                        <td class="text-success">
+                                            Hoạt động
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="text-danger">
+                                            Khóa
+                                        </td>
+                                    }
+                                    <td>
+                                        <button class="btn btn-primary" onclick="ResetInfor('@item.USER_NAME', '@item.GHI_CHU', @item.IS_ACTIVE)">Cập nhật</button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalTaoTaiKhoan" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h5 id="title"> <span>Tạo tài khoản</span></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="min-height: 130px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-form-label-sm">Tên nhân viên <strong class="text-danger">*</strong></label>
+                            <input type="text" id="tenNV" class="form-control" autocomplete="off" onfocus="$('#message1').addClass('d-none')" />
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label-sm">Password <strong class="text-danger">*</strong></label>
+                            <input type="text" id="password" class="form-control custom-password hidetext" autocomplete="off" oninput="changeText(this)" onfocus="$('#message1').addClass('d-none')" />
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label-sm">Nhập lại Password <strong class="text-danger">*</strong></label>
+                            <input type="text" id="repassword" class="form-control custom-password hidetext" autocomplete="off" oninput="changeText(this)" onfocus="$('#message1').addClass('d-none')" />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group text-center">
+                            <a href="javascript:;" onclick="CreateAccount()" class="btn btn-primary"><i class="fa fa-save"></i> Lưu</a>
+                        </div>
+                        <div class="form-group" style="height:50px;">
+                            <div class="alert alert-danger d-none mess-reset" role="alert" id="message1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalUpdateTKCon" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h5 id="title"> <span> Cập nhật thông tin</span></h5>
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
+            </div>
+            <div class="modal-body" style="min-height: 130px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label">Username <strong style="color:red">*</strong></label>
+                            <input type="text" autocomplete="off" id="upUserName" class="form-control" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Họ và tên <strong style="color:red">*</strong></label>
+                            <input type="text" autocomplete="off" id="upTenKH" class="form-control" onfocus="$('#mess-updateInfo').addClass('d-none')" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Mật khẩu mới</label>
+                            <input type="text" autocomplete="off" id="upPassWord" class="form-control custom-password hidetext" oninput="changeText(this)" onfocus="$('#mess-updateInfo').addClass('d-none')" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Nhập lại mật khẩu mới</label>
+                            <input type="text" autocomplete="off" id="upRePassWord" class="form-control custom-password hidetext" oninput="changeText(this)" onfocus="$('#mess-updateInfo').addClass('d-none')" />
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" value="KHOA"> Khóa
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <a href="javascript:;" onclick="UpdateInfo()" class="btn btn-primary form-control"><i class="mdi mdi-content-save"></i> Lưu</a>
+                        </div>
+                        <div class="alert alert-danger d-none mess-updateInfo" role="alert"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var re = /^[A-Za-z0-9]{4,8}$/;
+
+    function changeText(obj) {
+        if ($(obj).val() !== '') {
+            $(obj).attr('type', 'password');
+        } else {
+            $(obj).attr('type', 'text');
+        }
+    }
+
+    function CreateAccount() {
+        var maNV = $('#maNV').val();
+        var tenNV = $('#tenNV').val();
+        var password = $('#password').val();
+        var repassword = $('#repassword').val();
+
+        if (maNV == "") {
+            $('#message1').html('Mã nhân viên không được bỏ trống');
+            $('#message1').removeClass("d-none");
+            return;
+        }
+        if (tenNV == "") {
+            $('#message1').html('Tên nhân viên không được bỏ trống');
+            $('#message1').removeClass("d-none");
+            return;
+        }
+        if (password == "") {
+            $('#message1').html('Password không được bỏ trống');
+            $('#message1').removeClass("d-none");
+            return;
+        }
+        if (!re.test(password)) {
+            $('#message1').html('Password không được chứa kí tự đặc biệt và có 4-8 kí tự');
+            $('#message1').removeClass("d-none");
+            return;
+        }
+        if (repassword == "") {
+            $('#message1').html('Nhập lại password không được bỏ trống');
+            $('#message1').removeClass("d-none");
+            return;
+        }
+        if (password != repassword) {
+            $('#message1').html('Nhập lại password không đúng.');
+            $('#message1').removeClass("d-none");
+            return;
+        }
+        $.ajax({
+            url: "/MessagePage/CreateAccount",
+            type: "POST",
+            data: { maNV: maNV, tenNV: tenNV, password: password },
+            dataType: 'json',
+            success: function (data) {
+                if (data.Erorr) {
+                    Swal.fire(data.Title,
+                        '',
+                        'error')
+                    return;
+                }
+                Swal.fire({
+                        title: 'Tạo mới thành công',
+                        icon: 'success',
+                        showCancelButton: false,
+                        cancelButtonText: 'No',
+                        confirmButtonText: 'OK'
+                    })
+                    .then(function (willDelete) {
+                        if (willDelete.value) {
+                            window.location.reload();
+                        }
+                    });
+            },
+            complete: function () {
+
+            }
+        });
+    }
+
+    function ResetInfor(userName, ten, isActive) {
+        $('#upUserName').val(userName);
+        $('#upTenKH').val(ten);
+        if (isActive == 1) {
+            $('input[value="KHOA"]').prop("checked", true);
+        }
+        $('#ModalUpdateTKCon').modal({ backdrop: 'static' });
+    }
+
+    function UpdateInfo() {
+        if ($('#upTenKH').val() == "") {
+            $('.mess-updateInfo').html('Không được bỏ trống họ tên');
+            $('.mess-updateInfo').removeClass('d-none');
+            return;
+        }
+        if ($('#upPassWord').val() == "") {
+            $('.mess-updateInfo').html('Mật khẩu mới không được bỏ trống');
+            $('.mess-updateInfo').removeClass('d-none');
+            return;
+        }
+        if ($('#upPassWord').val() != "" && !re.test($('#upPassWord').val())) {
+            $('.mess-updateInfo').html('Mật khẩu mới không được chứa kí tự đặc biệt và có 4-8 kí tự');
+            $('.mess-updateInfo').removeClass('d-none');
+            return;
+        }
+        if ($('#upRePassWord').val() == "") {
+            $('.mess-updateInfo').html('Nhập lại mật khẩu không được bỏ trống.');
+            $('.mess-updateInfo').removeClass('d-none');
+            return;
+        }
+        if ($('#upPassWord').val() != $('#upRePassWord').val()) {
+            $('.mess-updateInfo').html('Nhập lại mật khẩu không chính xác.');
+            $('.mess-updateInfo').removeClass('d-none');
+            return;
+        }
+        var IS_ACTIVE = $('input[value="KHOA"]').prop("checked") == true ? 1 : 0;
+
+        $.ajax({
+            url: "/MessagePage/UpdateInfo",
+            type: "POST",
+            data: dto = {
+                USER_NAME: $('#upUserName').val(),
+                PASSWORD: $('#upPassWord').val(),
+                GHI_CHU: $('#upTenKH').val(),
+                IS_ACTIVE: IS_ACTIVE
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (!data.Error) {
+                    Swal.fire({
+                        title: 'Lưu thay đổi thành công',
+                        icon: 'success',
+                        showCancelButton: false,
+                        cancelButtonText: 'No',
+                        confirmButtonText: 'OK'
+                    })
+                        .then(function (willDelete) {
+                            if (willDelete.value) {
+                                window.location.reload();
+                            }
+                        });
+                }
+                else {
+                    Swal.fire(
+                        '',
+                        data.Title,
+                        'error')
+                    return;
+                }
+            }
+        });
+    }
+</script>

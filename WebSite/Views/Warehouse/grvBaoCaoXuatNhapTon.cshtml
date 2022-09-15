@@ -1,0 +1,166 @@
+﻿@using System.Web.UI.WebControls;
+@using WebSite.Language
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridView";
+        settings.CallbackRouteValues = new { Controller = "Warehouse", Action = "grvBaoCaoXuatNhapTon" };
+        settings.KeyFieldName = "ID";
+
+        settings.ControlStyle.CssClass = "grid-view griddata";
+        settings.Width = Unit.Percentage(100);
+        settings.Styles.Cell.Wrap = DefaultBoolean.True;
+        settings.Styles.PagerBottomPanel.CssClass = "pager";
+        settings.Styles.FocusedRow.CssClass = "focused";
+
+        settings.SettingsBehavior.AllowFocusedRow = true;
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsBehavior.AllowDragDrop = false;
+
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Auto;
+        settings.Settings.VerticalScrollableHeight = 200;
+        settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+
+        settings.SettingsPager.FirstPageButton.Visible = true;
+        settings.SettingsPager.LastPageButton.Visible = true;
+        settings.SettingsPager.PageSize = 20;
+        settings.SettingsPager.Visible = true;
+
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowGroupPanel = false;
+
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.SettingsExport.EnableClientSideExportAPI = true;
+        settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
+        settings.SettingsExport.FileName = Booking.WH_baoCaoXuatNhapTon;
+
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsExport.EnableClientSideExportAPI = true;
+        settings.ClientSideEvents.ContextMenuItemClick = "function(s, e) { OnContextMenuItemClick(s, e); }";
+        settings.FillContextMenuItems = (sender, e) =>
+        {
+            if (e.MenuType != GridViewContextMenuType.Rows) return;
+            e.Items.Remove(e.Items.FindByCommand(GridViewContextMenuCommand.NewRow));
+            e.Items.Remove(e.Items.FindByCommand(GridViewContextMenuCommand.EditRow));
+            e.Items.Remove(e.Items.FindByCommand(GridViewContextMenuCommand.DeleteRow));
+            e.Items.Add("Export Excel", "ExportToXLSX").Image.Url = @"~\lib\images\xlsx-512.png";
+        };
+
+        settings.KeyFieldName = "ID";
+        settings.Columns.AddBand(orderBand =>
+        {
+            orderBand.Caption = "";
+            orderBand.Columns.Add(column =>
+            {
+                column.Caption = Booking.WH_maHang;
+                column.FieldName = "MA_SAN_PHAM";
+                column.Width = 150;
+            });
+            orderBand.Columns.Add(column =>
+            {
+                column.Caption = Booking.WH_tenSP;
+                column.FieldName = "TEN_SAN_PHAM";
+                column.Width = 200;
+            });
+            orderBand.Columns.Add(column =>
+            {
+                column.Caption = Booking.WH_donViTinh;
+                column.FieldName = "TEN_DON_VI_TINH";
+                column.Width = 100;
+            });
+            orderBand.Columns.Add(column =>
+            {
+                column.Caption = Booking.WH_ngayHetHan;
+                column.FieldName = "NGAY_HET_HAN";
+                column.PropertiesEdit.DisplayFormatString = "dd/MM/yyyy";
+                column.Width = 130;
+            });
+            orderBand.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+            orderBand.FixedStyle = GridViewColumnFixedStyle.Left;
+        });
+        settings.Columns.AddBand(orderBand =>
+        {
+            orderBand.Caption = Booking.WH_tonDauKy;
+            orderBand.Columns.Add(column =>
+            {
+                column.Caption = Booking.WH_tonThucTe;
+                column.FieldName = "TONG_TL_TON_DAU_KY";
+                column.PropertiesEdit.DisplayFormatString = "N0";
+                column.Width = 170;
+            });
+
+            orderBand.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+            orderBand.HeaderStyle.Font.Bold = true;
+        });
+        settings.Columns.AddBand(orderBand =>
+        {
+            orderBand.Caption = Booking.WH_phatSinhTrongKy;
+            orderBand.Columns.Add(column =>
+            {
+                column.Caption = Booking.WH_soLuongNhap;
+                column.FieldName = "TRONG_LUONG_NHAP_TRONG_KY";
+                column.PropertiesEdit.DisplayFormatString = "N0";
+                column.Width = 120;
+            });
+            orderBand.Columns.Add(column =>
+            {
+                column.Caption = Booking.WH_soLuongXuat;
+                column.FieldName = "TRONG_LUONG_XUAT_TRONG_KY";
+                column.PropertiesEdit.DisplayFormatString = "N0";
+                column.Width = 120;
+            });
+
+            orderBand.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+            orderBand.HeaderStyle.Font.Bold = true;
+        });
+        settings.Columns.AddBand(orderBand =>
+        {
+            orderBand.Caption = Booking.WH_tonCuoiKy;
+            orderBand.Columns.Add(column =>
+            {
+                column.Caption = Booking.WH_tongSo;
+                column.FieldName = "TONG_TL_TON_CUOI_KY";
+                column.PropertiesEdit.DisplayFormatString = "N0";
+            });
+            orderBand.HeaderStyle.HorizontalAlign = HorizontalAlign.Center;
+            orderBand.HeaderStyle.Font.Bold = true;
+        });
+        settings.PreRender = (sender, e) =>
+        {
+            MVCxGridView gr = (MVCxGridView)sender;
+            gr.ExpandAll();
+            var page = Session["page"];
+            if (page != null && page.ToString() != "0")
+            {
+                Session["page"] = null;
+                gr.PageIndex = gr.PageCount;
+            }
+        };
+        settings.BeforeGetCallbackResult = (sender, e) =>
+        {
+            MVCxGridView gr = (MVCxGridView)sender;
+            var page = Session["page"];
+            if (page != null && page.ToString() != "0")
+            {
+                Session["page"] = null;
+                gr.PageIndex = gr.PageCount;
+            }
+        };
+        settings.SettingsExport.RenderBrick = (sender, e) =>
+        {
+            if (e.RowType == GridViewRowType.Header)
+            {
+                e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(205, 211, 216);
+                e.BrickStyle.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            }
+        };
+    });
+
+}
+@grid.Bind(Model).GetHtml()

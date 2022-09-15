@@ -1,0 +1,52 @@
+﻿@using WebSite.Language
+@{
+    ViewBag.Title = Resource.donchuyen;
+}
+<style>
+    .entry-content .col-md-4 {
+        display: flex;
+        justify-content: center;
+        padding-bottom: 25px;
+    }
+</style>
+<div class="container page-container">
+    <div class="row">
+        <div id="post-409" class="post-409 page type-page status-publish hentry">
+            <div class="title title2 about">
+                <h4><span> @Resource.donchuyen</span></h4>
+            </div>
+            <div class="entry-content">
+                <p>@Resource.ND_donchuyen</p>
+
+                <div class="row item-content">
+                    <div class="col-md-4">
+                        <img class="size-full wp-image-308" onclick="currentSlide('removal', 1)" title="" src="/lib/images/removal1.jpg" alt="" width="300" height="170">
+                    </div>
+                    <div class="col-md-4">
+                        <img class="size-full wp-image-309" onclick="currentSlide('removal', 2)" title="" src="/lib/images/removal2.jpg" alt="" width="300" height="170">
+                    </div>
+                    <div class="col-md-4">
+                        <img class="size-full wp-image-310" onclick="currentSlide('removal', 3)" title="" src="/lib/images/removal3.jpg" alt="" width="300" height="170">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <p>
+                        <u> @Resource.xemthem:</u> <a href="https://sites.google.com/logo.com/sgv-removal-team/home" target="_blank">@Resource.donchuyen</a>
+                    </p>
+                </div>
+                
+                <p style="text-align:right;padding-right: 25px;">
+                    @if (WebSite.Filter.ClientSession.getLanguage().Equals("vi"))
+                    {
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSc0lgpj1qeBHjOoGTLHR031fmDOtLT_ldMMXD6pk0-P0jQZFQ/viewform" style="padding: 0 5px; border-bottom: 1px solid;" target="_blank"><i class="fa fa-forward"></i>  @Resource.lienhe </a>
+                    }
+                    else
+                    {
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScBbYFHRcI8JXwycTE03JhmPF_ZjjqUNKNQfToMRlM4OcgQZQ/viewform" style="padding: 0 5px; border-bottom: 1px solid;" target="_blank"><i class="fa fa-forward"></i>  @Resource.lienhe </a>
+                    }
+                </p>
+            </div><!-- .entry-content -->
+        </div>
+    </div>
+</div>

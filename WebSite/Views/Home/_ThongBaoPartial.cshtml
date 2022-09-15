@@ -1,0 +1,22 @@
+﻿@using WebSite.Language;
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="thongbaomoi">
+        <div class="prArea">
+            <ul>
+                <li>
+                    News
+                </li>
+                @foreach (var item in Model)
+                {
+                    string href = "'/Tin_Tuc/Detail/" + item.ID + "'";
+                    <li onclick="window.location.href=@href">
+                        <i class="fa fa-bell" style="font-size: 20px;color:#6be5e5 !important"></i> @item.TIEU_DE <u>@Resource.detail</u>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}
+

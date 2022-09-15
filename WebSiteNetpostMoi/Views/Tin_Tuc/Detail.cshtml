@@ -1,0 +1,79 @@
+﻿@using WebSite.Language
+@model WebSite.Models.TINTUCDTO
+@{ViewBag.Title = "View Detail"; }
+<style>
+    #main .page-container {
+        padding-top: 0;
+    }
+   .page-container #title {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+   .page-container  .placehoder {
+        justify-content: center;
+        padding-bottom: 15px;
+    }
+
+       .page-container  .placehoder img {
+            /*min-width: 512px;*/
+            max-height: 480px;
+            /*min-height: 320px;*/
+        }
+
+
+    .page-container .post{
+        text-align:center;
+    }
+
+</style>
+
+<div class="banner-news">
+
+</div>
+<section>
+    <div class="container">
+        <div class="row tintuc-content">
+            @if (Model != null)
+            {
+                ViewBag.Title = @Model.TIEU_DE;
+                <div class="post" style="padding:20px">
+                    <h2 class="title-page">
+                        <span>@Model.TIEU_DE</span>
+                    </h2>
+                    <span>@Model.THOI_GIAN_STRING</span>
+                </div>
+                <div class="entry-content indexcontent">
+                    <div class="row placehoder justify-content-between">
+                        @if (!string.IsNullOrWhiteSpace(@Model.FILE_IMG))
+                        {
+                            <img src="@Model.FILE_IMG" />
+                        }
+                    </div>
+                    <div class="row justify-content-between noidungchitiet">
+                        @Html.Raw(@Model.NOI_DUNG)
+                    </div>
+                    <div class="row justify-content-between">
+                        <p>
+                            @if (!string.IsNullOrWhiteSpace(@Model.FILE_DINH_KEM))
+                            {
+                                @Html.Raw(Resource.tepdinhkem + ":<br/>")
+                                var list = Model.FILE_DINH_KEM.Replace(",", ";").Split(';');
+                                foreach (var item in list)
+                                {
+                                    if (!string.IsNullOrWhiteSpace(item))
+                                    {
+                                        var str = item.Replace("/ckfinder/News/files/", "");
+
+                                        <a href="@item">@str</a><br />
+                                    }
+                                }
+                            }
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+

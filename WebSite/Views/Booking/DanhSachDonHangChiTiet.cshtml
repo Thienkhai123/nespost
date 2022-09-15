@@ -1,0 +1,32 @@
+﻿@{WebSite.Models.CSS_CRM_NGUOI_DUNGDTO user = (WebSite.Models.CSS_CRM_NGUOI_DUNGDTO)Session["User"];}
+@using WebSite.Language;
+@{
+    ViewBag.Title = Booking.chitietdonhang;
+    Layout = "~/Views/Shared/_Layout_Booking.cshtml";
+}
+
+<div class="row danhsachchitiet" style="margin-top:5px">
+    <div class="col-md-6">
+        <h3> @Booking.dathang: <strong style="color:red">@ViewBag.PO </strong></h3>
+    </div>
+    <div class="col-md-6 print">
+        <a class="btn btn-primary pull-right" href="javascript:;" data-toggle="modal" data-target="#@ViewBag.PO" style="margin-bottom: 10px;" title="@Booking.inphieugui"><i class="fa fa-print" style="font-size: 15px; "></i> @Booking.inphieugui </a>
+    </div>
+    <div class="col-md-12">
+        @Html.Action("DachSachChiTiet", new { id = ViewBag.PO })
+    </div>
+</div>
+
+<div id="@ViewBag.PO" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 32%;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p id="msg_Show">  @Booking.chacchanIn: @ViewBag.PO ?  </p>
+            </div>
+            <div class="modal-footer">
+                <a href="@Url.Action("PhieuGui","Booking", new { PO = ViewBag.PO})" onclick="$('#@ViewBag.PO').modal('hide');" target="_blank" class="btn btn-primary">OK</a>
+                <a onclick="$('#@ViewBag.PO').modal('hide');" class="btn btn-danger">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>

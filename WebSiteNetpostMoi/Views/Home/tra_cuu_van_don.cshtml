@@ -1,0 +1,288 @@
+﻿@using WebSite.Language;
+@using WebSite.Models;
+@{
+    ViewBag.Title = "Tra cứu vận đơn";
+}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="section-title">
+                <h2>@Resource.tracuuBPBK</h2>
+            </div>
+            <div class="modal-body" style="min-height:300px;padding-top: 0.5rem;">
+                <div class="row">
+                    <h6 style="font-weight: bold; font-style: italic; margin-bottom: 5px; ">@Resource.timkiemvandon</h6>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <textarea class="form-control" rows="2" id="mavandon" placeholder="@Resource.nhapvandon">@ViewData["hawbNo"]</textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-left col-right">
+                        <div class="form-group">
+                            <button class="btn btn-danger" style="padding:8px 12px !important" onclick="TRACK_AND_TRACE()"><i class="fa fa-search"></i>  @Resource.search</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row listTrackAndTraceClass" style="display:none">
+                    <table id="listTrackAndTrace" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th colspan="1" style="width:300px;text-align:center">
+                                    @Resource.time
+                                </th>
+                                <th colspan="3" style="width:615px;text-align:center">
+                                    @Resource.Status
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="alert alert-danger" role="alert" id="mess_vandon" style="margin-top:10px;width:100%;display:none;">@Resource.mess_vandon </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="modal-anhlienvang_nhieuanh" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header justify-content-end" style="padding: 5px; border: 0;">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="overflow: hidden;min-height:510px; padding: 10px 15px;">
+                <div class="row">
+                    <img id="imgage1" onclick="ShowAnhLienVang_EX(this)" class="col-md-4" />
+                    <img id="imgage2" onclick="ShowAnhLienVang_EX(this)" class="col-md-4" />
+                    <img id="imgage3" onclick="ShowAnhLienVang_EX(this)" class="col-md-4" />
+                    <img id="imgage4" onclick="ShowAnhLienVang_EX(this)" class="col-md-4" />
+                    <img id="imgage5" onclick="ShowAnhLienVang_EX(this)" class="col-md-4" />
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 10px;">
+                <div class="row">
+                    <div class="col-md-12" style="text-align:center">
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal-baocaosaipham"><i class="fa-solid fa-circle-exclamation"></i> @Resource.baocaosaipham</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal-anhlienvang" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header justify-content-end" style="padding: 5px; border: 0;">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="overflow: hidden;min-height:510px; padding: 10px 15px;">
+                <div class="row justify-content-center">
+                    <input id="idAnhPOD" type="text" hidden />
+                    <div id="viewer" class="viewer"></div>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 10px;">
+                <div class="row">
+                    <div class="col-md-12" style="text-align:center">
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal-baocaosaipham"><i class="fa-solid fa-circle-exclamation"></i> @Resource.baocaosaipham</button>
+                        <button class="btn btn-success" onclick="XemAnhGoc()">Xem ảnh gốc chất lượng cao</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-baocaosaipham" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-xm">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 5px; border: 0;">
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 10px;">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label> @Resource.sdtlienhe</label>
+                        <input class="form-control" type="text" id="txtsdtlienhe" />
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label> @Booking.noidung <strong style="color:red">*</strong></label>
+                        <textarea class="form-control" rows="10" id="txtNote"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12" style="text-align:center">
+                    <button class="btn btn-danger" onclick="baocaosaipham()"><i class="fa fa-save"></i> @Booking.luu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    // tra cứu vận đơn
+    var iv1 = $("#viewer").iviewer({
+        fill_container: true,
+        src: "/lib/images/No_Image_Available.jpg",
+        initCallback: function () {
+            iviewer = this;
+        },
+    });
+
+    $(document).ready(function () {
+        if ($('#mavandon').val() != "") {
+            TRACK_AND_TRACE();
+        }
+    });
+
+    function TRACK_AND_TRACE() {
+        var MaBPBK = $('#mavandon').val();
+            $('#listTrackAndTrace tbody').empty();
+            $('#mess_vandon').hide();
+            if (MaBPBK == "") {
+                $('#mess_vandon').html("@Html.Raw(Resource.mess_vandon)");
+                $('#mess_vandon').show();
+                $('.listTrackAndTrace').hide();
+            }
+            else {
+                $('.img-loading').show();
+                $('#listTrackAndTrace tbody').empty();
+                $.ajax({
+                    url: "/Home/ListTrackAndTrace",
+                    type: "POST",
+                    data: {
+                        MaBPBK: MaBPBK
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.Title == "Get list success!") {
+                            var str = "";
+                            for (var i in data.Object) {
+                                var lst = data.Object[i];
+                                if ((lst[0].ID_MONGO != null && lst[0].ID_MONGO != "") || (lst[0].URLImage != null && lst[0].URLImage != "")) {
+                                     if (lst[0].URLImage2 != "") {
+                                             str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td colspan=\"4\"> @Html.Raw(Resource.mavandon): " + i + " (<a href=\"javascript:;\" onclick = 'ShowNhieuAnh(\"" + lst[0].URLImage + "\",\"" + lst[0].URLImage2 + "\",\"" + lst[0].URLImage3 + "\", \""+ lst[0].URLImage4 + "\",\"" + lst[0].URLImage5 + "\")' > @Resource.chuky</a>)</td></tr>";
+                                        } else {
+                                            str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td colspan=\"4\"> @Html.Raw(Resource.mavandon): " + i + " (<a href=\"javascript:;\" onclick = 'ShowAnhLienVang(\"" + lst[0].ID_MONGO + "\",\"" + lst[0].URLImage + "\", \"" + lst[0].CONTENT_TYPE + "\")' > @Resource.chuky</a>)</td></tr>";
+                                        }
+                                        str+="</a></td><td  colspan=\"1\">Nơi đến: <a style= \"color:red;\">" + lst[0].NOI_DEN + "</a></td>" +
+                                        "</td><td  colspan=\"1\">Trọng lượng: <a style= \"color:red;\">" + lst[0].TRONG_LUONG + " kg</a></td>"
+                                        + "<td  colspan=\"1\">Số kiện: <a style= \"color:red;\">" + lst[0].SO_KIEN + " </a></td>"
+                                        + "</tr> ";
+                                }
+                                else {
+                                     str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td  colspan=\"4\"> @Html.Raw(Resource.mavandon): " + i + "</td></tr>";
+                                    str = str + "<tr style= \"border-bottom: 1px solid #99999938;font-weight: bold;\"><td  colspan=\"1\"> Dịch vụ: <a style= \"color:red;\">" + lst[0].DICH_VU +
+                                        "</a></td><td  colspan=\"1\">Nơi đến: <a style= \"color:red;\">" + lst[0].NOI_DEN + "</a></td>" +
+                                        "</td><td  colspan=\"1\">Trọng lượng: <a style= \"color:red;\">" + lst[0].TRONG_LUONG + " kg</a></td>"
+                                        + "<td  colspan=\"1\">Số kiện: <a style= \"color:red;\">" + lst[0].SO_KIEN + " </a></td>"
+                                        + "</tr> ";
+                                }
+                                for (var j in lst) {
+                                    str = str + "<tr style= \"border-bottom: 1px solid #99999938;\"><td colspan=\"1\">" + lst[j].INSERT_TIME_STRING + "</td><td colspan=\"3\">" + lst[j].DESC + "</td></tr>";
+                                }
+                            }
+                            $('#listTrackAndTrace tbody').append(str);
+                            $('.listTrackAndTraceClass').show();
+                        }
+                        else {
+                            $('#mess_vandon').html("@Html.Raw(Resource.khongtimthayvandon)");
+                            $('#mess_vandon').show();
+                            $('.listTrackAndTraceClass').hide();
+                        }
+                    },
+                    complete: function () {
+                        $('.img-loading').hide();
+                    }
+                });
+            }
+        }
+
+
+
+    function XemAnhGoc() {
+        var url = $('#viewer').find("img").attr('src');
+        window.open(url, '', "width=800,height=800");
+    }
+
+
+        function ShowAnhLienVang(idmongo, URLImage, idAnhPOD) {
+            $("#viewer").hide();
+            $('#idAnhPOD').val(idAnhPOD);
+            iv1.iviewer('loadImage', URLImage);
+            iv1.iviewer('set_zoom', 100);
+            $('.pre-image').hide();
+            $("#viewer").show();
+            $('#modal-anhlienvang').modal('show');
+
+        }
+        function ShowAnhLienVang_EX(obj) {
+            $("#viewer").hide();
+            $('#idAnhPOD').val(idAnhPOD);
+            var src = obj.currentSrc;
+
+            iv1.iviewer('loadImage', src);
+            setTimeout(function () {
+                iv1.iviewer('set_zoom', 100);
+            }, 5);
+            $('.pre-image').hide();
+            $("#viewer").show();
+            $('#modal-anhlienvang').modal('show');
+
+        }
+
+    function ShowNhieuAnh(url1, url2, url3, url4, url5) {
+            $("#imgage1").attr("src", url1);
+            $("#imgage2").attr("src", url2);
+            $("#imgage3").attr("src", url3);
+            $("#imgage4").attr("src", url4);
+            $("#imgage5").attr("src", url5);
+            $('#modal-anhlienvang_nhieuanh').modal('show');
+        }
+
+        function baocaosaipham() {
+            if ($('#txtNote').val() == undefined || $('#txtNote').val() == "") {
+                Swal.fire('@Html.Raw(Resource.vadnoidung)',
+                    '',
+                    'error')
+                return;
+            }
+            $.ajax({
+                url: "/Home/BaoCaoSaiPham",
+                type: "POST",
+                data: {
+                    sdt:$('#txtsdtlienhe').val(),
+                    note: $('#txtNote').val(),
+                    idAnhPOD: $('#idAnhPOD').val()
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (!data.Error) {
+                        Swal.fire('@Html.Raw(Resource.baocaosaiphamthanhcong)',
+                            '',
+                            'success');
+                        $('#modal-baocaosaipham').modal('hide');
+                        $('#txtNote').val('');
+                    }
+                    else {
+                        Swal.fire(data.Title,
+                            '',
+                            'error')
+                        return;
+                    }
+                }
+            });
+        }
+
+        $('#modal-baocaosaipham').on('shown.bs.modal', function () {
+            $('#txtsdtlienhe').trigger('focus')
+        })
+</script>
+

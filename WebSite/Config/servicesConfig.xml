@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<service>
+	<!--local-->
+  <!--<service key="v1">http://localhost:9039/h2service/callrequest</service>
+  <service key="v2">http://localhost:9039/h2service/callrequestapi</service>-->
+  
+  <!--online-->
+  <service key="v1">http://203.205.6.104:9039/h2service/callrequest</service>
+  <service key="v2">http://203.205.6.104:9039/h2service/callrequestapi</service>
+</service>

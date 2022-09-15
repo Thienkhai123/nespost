@@ -1,0 +1,143 @@
+﻿@model List<WebSite.Models.CSS_OP_BOOKING_SGEV_WEB>
+@using WebSite.Models
+@using WebSite.Language
+@{CSS_CRM_NGUOI_DUNGDTO user = (CSS_CRM_NGUOI_DUNGDTO)Session["User"];}
+@{
+    Layout = "~/Views/Shared/_Layout_Booking.cshtml";
+    ViewBag.Title = Booking.tracuoconline;
+}
+<style>
+    .dxgvFooter_DevEx td.dxgv {
+        padding: 1px !important;
+        border-right: 1px solid #cacbd3;
+    }
+
+    .dxgvFooter_Office365 td.dxgv {
+        padding: 0 !important;
+    }
+</style>
+<div class="container px-0" id="tracuocOnline">
+    <div class="form-row py-1">
+        <div class="col-lg-3 col-md-5 col-5">
+            <div class="form-row m-0">
+                <label class="col-form-label-sm col-md-3 col-3"> @Booking.tungay</label>
+                <div class="input-group date col-md-9 col-9" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                    <input type="text" class="form-control" name="FromDate" id="FromDate" value="@ViewBag.FromDate" />
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-5 col-5">
+            <div class="form-row m-0">
+                <label class="col-form-label-sm col-md-3 col-4">@Booking.denngay</label>
+                <div class="input-group date col-md-9 col-8" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                    <input type="text" class="form-control" name="ToDate" id="ToDate" value="@ViewBag.ToDate" />
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1 col-1 timkiem">
+            <button type="submit" class="btn btn-primary" onclick="LoadData()"><i class="fa fa-search"></i> </button>
+        </div>
+        <div class="col-md-5 mb-1 export-excel text-right d-none">
+            <button type="button" class="btn btn-primary" onclick="GridView_TraCuoc.ExportTo(ASPxClientGridViewExportFormat.Xlsx);"><i class="mdi mdi-file-export"></i> Export Excel</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="position:relative;">
+            <h4 class="m-0 py-1" style="text-align:center;font-weight:bold;">
+                @Booking.bangtracuoc
+                <br />
+                <span style="font-size:15px">@Booking.tratungay </span>
+                <span class="tungay" style="font-size:15px"></span>
+                <span style="font-size:15px">&nbsp;@Booking.den&nbsp;</span>
+                <span class="denngay" style="font-size:15px"></span>
+            </h4>
+        </div>
+        <div class="col-md-10 mb-1">
+            <p style="font-weight:bold">
+                @Booking.khachhang: @user.CUSTOMER_CODE
+                <br />
+                @Booking.tenkhachhang: @user.NAME
+            </p>
+        </div>
+
+    </div>
+    <div class="row" style="position:relative">
+        <div class="img-loading d-none" style="position: absolute; left: 50%;left: 40%;top: 145px; padding: 15px 115px; border-radius: 5px; background: #ebebeb; border:1px solid lightgray;z-index: 2; ">
+            <img src="~/lib/images/loading.gif" style="width: 25px;" />    Loading
+        </div>
+        <div class="col-md-12 grid d-none">
+            @using (Html.BeginForm())
+            {
+
+                @Html.Action("TraCuoc")
+            }
+        </div>
+        <div class="col-md-12 d-none note" style="min-height: calc(100vmin - 315px);">
+            <p style="text-align:center;font-style:italic;padding:30px 0 30px"> @Resource.cuocphatsinh</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p style="margin: 0; font-size: 13px;font-style: italic;">
+                *** @Resource.cuoctamtinh <br />
+                @Resource.lienhecuoc: 1900545538.
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            LoadData();
+        });
+    })(jQuery);
+
+    function LoadData() {
+        $('.img-loading').removeClass("d-none");
+        var FromDate = $('#FromDate').val() == undefined ? '' : $('#FromDate').val();
+        var ToDate = $('#ToDate').val() == undefined ? '' : $('#ToDate').val();
+        var data = {
+            FromDate: FromDate,
+            ToDate: ToDate
+        }
+        $.ajax({
+            type: "post",
+            url: "/Booking/TraCuocTheoNgay",
+            data: data,
+            success: function (data) {
+                if (data.Error) {
+                    Swal.fire(
+                        '',
+                        data.Title,
+                        'error')
+                    return;
+                }
+                $('.tungay').html(FromDate);
+                $('.denngay').html(ToDate);
+                if (data.Title == "true") {
+                    $('.grid').removeClass('d-none');
+                    $('.export-excel').removeClass('d-none');
+                    $('.note').addClass('d-none');
+
+                }
+                else {
+                    $('.grid').addClass('d-none');
+                    $('.export-excel').addClass('d-none');
+                    $('.note').removeClass('d-none');
+
+                }
+                GridView_TraCuoc.Refresh();
+            },
+            complete: function () {
+                $('.img-loading').addClass("d-none");
+            }
+        });
+    }
+</script>

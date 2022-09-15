@@ -1,0 +1,2026 @@
+﻿@{WebSite.Models.CSS_CRM_NGUOI_DUNGDTO user = (WebSite.Models.CSS_CRM_NGUOI_DUNGDTO)Session["User"];}
+@using WebSite.Models
+@using WebSite.Language
+@using WebSite.Filter
+@{
+    ViewBag.Title = Booking.dondathang;
+    Layout = "~/Views/Shared/_Layout_Booking.cshtml";
+}
+<style>
+    .ClockCSS {
+        display: none;
+    }
+
+    .dxeDateEditTimeEditCell_Office365 {
+        padding: 10px 17px 12px 17px !important;
+        width: auto !important;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 20px;
+        color: #da251d;
+        margin: 0 0 10px;
+    }
+</style>
+
+@if (ClientSession.getSLMaKHCon() > 1 && !user.LOAI_USER.Equals("CS"))
+{
+    <div class="row chonMaKhachhang" ng-app="demo" ng-controller="DemoCtrl">
+        <div class="container">
+            <div class="row">
+                <label class="col-form-label-sm col-lg-2 col-md-3">@Booking.dathangvoimaKH</label>
+                <div class="col-md-9 pb-1">
+                    <ui-select name="test2" ng-model="person.selected" theme="bootstrap" on-select="ChangeCus(person.selected)">
+                        <ui-select-match placeholder="@Booking.chonchinhanhdetaodonhang">{{$select.selected.FULL_NAME}}</ui-select-match>
+                        <ui-select-choices repeat="item in people | filter: $select.search">
+                            <div>
+                                <span ng-bind-html="item.FULL_NAME | highlight: $select.search"></span>
+                            </div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="form-row m-0 pt-2" id="myform">
+    @if (ViewData["item_Copy"] != null)
+    {
+        CSS_OP_BOOKING_SGEV_WEB_EX dto = ViewData["item_Copy"] as CSS_OP_BOOKING_SGEV_WEB_EX;
+        <div class="col-lg-10 info-content">
+            <div class="form-row m-0">
+                <div class="col-lg-4 stretch-card mb-2 info-one">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="col-md-12 stepwizard-step">
+                                    <p>
+                                        <a href="javascript:;" type="button" class="btn btn-primary btn-circle">01</a>&nbsp;&nbsp;@Booking.ttnguoinhan
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <label class="col-form-label-sm col-md-3">@Booking.tennguoinhan</label>
+                                <div class="col-md-9 col-left col-right">
+                                    <textarea class="form-control form-boder change-content" id="NGUOI_NHAN" rows="2" name="NGUOI_NHAN">@dto.TEN_NGUOI_NHAN.Trim()</textarea>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <label class="col-form-label-sm col-md-3">@Booking.sodt</label>
+                                <div class="col-md-9 col-left col-right">
+                                    <input type="text" id="SDT_NHAN" name="SDT_NHAN" class="form-control form-boder change-content" value="@dto.SDT_NHAN.Trim()" />
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <label class="col-form-label-sm col-md-3">@Booking.diachi</label>
+                                <div class="col-md-9 col-left col-right">
+                                    <textarea class="form-control form-boder change-content" id="DIA_CHI" rows="4" name="DIA_CHI">@dto.DIA_CHI.Trim()</textarea>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <label class="col-form-label-sm col-md-3">@Booking.tinhTP</label>
+                                <div class="col-md-9 col-left col-right position-relative">
+                                    @Html.DevExpress().ComboBox(settings =>
+                                    {
+                                        settings.Name = "cbTinhNhan";
+                                        settings.SelectedIndex = -1;
+                                        settings.Properties.DropDownStyle = DropDownStyle.DropDownList;
+                                        settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                                        settings.ControlStyle.CssClass = "form-control form-boder";
+                                        settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                                        settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                        settings.Properties.TextField = "TEN_CO_DAU";
+                                        settings.Properties.ValueField = "ZONE_CODE";
+                                        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(){cbTinhNhan_OnSelectedChanged()}";
+                                        settings.Properties.ClientSideEvents.Init = "function(){cbTinhNhan_OnInit('" + dto.MA_TINH_NHAN + "', '" + dto.MA_HUYEN_NHAN + "');}";
+                                    }).BindList(ViewData["_listZone"] as List<OP_ZONE_MASTERDTO>).GetHtml()
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <label class="col-form-label-sm col-md-3 pr-0">@Booking.quanhuyen</label>
+                                <div class="col-md-9 col-left col-right" id="lstHuyen">
+
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <label class="col-form-label-sm col-md-3 pr-0"></label>
+                                <div class="col-md-9 col-left col-right">
+                                    <button class="btn btn-primary form-control" onclick="LayDanhSachThongTinNguoiNhan(this)">@Booking.dsNguoiNhan</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 stretch-card mb-2 info-second">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="col-md-12 stepwizard-step">
+                                    <p>
+                                        <a href="javascript:;" type="button" class="btn btn-primary btn-circle">02</a>&nbsp;&nbsp;@Booking.ttnguoigui
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <label class="col-form-label-sm col-md-3">@Booking.tennguoigui </label>
+                                <div class="col-md-9">
+                                    <textarea type="text" id="NGUOI_GUI" name="NGUOI_GUI" rows="2" class="form-control">@dto.TEN_NGUOI_GUI</textarea>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <label class="col-form-label-sm col-md-3">@Booking.sodt</label>
+                                <div class="col-md-9">
+                                    <input type="text" id="SDT_GUI" name="SDT_GUI" class="form-control form-boder" value="@dto.SDT_GUI" />
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <label class="col-form-label-sm col-md-3"> @Booking.diachi </label>
+                                <div class="col-md-9">
+                                    <textarea type="text" id="DIA_CHI_NGUOI_GUI" name="DIA_CHI_NGUOI_GUI" rows="4" class="form-control form-boder">@dto.DIA_CHI_NGUOI_GUI</textarea>
+                                </div>
+                            </div>
+
+                            @*<div class="form-row">
+                                    <label class="col-form-label-sm col-md-3">@Booking.j </label>
+                                    <div class="col-md-9">
+                                        <div class="form-row form-row-1">
+                                            <div class="col-md-4 form-group">
+                                                <input type="number" step="0.01" id="TRONG_LUONG" name="TRONG_LUONG" class="form-control change-content" value="@dto.TRONG_LUONG.ToString("N2").Replace(",",".")">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-row form-row-1 form-group">
+                                                    <label class="col-form-label-sm col-md-5">@Booking.sokien</label>
+                                                    <div class="col-md-7">
+                                                        <input type="number" step="1" min="0" max="9999" id="SO_KIEN" name="SO_KIEN" class="form-control change-content" value="@dto.SO_KIEN">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>*@
+                            <div class="form-row form-group">
+                                <label class="col-form-label-sm col-md-3">@Booking.noidung</label>
+                                <div class="col-md-9">
+                                    <textarea id="NOI_DUNG" style="height: 116px;" name="NOI_DUNG" rows="4" class="form-control change-content">@dto.NOI_DUNG</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 stretch-card mb-2 info-third">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="col-md-12 stepwizard-step">
+                                    <p>
+                                        <a href="javascript:;" type="button" class="btn btn-primary btn-circle">03</a>&nbsp;&nbsp;@Booking.tthanghoa
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <label class="col-form-label-sm col-md-5">@Booking.dichvu </label>
+                                <div class="col-md-7 position-relative">
+                                    @Html.DevExpress().ComboBox(settings =>
+                                    {
+                                        settings.Name = "cbDichVu";
+                                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                        settings.SelectedIndex = -1;
+                                        settings.ControlStyle.CssClass = "form-control";
+                                        settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                                        settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                                        settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                                        settings.Properties.ValueType = typeof(string);
+                                        settings.Properties.ValueField = "Value";
+                                        settings.Properties.TextField = "Text";
+                                        settings.Properties.AllowNull = true;
+                                        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(){cbDichVu_OnSelectedChanged()}";
+                                        settings.Properties.ClientSideEvents.Init = "function(s,e){cbDichVu.SetValue(\"" + dto.DICH_VU + "\") }";
+                                    }).BindList(CommonData.lstDichVu()).GetHtml()
+                                </div>
+                            </div>
+                            @*<div class="form-row form-group">
+                                    <label class="col-form-label-sm col-md-5">@Booking.gtdonhang</label>
+                                    <div class="col-md-7">
+                                        <input type="text" pattern="^\d{1,3}(.\d{3})*?$" id="GT_DON_HANG" data-type='currency' name="GT_DON_HANG" class="form-control change-content" value="@dto.GT_DON_HANG">
+                                    </div>
+                                </div>*@
+                            <div class="form-row form-group">
+                                <label class="col-form-label-sm col-md-5">@Booking.sothamchieu</label>
+                                <div class="col-md-7">
+                                    <input type="text" id="SO_THAM_CHIEU" name="SO_THAM_CHIEU" class="form-control change-content" value="@dto.SO_THAM_CHIEU">
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <label class="col-form-label-sm col-md-5">Loại BPBK</label>
+                                <div class="col-md-7">
+                                    @Html.DevExpress().ComboBox(settings =>
+                                   {
+                                       settings.Name = "cbLoaiHang";
+                                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                       settings.SelectedIndex = -1;
+                                       settings.ControlStyle.CssClass = "form-control";
+                                       settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                                       settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                                       settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                                       settings.Properties.ValueType = typeof(string);
+                                       settings.Properties.ValueField = "Value";
+                                       settings.Properties.TextField = "Text";
+                                       settings.Properties.AllowNull = true;
+                                   }).BindList(CommonData.lstLoaiHang()).GetHtml()
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <label class="col-form-label-sm col-md-5">HT thanh toán</label>
+                                <div class="col-md-7">
+                                    @Html.DevExpress().ComboBox(settings =>
+                               {
+                                   settings.Name = "cbHTTT";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.SelectedIndex = -1;
+                                   settings.ControlStyle.CssClass = "form-control";
+                                   settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                                   settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                                   settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                                   settings.SelectedIndex = 0;
+                                   settings.Properties.ValueType = typeof(string);
+                                   settings.Properties.AllowNull = true;
+                               }).BindList(new List<string> { "Thanh toán cuối tháng", "Thanh toán đầu nhận","Thanh toán ngay" }).GetHtml()
+                                </div>
+                            </div>
+                            <div class="form-row form-group">
+                                <label class="col-form-label-sm col-md-5">Số tiền COD</label>
+                                <div class="col-md-7">
+                                    @Html.DevExpress().SpinEdit(settings =>
+                                         {
+                                             settings.Name = "txtSoTienCOD";
+                                             settings.Properties.SpinButtons.ShowLargeIncrementButtons = false;
+                                             settings.Properties.SpinButtons.ShowIncrementButtons = true;
+                                             settings.Properties.Increment = 1;
+                                             settings.Properties.NumberType = SpinEditNumberType.Float;
+                                             settings.Properties.DisplayFormatString = "c0";
+                                         }).GetHtml()
+                                </div>
+                            </div>
+
+                            @*<div class="form-row form-group check-input-content">
+                                    <div class="col-md-5">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" value="SO_HOA_DON"> @Booking.hoadon
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="text" id="SO_HOA_DON" name="SO_HOA_DON" class="form-control change-content" value="@dto.SO_HOA_DON" readonly placeholder="@Booking.sohoadon">
+                                    </div>
+                                </div>*@
+                            @*<div class="form-row form-group check-input-content">
+                                    <div class="col-md-5">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" value="HOAN_BBBG">
+                                                @Booking.hoanBBBG
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="text" id="HOAN_BBBG" name="HOAN_BBBG" class="form-control change-content" value="@dto.HOAN_BBBG" readonly placeholder="Hoàn BBBG">
+                                    </div>
+                                </div>
+                                <div class="form-row form-group">
+                                    <div class="col-md-5">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" value="NGAY_HEN_PHAT_SIEU_THI">
+                                                @Booking.phatsieuthi
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        @Html.DevExpress().DateEdit(settings =>
+                                       {
+                                           settings.Name = "NGAY_HEN_PHAT_SIEU_THI";
+                                           settings.ControlStyle.CssClass = "form-control";
+                                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                           settings.Properties.AllowNull = true;
+                                           settings.Properties.NullText = Booking.ngayhenphat;
+                                           settings.Properties.UseMaskBehavior = false;
+                                           settings.Properties.EditFormat = EditFormat.DateTime;
+                                           settings.Properties.EditFormatString = "dd/MM/yyyy HH:mm";
+                                           settings.Properties.TimeSectionProperties.Visible = true;
+                                           settings.Properties.TimeSectionProperties.Adaptive = true;
+                                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.DateTime;
+                                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormatString = "HH:mm";
+                                           settings.Properties.TimeSectionProperties.ClockCellStyle.CssClass = "ClockCSS";
+                                           settings.Properties.CalendarProperties.ShowHeader = false;
+                                           settings.Properties.CalendarProperties.ShowClearButton = false;
+                                           settings.Properties.CalendarProperties.ShowTodayButton = false;
+                                           settings.Properties.CalendarProperties.ShowWeekNumbers = false;
+                                           settings.Properties.TimeSectionProperties.TimeEditProperties.Height = 34;
+                                           if (!string.IsNullOrWhiteSpace(dto.NGAY_HEN_PHAT_SIEU_THI))
+                                           {
+                                               settings.Date = DateTime.ParseExact(dto.NGAY_HEN_PHAT_SIEU_THI, "dd/MM/yyyy HH:mm", null);
+                                           }
+                                       }).GetHtml()
+                                    </div>
+                                </div>
+                                <div class="form-row form-group check-input-content">
+                                    <div class="col-md-12">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" value="DONG_KIEM">
+                                                @Booking.dongkiem
+                                            </label>
+                                            <input type="text" id="DONG_KIEM" name="DONG_KIEM" class="change-content" value="@dto.DONG_KIEM" hidden>
+                                        </div>
+                                    </div>
+                                </div>
+                            *@
+                            <div class="form-row form-group" style="padding-left: 10px;">
+                                <div class="col-md-6">
+                                    <div class="form-row form-group check-input-content">
+                                        <div class="col-md-12">
+                                            <div class="form-check">
+                                                <label class="form-check-label" style="font-size:13px">
+                                                    <input type="checkbox" class="form-check-input" value="PHAT_TAN_TAY">
+                                                    Phát tận tay
+                                                </label>
+                                                <input type="text" id="PHAT_TAN_TAY" name="PHAT_TAN_TAY" class="change-content" value="@dto.isPhatTanTay" hidden>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row form-group check-input-content">
+                                        <div class="col-md-12">
+                                            <div class="form-check">
+                                                <label class="form-check-label" style="font-size:13px">
+                                                    <input type="checkbox" class="form-check-input" value="BAO_PHAT">
+                                                    Báo phát
+                                                </label>
+                                                <input type="text" id="BAO_PHAT" name="BAO_PHAT" class="change-content" value="@dto.isBaoPhat" hidden>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-row form-group check-input-content">
+                                        <div class="col-md-12">
+                                            <div class="form-check">
+                                                <label class="form-check-label" style="font-size:13px">
+                                                    <input type="checkbox" class="form-check-input" value="DONG_KIEM">
+                                                    Đồng kiểm
+                                                </label>
+                                                <input type="text" id="DONG_KIEM" name="DONG_KIEM" class="change-content" value="@dto.isDONG_KIEM" hidden>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row form-group check-input-content">
+                                        <div class="col-md-12">
+                                            <div class="form-check">
+                                                <label class="form-check-label" style="font-size:13px">
+                                                    <input type="checkbox" class="form-check-input" value="KHAC">
+                                                    Khác
+                                                </label>
+                                                <input type="text" id="KHAC" name="KHAC" class="change-content" value="@dto.isKhac" hidden>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="col-lg-2 save-content" style="position:relative">
+        <div class="form-group">
+            <button onclick="Save(this)" title="Thêm đơn" class="btn btn-primary add-order">
+                <i class="mdi mdi-cart-plus"></i> Thêm đơn
+            </button>
+        </div>
+        <div class="form-group">
+            <button type="button" onclick="$('#id01').modal('show')" class="btn btn-primary add-order" title="@Booking.importexcel">
+                <i class="mdi mdi-upload-multiple"></i> Upload excel
+            </button>
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary add-order" onclick="open_modalTinhGia()"><i class="mdi mdi-calculator"></i> @Booking.dukientinhgia </button>
+        </div>
+
+        <div class="form-group save-order">
+            <button type="button" onclick="LuuHang()" id="save-order" class="btn btn-danger add-order">
+                <i class="mdi mdi-content-save"> </i>  @Booking.luudonhang
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row table-booking">
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        {
+            @Html.Action("_grvListBooking")
+        }
+    </div>
+</div>
+
+@*<button type="button" class="btn btn-primary save-order-temp" onclick="LuuDonHangTam()"><i class="mdi mdi-cart"></i> @Booking.luudontam</button>*@
+
+<div id="modal-danhsachnguoinhan" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-xm">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h4>
+                    <span>@Booking.dsNguoiNhan</span>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text border-right-0 bg-white" id="basic-addon1" style="border-bottom-right-radius:0; border-top-right-radius:0"><i class="fa fa-search"></i></span>
+                                </div>
+                                <input type="text" id="myInput" onkeyup="filterNguoiNhan()" placeholder="@Booking.nhapttnguoinhan" class="form-control border-left-0" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <ul id="myUL" class="list-info-filter list-unstyled">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="id01" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-xm">
+        <div class="modal-content">
+            <div class="modal-header" style="border: 0;">
+                <h3> <span>@Booking.importexcel</span></h3>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row m-0">
+                    <div class="col-md-12 form-group">
+                        <label>@Booking.chontep</label>
+                        <div class="input-group">
+                            <label class="input-group-btn">
+                                <span class="btn btn-primary" style="font-style:normal">
+                                    @Booking.chontep <input type="file" id="UploadedFile" style="display: none;" name="UploadedFile" accept=".xlsx" onchange="readInput(this)">
+                                </span>
+                            </label>
+                            <input type="text" class="form-control" readonly style="margin-top:0" id="tenfile">
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <label>@Booking.tensheet</label>
+                        <input id="sheetname" name="sheetname" class="form-control" value="Sheet1" required />
+                    </div>
+                    <div class="col-md-12 form-group text-right">
+                        @if (user.CUSTOMER_CODE.Equals("0131858"))
+                        {
+                            <input type="submit" onclick="Upload_VinID()" class="btn btn-primary" name="Submit" value="@Booking.importexcel" />
+                            <input type="button" class="btn btn-primary" value="@Booking.filemau" onclick="location.href = '/Excel/FileMau.xlsx?id=@DateTime.Now.ToString("HHmmss")'" />
+                        }
+                        else
+                        {
+                            <input type="submit" onclick="Upload(this)" class="btn btn-primary" name="Submit" value="@Booking.importexcel" />
+                            <input type="button" class="btn btn-primary" value="@Booking.filemau" onclick="location.href = '/Excel/File_Excel_Mau.xlsx?id=@DateTime.Now.ToString("HHmmss")'" />
+                        }
+                    </div>
+                    <div class="col-md-12">
+                        <div class="alert alert-danger" style="margin-top:15px">
+                            <i class="fa fa-warning"></i>  <strong>@Booking.thongBao</strong>
+                            @*<br />
+                                <span>06/01/2021</span>*@
+                            <br />
+                            @*QUÝ KHÁCH VUI LÒNG XUẤT VÀ LÀM THEO FORM MẪU MỚI TRƯỚC KHI THỰC HIỆN UPLOAD.*@
+                            06/01/2021 - Quý khách vui lòng nhập chính xác tỉnh nhận vào file excel, tham khảo sheet "Danh sách tỉnh TP" trong file excel mới để nhập liệu chính xác.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal1" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="border: 0;">
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 0px 15px 10px;">
+                <iframe src="" height="550" style="width:100%">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-ngaylayhang" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h4>
+                    <span>@Booking.ttlayhang</span>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body pt-0">
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-form-label-lg"> @Booking.ngayyclayhang <strong style="color:red">*</strong> </label>
+                            <div class="form-inline">
+                                <div class="input-group date col-5 px-0">
+                                    @Html.DevExpress().DateEdit(settings =>
+                                   {
+                                       settings.Name = "DateNgayLayHang";
+                                       settings.ControlStyle.CssClass = "form-control ngaydukienlayhang";
+                                       settings.Properties.DisplayFormatString = "dd/MM/yyyy";
+                                       settings.Properties.AllowMouseWheel = false;
+                                       settings.Properties.DropDownButton.Visible = false;
+                                       settings.Properties.CalendarProperties.ShowClearButton = false;
+                                       settings.Properties.CalendarProperties.ShowTodayButton = false;
+                                   }).GetHtml()
+                                    <div class="input-group-append ngaydukienlayhang">
+                                        <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                    </div>
+                                </div>
+                                <div class="btn-group col-7 px-0 pl-2" role="group">
+                                    <button id="btn-today" type="button" class="btn btn-info">Hôm nay</button>
+                                    <button id="btn-tomorow" type="button" class="btn btn-info">Ngày mai</button>
+                                    <button id="btn-choosedate" type="button" class="btn btn-info">Chọn ngày</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-form-label-lg"> @Booking.tennguoigui </label>
+                            <textarea type="text" class="form-control" id="txtTenNguoiGui"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-form-label-lg"> @Booking.sdtnguoigui </label>
+                            <input type="text" class="form-control" id="txtSDTNguoiGui" />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-form-label-lg"> @Booking.dichinguoigui </label>
+                            <textarea type="text" class="form-control" id="txtDiaChiNguoiGui"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-form-label-lg">@Booking.kthang<strong style="color:red">*</strong></label>
+                            <div class="combobox-body position-relative">
+                                @Html.DevExpress().ComboBox(settings =>
+                                {
+                                    settings.Name = "cbKichThuoc";
+                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                    settings.SelectedIndex = -1;
+                                    settings.ControlStyle.CssClass = "form-control";
+                                    settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                                    settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                                    settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                                    settings.Properties.ValueType = typeof(string);
+                                    settings.Properties.ValueField = "Value";
+                                    settings.Properties.TextField = "Text";
+                                    settings.Properties.ClientSideEvents.Init = "function(s,e){cbKichThuoc.SetValue(\"" + ViewBag.KT_HANG + "\") }";
+                                }).BindList(CommonData.lstKichThuoc()).GetHtml()
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-form-label-lg">@Booking.tinhlayhang<strong style="color:red">*</strong></label>
+                            <div class="combobox-body position-relative">
+                                @Html.DevExpress().ComboBox(settings =>
+                               {
+                                   settings.Name = "cbTinhLayHang";
+                                   settings.SelectedIndex = -1;
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDownList;
+                                   settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                                   settings.ControlStyle.CssClass = "form-control";
+                                   settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                                   settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.TextField = "TEN_CO_DAU";
+                                   settings.Properties.ValueField = "ZONE_CODE";
+                                   settings.Properties.ClientSideEvents.Init = "function(){cbTinhLayHang_OnInit('" + ViewBag.TINH_LH + "','" + ViewBag.HUYEN_LH + "');}";
+                                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(){cbTinhLayHang_OnSelectedChanged();}";
+                               }).BindList(ViewData["_listZone"] as List<OP_ZONE_MASTERDTO>).GetHtml()
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-form-label-lg">@Booking.quanlayhang<strong style="color:red">*</strong></label>
+                            <div class="lstHuyenLayHang position-relative">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-group" style="text-align:center">
+                        <button class="btn btn-primary luudonhang" onclick="LuuHang()"><i class="mdi mdi-content-save" id="refresh"> </i>  @Booking.luudonhang </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-dukientinhgia" class="modal fade overflow-auto" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0" style="padding-top:10px; padding-bottom:3px;">
+                <h4 id="title"><span>@Booking.dukientinhgia</span>  </h4>
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
+            </div>
+            <div class="modal-body pt-0">
+                <div class="form-row">
+                    <div class="col-lg-12 stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="ttTinhGia form-row m-0">
+                                    <div class="col-md-12 form-group">
+                                        <p class="font-weight-bold">@Booking.tenkh: <em id="txtTenKhachHang" style="color: crimson;">@ClientSession.getTenDayDuKHCon() </em> </p>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <label class="col-form-label-custom">@Booking.tinhlayhang <strong class="text-danger">*</strong> </label>
+                                        <div class="combobox-body position-relative">
+                                            @Html.DevExpress().ComboBox(settings =>
+                                       {
+                                           settings.Name = "cbTinhDi";
+                                           settings.SelectedIndex = -1;
+                                           settings.Properties.DropDownStyle = DropDownStyle.DropDownList;
+                                           settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                                           settings.ControlStyle.CssClass = "form-control";
+                                           settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                                           settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                           settings.Properties.TextField = "TEN_CO_DAU";
+                                           settings.Properties.ValueField = "ZONE_CODE";
+                                           //settings.ClientEnabled = false;
+                                       }).BindList(ViewData["_listZone"] as List<OP_ZONE_MASTERDTO>).GetHtml()
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label class="col-form-label-custom">@Resource.tinhden <strong class="text-danger">*</strong> </label>
+                                        <div class="combobox-body position-relative">
+                                            @Html.DevExpress().ComboBox(settings =>
+                                            {
+                                                settings.Name = "cbTinhDen";
+                                                settings.SelectedIndex = -1;
+                                                settings.Properties.DropDownStyle = DropDownStyle.DropDownList;
+                                                settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                                                settings.ControlStyle.CssClass = "form-control";
+                                                settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                                                settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                                settings.Properties.TextField = "TEN_CO_DAU";
+                                                settings.Properties.ValueField = "ZONE_CODE";
+                                            }).BindList(ViewData["_listZone"] as List<OP_ZONE_MASTERDTO>).GetHtml()
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 align-self-end">
+                                        <div class="form-check-inline form-group py-2 mr-5">
+                                            <label class="form-check-label">
+                                                <input type="radio" id="radQuanTP" name="radQuanHuyen" class="form-check-input"> @Booking.denquantp <i class="input-helper"></i>
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline form-group py-2">
+                                            <label class="form-check-label">
+                                                <input type="radio" id="radHuyenXa" name="radQuanHuyen" class="form-check-input"> @Booking.denhuyenxa <i class="input-helper"></i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label class="col-form-label-custom">@Booking.dichvu <strong class="text-danger">*</strong> </label>
+                                        <div class="combobox-body position-relative">
+                                            @Html.DevExpress().ComboBox(settings =>
+                                            {
+                                                settings.Name = "cbTos";
+                                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                                settings.SelectedIndex = -1;
+                                                settings.ControlStyle.CssClass = "form-control form-boder";
+                                                settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                                                settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                                                settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                                                settings.Properties.ValueType = typeof(string);
+                                                settings.Properties.ValueField = "Value";
+                                                settings.Properties.TextField = "Text";
+                                            }).BindList(CommonData.lstDichVu(true)).GetHtml()
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label class="col-form-label-custom">@Booking.tl_kien (kg) <strong class="text-danger">*</strong> </label>
+                                        <input id="txtTrongLuong" class="form-control" type="number" min="0.1" max="999999" step="0.1" value="0" />
+                                    </div>
+                                    <div class="justify-content-center form-group-sm col-md-12">
+                                        <div class="item-form istable table-responsive kich_thuoc_hang_hoa">
+                                            <h1>Kích thước hàng hóa (nếu là hàng cồng kềnh)</h1>
+                                            <table id="DimensionsLine" class="table table-bordered">
+                                                <thead>
+                                                    <tr style="border: 1px solid #dee2e6;">
+                                                        <th>STT</th>
+                                                        <th>Số kiện</th>
+                                                        <th>Chiều dài (CM)</th>
+                                                        <th>Chiều rộng (CM)</th>
+                                                        <th>Chiều cao (CM)</th>
+                                                        <th>Xóa dòng</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                            <a id="addDimensionsLine" class="themkien" href="#"><i class="fa fa-plus"></i> Thêm kiện mới</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 py-2">
+                                        <button type="button" class="btn btn-primary form-control" onclick="DuKienTinhGia(this)"><i class="mdi mdi-calculator-variant"></i> @Booking.tinhgia </button>
+                                    </div>
+                                </div>
+
+                                <div class="kqtinhgia m-0 d-none col-md-12 table-responsive">
+                                    <div class="col-md-12 justify-content-center form-group-sm">
+                                        <h1 style="width:100%">Thông tin cước</h1>
+                                        <table id="table_thong_tin_cuoc" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Tỉnh nhận</th>
+                                                    <th scope="col">Tỉnh phát</th>
+                                                    <th scope="col">Trọng lượng tính cước</th>
+                                                    <th scope="col">Dịch vụ</th>
+                                                    <th scope="col">Cước chính</th>
+                                                    <th scope="col">Vat </th>
+                                                    <th scope="col">Tổng cước(có vat)</th>
+                                                    @*<th scope="col">Thời gian dự kiến</th>*@
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                        @*<div class="alert alert-success w-100" role="alert">
+                                                <p class="font-italic px-0">Chưa bao gồm phụ phí kết nối vùng xa</p>
+                                            </div>*@
+                                    </div>
+
+                                    @*<div id="chuyenphatthuong">
+                                            <h6 class="title"> <span>Dịch vụ chuyển phát thường</span> </h6>
+
+                                            <div class="form-row m-0" style="height:23px">
+                                                <label class="col-md-12 hangcongkenh d-none">@Booking.tlhangcongkenh: <span></span></label>
+                                            </div>
+
+                                            <div class="form-row kqtinhgia-content">
+                                                <label class="col-md-4"> @Booking.thanhtien </label>
+                                                <label class="col-md-8 AMOUNT"></label>
+                                            </div>
+                                            <div class="form-row kqtinhgia-content">
+                                                <label class="col-md-4"> VAT </label>
+                                                <label class="col-md-8 VAT"> </label>
+                                            </div>
+                                            <div class="form-row kqtinhgia-content">
+                                                <label class="col-md-4">@Booking.tongtien </label>
+                                                <label class="col-md-8 VIETNAMESE_NET_AMT"></label>
+                                            </div>
+                                        </div>
+
+                                        <div id="chuyenphatnhanh">
+                                            <h6 class="title"> <span>Dịch vụ chuyển phát nhanh</span> </h6>
+
+                                            <div class="form-row m-0" style="height:23px">
+                                                <label class="col-md-12 hangcongkenh d-none">@Booking.tlhangcongkenh: <span></span></label>
+                                            </div>
+
+                                            <div class="form-row kqtinhgia-content">
+                                                <label class="col-md-4"> @Booking.thanhtien </label>
+                                                <label class="col-md-8 AMOUNT"></label>
+                                            </div>
+                                            <div class="form-row kqtinhgia-content">
+                                                <label class="col-md-4"> VAT </label>
+                                                <label class="col-md-8 VAT"> </label>
+                                            </div>
+                                            <div class="form-row kqtinhgia-content">
+                                                <label class="col-md-4">@Booking.tongtien </label>
+                                                <label class="col-md-8 VIETNAMESE_NET_AMT"></label>
+                                            </div>
+                                        </div>
+
+                                        <div id="phathoatoc">
+                                            <h6 class="title"> <span>Dịch vụ phát hỏa tốc</span> </h6>
+
+                                            <div class="form-row m-0" style="height:23px">
+                                                <label class="col-md-12 hangcongkenh d-none">@Booking.tlhangcongkenh: <span></span></label>
+                                            </div>
+
+                                            <div class="form-row kqtinhgia-content">
+                                                <label class="col-md-4"> @Booking.thanhtien </label>
+                                                <label class="col-md-8 AMOUNT"></label>
+                                            </div>
+                                            <div class="form-row kqtinhgia-content">
+                                                <label class="col-md-4"> VAT </label>
+                                                <label class="col-md-8 VAT"> </label>
+                                            </div>
+                                            <div class="form-row kqtinhgia-content">
+                                                <label class="col-md-4">@Booking.tongtien </label>
+                                                <label class="col-md-8 VIETNAMESE_NET_AMT"></label>
+                                            </div>
+                                        </div>*@
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="img-loading d-none font-weight-bold" style="position: absolute;left: 30%;top: 40%; padding: 15px 115px; border-radius: 5px; background: #ebebeb; border:1px solid lightgray">
+                    <img src="~/lib/images/loading.gif" style="width: 25px;" />    Loading
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-danhsachtinhhuyen" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-xm">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="error-header text-center text-danger font-weight-bold font-20">
+
+                        </p>
+                    </div>
+                    <div class="col-md-12">
+                        <p class="error-title">
+
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text border-right-0 bg-white" id="basic-addon1" style="border-bottom-right-radius:0; border-top-right-radius:0"><i class="fa fa-search"></i></span>
+                                </div>
+                                <input type="text" id="txtTinhTP" onkeyup="filterDanhSachTinhTP()" placeholder="Nhập tỉnh/TP" class="form-control border-left-0" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <ul id="lstTinhHuyen" class="list-info-filter list-unstyled" style="height:300px;">
+                                @foreach (var item in ViewData["_listZone"] as List<OP_ZONE_MASTERDTO>)
+                                {
+                                    <li><p> @item.TEN_CO_DAU </p></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(window).on('load', function () {
+        checkvad();
+
+        $('#live-chat').addClass('d-none');
+    });
+
+    $("input[data-type='currency']").on({
+        keyup: function () {
+            formatCurrency($(this));
+        },
+        blur: function () {
+            formatCurrency($(this), "blur");
+        }
+    });
+
+    function formatCurrency(input, blur) {
+        // get input value
+        var input_val = input.val();
+        if (input_val === "") {
+            return;
+        }
+        input_val = input_val.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        // send updated string to input
+        input.val(input_val);
+    }
+
+    function cbTinhNhan_OnInit(zode_code, district_code) {
+        cbTinhNhan.SetValue(zode_code);
+        $('#lstHuyen').load("/Booking/CbHuyenNhan?ZoneCode=" + zode_code + "&district_code=" + district_code + "&name=cbHuyenNhan", function () {
+            if (zode_code == "" || zode_code == null) {
+                $('#cbTinhNhan').addClass("border-danger");
+            }
+            else {
+                $('#cbTinhNhan').removeClass("border-danger");
+            }
+            if (district_code == "" || district_code == null) {
+               /* $('#cbHuyenNhan').addClass("border-danger");*/
+            }
+            else {
+                //$('#cbHuyenNhan').removeClass("border-danger");
+            }
+            if (cbDichVu.GetValue() != null) {
+                $('#cbDichVu').removeClass("border-danger");
+            }
+            else {
+                $('#cbDichVu').addClass("border-danger");
+            }
+
+            //if (cbDichVu.GetValue() != null) {
+            //    $('#NGUOI_NHAN').removeClass("border-danger");
+            //}
+            //else {
+            //    $('#NGUOI_NHAN').addClass("border-danger");
+            //}
+
+        });
+    }
+
+    function cbTinhNhan_OnSelectedChanged(s, e) {
+        cbTinhNhan_OnInit(cbTinhNhan.GetValue(),"");
+    }
+    function cbDichVu_OnSelectedChanged(s, e) {
+        if (cbDichVu.GetValue() != null) {
+            $('#cbDichVu').removeClass("border-danger");
+        }
+        else {
+            $('#cbDichVu').addClass("border-danger");
+        }
+    }
+
+    function cbHuyenNhan_OnSelectedChanged() {
+        if (cbHuyenNhan.GetValue() != null) {
+            $('#cbHuyenNhan').removeClass("border-danger");
+        }
+        else {
+            //$('#cbHuyenNhan').addClass("border-danger");
+        }
+    }
+
+    function cbTinhLayHang_OnInit(zode_code, district_code) {
+        cbTinhLayHang.SetValue(zode_code);
+        $('.lstHuyenLayHang').load("/Booking/CbHuyenNhan?ZoneCode=" + zode_code + "&district_code="+ district_code+"&name=cbHuyenLayHang");
+    }
+
+    function cbTinhLayHang_OnSelectedChanged() {
+         cbTinhLayHang_OnInit(cbTinhLayHang.GetValue(),"");
+    }
+
+    $('.form-boder').on('input', function () {
+        if (this.value.trim() != "") {
+
+            $(this).removeClass("border-danger");
+        }
+        else
+            $(this).addClass("border-danger");
+    });
+
+    $('.form-check-input').on('change', function (e) {
+        var value = e.currentTarget.value;
+
+        if (e.currentTarget.checked) {
+            if (value == "NGAY_HEN_PHAT_SIEU_THI") {
+                NGAY_HEN_PHAT_SIEU_THI.SetEnabled(true);
+                NGAY_HEN_PHAT_SIEU_THI.SetDate(new Date());
+                NGAY_HEN_PHAT_SIEU_THI.ShowDropDown();
+            }
+            else {
+                $('#'+value).removeAttr("readonly");
+                $('#'+value).focus();
+            }
+        }
+        else
+            if (value == "NGAY_HEN_PHAT_SIEU_THI") {
+                NGAY_HEN_PHAT_SIEU_THI.SetEnabled(false);
+                NGAY_HEN_PHAT_SIEU_THI.SetDate(null);
+                NGAY_HEN_PHAT_SIEU_THI.HideDropDown();
+            }
+            else {
+                $('#'+value).attr("readonly", "true");
+            }
+
+    });
+
+    function checkvad() {
+        var lstInput = $('#myform').find('.form-boder');
+        for (var i = 0; i < lstInput.length; i++) {
+            if (lstInput[i].tagName != "TABLE")
+                if (lstInput[i].value != null && lstInput[i].value.trim() != "") {
+                    $(lstInput[i]).removeClass("border-danger");
+                }
+                else
+                    $(lstInput[i]).addClass("border-danger");
+        }
+        txtSoTienCOD.SetText('0');
+
+        var lstFormCheck = $('#myform').find('.check-input-content input[type="text"]');
+        for (var i = 0; i < lstFormCheck.length; i++) {
+            var id = lstFormCheck[i].id;
+            if (lstFormCheck[i].value != null && lstFormCheck[i].value.trim() != "") {
+                $(lstFormCheck[i]).removeAttr("readonly");
+                $('input[value="' + id + '"]').prop("checked", true);
+            }
+            else {
+                $(lstFormCheck[i]).attr("readonly", "true");
+                $('input[value="' + id + '"]').prop("checked", false);
+            }
+        }
+        cbHTTT.SelectedIndex = 0;
+
+        //if (NGAY_HEN_PHAT_SIEU_THI.GetDate() == null || NGAY_HEN_PHAT_SIEU_THI.GetDate() == "") {
+        //    $('input[value="NGAY_HEN_PHAT_SIEU_THI"]').prop("checked", false);
+        //    NGAY_HEN_PHAT_SIEU_THI.SetEnabled(false);
+        //    DateNgayLayHang.SetDate(new Date());
+        //}
+        //else {
+        //    $('input[value="NGAY_HEN_PHAT_SIEU_THI"]').prop("checked", true);
+        //}
+
+        if (cbTinhLayHang.GetValue() != null) {
+            cbTinhLayHang.SetEnabled(false);
+        }
+    }
+
+    @*$('#save-order').on('click', function () {
+        if(gridView.GetRowKey(0) ==null && $('#NGUOI_NHAN').val() ==""){
+            Swal.fire(
+                '',
+                '@Html.Raw(Booking.errKhongCoDH)',
+                'error')
+            return;
+        }
+
+        if (gridView.GetRowKey(0) != null) {
+            gridView.GetRowValues(0, "TEN_NGUOI_GUI;SDT_GUI;DIA_CHI_NGUOI_GUI", function (values) {
+                $('#txtTenNguoiGui').val(values[0]);
+                $('#txtSDTNguoiGui').val(values[1]);
+                $('#txtDiaChiNguoiGui').val(values[2]);
+            });
+        }
+        else {
+            $('#txtTenNguoiGui').val($('#NGUOI_GUI').val());
+            $('#txtSDTNguoiGui').val($('#SDT_GUI').val());
+            $('#txtDiaChiNguoiGui').val($('#DIA_CHI_NGUOI_GUI').val());
+        }
+
+        DateNgayLayHang.SetDate(null);
+
+        $('#modal-ngaylayhang').modal({ backdrop: 'static'});
+    });*@
+
+    //nút thêm hàng
+    function Save() {
+        var data = {
+            TEN_NGUOI_GUI: $('#NGUOI_GUI').val(),
+            SDT_GUI: $('#SDT_GUI').val(),
+            DIA_CHI_NGUOI_GUI: $('#DIA_CHI_NGUOI_GUI').val(),
+
+            TEN_NGUOI_NHAN: $('#NGUOI_NHAN').val(),
+            SDT_NHAN: $('#SDT_NHAN').val(),
+            MA_TINH_NHAN: cbTinhNhan.GetValue(),
+            MA_HUYEN_NHAN: cbHuyenNhan.GetValue(),
+            TINH_NHAN: cbTinhNhan.GetText(),
+            HUYEN_NHAN: cbHuyenNhan.GetText(),
+            DIA_CHI: $('#DIA_CHI').val(),
+
+            DICH_VU: cbDichVu.GetValue(),
+            TRONG_LUONG: parseFloat($('#TRONG_LUONG').val()).toFixed(2).replace(".", ","),
+            SO_COD: parseFloat(txtSoTienCOD.GetValue()),
+            NOI_DUNG: $('#NOI_DUNG').val(),
+            SO_KIEN: $('#SO_KIEN').val(),
+            SO_THAM_CHIEU: $('#SO_THAM_CHIEU').val(),
+            GT_DON_HANG: $('#GT_DON_HANG').val(),
+
+            SO_HOA_DON:$('input[value="SO_HOA_DON"]').prop('checked')? $('#SO_HOA_DON').val():"",
+            HOAN_BBBG: $('input[value="HOAN_BBBG"]').prop('checked') ? $('#HOAN_BBBG').val():"",
+            //NGAY_HEN_PHAT_SIEU_THI: $('input[value="NGAY_HEN_PHAT_SIEU_THI"]').prop('checked') ? moment(NGAY_HEN_PHAT_SIEU_THI.GetDate()).format("DD/MM/YYYY HH:MM") :"",
+            DONG_KIEM: $('input[value="DONG_KIEM"]').prop('checked') ? "Đồng kiểm" : "",
+            PHAT_TAN_TAY: $('input[value="PHAT_TAN_TAY"]').prop('checked') ? "Phát tận tay" : "",
+            BAO_PHAT: $('input[value="BAO_PHAT"]').prop('checked') ? "Báo phát" : "",
+            KHAC: $('input[value="KHAC"]').prop('checked') ? "Khác" : "",
+            LOAI_BPBK: cbLoaiHang.GetText(),
+            HT_THANH_TOAN:cbHTTT.GetText(),
+        }
+        if (cbDichVu.GetValue() == null || cbDichVu.GetValue() == '') {
+            Swal.fire(
+                '',
+                'Mời bạn chọn dịch vụ',
+                'error');
+            $('#refresh').removeClass("fa fa-spinner fa-spin").addClass("mdi mdi-content-save");
+            $('button.luudonhang').removeAttr("disabled");
+            return;
+        }
+        var isCheck = checkVadidate();
+        if (isCheck)
+            return;
+
+        $.ajax({
+            url: "/Booking/DonHangMoiTuSinh",
+            type: "POST",
+            data: data,
+            dataType: 'json',
+            success: function (data) {
+                if (!data.Error) {
+                    Toast.fire({
+                            icon: 'success',
+                            title: '@Html.Raw(Booking.WH_themThanhCong)'
+                        });
+                    gridView.Refresh();
+
+                    $('.change-content').val('');
+                    cbTinhNhan.SetSelectedIndex(-1);
+                    cbTinhNhan_OnInit("", "");
+                    cbDichVu.SetSelectedIndex(-1);
+                    //NGAY_HEN_PHAT_SIEU_THI.SetDate(null);
+                    checkvad();
+
+                }
+                else {
+                    Swal.fire(
+                        '',
+                        data.Title,
+                        'error')
+                    return;
+                }
+            }
+        });
+    }
+
+    // nút lưu hàng
+    function LuuHang() {
+         if(gridView.GetRowKey(0) ==null && $('#NGUOI_NHAN').val() ==""){
+            Swal.fire(
+                '',
+                '@Html.Raw(Booking.errKhongCoDH)',
+                'error')
+            return;
+        }
+
+        if (gridView.GetRowKey(0) != null) {
+            gridView.GetRowValues(0, "TEN_NGUOI_GUI;SDT_GUI;DIA_CHI_NGUOI_GUI", function (values) {
+                $('#txtTenNguoiGui').val(values[0]);
+                $('#txtSDTNguoiGui').val(values[1]);
+                $('#txtDiaChiNguoiGui').val(values[2]);
+            });
+        }
+        else {
+            $('#txtTenNguoiGui').val($('#NGUOI_GUI').val());
+            $('#txtSDTNguoiGui').val($('#SDT_GUI').val());
+            $('#txtDiaChiNguoiGui').val($('#DIA_CHI_NGUOI_GUI').val());
+        }
+        $('#refresh').removeClass("mdi mdi-content-save").addClass("fa fa-spinner fa-spin");
+        $('button.luudonhang').attr("disabled");
+
+        //if (DateNgayLayHang.GetDate() == undefined) {
+        //    $('button.luudonhang').removeAttr("disabled");
+        //    $('#refresh').removeClass("fa fa-spinner fa-spin").addClass("mdi mdi-content-save");
+
+        //    Swal.fire({
+        //        title: "Ngày yêu cầu lấy hàng không được bỏ trống.",
+        //        icon: 'error'
+        //    })
+        //    .then(function (willDelete) {
+        //        setTimeout(function () {
+        //            DateNgayLayHang.ShowDropDown();
+        //        }, 10);
+        //    });
+        //    return;
+        //}
+
+        var NGAY_KH_DU_KIEN_LAY_HANG = moment(DateNgayLayHang.GetDate()).format("DD/MM/YYYY");
+        if (gridView.GetRowKey(0) == null) {
+            if (cbDichVu.GetValue() == null || cbDichVu.GetValue() == '') {
+                Swal.fire(
+                    '',
+                    'Mời bạn chọn dịch vụ',
+                    'error');
+                $('#refresh').removeClass("fa fa-spinner fa-spin").addClass("mdi mdi-content-save");
+                $('button.luudonhang').removeAttr("disabled");
+                return;
+            }
+            if ($('#txtTenNguoiGui').val() == "") {
+            $('button.luudonhang').removeAttr("disabled");
+            $('#refresh').removeClass("fa fa-spinner fa-spin").addClass("mdi mdi-content-save");
+            Swal.fire(
+                '',
+                "@Html.Raw(Booking.errTenNguoiGui)",
+                    'error')
+                return;
+            }
+            if ($('#txtSDTNguoiGui').val() == "") {
+            $('button.luudonhang').removeAttr("disabled");
+            $('#refresh').removeClass("fa fa-spinner fa-spin").addClass("mdi mdi-content-save");
+            Swal.fire(
+                '',
+                "@Html.Raw(Booking.errSDTgui)",
+                    'error')
+                return;
+                }
+
+            if ($('#txtDiaChiNguoiGui').val() == "") {
+                $('button.luudonhang').removeAttr("disabled");
+                $('#refresh').removeClass("fa fa-spinner fa-spin").addClass("mdi mdi-content-save");
+                Swal.fire(
+                    '',
+                    "@Html.Raw(Booking.msg_dia_chi_nguoi_gui)",
+                        'error')
+                    return;
+            }
+        }
+
+
+
+
+        @*if (cbKichThuoc.GetValue() == null) {
+            $('button.luudonhang').removeAttr("disabled");
+            $('#refresh').removeClass("fa fa-spinner fa-spin").addClass("mdi mdi-content-save");
+            Swal.fire(
+                '',
+                "@Html.Raw(Booking.vadkthang)",
+                    'error')
+                return;
+        }*@
+        @*if(cbTinhLayHang.GetValue() ==null)
+        {
+            $('button.luudonhang').removeAttr("disabled");
+            $('#refresh').removeClass("fa fa-spinner fa-spin").addClass("mdi mdi-content-save");
+            Swal.fire(
+                '',
+                "@Html.Raw(Booking.vadtinhlayhang)",
+                    'error')
+                return;
+        }
+        if(cbHuyenLayHang.GetValue() ==null)
+        {
+            $('button.luudonhang').removeAttr("disabled");
+            $('#refresh').removeClass("fa fa-spinner fa-spin").addClass("mdi mdi-content-save");
+            Swal.fire(
+                '',
+                "@Html.Raw(Booking.vadquanlayhang)",
+                    'error')
+                return;
+        }*@
+
+        var data = {
+            TEN_NGUOI_GUI: $('#txtTenNguoiGui').val(),
+            SDT_GUI: $('#txtSDTNguoiGui').val(),
+            DIA_CHI_NGUOI_GUI: $('#txtDiaChiNguoiGui').val(),
+
+            TEN_NGUOI_NHAN: $('#NGUOI_NHAN').val(),
+            SDT_NHAN: $('#SDT_NHAN').val(),
+            MA_TINH_NHAN: cbTinhNhan.GetValue(),
+            MA_HUYEN_NHAN: cbHuyenNhan.GetValue(),
+            TINH_NHAN: cbTinhNhan.GetText(),
+            HUYEN_NHAN: cbHuyenNhan.GetText(),
+            DIA_CHI: $('#DIA_CHI').val(),
+
+            TINH_LH: cbTinhLayHang.GetText(),
+            HUYEN_LH: cbHuyenLayHang.GetText(),
+            MA_TINH_LH: cbTinhLayHang.GetValue(),
+            MA_HUYEN_LH: cbHuyenLayHang.GetValue(),
+            DICH_VU: cbDichVu.GetValue(),
+            TRONG_LUONG: parseFloat($('#TRONG_LUONG').val()).toFixed(2).replace(".", ","),
+            NOI_DUNG: $('#NOI_DUNG').val(),
+            SO_KIEN: $('#SO_KIEN').val(),
+            SO_THAM_CHIEU: $('#SO_THAM_CHIEU').val(),
+            KT_HANG: cbKichThuoc.GetValue(),
+            GT_DON_HANG: $('#GT_DON_HANG').val(),
+
+            SO_HOA_DON:$('input[value="SO_HOA_DON"]').prop('checked')? $('#SO_HOA_DON').val():"",
+            HOAN_BBBG: $('input[value="HOAN_BBBG"]').prop('checked') ? $('#HOAN_BBBG').val():"",
+            NGAY_HEN_PHAT_SIEU_THI: $('input[value="NGAY_HEN_PHAT_SIEU_THI"]').prop('checked') ? moment(NGAY_HEN_PHAT_SIEU_THI.GetDate()).format("DD/MM/YYYY HH:MM") :"",
+            DONG_KIEM: $('input[value="DONG_KIEM"]').prop('checked') ? "Đồng kiểm" : "",
+            PHAT_TAN_TAY: $('input[value="PHAT_TAN_TAY"]').prop('checked') ? "Phát tận tay" : "",
+            BAO_PHAT: $('input[value="BAO_PHAT"]').prop('checked') ? "Báo phát" : "",
+            KHAC: $('input[value="KHAC"]').prop('checked') ? "Khác" : "",
+            LOAI_BPBK: cbLoaiHang.GetText(),
+            HT_THANH_TOAN: cbHTTT.GetText(),
+            SO_COD: parseFloat(txtSoTienCOD.GetValue())
+        }
+
+        if(gridView.GetRowKey(0) ==null){
+            var isCheck = checkVadidate();
+            if (isCheck)
+                return;
+        }
+
+        $.ajax({
+            url: "/Booking/ListDatHangTuSinh",
+            type: "POST",
+            data: { model: data, ngayyc: NGAY_KH_DU_KIEN_LAY_HANG, taoTuMT: gridView.GetRowKey(0) == null },
+            dataType: 'json',
+            success: function (data) {
+                $('button.luudonhang').removeAttr("disabled");
+                $('#refresh').removeClass("fa fa-spinner fa-spin").addClass("mdi mdi-content-save");
+                if(data.Error)
+                {
+                    Swal.fire(
+                        '',
+                        data.Title,
+                        'error')
+                    return;
+                }
+                else {
+                    gridView.Refresh();
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: '@Html.Raw(Booking.msg_luu_thanh_cong)'
+                    });
+                    $('#modal1 .modal-body iframe').attr("src", "/Booking/PhieuGui/");
+                    $('#modal1').modal({ backdrop: "static" });
+                    $('#modal-ngaylayhang').modal('hide');
+                    $('.change-content').val('');
+                    cbTinhNhan.SetSelectedIndex(-1);
+                    cbTinhNhan_OnInit("", "");
+                    cbDichVu.SetSelectedIndex(-1);
+                    //NGAY_HEN_PHAT_SIEU_THI.SetDate(null);
+                    checkvad();
+                }
+            }
+        });
+    }
+
+    //
+    function Upload(obj) {
+        $(obj).attr("disabled", true);
+
+        var data = new FormData();
+        $.each($("#UploadedFile"), function (i, obj) {
+            $.each(obj.files, function (j, file) {
+                data.append("UploadedFile", file); // is the var i against the var j, because the i is incremental the j is ever 0
+            });
+        });
+        data.append("TT_BO_SUNG",$('#sheetname').val());
+        $.ajax({
+            url: "/Booking/Upload",
+            type:"POST",
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                $(obj).removeAttr("disabled");
+                $("#UploadedFile").val('');
+                $('#tenfile').val('');
+                $('#sheetname').val('Sheet1');
+                if(data.Error)
+                {
+                    if (data.ID == 0) {
+                        Swal.fire(
+                            '',
+                            data.Title,
+                            'error')
+                        return;
+                    }
+                    else {
+                        $('.error-header').html("Lỗi dòng số: " + data.ID);
+                        $('.error-title').html(data.Title);
+                        $('#modal-danhsachtinhhuyen').modal({ backdrop:'static'});
+                        return;
+                    }
+                }
+                gridView.Refresh();
+                $('#id01').modal('hide');
+            }
+        });
+    }
+
+    function Upload_VinID() {
+        $('#listbooking tbody').empty();
+        var data = new FormData();
+        $.each($("#UploadedFile"), function (i, obj) {
+            $.each(obj.files, function (j, file) {
+                data.append("UploadedFile", file); // is the var i against the var j, because the i is incremental the j is ever 0
+            });
+        });
+        data.append("TT_BO_SUNG",$('#sheetname').val());
+        $.ajax({
+            url: "/Booking/Upload_VinID",
+            type:"POST",
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                if(data.Error)
+                {
+                    Swal.fire(
+                        '',
+                        data.Title,
+                        'error')
+                    return;
+                }
+                gridView.Refresh();
+                $('#tenfile').val('');
+                $('#sheetname').val('Sheet1');
+                $('#id01').modal('hide');
+            }
+        });
+    }
+
+    function readInput(input) {
+        if (input.files && input.files[0]) {
+            $('#tenfile').val(input.files[0].name);
+        }
+    }
+
+    function XoaDonHangTuSinh(id){
+        $.ajax({
+            url: "/Booking/XoaDonHangTuSinh",
+            type:"POST",
+            data: {id:id},
+            dataType: 'json',
+            success: function (data) {
+                if(data.Error)
+                {
+                    Swal.fire(
+                        '',
+                        data.Title,
+                        'error')
+                    return;
+                }
+                else{
+                    gridView.Refresh();
+                }
+            }
+        });
+    }
+
+    // xử lý sự kiện tìm kiếm danh sách người nhận
+    function LayDanhSachThongTinNguoiNhan(obj) {
+        $(obj).prop('disabled', true);
+        $.ajax({
+            url: "/Booking/LayDanhSachThongTinNguoiNhan",
+            type:"POST",
+            dataType: 'json',
+            success: function (data) {
+                if(data.Error)
+                {
+                    Swal.fire(
+                        '',
+                        data.Title,
+                        'error')
+                    return;
+                }
+                $('#myUL').empty();
+                $('#myInput').val('');
+                for (var i in data.Object) {
+                    var str = '<li onclick="clickitem(this)"><p>' + data.Object[i].TEN_NGUOI_NHAN +"</br>" ;
+                    str += '<strong>SĐT: </strong><small class="smSDT">' + data.Object[i].SDT_NHAN + "</small></br>";
+                    str += '<strong>Địa chỉ: </strong><small class="smDC">' + data.Object[i].DIA_CHI + "</small><br>";
+                    str += '<strong>Quận/Huyện: </strong><small class="smHuyen">' + data.Object[i].HUYEN_NHAN + '</small><strong> - Tỉnh/TP: </strong><small class="smTinh">' + data.Object[i].TINH_NHAN + '</small>';
+                    str += '<small class="smMaTinh" style="display:none">' + data.Object[i].MA_TINH_NHAN + '</small><small class="smMaHuyen" style="display:none">' + data.Object[i].MA_HUYEN_NHAN + '</small></p></li >';
+                    $('#myUL').append(str);
+                }
+
+                $(obj).prop('disabled', false);
+                $('#modal-danhsachnguoinhan').modal({ backdrop:'static'});
+            }
+        });
+    }
+
+    $('#modal-danhsachnguoinhan').on("shown.bs.modal", function () {
+        $('#myInput').focus();
+    })
+
+    function filterNguoiNhan() {
+        var input, filter, ul, li, a, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName("li");
+        for (var i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("p")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+
+    function clickitem(obj) {
+        var ten, sdt, diachi, tinh, huyen;
+        var p = obj.childNodes[0];
+
+        ten = p.firstChild.textContent;
+        var childNodes = p.childNodes;
+        for (var i = 0; i < childNodes.length; i++) {
+            var g = childNodes[i];
+            if (g.nodeName.toLowerCase() == "small" && g.className=="smSDT") {
+                sdt = childNodes[i].textContent;
+            }
+            if (g.nodeName.toLowerCase() == "small" && g.className=="smDC") {
+                diachi = childNodes[i].textContent;
+            }
+            if (g.nodeName.toLowerCase() == "small" && g.className=="smMaTinh") {
+                tinh = childNodes[i].textContent;
+            }
+            if (g.nodeName.toLowerCase() == "small" && g.className=="smMaHuyen") {
+                huyen = childNodes[i].textContent;
+            }
+        }
+
+        $('#NGUOI_NHAN').val(ten);
+        $('#SDT_NHAN').val(sdt);
+        $('#DIA_CHI').val(diachi);
+        cbTinhNhan.SetValue(tinh);
+        cbTinhNhan_OnInit(tinh, huyen);
+        $('#modal-danhsachnguoinhan').modal('hide');
+        checkvad();
+
+    }
+
+    //Lưu đơn tạm
+    function LuuDonHangTam() {
+        Swal.fire({
+            title: '@Html.Raw(Booking.qusChacChanLuuDonTam)',
+            text: "",
+            icon: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'No',
+            confirmButtonText: 'Yes'
+        })
+        .then(function (willDelete) {
+            if (!willDelete.value) {
+                return;
+            }
+
+            var data = {
+                TEN_NGUOI_GUI: $('#NGUOI_GUI').val(),
+                SDT_GUI: $('#SDT_GUI').val(),
+                DIA_CHI_NGUOI_GUI: $('#DIA_CHI_NGUOI_GUI').val(),
+
+                TEN_NGUOI_NHAN: $('#NGUOI_NHAN').val(),
+                SDT_NHAN: $('#SDT_NHAN').val(),
+                MA_TINH_NHAN: cbTinhNhan.GetValue(),
+                MA_HUYEN_NHAN: cbHuyenNhan.GetValue(),
+                TINH_NHAN: cbTinhNhan.GetText(),
+                HUYEN_NHAN: cbHuyenNhan.GetText(),
+                DIA_CHI: $('#DIA_CHI').val(),
+                DICH_VU: cbDichVu.GetValue(),
+
+                TRONG_LUONG: parseFloat($('#TRONG_LUONG').val()).toFixed(2).replace(".", ","),
+                NOI_DUNG: $('#NOI_DUNG').val(),
+                SO_KIEN: $('#SO_KIEN').val(),
+                SO_THAM_CHIEU: $('#SO_THAM_CHIEU').val(),
+                GT_DON_HANG: $('#GT_DON_HANG').val(),
+
+                SO_HOA_DON:$('input[value="SO_HOA_DON"]').prop('checked')? $('#SO_HOA_DON').val():"",
+                HOAN_BBBG: $('input[value="HOAN_BBBG"]').prop('checked') ? $('#HOAN_BBBG').val():"",
+                NGAY_HEN_PHAT_SIEU_THI: $('input[value="NGAY_HEN_PHAT_SIEU_THI"]').prop('checked') ? moment(NGAY_HEN_PHAT_SIEU_THI.GetDate()).format("DD/MM/YYYY HH:MM") :"",
+                DONG_KIEM: $('input[value="DONG_KIEM"]').prop('checked') ? "Đồng kiểm" : "",
+                PHAT_TAN_TAY: $('input[value="PHAT_TAN_TAY"]').prop('checked') ? "Phát tận tay" : "",
+                BAO_PHAT: $('input[value="BAO_PHAT"]').prop('checked') ? "Báo phát" : "",
+                LOAI_BPBK: cbLoaiHang.GetText(),
+                HT_THANH_TOAN: cbHTTT.GetText(),
+            }
+            if (cbDichVu.GetValue() == null || cbDichVu.GetValue()=='') {
+                Swal.fire(
+                '',
+                'Mời bạn chọn dịch vụ',
+                'error');
+                $('#refresh').removeClass("fa fa-spinner fa-spin").addClass("mdi mdi-content-save");
+                $('button.luudonhang').removeAttr("disabled");
+                return;
+            }
+
+            if(gridView.GetRowKey(0) ==null){
+                var isCheck = checkVadidate();
+                if (isCheck)
+                    return;
+            }
+
+            $.ajax({
+                url: "/Booking/LuuDonHangTam",
+                type: "POST",
+                data: {model: data },
+                dataType: 'json',
+                success: function (data) {
+                    gridView.Refresh();
+                    if(data.Error)
+                    {
+                        Swal.fire(
+                            '',
+                            data.Title,
+                            'error')
+                        return;
+                    }
+                    else {
+                        Swal.fire(
+                            '',
+                            "@Html.Raw(Booking.msg_luu_thanh_cong)",
+                            'success');
+                        $('.change-content').val('');
+                        cbTinhNhan.SetSelectedIndex(-1);
+                        cbTinhNhan_OnInit("", "");
+                        cbDichVu.SetSelectedIndex(-1);
+                        NGAY_HEN_PHAT_SIEU_THI.SetDate(null);
+                        checkvad();
+                    }
+                }
+            });
+        });
+    }
+
+    function checkVadidate() {
+        if($('#NGUOI_NHAN').val() == "" || $('#NGUOI_NHAN').val() == null)
+        {
+            Swal.fire(
+                '',
+                "@Html.Raw(Booking.NGUOI_NHAN)",
+                'error');
+            $('#refresh').removeClass("fa fa-spinner fa-spin").addClass("mdi mdi-content-save");
+            $('button.luudonhang').removeAttr("disabled");
+            return true;
+        }
+        if($('#SDT_NHAN').val() == "" || $('#SDT_NHAN').val() == null)
+        {
+            Swal.fire(
+                '',
+                "@Html.Raw(Booking.SDT_NHAN)",
+                'error');
+            $('#refresh').removeClass("fa fa-spinner fa-spin").addClass("mdi mdi-content-save");
+            $('button.luudonhang').removeAttr("disabled");
+            return true;
+        }
+        if($('#DIA_CHI').val() == "" || $('#DIA_CHI').val() == null)
+        {
+            Swal.fire(
+                '',
+                "@Html.Raw(Booking.DIA_CHI)",
+                'error');
+            $('#refresh').removeClass("fa fa-spinner fa-spin").addClass("mdi mdi-content-save");
+            $('button.luudonhang').removeAttr("disabled");
+            return true;
+        }
+        if(cbTinhNhan.GetValue() ==null)
+        {
+            $('#refresh').removeClass("fa fa-spinner fa-spin").addClass("mdi mdi-content-save");
+            $('button.luudonhang').removeAttr("disabled");
+            Swal.fire(
+                '',
+                "@Html.Raw(Booking.vadtinhnhan)",
+                    'error')
+                return true;
+        }
+        @*if(cbHuyenNhan.GetValue() ==null)
+        {
+            $('#refresh').removeClass("fa fa-spinner fa-spin").addClass("mdi mdi-content-save");
+            $('button.luudonhang').removeAttr("disabled");
+            Swal.fire(
+                '',
+                "@Html.Raw(Booking.vadhuyennhan)",
+                    'error')
+                return true;
+        }*@
+        if ($('#NGUOI_GUI').val() == "") {
+            $('button.luudonhang').removeAttr("disabled");
+            $('#refresh').removeClass("fa fa-spinner fa-spin").addClass("mdi mdi-content-save");
+            Swal.fire(
+                '',
+                "@Html.Raw(Booking.errTenNguoiGui)",
+                    'error')
+                return;
+        }
+
+        if($('#DIA_CHI_NGUOI_GUI').val() == "")
+        {
+            Swal.fire(
+                '',
+                "@Html.Raw(Booking.msg_dia_chi_nguoi_gui)",
+                    'error')
+                return true;
+        }
+        if ($('input[value="SO_HOA_DON"]').prop('checked') && $('#SO_HOA_DON').val() == "") {
+            $('button.luudonhang').removeAttr("disabled");
+            $('#refresh').removeClass("fa fa-spinner fa-spin").addClass("mdi mdi-content-save");
+            Swal.fire(
+                '',
+                "@Html.Raw(Booking.vadsohoadon)",
+                'error')
+            return true;
+        }
+
+        if ($('input[value="HOAN_BBBG"]').prop('checked') && $('#HOAN_BBBG').val() == "") {
+            $('button.luudonhang').removeAttr("disabled");
+            $('#refresh').removeClass("fa fa-spinner fa-spin").addClass("mdi mdi-content-save");
+            Swal.fire(
+                '',
+                "@Html.Raw(Booking.errHoanBienBanBB)",
+                'error')
+            return true;
+        }
+
+        if ($('input[value="NGAY_HEN_PHAT_SIEU_THI"]').prop('checked') && NGAY_HEN_PHAT_SIEU_THI.GetDate() == null) {
+            Swal.fire(
+                '',
+                "@Html.Raw(Booking.errNgayHenPhatST)",
+                'error')
+            return true;
+        }
+    }
+
+    // dự kiến tính giá
+    function DuKienTinhGia(obj) {
+        $(obj).attr("disabled", true);
+        $('.img-loading').removeClass('d-none');
+
+        var TOS = cbTos.GetValue();
+        var DestZone = cbTinhDen.GetValue();
+        var ORIGIN_ZONE = cbTinhDi.GetValue();
+
+        var TRONG_LUONG = $('#txtTrongLuong').val();
+        //var CHIEU_DAI = $('#txtChieuDai').val();
+        //var CHIEU_RONG = $('#txtChieuRong').val();
+        //var CHIEU_CAO = $('#txtChieuCao').val();
+
+        if (DestZone == null || DestZone == "") {
+            Swal.fire("@Html.Raw(Booking.vadtinhnhan)", '', 'error');
+            $(obj).removeAttr("disabled");
+            $('.img-loading').addClass('d-none');
+            return;
+        }
+        if (TOS == null ||TOS == "") {
+            Swal.fire('@Html.Raw(Booking.msgdichvutinhgia)', '', 'error');
+            $(obj).removeAttr("disabled");
+            $('.img-loading').addClass('d-none');
+            return;
+        }
+        if (!$('#radHuyenXa').prop("checked") && !$('#radQuanTP').prop("checked")) {
+            Swal.fire('@Html.Raw(Booking.msgChonQuanTP)', '', 'error');
+            $(obj).removeAttr("disabled");
+            $('.img-loading').addClass('d-none');
+            return;
+        }
+        if (TRONG_LUONG==undefined) {
+            Swal.fire('@Html.Raw(Booking.msgtrongluongtinhgia)', '', 'error');
+            $(obj).removeAttr("disabled");
+            $('.img-loading').addClass('d-none');
+            return;
+        }
+        var tr_tag = $('#DimensionsLine tbody');
+        var lst_kich_thuoc = [];
+        if (tr_tag != null) {
+            var children = tr_tag[0].children;
+            for (var i = 0; i < children.length; i++) {
+                var index = i + 1;
+                var so_kien = $('#d_package' + index).val() != "" && $('#d_package' + index).val() != undefined ? $('#d_package' + index).val() : 0;
+                var chieu_dai = $('#d_length' + index).val() != "" && $('#d_length' + index).val() != undefined ? $('#d_length' + index).val() : 0;
+                var chieu_rong = $('#d_width' + index).val() != "" && $('#d_width' + index).val() != undefined ? $('#d_width' + index).val() : 0;
+                var chieu_cao = $('#d_height' + index).val() != "" && $('#d_height' + index).val() != undefined ? $('#d_height' + index).val() : 0;
+
+                lst_kich_thuoc.push({
+                    SO_KIEN: parseFloat(so_kien),
+                    CHIEU_DAI: parseFloat(chieu_dai),
+                    CHIEU_RONG: parseFloat(chieu_rong),
+                    CHIEU_CAO: parseFloat(chieu_cao)
+                });
+            }
+        }
+
+        var lstDichVu = [];
+
+        if (TOS == "ALL") {
+            lstDichVu = ['CPN', 'EXP', 'PHT', 'PTK', 'CPT'];
+        }
+        else {
+                lstDichVu.push(TOS);
+        }
+        var isDiHuyenxa = $('#radHuyenXa').prop("checked");
+
+        var data = new FormData();
+        data.append("WEIGHT", TRONG_LUONG.replace(".",","));
+        data.append("NO_PIECES", 1);
+        data.append("DEST_ZONE", DestZone);
+        data.append("ORIGIN_ZONE", ORIGIN_ZONE);
+        data.append("lstDichVu", lstDichVu);
+        data.append("isDiHuyenxa", isDiHuyenxa);
+        //data.append("CHIEU_DAI", CHIEU_DAI);
+        //data.append("CHIEU_RONG", CHIEU_RONG);
+        //data.append("CHIEU_CAO", CHIEU_CAO);
+        data.append("lst_kich_thuoc", JSON.stringify(lst_kich_thuoc));
+        $.ajax({
+            url: "/Booking/TinhGia",
+            type: "POST",
+            cache: false,
+            processData: false,
+            contentType: false,
+            data: data,
+            success: function (data) {
+                $('#table_thong_tin_cuoc tbody').empty();
+                if (data.Error) {
+                    Swal.fire('', data.Title, 'error');
+                }
+                else {
+                    var tinh_di = cbTinhDi.GetText();
+                    var tinh_den = cbTinhDen.GetText();
+
+                    var lst = data.Object;
+                    for (var i in lst) {
+                        $('#table_thong_tin_cuoc tbody').append('<tr><td class="dataField">' + tinh_di + '</td><td class="dataField">' + tinh_den +
+                            '</td><td class="dataField">' + lst[i].TRONG_LUONG_QUY_DOI +
+                            '</td><td class="dataField">' + lst[i].TOS +
+                            '</td><td class="dataField">' + lst[i].AMOUNT_STR +
+                            '</td><td class="dataField">' + lst[i].VAT_STR +
+                            '<td class="dataField">' + lst[i].VIETNAMESE_NET_AMT_STR +
+                            '</td>'/*<td class="dataField">' + lst[i].THOI_GIAN_DU_KIEN + '</td></tr>'*/);
+                    }
+                    $('.thong_tin_cuoc_phi').show();
+                    $('.kqtinhgia').removeClass('d-none');
+
+                }
+            },
+            complete: function () {
+                $(obj).removeAttr("disabled");
+                $('.img-loading').addClass('d-none');
+            }
+        });
+    };
+    $('#addDimensionsLine').on('click', function () {
+        var tr_tag = $('#DimensionsLine tbody');
+        if (tr_tag != null) {
+            var count = tr_tag[0].children.length + 1;
+            $('#DimensionsLine tbody').append('<tr id="rowDIndex_' + count + '"><td class="dataField">' + count + '<input type="hidden" style="border: none;width: 100%;" value="" id="ordering_d' + count + '"></td><td class="dataField"><input style="border: none;width: 100%;" type="text" id="d_package' + count + '" name="d_package[]" size="10" class="d_package" value="1"></td><td class="dataField"><input style="border: none;width: 100%;" type="text" id="d_length' + count + '" name="d_length[]" size="10" class="lineDimension"></td><td class="dataField"><input style="border: none;width: 100%;" type="text" id="d_width' + count + '" name="d_width[]" size="10" class="d_width"></td><td class="dataField"><input style="border: none;width: 100%;" type="text" id="d_height' + count + '" name="d_height[]" size="10" class="d_height"></td><td class="dataField"><input style="background: white;border: none;text-decoration: underline;width: 100%;" onclick="xoa_dong_kich_thuoc(' + count + ')" type="button" title="Xóa" value="Xóa" class="button btnDelete" /></td></tr>');
+        }
+    });
+    function xoa_dong_kich_thuoc(stt) {
+        $('#DimensionsLine tbody').find('tr#rowDIndex_' + stt).remove();
+    }
+    function open_modalTinhGia() {
+        cbTinhDen.SetValue(cbTinhNhan.GetValue());
+        //cbTinhDi.AddItem(cbTinhLayHang.GetText(),cbTinhLayHang.GetValue());
+        cbTinhDi.SetValue(cbTinhLayHang.GetValue());
+        cbTos.SetValue(cbDichVu.GetValue());
+
+        $('#radQuanTP').prop("checked", false);
+        $('#radHuyenXa').prop("checked", false);
+
+        $('#txtTrongLuong').val($('#TRONG_LUONG').val());
+        $('#txtSoKien').val($('#SO_KIEN').val());
+        $('#txtChieuDai').val('');
+        $('#txtChieuRong').val('');
+        $('#txtChieuCao').val('');
+
+
+        $('.kqtinhgia').addClass('d-none');
+        $('#modal-dukientinhgia').modal({ backdrop: 'static' });
+    }
+
+    function filterDanhSachTinhTP() {
+        var input, filter, ul, li, txtValue;
+        input = document.getElementById("txtTinhTP");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("lstTinhHuyen");
+        li = ul.getElementsByTagName("li");
+        for (var i = 0; i < li.length; i++) {
+            txtValue = li[i].textContent || li[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+
+    $('#btn-today').on('click', function () {
+        DateNgayLayHang.SetDate(new Date());
+    });
+    $('#btn-tomorow').on('click', function () {
+        var date = new Date();
+        date.setDate(date.getDate() + 1);
+
+        DateNgayLayHang.SetDate(date);
+    });
+    $('#btn-choosedate').on('click', function () {
+        DateNgayLayHang.ShowDropDown();
+    });
+    $('.ngaydukienlayhang').on('click', function () {
+        DateNgayLayHang.ShowDropDown();
+    });
+</script>
+
+@if (ClientSession.getSLMaKHCon() > 1)
+{
+    <script>
+        'use strict';
+        var app = angular.module('demo', ['ngSanitize', 'ui.select']);
+        app.filter('propsFilter', function() {
+            return function(items, props) {
+                var out = [];
+                if (angular.isArray(items)) {
+                    items.forEach(function(item) {
+                        var itemMatches = false;
+                        var keys = Object.keys(props);
+                        for (var i = 0; i < keys.length; i++) {
+                            var prop = keys[i];
+                            var text = props[prop].toLowerCase();
+                            if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+                                itemMatches = true;
+                                break;
+                            }
+                        }
+                        if (itemMatches) {
+                            out.push(item);
+                        }
+                    });
+                } else {
+                    // Let the output be the input untouched
+                    out = items;
+                }
+                return out;
+            }
+        });
+        app.controller('DemoCtrl', function($scope, $http) {
+            $scope.people = [];
+            $scope.person = {};
+
+            $http({ method: 'POST', url: '/Booking/ListKhachHang' })
+                .then(function (response) {
+                    $scope.people = response.data.Object;
+                });
+
+            $scope.person.selected = {FULL_NAME: '@Html.Raw(user.FULL_NAME)', CUSTOMER_CODE: '@Html.Raw(user.MA_KHACH_HANG_CON)'};
+
+            $scope.ChangeCus = function (uiselCust) {
+                if(uiselCust==null){
+                    Swal.fire(
+                        '',
+                        "@Html.Raw(Booking.msgChonChiNhanh)",
+                                'error')
+                    return;
+                }
+                $.ajax({
+                    url: "/Booking/ChonKhachHang",
+                    type: "POST",
+                    data: { CUST_CODE: uiselCust.CUSTOMER_CODE},
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.Error)
+                        {
+                            Swal.fire(
+                                '',
+                                "@Html.Raw(Booking.msgLoi)",
+                                'error')
+                        }
+                        else {
+                            $('.change-content').val('');
+                            cbTinhNhan.SetSelectedIndex(-1);
+                            cbTinhNhan_OnInit("", "");
+                            cbDichVu.SetSelectedIndex(-1);
+                            NGAY_HEN_PHAT_SIEU_THI.SetDate(null);
+                            checkvad();
+
+                            $('#txtTenKhachHang').html(data.Title);
+
+                            $('#NGUOI_GUI').val(data.Object.TEN_NGUOI_GUI);
+                            $('#DIA_CHI_NGUOI_GUI').val(data.Object.DIA_CHI_NGUOI_GUI);
+                            $('#SDT_GUI').val(data.Object.SDT_GUI);
+
+                            cbTinhLayHang.SetValue(data.Object.MA_TINH_LH);
+                            cbTinhLayHang_OnInit(data.Object.MA_TINH_LH, data.Object.MA_HUYEN_LH);
+                            cbKichThuoc.SetValue(data.Object.KT_HANG);
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+}
+

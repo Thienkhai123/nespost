@@ -1,0 +1,31 @@
+﻿@using WebSite.Language;
+@{
+    ViewBag.Title = Resource.kiemkim;
+}
+<style>
+    .entry-content .col-md-4 {
+        display: flex;
+        justify-content: center;
+        padding-bottom: 25px;
+    }
+</style>
+<div class="page-container">
+    <section class="dich_vu_gia_tang">
+        <div class="container boxDetail">
+            <h2 class="section_header">DỊCH VỤ GIA TĂNG</h2>
+            <p class="d_txt">
+                <span style="color: rgb(62, 77, 92); text-align: justify;"><strong>1. Dịch vụ “Phát tận tay”</strong>: là dịch vụ mà người gửi yêu cầu phát đến tận tay cho người nhận có họ tên địa chỉ ghi trên bưu gửi. Không chấp nhận sử dụng dịch vụ phát tận tay trong các trường hợp người nhận là các đồng chí Lãnh đạo cấp cao của Đảng, chính quyền, đoàn thể, các tổ chức doanh nghiệp, các địa chỉ là trường học.</span><br style="box-sizing: border-box; color: rgb(62, 77, 92); font-family: Roboto-Regular; text-align: justify;">
+                <span style="color: rgb(62, 77, 92); text-align: justify;"><strong>2. Dịch vụ “Khai giá”</strong>: là dịch vụ mà người gửi có thể sử dụng thêm khi ký gửi bưu gửi, bằng cách kê khai giá trị nội dung hàng gửi. Trong trường hợp bưu gửi bị mất mát, suy suyển người sử dụng dịch vụ được bồi thường theo giá trị bưu gửi.</span><br style="box-sizing: border-box; color: rgb(62, 77, 92); font-family: Roboto-Regular; text-align: justify;">
+                <span style="color: rgb(62, 77, 92); text-align: justify;"><strong>3. Dịch vụ “Phát ngoài giờ hành chính”</strong>: là dịch vụ người gửi yêu cầu phát bưu gửi trong khoảng thời gian từ 17h00 đến trước 21h00 hàng ngày, trừ các ngày lễ Tết theo quy định.</span><br style="box-sizing: border-box; color: rgb(62, 77, 92); font-family: Roboto-Regular; text-align: justify;">
+                <span style="color: rgb(62, 77, 92); text-align: justify;"><strong>4. Dịch vụ phát hàng thu tiền COD:</strong> là dịch vụ mà người gửi có thể uỷ thác cho doanh nghiệp cung cấp dịch vụ thu hộ một khoản tiền của người nhận khi phát bưu gửi (hàng hoá) và chuyển trả khoản tiền đó cho người gửi.</span><br style="box-sizing: border-box; color: rgb(62, 77, 92); font-family: Roboto-Regular; text-align: justify;">
+                <span style="color: rgb(62, 77, 92); text-align: justify;"><strong>5. Dịch vụ “Báo phát”</strong>: là dịch vụ mà người gửi yêu cầu được cung cấp bằng chứng phát bưu gửi có chữ ký người nhận.</span><br style="box-sizing: border-box; color: rgb(62, 77, 92); font-family: Roboto-Regular; text-align: justify;">
+                <span style="color: rgb(62, 77, 92); text-align: justify;"><strong>6. Dịch vụ “Phát đồng kiểm”:</strong> là dịch vụ mà người gửi yêu cầu Hãng CPN thực hiện đồng kiểm số lượng sản phẩm trong bưu gửi khi nhận gửi và khi phát tại Bưu điện căn cứ theo biên bản giao nhận do người gửi cung cấp.</span><br style="box-sizing: border-box; color: rgb(62, 77, 92); font-family: Roboto-Regular; text-align: justify;">
+                <span style="color: rgb(62, 77, 92); text-align: justify;"><strong>7. Dịch vụ Hàng Gía trị cao (GTC), nhạy cảm:</strong> là dịch vụ đảm bảo an toàn, hạn chế rủi ro cho các mặt hàng nhạy cảm vận chuyển qua đường Hàng không. Hàng không sẽ chất xếp toàn bộ các mặt hàng nhạy cảm trong container có niêm phong và bố trí phục vụ riêng trong toàn bộ quá trình vận chuyển từ bước đặt chỗ, tiếp nhận hàng tại sân bay đi, chất xếp và trả hàng tại sân bay đến. Hàng GTC, hàng nhạy cảm bao gồm các loại hàng sau: Máy chụp ảnh, máy quay phim, máy tính xách tay, các phương tiện hỗ trợ cá nhân, điện thoại di động, hàng điện tử và các loại hàng hoá có giá trị cao khác.</span><br style="box-sizing: border-box; color: rgb(62, 77, 92); font-family: Roboto-Regular; text-align: justify;">
+                <span style="color: rgb(62, 77, 92); text-align: justify;"><strong>8. Dịch vụ Rút bưu gửi</strong>: là dịch vụ người gửi có thể rút bưu gửi tại bưu cục gốc nếu như thời gian từ lúc nhận gửi đến thời điểm khách hàng đề nghị rút bưu gửi chưa vượt chỉ tiêu thời gian toàn trình.</span><br style="box-sizing: border-box; color: rgb(62, 77, 92); font-family: Roboto-Regular; text-align: justify;">
+                <span style="color: rgb(62, 77, 92); text-align: justify;"><strong>9. Dịch vụ Thay đổi họ tên địa chỉ người nhận</strong>: là dịch vụ người gửi có thay đổi họ tên, địa chỉ người nhận bưu gửi tại bưu cục gốc nếu như thời gian từ lúc nhận gửi đến thời điểm khách hàng đề nghị thay đổi họ tên, địa chỉ người nhận chưa vượt quá chỉ tiêu thời gian toàn trình.</span><br style="box-sizing: border-box; color: rgb(62, 77, 92); font-family: Roboto-Regular; text-align: justify;">
+                <span style="color: rgb(62, 77, 92); text-align: justify;"><strong>10. Dịch vụ nhận tại địa chỉ:</strong> là dịch vụ mà người gửi yêu cầu doanh nghiệp cung cấp dịch vụ đến nhận bưu gửi tại địa điểm do người gửi đề nghị và phải trả một khoản tiền cước theo quy định.</span><br style="box-sizing: border-box; color: rgb(62, 77, 92); font-family: Roboto-Regular; text-align: justify;">
+                <span style="color: rgb(62, 77, 92); text-align: justify;"><strong>11. &nbsp;Dịch vụ người nhận trả tiền (TTĐN):</strong> là dịch vụ mà người gửi ký hợp đồng với bưu điện để chỉ định cho bưu điện thu toàn bộ cước phí từ người nhận khi phát bưu gửi.</span>
+            </p>
+        </div>
+    </section>
+</div>

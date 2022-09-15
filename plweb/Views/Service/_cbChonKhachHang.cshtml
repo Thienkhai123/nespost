@@ -1,0 +1,22 @@
+﻿@using WebSite.Filter;
+@using WebSite.Language;
+
+@Html.DevExpress().ComboBox(settings =>
+{
+    settings.Name = "cbChonKhachHang";
+    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+    settings.SelectedIndex = -1;
+    settings.ControlStyle.CssClass = "form-control";
+    settings.Properties.DropDownWidth = System.Web.UI.WebControls.Unit.Pixel(500);
+    settings.Properties.DropDownHeight = System.Web.UI.WebControls.Unit.Pixel(300);
+    settings.Properties.DropDownStyle = DropDownStyle.DropDownList;
+    settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+    settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+    settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+    settings.Properties.ValueType = typeof(string);
+    settings.Properties.TextFormatString = "{0}";
+    settings.Properties.ValueField = "CUSTOMER_CODE";
+    settings.Properties.Columns.Add("FULL_NAME", @Booking.tenkhachhang, 500);
+
+    settings.Properties.SelectInputTextOnClick = true;
+}).BindList(ClientSession.getFullInForCustomer()).GetHtml()

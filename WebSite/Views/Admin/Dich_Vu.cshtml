@@ -1,0 +1,72 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    ViewBag.Title = "Các loại dịch vụ";
+}
+@*@Html.DevExpress().GetStyleSheets(
+    new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.GridView }
+)
+
+<link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/GridView.css")" />
+@Html.DevExpress().GetScripts(
+    new Script { ExtensionSuite = ExtensionSuite.GridView },
+    new Script { ExtensionSuite = ExtensionSuite.Editors }
+)
+<script type="text/javascript" src="@Url.Content("~/Content/Script.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/GridView.js")"></script>*@
+<div class="row">
+    <div class="col-md-12 form-group text-right">
+        <a href="@Url.Action("ThemDichVu")" class="btn btn-primary">Thêm mới</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        {
+            @Html.Action("QuyDinhDV")
+        }
+    </div>
+</div>
+<script>
+    function Xoa_Tin(id) {
+        Swal.fire({
+            title: 'Bạn có chắc chắn xóa mã ' + id + ' không?',
+            text: "",
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'No',
+            confirmButtonText: 'Yes'
+        })
+            .then(function (result) {
+                if (result.value) {
+                    $.ajax({
+                        url: "/Admin/Delete",
+                        type: "POST",
+                        data: { id: id },
+                        dataType: 'json',
+                        success: function (data) {
+                            if (!data.Error) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    text: 'Xóa tin thành công!',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                                window.location.reload();
+                            }
+                            else {
+                                Swal.fire(data.Title,
+                                    '',
+                                    'error')
+                                return;
+                            }
+                        }
+                    });
+                }
+            });
+    }
+
+    function Update_Tin(id) {
+        window.location.href = "/Admin/ThemDichVu?id=" + id;
+    }
+</script>

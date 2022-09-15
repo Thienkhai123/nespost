@@ -1,0 +1,334 @@
+﻿@using WebSite.Language;
+@using WebSite.Models;
+@{
+    ViewBag.Title = Resource.trangchu;
+}
+
+<div class="page-container" style="padding-top:15px;">
+    <div class="container-fluid">
+        <div class="row content-page">
+            <section class="tra_cuu_cuoc_phi">
+                <h2 class="section_header">Tra cứu cước phí </h2>
+                <div class="container-fluid row px-0">
+                    <div class="row justify-content-between align-items-start form-group-sm">
+                        <div class="col-md-3">
+                            <label class="label">Gửi từ <span class="text-danger">*</span></label>
+                            <div class="position-relative">
+                                @Html.DevExpress().ComboBox(settings =>
+                               {
+                                   settings.Name = "cboTinhDi";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.SelectedIndex = 0;
+                                   settings.ControlStyle.CssClass = "form-control";
+                                   settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                                   settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                                   settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                                   settings.Properties.ValueType = typeof(string);
+                                   settings.Properties.TextField = "TEN_CO_DAU";
+                                   settings.Properties.ValueField = "ZONE_CODE";
+                               }).BindList(ViewData["_listZone"] as List<OP_ZONE_MASTERDTO>).GetHtml()
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="label">Gửi đến <span class="text-danger">*</span></label>
+                            <div class="position-relative">
+                                @Html.DevExpress().ComboBox(settings =>
+                           {
+                               settings.Name = "cboTinhDen";
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               settings.SelectedIndex = 1;
+                               settings.ControlStyle.CssClass = "form-control";
+                               settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                               settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                               settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                               settings.Properties.ValueType = typeof(string);
+                               settings.Properties.TextField = "TEN_CO_DAU";
+                               settings.Properties.ValueField = "ZONE_CODE";
+                           }).BindList(ViewData["_listZone"] as List<OP_ZONE_MASTERDTO>).GetHtml()
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="label">Trọng lương (kg) <span class="text-danger">*</span></label>
+                            @Html.DevExpress().TextBox(settings =>
+                           {
+                               settings.Name = "txtTrongLuong";
+                               settings.ControlStyle.CssClass = "form-control";
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               settings.Properties.MaskSettings.Mask = "<0..99999g>.<00..99>";
+                               settings.Properties.MaskSettings.IncludeLiterals = MaskIncludeLiteralsMode.DecimalSymbol;
+                               settings.Properties.ValidationSettings.Display = Display.None;
+                           }).GetHtml()
+                        </div>
+                        <div class="col-md-3">
+                            <label class="label">Giá DV cộng thêm (tham khảo)</label>
+                            <div class="position-relative">
+                                @Html.DevExpress().ComboBox(settings =>
+                           {
+                               settings.Name = "cbDichVu";
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               settings.SelectedIndex = -1;
+                               settings.ControlStyle.CssClass = "form-control";
+                               settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                               settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                               settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                               settings.Properties.ValueType = typeof(string);
+                               settings.Properties.ValueField = "Value";
+                               settings.Properties.TextField = "Text";
+                               settings.ReadOnly = true;
+                           }).BindList(new List<SelectListItem> { new SelectListItem { Value = "5000", Text = "Báo phát (5,000 đ)" }, new SelectListItem { Value = "10000", Text = "Phát tận tay (10,000 đ)" }, new SelectListItem { Value = "10000", Text = "Phát siêu thị (10,000 đ)" } }).GetHtml()
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center form-group-sm">
+                        <div class="item-form istable table-responsive kich_thuoc_hang_hoa">
+                            <h1>Kích thước hàng hóa (nếu là hàng cồng kềnh)</h1>
+                            <table id="DimensionsLine" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Số kiện</th>
+                                        <th>Chiều dài (CM)</th>
+                                        <th>Chiều rộng (CM)</th>
+                                        <th>Chiều cao (CM)</th>
+                                        <th>Xóa dòng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <a id="addDimensionsLine" class="themkien" href="javasrcipt:;"><i class="fa fa-plus"></i> Thêm kiện mới</a>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center form-group-sm">
+                        <div class="col-md-3 text-center">
+                            <button id="btn-tra_cuoc" class="btn btn-danger" style="padding: 12px !important;"><i class="" id="refresh"> </i>Tra cước</button>
+                        </div>
+                    </div>
+                    <div class="row justify-content-between align-items-start form-group-lg thong_tin_cuoc_phi">
+                        <h4 class="alert-heading">Thông tin cước</h4>
+                        <table id="table_thong_tin_cuoc" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tỉnh nhận</th>
+                                    <th scope="col">Tỉnh phát</th>
+                                    <th scope="col">Trọng lượng tính cước</th>
+                                    <th scope="col">Dịch vụ</th>
+                                    <th scope="col">Cước chính tạm tính</th>
+                                    @*<th scope="col">Cước dịch vụ gia tăng </th>*@
+                                    <th scope="col">Tổng cước </th>
+                                    @*<th scope="col">Thời gian dự kiến</th>*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <div class="alert alert-success w-100" role="alert">
+                            <p class="font-italic px-0">Chưa bao gồm phụ phí kết nối vùng xa</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="dichvu">
+                <h2 class="section_header">Dịch vụ của chúng tôi</h2>
+                <div class="container-fluid row px-0">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="dvItem clearfix row">
+                            <p class="dvImg col-sm-4 col-md-4 col-lg-4 pl-0"><img class="img-responsive" src="~/lib/images/home_index/cpn.png" id="dv1"></p>
+                            <div class="dvRight col-sm-8 col-md-8 col-lg-8">
+                                <h3><a href="@Url.Action("chuyen_phat_nhanh", "Dich_Vu")">DỊCH VỤ CHUYỂN PHÁT NHANH</a></h3>
+                                <p class="dvTxt">Là dịch vụ chuyển phát nhanh trong nước và quốc tế theo thời gian được công bố trước, theo chỉ tiêu thời gian (xem phần chỉ tiêu thời gian) trong nước từ 12 đến 48 giờ.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="dvItem clearfix row">
+                            <p class="dvImg col-sm-4 col-md-4 col-lg-4"><img class="img-responsive" src="~/lib/images/home_index/hoatoc.png" id="dv2"></p>
+                            <div class="dvRight col-sm-8 col-md-8 col-lg-8 pr-0">
+                                <h3><a href="@Url.Action("phat_hoa_toc", "Dich_Vu")">DỊCH VỤ HỎA TỐC, PHÁT YÊU CẦU</a></h3>
+                                <p class="dvTxt">Dịch vụ phát Hỏa Tốc, Hẹn giờ, Trước 09h00: là dịch vụ mà bưu gửi được tổ chức khai thác và chuyển phát cùng hành trình với các bưu gửi CPN thông thường. Tuy nhiên sẽ được ưu tiên sắp xếp để phát đến người nhận trong khoảng thời gian trước 09 giờ.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="dvItem clearfix row">
+                            <p class="dvImg col-sm-4 col-md-4 col-lg-4 pl-0"><img class="img-responsive" src="~/lib/images/home_index/gia_tri_cao.png" id="dv3"></p>
+                            <div class="dvRight col-sm-8 col-md-8 col-lg-8">
+                                <h3><a href="@Url.Action("gia_tri_cao", "Dich_Vu")">DỊCH VỤ HÀNG GIÁ TRỊ CAO, EXPRESS</a></h3>
+                                <p class="dvTxt">Dịch vụ đặc thù mà bưu gửi được tổ chức khai thác và chuyển phát cùng hành trình với các bưu gửi CPN thông thường. Tuy nhiên sẽ được ưu tiên sắp xếp để phát đến người nhận trong khoảng thời gian trong buổi sáng. Mức độ ưu tiên sau Dịch vụ Hỏa Tốc.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="dvItem clearfix row">
+                            <p class="dvImg col-sm-4 col-md-4 col-lg-4"><img class="img-responsive" src="~/lib/images/home_index/cpt.png" id="dv4"></p>
+                            <div class="dvRight col-sm-8 col-md-8 col-lg-8 pr-0">
+                                <h3><a href="@Url.Action("trucking", "Dich_Vu")">DỊCH VỤ CHUYỂN PHÁT THƯỜNG</a></h3>
+                                <p class="dvTxt">Netpost cung cấp dịch vụ chuyển phát thường trong nước, nhận tận nơi và phát tận nơi theo yêu cầu của Quý khách hàng.Hàng hóa được vận chuyển bằng đường bộ thời gian chuyển phát tính theo ngày (Phù hợp với những hàng hóa không cần quá nhanh).</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="dvItem clearfix row">
+                            <p class="dvImg col-sm-4 col-md-4 col-lg-4 pl-0"><img class="img-responsive" src="~/lib/images/home_index/tietkiem.png" id="dv5"></p>
+                            <div class="dvRight col-sm-8 col-md-8 col-lg-8">
+                                <h3><a href="@Url.Action("tiet_kiem", "Dich_Vu")">DỊCH VỤ CHUYỂN PHÁT TIẾT KIỆM 48H</a></h3>
+                                <p class="dvTxt">Netpost cung cấp dịch vụ chuyển phát tiết kiệm. Đó là sự kết hợp giữa đường hàng không và đường bộ để tạo ra một dịch vụ tiết kiệm về chi phí nhưng vẫn đảm bảo cam kết về thời gian toàn trình.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="khach_hang_doi_tac">
+                <h2 class="section_header">KHÁCH HÀNG ĐỐI TÁC</h2>
+                <div class="container-fluid row px-0">
+                    <div class="row justify-content-between align-items-start form-group-lg">
+                        <img class="imgDoiTac" src="~/lib/images/logo_doi_tac/cts.png" />
+                        <img class="imgDoiTac" src="~/lib/images/logo_doi_tac/dt23.png" />
+                        <img class="imgDoiTac" src="~/lib/images/logo_doi_tac/dt44.jpg" />
+                        <img class="imgDoiTac" src="~/lib/images/logo_doi_tac/dt54.jpg" />
+                    </div>
+                    <div class="row justify-content-between align-items-start form-group-lg">
+                        <img class="imgDoiTac" src="~/lib/images/logo_doi_tac/dt65.png" />
+                        <img class="imgDoiTac" src="~/lib/images/logo_doi_tac/lotte-logo1.jpg" />
+                        <img class="imgDoiTac" src="~/lib/images/logo_doi_tac/NEXT VN.png" />
+                        <img class="imgDoiTac" src="~/lib/images/logo_doi_tac/somerset.jpg" />
+                    </div>
+                    <div class="row align-items-start">
+                        <img class="imgDoiTac" src="~/lib/images/logo_doi_tac/World.png" />
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //$(window).on('load', function () {
+    //    //$('.tab-list-job').load('/Dich_Vu/sgx?partialview=true');
+
+    //    $('.tab-list-job').load('/Dich_Vu/chuyen_phat_nhanh?partialview=true');
+    //});
+
+    //function showtab(obj) {
+    //    var id = obj.id;
+
+    //    $('.tab-list-job').load('/Dich_Vu/' + id + "?partialview=true");
+
+    //    $('.topPanel').find(".itemclick").removeClass("active");
+
+    //    $('#' + id).addClass("active");
+
+    //    var height = $('#banner')[0].offsetHeight;
+    //    $('body, html').animate({
+    //        scrollTop: height
+    //    }, 600);
+
+    //    $('.page-container .content-page').hide();
+    //    $('#trackandtrade').hide();
+    //    $('.tab-list-job').removeClass('d-none');
+    //    $('.view-content-page').show();
+    //}
+    $(document).ready(function () {
+        $('.dvImg').on('mouseover', function () {
+            var src = $(this).find('img')[0].currentSrc.split(".png")[0] + '1.png'
+            if (src != null && src != undefined) {
+                $(this).find('img').attr('src', src);
+            }
+        });
+        $('.dvImg').on('mouseout', function () {
+            var src = $(this).find('img')[0].currentSrc.replace('1', '')
+            if (src != null && src != undefined) {
+                $(this).find('img').attr('src', src);
+            }
+        });
+    });
+
+    $('#addDimensionsLine').on('click', function () {
+        var tr_tag = $('#DimensionsLine tbody');
+        if (tr_tag != null) {
+            var count = tr_tag[0].children.length + 1;
+            $('#DimensionsLine tbody').append('<tr id="rowDIndex_' + count + '"><td class="dataField">' + count + '<input type="hidden" value="" id="ordering_d' + count + '"></td><td class="dataField"><input type="text" id="d_package' + count + '" name="d_package[]" size="10" class="d_package" value="1"></td><td class="dataField"><input type="text" id="d_length' + count + '" name="d_length[]" size="10" class="lineDimension"></td><td class="dataField"><input type="text" id="d_width' + count + '" name="d_width[]" size="10" class="d_width"></td><td class="dataField"><input type="text" id="d_height' + count + '" name="d_height[]" size="10" class="d_height"></td><td class="dataField"><input style="text-decoration: underline;" onclick="xoa_dong_kich_thuoc('+count+')" type="button" title="Xóa" value="Xóa" class="button btnDelete" /></td></tr>');
+        }
+    });
+
+    $('#btn-tra_cuoc').on('click', function () {
+        var tr_tag = $('#DimensionsLine tbody');
+        $('#refresh').addClass("fa fa-spinner fa-spin");
+
+        var lst_kich_thuoc = [];
+        if (tr_tag != null) {
+            var children = tr_tag[0].children;
+            for (var i = 0; i < children.length; i++) {
+                var index = i+1;
+                var so_kien = $('#d_package' + index).val() != "" && $('#d_package' + index).val() != undefined ? $('#d_package' + index).val() : 0;
+                var chieu_dai = $('#d_length' + index).val() != "" && $('#d_length' + index).val() != undefined ? $('#d_length' + index).val() : 0;
+                var chieu_rong = $('#d_width' + index).val() != "" && $('#d_width' + index).val() != undefined ? $('#d_width' + index).val() : 0;
+                var chieu_cao = $('#d_height' + index).val() != "" && $('#d_height' + index).val() != undefined ? $('#d_height' + index).val() : 0;
+
+                lst_kich_thuoc.push({
+                    SO_KIEN: parseFloat(so_kien),
+                    CHIEU_DAI: parseFloat(chieu_dai),
+                    CHIEU_RONG: parseFloat(chieu_rong),
+                    CHIEU_CAO: parseFloat(chieu_cao)
+                });
+            }
+        }
+
+        var lstDichVu = ['CPN', 'EXP', 'PHT', 'PTK','CPT'];
+
+        if (parseFloat(txtTrongLuong.GetValue().replace(',', '.')) <= 0) {
+            Swal.fire('', "Mời bạn nhập trọng lượng", 'error');
+            $('#refresh').removeClass("fa fa-spinner fa-spin");
+            return;
+        }
+        var data = new FormData();
+        data.append("WEIGHT", txtTrongLuong.GetValue());
+        data.append("NO_PIECES", 1);
+        data.append("DEST_ZONE", cboTinhDen.GetValue());
+        data.append("ORIGIN_ZONE", cboTinhDi.GetValue());
+        data.append("lstDichVu", lstDichVu);
+        data.append("lst_kich_thuoc", JSON.stringify(lst_kich_thuoc));
+
+        $.ajax({
+            url: "/Home/TinhGia",
+            type: "POST",
+            cache: false,
+            processData: false,
+            contentType: false,
+            data: data,
+            success: function (data) {
+                $('#table_thong_tin_cuoc tbody').empty();
+                if (data.Error) {
+                    Swal.fire('', data.Title, 'error');
+                }
+                else {
+                    var tinh_di = cboTinhDi.GetText();
+                    var tinh_den = cboTinhDen.GetText();
+
+                    var lst = data.Object;
+                    for (var i in lst) {
+                        $('#table_thong_tin_cuoc tbody').append('<tr><td class="dataField">' + tinh_di + '</td><td class="dataField">' + tinh_den +
+                            '</td><td class="dataField">' + lst[i].TRONG_LUONG_QUY_DOI +
+                            '</td><td class="dataField">' + lst[i].TOS +
+                            '</td><td class="dataField">' + lst[i].AMOUNT_STR +
+                            '</td>'/*<td class="dataField">' + lst[i].SERVICE_CHARGE +*/+
+                            '<td class="dataField">' + lst[i].VIETNAMESE_NET_AMT_STR +
+                            '</td>'/*<td class="dataField">' + lst[i].THOI_GIAN_DU_KIEN + '</td></tr>'*/);
+                    }
+                    $('.thong_tin_cuoc_phi').show();
+                }
+                $('#refresh').removeClass("fa fa-spinner fa-spin");
+            },
+        });
+    });
+
+    function xoa_dong_kich_thuoc(stt) {
+        $('#DimensionsLine tbody').find('tr#rowDIndex_' + stt).remove();
+    }
+   
+</script>
+
+
+

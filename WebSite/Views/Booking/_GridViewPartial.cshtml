@@ -1,0 +1,568 @@
+﻿@using WebSite.Models;
+@using WebSite.Language;
+@{WebSite.Models.CSS_CRM_NGUOI_DUNGDTO user = (WebSite.Models.CSS_CRM_NGUOI_DUNGDTO)Session["User"];}
+@model List<WebSite.Models.CSS_OP_BOOKING_SGEV_WEB_EX>
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gridView";
+        settings.KeyFieldName = "MA_BPBK";
+        settings.CallbackRouteValues = new { Controller = "Booking", Action = "GridViewPartial" };
+
+        settings.ControlStyle.CssClass = "grid-view gridView";
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        settings.Styles.Cell.Wrap = DefaultBoolean.True;
+        settings.Styles.PagerBottomPanel.CssClass = "pager";
+        settings.Styles.FocusedRow.CssClass = "focused";
+
+        settings.SettingsEditing.Mode = GridViewEditingMode.Batch;
+        settings.SettingsEditing.BatchEditSettings.KeepChangesOnCallbacks = DefaultBoolean.False;
+        settings.SettingsEditing.BatchEditSettings.ShowConfirmOnLosingChanges = false;
+        settings.Settings.ShowStatusBar = GridViewStatusBarMode.Hidden;
+        settings.SettingsDataSecurity.AllowEdit = false;
+
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Auto;
+        settings.Settings.VerticalScrollableHeight = 200;
+        settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Auto;
+
+        settings.SettingsBehavior.AllowEllipsisInText = false;
+        settings.SettingsBehavior.AllowDragDrop = false;
+        settings.SettingsBehavior.AllowSort = false;
+        settings.SettingsBehavior.AllowFocusedRow = true;
+
+        settings.SettingsPager.FirstPageButton.Visible = true;
+        settings.SettingsPager.LastPageButton.Visible = true;
+        settings.SettingsPager.PageSize = 30;
+        settings.SettingsPager.Visible = true;
+        if (Request.Browser.IsMobileDevice)
+        {
+            settings.SettingsPager.NumericButtonCount = 1;
+        }
+        settings.CommandColumn.ShowSelectCheckbox = true;
+        settings.CommandColumn.Caption = "Chọn";
+        settings.CommandColumn.Width = 50;
+        settings.CommandColumn.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowHeaderFilterButton = true;
+        settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Left;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        //if (user.CUSTOMER_CODE.Equals("0131858"))
+        //{
+        //    settings.CommandColumn.Visible = true;
+        //    settings.CommandColumn.ShowSelectCheckbox = true;
+        //    settings.CommandColumn.SelectAllCheckboxMode = GridViewSelectAllCheckBoxMode.AllPages;
+        //    settings.CommandColumn.Width = 50;
+
+        //    settings.SettingsContextMenu.Enabled = true;
+
+        //    settings.ClientSideEvents.ContextMenuItemClick = "function(s, e) { OnContextMenuItemClick(s, e); }";
+        //    settings.ClientSideEvents.SelectionChanged = "function(s,e){OnGridViewSelectionChanged(s,e)}";
+
+        //    settings.FillContextMenuItems = (sender, e) =>
+        //    {
+        //        if (e.MenuType != GridViewContextMenuType.Rows) return;
+        //        e.Items.Remove(e.Items.FindByCommand(GridViewContextMenuCommand.NewRow));
+        //        e.Items.Remove(e.Items.FindByCommand(GridViewContextMenuCommand.EditRow));
+        //        e.Items.Remove(e.Items.FindByCommand(GridViewContextMenuCommand.DeleteRow));
+        //        e.Items.Add(@Booking.inphieugiaohang, "Print").Image.Url = @"~\lib\images\print.png";
+        //    };
+        //    settings.Columns.Add(column =>
+        //    {
+        //        column.Caption = Booking.tacvu;
+        //        column.Width = 85;
+        //        column.SetDataItemTemplateContent(container =>
+        //        {
+        //            ViewContext.Writer.Write("<a style=\"font-size:19px;cursor: pointer;\" href=\"/Booking/DonHangMoiTuSinh?id=" + Convert.ToString(DataBinder.Eval(container.DataItem, "MA_BPBK")) + "\" style=\"font - size:20px; \" title=\"" + Booking.copynoidung + "\"><i class=\"fa fa-copy\"></i> </a>");
+        //            if (DataBinder.Eval(container.DataItem, "Status").ToString() == "1")
+        //            {
+        //                ViewContext.Writer.Write("<a onclick=\"Xoa_BPBK('" + Convert.ToString(DataBinder.Eval(container.DataItem, "MA_BPBK")) + "')\" style=\"font-size:19px;cursor: pointer;\" title=\"" + Booking.xoaBPBK + "\"><i class=\"fa fa-times-circle\"></i> </a>");
+        //            }
+        //            if (DataBinder.Eval(container.DataItem, "Check") != null && Boolean.Parse(DataBinder.Eval(container.DataItem, "Check").ToString()) == true)
+        //            {
+        //                ViewContext.Writer.Write("<a onclick=\"Print_PhieuGiaoHang('" + Convert.ToString(DataBinder.Eval(container.DataItem, "PO")) + "')\" style=\"font-size:19px;cursor: pointer;\" title=\"" + Booking.inphieugui + "\"><i class=\"fa fa-print\"></i> </a>");
+        //            }
+        //        });
+        //    });
+        //}
+        //else
+        //{
+
+        //settings.Columns.Add(column =>
+        //{
+        //    column.Caption = "Chọn";
+        //    column.Width = 85;
+        //    column.FieldName = "CHON";
+        //    column.ColumnType = MVCxGridViewColumnType.CheckBox;
+
+        //});
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.tacvu;
+            column.Width = 85;
+            column.SetDataItemTemplateContent(container =>
+            {
+                ViewContext.Writer.Write("<a style=\"font-size:19px;cursor: pointer;\" href=\"/Booking/DonHangMoiTuSinh?id=" + Convert.ToString(DataBinder.Eval(container.DataItem, "MA_BPBK")) + "\" style=\"font - size:20px; \" title=\"" + Booking.copynoidung + "\"><i class=\"fa fa-copy\"></i> </a>");
+                if (DataBinder.Eval(container.DataItem, "Status") != null && DataBinder.Eval(container.DataItem, "Status").ToString() == "1")
+                {
+                    ViewContext.Writer.Write("<a onclick=\"Xoa_BPBK('" + Convert.ToString(DataBinder.Eval(container.DataItem, "MA_BPBK")) + "', '" + Convert.ToString(DataBinder.Eval(container.DataItem, "SL_BILL")) + "', '" + Convert.ToString(DataBinder.Eval(container.DataItem, "PO")) + "')\" style=\"font-size:19px;cursor: pointer;\" title=\"" + Booking.xoaBPBK + "\"><i class=\"fa fa-times-circle\"></i> </a>");
+                }
+
+                ViewContext.Writer.Write("<a onclick=\"Print_PO('" + Convert.ToString(DataBinder.Eval(container.DataItem, "MA_BPBK")) + "', '" + Convert.ToString(DataBinder.Eval(container.DataItem, "Check")) + "', '" + Convert.ToString(DataBinder.Eval(container.DataItem, "PO")) + "')\" style=\"font-size:19px;cursor: pointer;\" title=\"" + Booking.inphieugui + "\"><i class=\"fa fa-print\"></i> </a>");
+            });
+        });
+
+
+
+
+        List<CUSTOMER> lstCust = Session["DANH_SACH_KH"] as List<CUSTOMER>;
+        if (lstCust.Count > 1)
+        {
+            settings.Columns.Add(column =>
+            {
+                column.Caption = Booking.makhachhang;
+                column.FieldName = "TEN_KHACH_HANG";
+                column.SetDataItemTemplateContent(container =>
+                {
+                    if (Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_KHACH_HANG")).Length > 30)
+                    {
+                        ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_KHACH_HANG")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_KHACH_HANG")).Substring(0, 30) + "...");
+                    }
+                    else
+                        ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_KHACH_HANG")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_KHACH_HANG")));
+                });
+                column.Width = 180;
+            });
+        }
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.ngaytao;
+            column.FieldName = "UPDATE_TIME_STRING";
+            column.Width = 110;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.Donhang;
+            column.FieldName = "PO";
+            column.Width = 110;
+
+            column.SetDataItemTemplateContent(container =>
+            {
+                if (DataBinder.Eval(container.DataItem, "Check") != null && Boolean.Parse(DataBinder.Eval(container.DataItem, "Check").ToString()) == true)
+                {
+                    Html.DevExpress().HyperLink(hyperlink =>
+                    {
+                        hyperlink.Properties.Text = Convert.ToString(DataBinder.Eval(container.DataItem, "PO"));
+                        hyperlink.NavigateUrl = "~/Booking/DanhSachDonHangChiTiet?id=" + Convert.ToString(DataBinder.Eval(container.DataItem, "PO"));
+                        hyperlink.ToolTip = Booking.chitietdonhang;
+                    }).Render();
+                }
+                else
+                {
+                    ViewContext.Writer.Write("");
+                }
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.maBPBK;
+            column.FieldName = "MA_BPBK";
+            column.Width = 150;
+
+            column.SetDataItemTemplateContent(container =>
+            {
+                ViewContext.Writer.Write("<a onclick=\"TRACK_AND_TRACE('" + Convert.ToString(DataBinder.Eval(container.DataItem, "MA_BPBK")) + "')\" style=\"cursor: pointer;\">" + Convert.ToString(DataBinder.Eval(container.DataItem, "MA_BPBK")) + " </a>");
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Loại BPBK";
+            column.FieldName = "LOAI_BPBK";
+            column.Width = 100;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.trangthai;
+            column.FieldName = "TRANG_THAI_PHAT";
+            column.Width = 100;
+
+        });
+        //settings.Columns.Add(column =>
+        //{
+        //    column.Caption = Booking.ngayyclayhang;
+        //    column.FieldName = "NGAY_KH_DU_KIEN_LAY_HANG";
+        //    column.Width = 150;
+        //    //column.Settings.FilterMode = ColumnFilterMode.DisplayText;
+        //    column.SettingsHeaderFilter.Mode = GridHeaderFilterMode.DateRangeCalendar;
+        //    column.SetDataItemTemplateContent(container =>
+        //    {
+        //        if (Convert.ToDateTime(DataBinder.Eval(container.DataItem, "NGAY_KH_DU_KIEN_LAY_HANG")).Year == 1900)
+        //        {
+        //            ViewContext.Writer.Write("");
+        //        }
+        //        else
+        //            ViewContext.Writer.Write(Convert.ToDateTime(DataBinder.Eval(container.DataItem, "NGAY_KH_DU_KIEN_LAY_HANG")).ToString("dd/MM/yyyy"));
+        //    });
+        //});
+        //if (user.CUSTOMER_CODE.Equals("0131858"))
+        //{
+        //    settings.Columns.Add(column =>
+        //    {
+        //        column.Caption = Booking.thoigiangui;
+        //        column.FieldName = "THOI_GIAN_GUI";
+        //        column.Width = 150;
+        //        column.SetDataItemTemplateContent(container =>
+        //        {
+        //            DateTime time = (DateTime)DataBinder.Eval(container.DataItem, "THOI_GIAN_GUI");
+        //            if (time.Year == 1 || time.Year == 1900)
+        //            {
+        //                ViewContext.Writer.Write("");
+        //            }
+        //            else
+        //            {
+        //                ViewContext.Writer.Write(time.ToString("dd/MM/yyyy HH:mm"));
+        //            }
+        //        });
+        //    });
+        //    settings.Columns.Add(column =>
+        //    {
+        //        column.Caption = Booking.mashipment;
+        //        column.FieldName = "SO_THAM_CHIEU";
+        //        column.Width = 150;
+        //    });
+        //    settings.Columns.Add(column =>
+        //    {
+        //        column.Caption = Booking.tennguoigui;
+        //        column.FieldName = "TEN_NGUOI_GUI";
+        //        column.Width = 150;
+        //        column.SetDataItemTemplateContent(container =>
+        //        {
+        //            if (Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_GUI")).Length > 30)
+        //            {
+        //                ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_GUI")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_GUI")).Substring(0, 30) + "...");
+        //            }
+        //            else
+        //                ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_GUI")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_GUI")));
+        //        });
+        //    });
+        //    settings.Columns.Add(column =>
+        //    {
+        //        column.Caption = Booking.dichinguoigui;
+        //        column.FieldName = "DIA_CHI_NGUOI_GUI";
+        //        column.Width = 180;
+        //        column.SetDataItemTemplateContent(container =>
+        //        {
+        //            if (Convert.ToString(DataBinder.Eval(container.DataItem, "DIA_CHI_NGUOI_GUI")).Length > 30)
+        //            {
+        //                ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "DIA_CHI_NGUOI_GUI")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "DIA_CHI_NGUOI_GUI")).Substring(0, 30) + "...");
+        //            }
+        //            else
+        //                ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "DIA_CHI_NGUOI_GUI")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "DIA_CHI_NGUOI_GUI")));
+        //        });
+        //    });
+        //    settings.Columns.Add(column =>
+        //    {
+        //        column.Caption = Booking.tennguoinhan;
+        //        column.FieldName = "TEN_NGUOI_NHAN";
+        //        column.Width = 150;
+        //        column.SetDataItemTemplateContent(container =>
+        //        {
+        //            if (Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_NHAN")).Length > 30)
+        //            {
+        //                ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_NHAN")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_GUI")).Substring(0, 30) + "...");
+        //            }
+        //            else
+        //                ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_NHAN")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_GUI")));
+        //        });
+        //    });
+        //    settings.Columns.Add(column =>
+        //    {
+        //        column.Caption = Booking.diachi;
+        //        column.FieldName = "DIA_CHI";
+        //        column.Width = 180;
+        //        column.SetDataItemTemplateContent(container =>
+        //        {
+        //            if (Convert.ToString(DataBinder.Eval(container.DataItem, "DIA_CHI")).Length > 30)
+        //            {
+        //                ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "DIA_CHI")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "DIA_CHI")).Substring(0, 30) + "...");
+        //            }
+        //            else
+        //                ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "DIA_CHI")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "DIA_CHI")));
+        //        });
+        //    });
+        //    settings.Columns.Add(column =>
+        //    {
+        //        column.Caption = "COD";
+        //        column.FieldName = "SO_COD";
+        //        column.Width = 130;
+        //        column.PropertiesEdit.DisplayFormatString = "N0";
+        //    });
+        //    settings.Columns.Add(column =>
+        //    {
+        //        column.Caption = Booking.noidunghh;
+        //        column.FieldName = "NOI_DUNG";
+        //        column.Width = 180;
+        //        column.SetDataItemTemplateContent(container =>
+        //        {
+        //            if (Convert.ToString(DataBinder.Eval(container.DataItem, "NOI_DUNG")).Length > 30)
+        //            {
+        //                ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "NOI_DUNG")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "NOI_DUNG")).Substring(0, 30) + "...");
+        //            }
+        //            else
+        //                ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "NOI_DUNG")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "NOI_DUNG")));
+        //        });
+        //    });
+        //    settings.Columns.Add(column =>
+        //    {
+        //        column.Caption = Booking.sokien;
+        //        column.Width = 120;
+        //        column.FieldName = "SO_KIEN";
+        //    });
+        //    settings.Columns.Add(column =>
+        //    {
+        //        column.Caption = Booking.trongluong;
+        //        column.FieldName = "TRONG_LUONG";
+        //        column.Width = 120;
+        //        column.PropertiesEdit.DisplayFormatString = "f2";
+        //    });
+        //    settings.Columns.Add(column =>
+        //    {
+        //        column.Caption = Booking.TLquydoi;
+        //        column.FieldName = "TL_QUY_DOI";
+        //        column.Width = 120;
+        //        column.PropertiesEdit.DisplayFormatString = "f2";
+        //    });
+        //    settings.Columns.Add(column =>
+        //    {
+        //        column.Caption = Booking.dichvu;
+        //        column.FieldName = "LOAI_DV";
+        //        column.Width = 150;
+        //    });
+        //    settings.Columns.Add(column =>
+        //    {
+        //        column.Caption = Booking.ghichu;
+        //        column.FieldName = "GHI_CHU";
+        //        column.Width = 150;
+        //        column.SetDataItemTemplateContent(container =>
+        //        {
+        //            if (Convert.ToString(DataBinder.Eval(container.DataItem, "GHI_CHU")).Length > 30)
+        //            {
+        //                ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "GHI_CHU")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "GHI_CHU")).Substring(0, 30) + "...");
+        //            }
+        //            else
+        //                ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "GHI_CHU")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "GHI_CHU")));
+        //        });
+        //    });
+        //}
+        //else
+        //{
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.tennguoigui;
+            column.FieldName = "TEN_NGUOI_GUI";
+            column.Width = 130;
+            column.SetDataItemTemplateContent(container =>
+            {
+                if (Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_GUI")).Length > 30)
+                {
+                    ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_GUI")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_GUI")).Substring(0, 30) + "...");
+                }
+                else
+                    ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_GUI")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_GUI")));
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.sdtnguoigui;
+            column.FieldName = "SDT_GUI";
+            column.Width = 130;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.tennguoinhan;
+            column.FieldName = "TEN_NGUOI_NHAN";
+            column.SetDataItemTemplateContent(container =>
+            {
+                if (Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_NHAN")).Length > 30)
+                {
+                    ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_NHAN")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_NHAN")).Substring(0, 30) + "...");
+                }
+                else
+                    ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_NHAN")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "TEN_NGUOI_NHAN")));
+            });
+            column.Width = 150;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.sdt;
+            column.FieldName = "SDT_NHAN";
+            column.Width = 130;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.diachinhan;
+            column.FieldName = "DIA_CHI";
+            column.SetDataItemTemplateContent(container =>
+            {
+                string diachi = Convert.ToString(DataBinder.Eval(container.DataItem, "DIA_CHI"));
+                if (!string.IsNullOrWhiteSpace(Convert.ToString(DataBinder.Eval(container.DataItem, "HUYEN_NHAN"))))
+                {
+                    diachi += ", " + DataBinder.Eval(container.DataItem, "HUYEN_NHAN").ToString();
+                }
+                if (!string.IsNullOrWhiteSpace(Convert.ToString(DataBinder.Eval(container.DataItem, "TINH_NHAN"))))
+                {
+                    diachi += ", " + DataBinder.Eval(container.DataItem, "TINH_NHAN").ToString();
+                }
+                if (diachi.Length > 30)
+                {
+                    ViewContext.Writer.Write("<p title = \"" + diachi + "\"> " + diachi.Substring(0, 30) + "...");
+                }
+                else
+                    ViewContext.Writer.Write("<p title = \"" + diachi + "\"> " + diachi);
+            });
+            column.Width = 180;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.dichvu;
+            column.FieldName = "TEN_DICH_VU";
+            column.Width = 160;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "HT thanh toán";
+            column.FieldName = "HT_THANH_TOAN";
+            column.Width = 160;
+        });
+        //settings.Columns.Add(column =>
+        //{
+        //    column.Caption = Booking.dongkiem;
+        //    column.FieldName = "isDONG_KIEM";
+        //    column.Width = 120;
+        //    column.ColumnType = MVCxGridViewColumnType.CheckBox;
+        //});
+
+        //settings.Columns.Add(column =>
+        //{
+        //    column.Caption = Booking.trongluong;
+        //    column.FieldName = "TRONG_LUONG";
+        //    column.Width = 110;
+        //    column.PropertiesEdit.DisplayFormatString = "N2";
+        //});
+        //settings.Columns.Add(column =>
+        //{
+        //    column.Caption = Booking.kthang;
+        //    column.FieldName = "KT_HANG";
+        //    column.Width = 150;
+        //    column.ColumnType = MVCxGridViewColumnType.ComboBox;
+        //    var editor = (ComboBoxProperties)column.PropertiesEdit;
+        //    editor.DataSource = CommonData.lstKichThuoc();
+        //    editor.TextField = "Text";
+        //    editor.ValueField = "Value";
+        //    editor.ValueType = typeof(string);
+        //});
+        //settings.Columns.Add(column =>
+        //{
+        //    column.Caption = Booking.sokien;
+        //    column.Width = 120;
+        //    column.FieldName = "SO_KIEN";
+        //});
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.noidung;
+            column.Width = 180;
+            column.FieldName = "NOI_DUNG";
+            column.SetDataItemTemplateContent(container =>
+            {
+                if (Convert.ToString(DataBinder.Eval(container.DataItem, "NOI_DUNG")).Length > 30)
+                {
+                    ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "NOI_DUNG")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "NOI_DUNG")).Substring(0, 30) + "...");
+                }
+                else
+                    ViewContext.Writer.Write("<p title = \"" + Convert.ToString(DataBinder.Eval(container.DataItem, "NOI_DUNG")) + "\"> " + Convert.ToString(DataBinder.Eval(container.DataItem, "NOI_DUNG")));
+            });
+        });
+        //settings.Columns.Add(column =>
+        //{
+        //    column.Caption = Booking.sohoadon;
+        //    column.Width = 120;
+        //    column.FieldName = "SO_HOA_DON";
+        //});
+        settings.Columns.Add(column =>
+        {
+            column.Caption = Booking.sothamchieu;
+            column.FieldName = "SO_THAM_CHIEU";
+            column.Width = 120;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Số tiền COD";
+            column.FieldName = "SO_COD";
+            column.Width = 120;
+            column.PropertiesEdit.DisplayFormatString = "c0";
+        });
+
+        //settings.Columns.Add(column =>
+        //{
+        //    column.Caption = Booking.gtdonhang;
+        //    column.Width = 120;
+        //    column.FieldName = "GT_DON_HANG";
+        //    column.PropertiesEdit.DisplayFormatString = "N0";
+        //});
+        //settings.Columns.Add(column =>
+        //{
+        //    column.Caption = Booking.hoanBBBG;
+        //    column.Width = 120;
+        //    column.FieldName = "HOAN_BBBG";
+        //});
+        //settings.Columns.Add(column =>
+        //{
+        //    column.Caption = Booking.ngayhenphat;
+        //    column.Width = 120;
+        //    column.FieldName = "NGAY_HEN_PHAT_SIEU_THI";
+        //});
+        //settings.Columns.Add(column =>
+        //{
+        //    column.Caption = Booking.doanhthu;
+        //    column.FieldName = "DOANH_THU";
+        //    column.Width = 160;
+        //    column.PropertiesEdit.DisplayFormatString = "N0";
+        //});
+        //}
+
+        settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
+        settings.SettingsExport.EnableClientSideExportAPI = true;
+        settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
+        settings.SettingsExport.RenderBrick = (sender, e) =>
+        {
+            if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
+                e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
+        };
+        settings.SettingsExport.BeforeExport = (sender, e) =>
+        {
+            MVCxGridView gridView = sender as MVCxGridView;
+            if (sender == null) return;
+            gridView.Columns[0].Visible = false;
+        };
+        settings.SettingsExport.FileName = Booking.danhsachdonhang;
+        settings.PreRender = (sender, e) =>
+        {
+            ((MVCxGridView)sender).ExpandAll();
+        };
+
+    });
+}
+@grid.Bind(Model).GetHtml()

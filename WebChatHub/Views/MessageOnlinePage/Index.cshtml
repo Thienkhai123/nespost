@@ -1,0 +1,68 @@
+﻿@{WebChatHub.Models.CSS_CRM_NGUOI_DUNGDTO user = (WebChatHub.Models.CSS_CRM_NGUOI_DUNGDTO)Session["UserAdmin"];}
+@{
+    Layout = "~/Views/Shared/_Layout_Message.cshtml";
+    ViewBag.Title = "Page Chat";
+}
+
+<div id="divChat" class="chatRoom row">
+    <div class="content col-md-12">
+
+
+    </div>
+    <div class="messageBar col-md-12 d-none">
+        <div class="input-group px-2">
+            <input class="textbox form-control" type="text" id="txtMessage" />
+            <div class="input-group-append">
+                <button id="btnSendMsg" class="btn btn-primary">Send</button>
+            </div>
+        </div>
+        <input id="touserName" type="hidden" />
+    </div>
+</div>
+
+<div id="modal-PhanTuyenCS" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h4>
+                    <span>Phân tuyến cho CS</span>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-times-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 10px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-form-label-sm">Khách hàng</label>
+                            <textarea type="text" class="form-control" id="tenKhachHang" rows="3" readonly></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-form-label-sm"> Danh sách CS <strong style="color:red">*</strong></label>
+                            <div id="searchBox"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="text-align:center">
+                        <button class="btn btn-primary" id="btnPhanTuyen"><i class="fa fa-save"></i> Lưu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        $("#searchBox").dxSelectBox({
+            dataSource: @Html.Raw(Json.Encode(WebChatHub.Models.CommonData._lstCS.Where(x=>x.COMPANY_CODE == user.COMPANY_CODE).ToList())),
+            displayExpr: "FULL_NAME",
+            valueExpr: "USER_NAME",
+            value: "USER_NAME",
+            searchEnabled: true
+        });
+    });
+</script>

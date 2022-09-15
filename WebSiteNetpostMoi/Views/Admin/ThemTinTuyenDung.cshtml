@@ -1,0 +1,284 @@
+﻿@model WebSite.Models.TINTUCDTO
+@{
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+
+    string title = "Thêm mới tin tuyển dụng";
+    if (Model.ID != 0)
+    {
+        title = "Xem và cập nhật tin tuyển dụng";
+    }
+
+    ViewBag.Title = title;
+}
+
+<div class="container">
+    <ul class="breadcrumb">
+        <li><a href="/Admin/Tuyen_Dung">Quản trị tin tuyển dụng</a></li>
+        <li><a>@title</a></li>
+    </ul>
+    <div class="row pb-5">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
+            <h4><span>Chọn ngôn ngữ</span></h4>
+
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#tiengviet">Tiếng việt</a>
+                </li>
+                @*<li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tienganh">English</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tiengnhat">日本語</a>
+                </li>*@
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="tiengviet">
+                    <div class="form-group">
+                        <label class="control-label">Tiêu đề <strong style="color:red">(*)</strong></label>
+                        @Html.EditorFor(model => model.TIEU_DE, new { htmlAttributes = new { @class = "form-control", @id = "TIEU_DE" } })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Vị trí tuyển dụng<strong style="color:red">(*)</strong></label>
+                        @Html.EditorFor(model => model.VI_TRI, new { htmlAttributes = new { @class = "form-control", @id = "VI_TRI" } })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nội dung <strong style="color:red">(*)</strong></label>
+                        <textarea name="NOI_DUNG" id="ckeContent">@Model.NOI_DUNG</textarea>
+                        <script type="text/javascript">
+                            var editor = CKEDITOR.replace("ckeContent");
+                            CKFinder.setupCKEditor(editor, "/ckfinder");
+                        </script>
+                    </div>
+                </div>
+                @*<div class="tab-pane" id="tienganh">
+                    <div class="form-group">
+                        <label class="control-label">Tiêu đề tiếng anh<strong style="color:red">(*)</strong></label>
+                        @Html.EditorFor(model => model.TIEU_DE_EN, new { htmlAttributes = new { @class = "form-control", @id = "TIEU_DE_EN" } })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Vị trí tuyển dụng<strong style="color:red">(*)</strong></label>
+                        @Html.EditorFor(model => model.VI_TRI_EN, new { htmlAttributes = new { @class = "form-control", @id = "VI_TRI_EN" } })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nội dung <strong style="color:red">(*)</strong></label>
+                        <textarea name="NOI_DUNG_EN" id="ckeContentEN">@Model.NOI_DUNG_EN</textarea>
+                        <script type="text/javascript">
+                            var editor1 = CKEDITOR.replace("ckeContentEN");
+                            CKFinder.setupCKEditor(editor1, "/ckfinder");
+                        </script>
+                    </div>
+                </div>
+                <div class="tab-pane" id="tiengnhat">
+                    <div class="form-group">
+                        <label class="control-label">Tiêu đề tiếng nhật<strong style="color:red">(*)</strong></label>
+                        @Html.EditorFor(model => model.TIEU_DE_JA, new { htmlAttributes = new { @class = "form-control", @id = "TIEU_DE_JA" } })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Vị trí tuyển dụng<strong style="color:red">(*)</strong></label>
+                        @Html.EditorFor(model => model.VI_TRI_JA, new { htmlAttributes = new { @class = "form-control", @id = "VI_TRI_JA" } })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nội dung <strong style="color:red">(*)</strong></label>
+                        <textarea name="NOI_DUNG_JA" id="ckeContentJA">@Model.NOI_DUNG_JA</textarea>
+                        <script type="text/javascript">
+                            var editor2 = CKEDITOR.replace("ckeContentJA");
+                            CKFinder.setupCKEditor(editor2, "/ckfinder");
+                        </script>
+                    </div>
+                </div>*@
+            </div>
+
+            <h4><span>Thông tin chung</span> </h4>
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="control-label">Kinh nghiệm <small>(VD: 1 / 1-2) </small><strong style="color:red">(*)</strong></label>
+                    @Html.EditorFor(model => model.KINH_NGHIEM, new { htmlAttributes = new { @class = "form-control", @id = "KINH_NGHIEM", @placeholder = "0 / 1 / 1-2" } })
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label">Ngày hết hạn<strong style="color:red"> (*)</strong></label>
+                    @{
+                        var han = Model.HAN_NOP.Year == 1 ? DateTime.Now.ToString("yyyy-MM-dd") : Model.HAN_NOP.ToString("yyyy-MM-dd");
+                    }
+                    <input type="date" class="form-control" name="HAN_NOP" id="HAN_NOP" value="@han" />
+                    <datalist id="LstTinh"></datalist>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label">Địa điểm<strong style="color:red">(*)</strong></label>
+                    <div class="position-relative">
+                        @Html.DevExpress().ComboBox(settings =>
+                        {
+                            settings.Name = "cbTinhNhan";
+                            settings.SelectedIndex = -1;
+                            settings.Properties.DropDownStyle = DropDownStyle.DropDownList;
+                            settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                            settings.ControlStyle.CssClass = "form-control form-boder";
+                            settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                            settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                            settings.Properties.TextField = "TEN_CO_DAU";
+                            settings.Properties.ValueField = "ZONE_CODE";
+                            settings.Properties.ClientSideEvents.Init = "function(){cbTinhNhan.SetValue('" + @Model.MA_DIA_DIEM + "')}";
+                        }).BindList(WebSite.Models.CommonData.GetZone()).GetHtml()
+                    </div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="control-label">Tác giả</label>
+                    @Html.EditorFor(model => model.TAC_GIA, new { htmlAttributes = new { @class = "form-control", @id = "TAC_GIA" } })
+                </div>
+            </div>
+
+            <div class="form-group" hidden>
+                <input type="text" value="@Model.ID" id="ID" />
+            </div>
+
+            <div class="form-group text-center pt-2">
+                @if (Model.ID == 0)
+                {
+                    <button style="width: 120px;" onclick="Save()" class="btn btn-primary">Lưu </button>
+                }
+                else
+                {
+                    <button style="width: 120px;" onclick="Update()" class="btn btn-primary">Update</button>
+                }
+            </div>
+        </div>
+        <div class="col-md-1">
+        </div>
+    </div>
+</div>
+<script>
+
+    function Save() {
+        if ($('#TIEU_DE').val() == "") {
+            Swal.fire("Tiêu đề không được bỏ trống",
+                '',
+                'error')
+            return;
+        }
+        if ($('#VI_TRI').val() == "") {
+            Swal.fire("Vị trí tuyển dụng không được bỏ trống",
+                '',
+                'error')
+            return;
+        }
+        if ($('#KINH_NGHIEM').val() == "") {
+            Swal.fire("Kinh nghiệm không được bỏ trống",
+                '',
+                'error')
+            return;
+        }
+        if ($('#HAN_NOP').val() == "") {
+            Swal.fire("Hạn nộp không được bỏ trống",
+                '',
+                'error')
+            return;
+        }
+        if (cbTinhNhan.GetValue() == null) {
+            Swal.fire("Địa điểm không được bỏ trống",
+                '',
+                'error')
+            return;
+        }
+        for (var instanceName in CKEDITOR.instances)
+            CKEDITOR.instances[instanceName].updateElement();
+
+        var data = new FormData();
+        data.append("TIEU_DE", $('#TIEU_DE').val());
+        data.append("TIEU_DE_EN", $('#TIEU_DE_EN').val());
+        data.append("TIEU_DE_JA", $('#TIEU_DE_JA').val());
+        data.append("NOI_DUNG", $('#ckeContent').val());
+        data.append("NOI_DUNG_EN", $('#ckeContentEN').val());
+        data.append("NOI_DUNG_JA", $('#ckeContentJA').val());
+        data.append("NHOM_TIN", "TUYEN_DUNG");
+        data.append("TAC_GIA", $('#TAC_GIA').val());
+        data.append("MA_DIA_DIEM", cbTinhNhan.GetValue())
+        data.append("DIA_DIEM", cbTinhNhan.GetText());
+        data.append("HAN_NOP", $('#HAN_NOP').val())
+        data.append("KINH_NGHIEM", $('#KINH_NGHIEM').val());
+        data.append("VI_TRI", $('#VI_TRI').val());
+        data.append("VI_TRI_JA", $('#VI_TRI_JA').val());
+        data.append("VI_TRI_EN", $('#VI_TRI_EN').val());
+
+        $.ajax({
+            url: "/Admin/InsertNews",
+            type: "POST",
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (data) {
+                if (!data.Error) {
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'Thêm mới tin thành công!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    window.location.href = "/Admin/Tuyen_Dung";
+                }
+                else {
+                    Swal.fire(data.Title,
+                        '',
+                        'error')
+                    return;
+                }
+            }
+        });
+
+    }
+
+    function Update() {
+        for (var instanceName in CKEDITOR.instances)
+            CKEDITOR.instances[instanceName].updateElement();
+
+        var data = new FormData();
+        data.append("ID", $('#ID').val());
+        data.append("TIEU_DE", $('#TIEU_DE').val());
+        data.append("TIEU_DE_EN", $('#TIEU_DE_EN').val());
+        data.append("TIEU_DE_JA", $('#TIEU_DE_JA').val());
+        data.append("NOI_DUNG", $('#ckeContent').val());
+        data.append("NOI_DUNG_EN", $('#ckeContentEN').val());
+        data.append("NOI_DUNG_JA", $('#ckeContentJA').val());
+        data.append("NHOM_TIN", "TUYEN_DUNG");
+        data.append("TAC_GIA", $('#TAC_GIA').val());
+        data.append("MA_DIA_DIEM", cbTinhNhan.GetValue())
+        data.append("DIA_DIEM", cbTinhNhan.GetText());
+        data.append("HAN_NOP", $('#HAN_NOP').val())
+        data.append("KINH_NGHIEM", $('#KINH_NGHIEM').val());
+        data.append("VI_TRI", $('#VI_TRI').val());
+        data.append("VI_TRI_JA", $('#VI_TRI_JA').val());
+        data.append("VI_TRI_EN", $('#VI_TRI_EN').val());
+
+        $.ajax({
+            url: "/Admin/EditNew",
+            type: "POST",
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (data) {
+                if (!data.Error) {
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'Cập nhật tin thành công!',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                    setTimeout(function () {
+                        window.location.href = "/Admin/Tuyen_Dung";
+                    }, 1500);
+
+                }
+                else {
+                    Swal.fire(data.Title,
+                        '',
+                        'error')
+                    return;
+                }
+            }
+        });
+    }
+</script>

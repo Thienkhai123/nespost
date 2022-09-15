@@ -1,0 +1,242 @@
+﻿@model WebSite.Models.CSS_DIC_GENERAL_DICTIONARY
+@{
+    ViewBag.Title = @Booking.WH_quanLyDanhMucNhomSP;
+    Layout = "~/Views/Shared/_Layout_Warehouse.cshtml";
+}
+@using WebSite.Language
+<style>
+    .row-margin-top {
+        margin-top: 5px
+    }
+</style>
+<div class="row" style="margin-top:5px">
+    <div class="col-md-1"><label style="font-weight:normal;margin-top:5px">@Booking.WH_nhomKhoHang </label></div>
+    <div class="col-md-3">
+        <div class="col-xs-12 form-group">
+            <div class="col-md-12">
+                @Html.DevExpress().ComboBox(settings =>
+                {
+                settings.Name = "cbNhomKhoHang";
+                settings.Properties.DropDownStyle = DropDownStyle.DropDownList;
+                settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                settings.Properties.TextField = "DICTIONARY_NAME";
+                settings.Properties.ValueField = "DICTIONARY_CODE";
+                settings.Properties.NullText = @Booking.WH_moiChonNhomKhoHang;
+                settings.ControlStyle.CssClass = "form-control col-md-6";
+                settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                settings.Properties.Columns.Add(column =>
+                {
+                column.FieldName = "DICTIONARY_NAME";
+                column.Caption = @Booking.WH_tenNhomKho;
+                column.Width = 400;
+                });
+                }).BindList(ViewData["NhomKhoHang"] as List<WebSite.Models.CSS_DIC_GENERAL_DICTIONARY>).GetHtml()
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <input type="submit" value="@Booking.timkiem" class="btn btn-primary col-md-4" onclick="search()" id="Search" />
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-2 pull-right">
+        <input type="button" value="@Booking.WH_them" class="btn btn-success col-md-5 pull-right" onclick="add()" id="Add" />
+    </div>
+</div>
+<div class="row" style="margin-top:10px">
+    @using (Html.BeginForm())
+    {
+        @Html.Action("grvDanhMucNhomSP")
+    }
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title text-center" id="myModalLabel">@Booking.WH_themDanhMucNhomSP</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-3 hidden">Nhóm kho</div>
+                    <div class="col-md-9 hidden">
+                        <div class="col-md-12">
+                            @Html.DevExpress().ComboBox(settings =>
+                            {
+                            settings.Name = "cbNhomKhoHangDetail";
+                            settings.Properties.DropDownStyle = DropDownStyle.DropDownList;
+                            settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                            settings.Properties.TextField = "DICTIONARY_NAME";
+                            settings.Properties.ValueField = "DICTIONARY_CODE";
+                            settings.Properties.NullText = @Booking.WH_moiChonNhomKhoHang;
+                            settings.ControlStyle.CssClass = "form-control col-md-6";
+                            settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+                            settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                            settings.Properties.Columns.Add(column =>
+                            {
+                            column.FieldName = "DICTIONARY_NAME";
+                            column.Caption = @Booking.WH_tenNhomKho;
+                            column.Width = 400;
+                            });
+                            }).BindList(ViewData["NhomKhoHang"] as List<WebSite.Models.CSS_DIC_GENERAL_DICTIONARY>).GetHtml()
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="margin-top:10px">@Booking.WH_maNhomSP</div>
+                    <div class="col-md-9" style="margin-top:10px">
+                        <div class="col-md-12">
+                            <input class="form-control" id="txtMaNhomSP" name="txtMaNhomSP" readonly />
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="margin-top:10px">@Booking.WH_tenNhomSP</div>
+                    <div class="col-md-9" style="margin-top:10px">
+                        <div class="col-md-12">
+                            <input class="form-control" id="txtTenNhomSP" name="txtTenNhomSP" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="modal-btn-si">@Booking.WH_them</button>
+                <button type="button" class="btn btn-danger" id="modal-btn-no">@Booking.WH_huy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    cbNhomKhoHang.SetSelectedIndex(0);
+    cbNhomKhoHangDetail.SetSelectedIndex(0);
+    cbNhomKhoHang.SetEnabled(false);
+    (function ($) {
+        $(document).ready(function () {
+            document.getElementById('Search').click();
+        });
+    })(jQuery);
+    //Search
+    function search() {
+        var maNhomKho = cbNhomKhoHang.GetValue();
+        var data = {
+            maNhomKho: maNhomKho
+        }
+        $('.img-loading').show();
+        $.ajax({
+            type: "post",
+            url: "/Warehouse/TimKiemNhomSP",
+            data: data,
+            dataType: "json",
+            success: function (data) {
+                if (data.isError) {
+                    Swal.fire(data.Mess,
+                        '',
+                        'error')
+                    return;
+                }
+                else {
+                    gridView.Refresh();
+                }
+            },
+            complete: function () {
+                $('.img-loading').hide();
+            }
+
+        });
+    }
+    //Modal
+    $("#Add").on("click", function () {
+        $.ajax({
+            url: "/Warehouse/GetAutonum",
+            type: "POST",
+            dataType: "json",
+            success: function (data) {
+                if (data.Error) {
+                    Swal.fire(data.Title,
+                        '',
+                        'error')
+                    return;
+                }
+                else {
+                    document.getElementById("txtMaNhomSP").value = data.Object[0].MA_NHOM_SAN_PHAM;
+                }
+            }
+        })
+        $("#mi-modal").modal('show');
+    });
+
+    $("#modal-btn-si").on("click", function () {
+        $('.img-loading').show();
+        var maNhomKho = cbNhomKhoHangDetail.GetValue();
+        var maNhomSP = document.getElementById("txtMaNhomSP").value;
+        var tenNhomSP = document.getElementById("txtTenNhomSP").value;
+        if (maNhomKho == "" || maNhomKho == undefined) {
+            Swal.fire('@Html.Raw(@Booking.WH_moiNhapMaNhomKho)',
+                '',
+                'error')
+            return;
+        }
+        if (maNhomSP == "" || maNhomSP == undefined) {
+            Swal.fire('@Html.Raw(@Booking.WH_moiNhapMaNhomSP)',
+                '',
+                'error')
+            return;
+        }
+        if (tenNhomSP == "" || tenNhomSP == undefined) {
+            Swal.fire('@Html.Raw(@Booking.WH_moiNhapTenNhomSP)',
+                '',
+                'error')
+            return;
+        }
+        var data = {
+            maNhomKho: maNhomKho,
+            maNhomSP: maNhomSP,
+            tenNhomSP: tenNhomSP
+        }
+        $.ajax({
+            type: "post",
+            url: "/Warehouse/AddNhomSP",
+            data: data,
+            dataType: "json",
+            success: function (data) {
+                if (data.isError) {
+                    Swal.fire(data.Mess,
+                        '',
+                        'error')
+                    return;
+                }
+                else if (data.isSuccess) {
+                    Swal.fire(data.Mess,
+                        '',
+                        'success');
+                    $("#mi-modal").modal('hide');
+                    rsModal();
+                    return;
+                }
+            },
+            complete: function () {
+                $('.img-loading').hide();
+                document.getElementById("Search").click();
+            }
+
+        });
+    });
+
+    $("#modal-btn-no").on("click", function () {
+        $("#mi-modal").modal('hide');
+        rsModal();
+    });
+    //Reset
+    function rsModal() {
+        document.getElementById("txtMaNhomSP").value = '';
+        document.getElementById("txtTenNhomSP").value = '';
+    }
+    //chuột phải
+    function OnContextMenuItemClick(s, e) {
+        var item = e.elementIndex;
+        if (e.item.name == "ExportToXLSX") {
+            gridView.ExportTo(ASPxClientGridViewExportFormat.Xlsx);
+        }
+    }
+</script>

@@ -1,0 +1,135 @@
+﻿@{
+    Layout = null;
+}
+@using WebSite.Models
+@using WebSite.Language
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Login Netpost</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="~/lib/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/css/login.css?a=@DateTime.Now.ToString("yyyyMMdd")" rel="stylesheet" />
+    <link href="~/lib/css/sweetalert2.min.css" rel="stylesheet" />
+
+    <script src="~/lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="~/lib/js/sweetalert2@10.js"></script>
+    @if (Request.Browser.Browser == "IE" || Request.Browser.Browser == "InternetExplorer")
+    {
+        <script src="~/lib/js/core-2.4.1.js"></script>
+        <script src="~/lib/js/promise-polyfill@8.js"></script>
+    }
+</head>
+<body>
+    <div class="row header m-0 justify-content-center">
+        <div class="logo col-md-12">
+            CÔNG TY CỔ PHẦN CHUYỂN PHÁT NHANH NETPOST VIỆT NAM
+        </div>
+        <div class="hotline col-md-12">
+            Hotline: 024.396.12345
+        </div>
+    </div>
+    <div class="container">
+        <div class="login">
+            <div class="row page-container justify-content-center" style="height: 100%;">
+                <div class="login-detail">
+                    <div class="col-md-12 des">
+                        Administrator Page
+                    </div>
+                    <hr />
+                    <div class="fmlogin">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label">@Booking.username</label>
+                                    <input type="text" required id="user" class="form-control" onfocus="$('#success_message').addClass('d-none')" autofocus>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-form-label">@Booking.password</label>
+                                    <input type="password" required id="pass" class="form-control" onfocus="$('#success_message').addClass('d-none')">
+                                </div>
+                            </div>
+                            <div class="col-md-12 py-2">
+                                <button class="btn btn-primary button btn-login" onclick="Login()"><i class="" id="refresh"> </i>  @Booking.login</button>
+                            </div>
+                            <div class="col-md-12" style="height:115px;">
+                                <div class="form-group pt-2">
+                                    <div class="alert alert-danger d-none" role="alert" id="success_message" style="margin-bottom:5px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+    </div>
+    
+    <script type="text/javascript">
+        function Login() {
+            $('#success_message').addClass("d-none");
+            var Username = $('#user').val();
+            var Password = $('#pass').val();
+            $('#refresh').addClass("fa fa-spinner fa-spin");
+            if (Username == null || Username == "") {
+                $('#refresh').removeClass("fa fa-spinner fa-spin");
+                $('#success_message').html("Please enter your Username");
+                $('#success_message').removeClass("d-none");
+                return;
+            }
+            if (Password == null || Password == "") {
+                $('#refresh').removeClass("fa fa-spinner fa-spin");
+                $('#success_message').html("Please enter your Password");
+                $('#success_message').removeClass("d-none");
+                return;
+            }
+            if (Username != null && Username != "" && Password != null && Password != "") {
+                $.ajax({
+                    url: "/Admin/Login",
+                    type: "POST",
+                    data: {
+                        Username: Username,
+                        Password: Password
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.ID == 1) {
+                            window.location.href = "/Admin/TinTuc";
+                        }
+                        else if (data.ID == 2) {
+                            window.location.href = "/Admin/Tuyen_Dung";
+                        }
+                        else {
+                            $('#refresh').removeClass("fa fa-spinner fa-spin");
+                            $('#success_message').html(data.Title);
+                            $('#success_message').removeClass("d-none");
+
+                        }
+                    }
+                })
+            }
+            else {
+                return;
+            }
+        }
+
+        $(document).on("keypress", function (e) {
+            /* ENTER PRESSED*/
+            if (e.keyCode == 13) {
+                /* FOCUS ELEMENT */
+                Login();
+            }
+        });
+    </script>
+</body>
+</html>
+

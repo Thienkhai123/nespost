@@ -1,0 +1,16 @@
+﻿@{WebSite.Models.CSS_CRM_NGUOI_DUNGDTO user = (WebSite.Models.CSS_CRM_NGUOI_DUNGDTO)Session["UserAdmin"];}
+
+@Html.DevExpress().ComboBox(settings =>
+{
+    settings.Name = "cbListCS";
+    settings.Properties.DropDownStyle = DropDownStyle.DropDownList;
+    settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+    settings.Properties.NullText = "";
+    settings.ControlStyle.CssClass = "form-control";
+    settings.Properties.ClientSideEvents.ItemFiltering = "onItemFiltering";
+    settings.Properties.ClientSideEvents.CustomHighlighting = "onCustomHighlighting";
+    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+    settings.Properties.TextField = "FULL_NAME";
+    settings.Properties.ValueField = "CUSTOMER_CODE";
+    settings.SelectedIndex = -1;
+}).BindList(WebSite.Models.CommonData._lstCS.Where(x => x.COMPANY_CODE == user.COMPANY_CODE).ToList()).GetHtml()
